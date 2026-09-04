@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PackCalc</title>
+
+<style>
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:#f4f6fa;
+margin:0;
+color:#172033
+}
+header{
+background:#1459d9;
+color:white;
+padding:25px 18px;
+text-align:center
+}
+h1{margin:0;font-size:30px}
+main{max-width:600px;margin:auto;padding:15px}
+.card{
+background:white;
+border-radius:16px;
+padding:18px;
+margin-bottom:15px;
+box-shadow:0 2px 10px #0001
+}
+h2{margin-top:0}
+label{
+display:block;
+font-weight:bold;
+font-size:14px;
+margin-top:12px
+}
+input,select{
+width:100%;
+padding:13px;
+font-size:17px;
+border:1px solid #ccd3df;
+border-radius:10px;
+box-sizing:border-box
+}
+button{
+width:100%;
+padding:14px;
+border:0;
+border-radius:11px;
+font-size:16px;
+font-weight:bold;
+margin-top:12px
+}
+.blue{background:#1459d9;color:white}
+.green{background:#dff7e8;color:#08753c}
+.red{background:#ffe1e4;color:#b21f32}
+.result{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:15px
+}
+.box{
+background:#eef6ff;
+padding:15px;
+text-align:center;
+border-radius:12px
+}
+.number{
+font-size:32px;
+font-weight:bold;
+color:#1459d9;
+display:block;
+margin-top:5px
+}
+nav{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;
+margin-bottom:15px
+}
+nav button{
+background:white;
+margin:0
+}
+.hidden{display:none}
+table{
+width:100%;
+border-collapse:collapse;
+font-size:12px
+}
+td,th{
+padding:8px;
+border-bottom:1px solid #ddd;
+text-align:left
+}
+.scroll{overflow:auto}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>📦 PackCalc</h1>
+<div>Packningskalkylator</div>
+</header>
+
+<main>
+
+<nav>
+<button onclick="visa('kolli')">📦 Kolli</button>
+<button onclick="visa('order')">🧪 Order</button>
+<button onclick="visa('historik')">📋 Historik</button>
+</nav>
+
+<!-- KOLLI -->
+
+<div id="kolli">
+
+<div class="card">
+
+<h2>Kolli → kapsel / well</h2>
+
+<label>Produkt</label>
+<select id="produkt">
+<option>Sprutor</option>
+<option>Vialer</option>
+<option>Annan produkt</option>
+</select>
+
+<label>Kollinummer</label>
+<input id="kollinummer" placeholder="t.ex. 001">
+
+<label>Antal i kollit</label>
+<input id="antal" type="number" value="1760">
+
+<label>Antal per kapsel / well</label>
+<input id="per" type="number" value="7">
+
+<div class="result">
+
+<div class="box">
+Fulla kapslar / wells
+<span class="number" id="fulla">251</span>
+</div>
+
+<div class="box">
+Sista kapseln / well
+<span class="number" id="sista">3</span>
+</div>
+
+</div>
+
+<button class="blue" onclick="laggTill()">
+＋ Lägg till kolli
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>➖ Kassation / justering</h2>
+
+<label>Antal att ta bort</label>
+<input id="minus" type="number" value="1">
+
+<label>Anledning</label>
+<input id="anledning" placeholder="t.ex. 1 spruta kass">
+
+<button class="red" onclick="taBort()">
+Ta bort antal
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Aktuellt saldo</h2>
+
+<div class="result">
+
+<div class="box">
+Totalt
+<span class="number" id="totalt">0</span>
+</div>
+
+<div class="box">
+Sista kapseln
+<span class="number" id="sistaTotal">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ORDER -->
+
+<div id="order" class="hidden">
+
+<div class="card">
+
+<h2>🧪 Order → sista well</h2>
+
+<label>Ordernummer</label>
+<input id="ordernummer" placeholder="t.ex. 2410">
+
+<label>Totalt antal enheter</label>
+<input id="ordertotal" type="number" value="2410">
+
+<label>Redan packat</label>
+<input id="packat" type="number" value="0">
+
+<label>Antal per well</label>
+<input id="well" type="number" value="60">
+
+<div class="result">
+
+<div class="box">
+Kvar
+<span class="number" id="kvar">2410</span>
+</div>
+
+<div class="box">
+Sista well
+<span class="number" id="sistawell">10</span>
+</div>
+
+</div>
+
+<p id="fullawells">40 fulla wells</p>
+
+</div>
+
+</div>
+
+
+<!-- HISTORIK -->
+
+<div id="historik" class="hidden">
+
+<div class="card">
+
+<h2>📋 Historik</h2>
+
+<div class="scroll">
+
+<table>
+
+<thead>
+<tr>
+<th>Tid</th>
+<th>Kolli</th>
+<th>Produkt</th>
+<th>Ändring</th>
+<th>Totalt</th>
+<th>Sista</th>
+</tr>
+</thead>
+
+<tbody id="historikLista"></tbody>
+
+</table>
+
+</div>
+
+<button class="red" onclick="rensa()">
+Rensa historik
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+
+<script>
+
+let totaler =
+JSON.parse(localStorage.getItem("packcalc_totaler") || "{}");
+
+let historik =
+JSON.parse(localStorage.getItem("packcalc_historik") || "[]");
+
+
+function spara(){
+
+localStorage.setItem(
+"packcalc_totaler",
+JSON.stringify(totaler)
+);
+
+localStorage.setItem(
+"packcalc_historik",
+JSON.stringify(historik)
+);
+
+}
+
+
+function visa(id){
+
+document.getElementById("kolli").classList.add("hidden");
+document.getElementById("order").classList.add("hidden");
+document.getElementById("historik").classList.add("hidden");
+
+document.getElementById(id).classList.remove("hidden");
+
+if(id==="historik")
+visaHistorik();
+
+}
+
+
+function räknaKolli(){
+
+let antal =
+Number(document.getElementById("antal").value) || 0;
+
+let per =
+Number(document.getElementById("per").value) || 1;
+
+document.getElementById("fulla").innerText =
+Math.floor(antal/per);
+
+document.getElementById("sista").innerText =
+antal % per;
+
+let produkt =
+document.getElementById("produkt").value;
+
+let totalt =
+totaler[produkt] || 0;
+
+document.getElementById("totalt").innerText =
+totalt;
+
+document.getElementById("sistaTotal").innerText =
+totalt % per;
+
+}
+
+
+function laggTill(){
+
+let antal =
+Number(document.getElementById("antal").value) || 0;
+
+let per =
+Number(document.getElementById("per").value) || 1;
+
+let produkt =
+document.getElementById("produkt").value;
+
+let kolli =
+document.getElementById("kollinummer").value || "-";
+
+totaler[produkt] =
+(totaler[produkt] || 0) + antal;
+
+historik.push({
+
+tid:new Date().toLocaleString("sv-SE"),
+
+kolli:kolli,
+
+produkt:produkt,
+
+ändring:"+" + antal,
+
+totalt:totaler[produkt],
+
+sista:totaler[produkt] % per
+
+});
+
+spara();
+
+räknaKolli();
+
+document.getElementById("kollinummer").value="";
+
+}
+
+
+function taBort(){
+
+let antal =
+Number(document.getElementById("minus").value) || 0;
+
+let per =
+Number(document.getElementById("per").value) || 1;
+
+let produkt =
+document.getElementById("produkt").value;
+
+let anledning =
+document.getElementById("anledning").value || "Kassation";
+
+totaler[produkt] =
+Math.max(0,(totaler[produkt] || 0)-antal);
+
+historik.push({
+
+tid:new Date().toLocaleString("sv-SE"),
+
+kolli:"-",
+
+produkt:produkt,
+
+ändring:"-" + antal,
+
+totalt:totaler[produkt],
+
+sista:totaler[produkt] % per,
+
+notering:anledning
+
+});
+
+spara();
+
+räknaKolli();
+
+document.getElementById("anledning").value="";
+
+}
+
+
+function räknaOrder(){
+
+let total =
+Number(document.getElementById("ordertotal").value)||0;
+
+let packat =
+Number(document.getElementById("packat").value)||0;
+
+let per =
+Number(document.getElementById("well").value)||1;
+
+let kvar =
+Math.max(0,total-packat);
+
+document.getElementById("kvar").innerText=kvar;
+
+document.getElementById("sistawell").innerText=kvar%per;
+
+document.getElementById("fullawells").innerText=
+Math.floor(kvar/per)+" fulla wells";
+
+}
+
+
+function visaHistorik(){
+
+let lista =
+document.getElementById("historikLista");
+
+lista.innerHTML="";
+
+historik.slice().reverse().forEach(x=>{
+
+let rad=document.createElement("tr");
+
+rad.innerHTML=
+"<td>"+x.tid+"</td>"+
+"<td>"+x.kolli+"</td>"+
+"<td>"+x.produkt+"</td>"+
+"<td>"+x.ändring+"</td>"+
+"<td>"+x.totalt+"</td>"+
+"<td>"+x.sista+"</td>";
+
+lista.appendChild(rad);
+
+});
+
+}
+
+
+function rensa(){
+
+if(confirm("Vill du rensa all historik?")){
+
+historik=[];
+totaler={};
+
+spara();
+
+visaHistorik();
+
+räknaKolli();
+
+}
+
+}
+
+
+document.getElementById("antal")
+.addEventListener("input",räknaKolli);
+
+document.getElementById("per")
+.addEventListener("input",räknaKolli);
+
+document.getElementById("produkt")
+.addEventListener("change",räknaKolli);
+
+document.getElementById("ordertotal")
+.addEventListener("input",räknaOrder);
+
+document.getElementById("packat")
+.addEventListener("input",räknaOrder);
+
+document.getElementById("well")
+.addEventListener("input",räknaOrder);
+
+
+räknaKolli();
+räknaOrder();
+
+</script>
+
+</body>
+</html>
