@@ -304,7 +304,7 @@ th{
   background:#f0fbf5;
 }
 
-/* NYTT I V1.1 */
+/* V1.1 */
 
 .previousKolli{
   border:2px solid #1459d9;
@@ -368,7 +368,112 @@ th{
   padding:20px 0;
 }
 
+/* =========================
+   PACKALKYLATOR
+========================= */
+
+.calculatorGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.calculatorCard{
+  background:white;
+  border:0;
+  border-radius:16px;
+  padding:18px;
+  text-align:left;
+  box-shadow:0 2px 10px #0001;
+  min-height:120px;
+  margin:0;
+}
+
+.calculatorCard .calcIcon{
+  font-size:29px;
+  margin-bottom:10px;
+}
+
+.calculatorCard strong{
+  display:block;
+  font-size:18px;
+  margin-bottom:5px;
+}
+
+.calculatorCard span{
+  display:block;
+  color:#687386;
+  font-size:13px;
+  line-height:1.3;
+}
+
+.calcBack{
+  margin-bottom:15px;
+}
+
+.calcResult{
+  margin-top:15px;
+}
+
+.calcExplanation{
+  background:#fff4df;
+  color:#8a5a00;
+  border-radius:10px;
+  padding:12px;
+  margin-top:15px;
+  line-height:1.4;
+}
+
+.calcPositive{
+  background:#eaf8f1;
+  color:#17764a;
+  border-radius:10px;
+  padding:14px;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+.calcNegative{
+  background:#ffe1e4;
+  color:#b21f32;
+  border-radius:10px;
+  padding:14px;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+.timeRow{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:end;
+  margin-top:10px;
+}
+
+.timeRow input{
+  margin:0;
+}
+
+.removeTime{
+  width:auto;
+  margin:0;
+  padding:13px 15px;
+}
+
+.timeTotal{
+  background:#eef6ff;
+  border-radius:12px;
+  padding:18px;
+  text-align:center;
+  margin-top:15px;
+}
+
+.timeTotal .number{
+  font-size:30px;
+}
+
 @media(max-width:430px){
+
   .homeGrid{
     grid-template-columns:1fr 1fr;
   }
@@ -380,7 +485,13 @@ th{
   nav button{
     font-size:12px;
   }
+
+  .calculatorGrid{
+    grid-template-columns:1fr 1fr;
+  }
+
 }
+
 </style>
 </head>
 
@@ -409,7 +520,7 @@ th{
   </button>
 
   <button onclick="showPage('pack')" id="navPack">
-    📦 Pack
+    🏭 Produktion
   </button>
 
   <button onclick="showPage('print')" id="navPrint">
@@ -446,9 +557,9 @@ th{
 
     <button class="homeCard" onclick="showPage('pack')">
 
-      <div class="icon">📦</div>
+      <div class="icon">🏭</div>
 
-      <strong>Pack</strong>
+      <strong>Produktion</strong>
 
       <span>
         Kolli, FPK, kassation och registreringar
@@ -457,27 +568,27 @@ th{
     </button>
 
 
-    <button class="homeCard" onclick="showPage('print')">
+    <button class="homeCard" onclick="showPage('packalkylator')">
 
-      <div class="icon">🖨️</div>
+      <div class="icon">🧮</div>
 
-      <strong>Print</strong>
+      <strong>Packalkylator</strong>
 
       <span>
-        Order, redan packat och sista well
+        Allt du snabbt behöver räkna.
       </span>
 
     </button>
 
 
-    <button class="homeCard" onclick="showPage('pall')">
+    <button class="homeCard" onclick="showPage('dagbok')">
 
-      <div class="icon">🏗️</div>
+      <div class="icon">📖</div>
 
-      <strong>Pall</strong>
+      <strong>Loggbok</strong>
 
       <span>
-        Beräkna wells och pallar
+        Information mellan skift och operatörer.
       </span>
 
     </button>
@@ -487,23 +598,10 @@ th{
 
       <div class="icon">▣</div>
 
-      <strong>QR-kod</strong>
+      <strong>QR kodläsare</strong>
 
       <span>
-        Läs och visa QR-information
-      </span>
-
-    </button>
-
-
-    <button class="homeCard" onclick="showPage('dagbok')">
-
-      <div class="icon">📓</div>
-
-      <strong>Dagbok</strong>
-
-      <span>
-        Anteckningar för skift och information
+        Läs och visa QR-information tydligt.
       </span>
 
     </button>
@@ -516,7 +614,33 @@ th{
       <strong>Historik</strong>
 
       <span>
-        Sök tidigare FPK, kolli och händelser
+        Sök gamla körningar och se exakt vad som hänt.
+      </span>
+
+    </button>
+
+
+    <button class="homeCard" onclick="showPage('oversikt')">
+
+      <div class="icon">📊</div>
+
+      <strong>Översikt</strong>
+
+      <span>
+        För produktionsledning och senare hela företaget.
+      </span>
+
+    </button>
+
+
+    <button class="homeCard" onclick="showPage('installningar')">
+
+      <div class="icon">⚙️</div>
+
+      <strong>Inställningar</strong>
+
+      <span>
+        Administration.
       </span>
 
     </button>
@@ -543,14 +667,15 @@ th{
 
 
 <!-- ========================= -->
-<!-- PACK -->
-<!-- ========================= -->
+<!-- PRODUKTION
+     SAMMA SOM TIDIGARE PACK
+========================= -->
 
 <section id="pack" class="hidden">
 
   <div class="sectionTitle">
 
-    <h2>📦 Pack</h2>
+    <h2>🏭 Produktion</h2>
 
     <p>
       Samma grundkalkylator som i PackCalc,
@@ -562,8 +687,6 @@ th{
 
   <div id="activeFpkBox"></div>
 
-
-  <!-- FPK -->
 
   <div class="card">
 
@@ -592,8 +715,6 @@ th{
 
   </div>
 
-
-  <!-- KOLLI -->
 
   <div class="card">
 
@@ -678,8 +799,6 @@ th{
   </div>
 
 
-  <!-- AKTUELLT SALDO -->
-
   <div class="card">
 
     <h2>Aktuellt saldo</h2>
@@ -746,8 +865,6 @@ th{
   </div>
 
 
-  <!-- AKTIVA KOLLIN -->
-
   <div class="card">
 
     <h2>Registrerade kollin</h2>
@@ -762,8 +879,6 @@ th{
 
   </div>
 
-
-  <!-- KASSATION -->
 
   <div class="card">
 
@@ -804,8 +919,6 @@ th{
   </div>
 
 
-  <!-- PACK HISTORIK -->
-
   <div class="card">
 
     <h2>Registreringar</h2>
@@ -844,8 +957,578 @@ th{
 
 
 <!-- ========================= -->
-<!-- PRINT -->
+<!-- PACKALKYLATOR
+========================= -->
+
+<section id="packalkylator" class="hidden">
+
+  <!-- VAL AV KALKYLATOR -->
+
+  <div id="calculatorChoice">
+
+    <div class="sectionTitle">
+
+      <h2>🧮 Packalkylator</h2>
+
+      <p>
+        Allt du snabbt behöver räkna.
+      </p>
+
+    </div>
+
+
+    <div class="calculatorGrid">
+
+      <button
+        class="calculatorCard"
+        onclick="openCalculator('sprutor')"
+      >
+
+        <div class="calcIcon">💉</div>
+
+        <strong>Sprutor</strong>
+
+        <span>
+          Räkna sprutor till kapslar.
+        </span>
+
+      </button>
+
+
+      <button
+        class="calculatorCard"
+        onclick="openCalculator('kapslar')"
+      >
+
+        <div class="calcIcon">🧪</div>
+
+        <strong>Kapslar</strong>
+
+        <span>
+          Räkna kapslar till well/backar.
+        </span>
+
+      </button>
+
+
+      <button
+        class="calculatorCard"
+        onclick="openCalculator('pallcalc')"
+      >
+
+        <div class="calcIcon">📦</div>
+
+        <strong>Pall</strong>
+
+        <span>
+          Räkna well till pallar.
+        </span>
+
+      </button>
+
+
+      <button
+        class="calculatorCard"
+        onclick="openCalculator('etiketter')"
+      >
+
+        <div class="calcIcon">🏷️</div>
+
+        <strong>Etiketter</strong>
+
+        <span>
+          Räkna och kontrollera etiketter.
+        </span>
+
+      </button>
+
+
+      <button
+        class="calculatorCard"
+        onclick="openCalculator('tid')"
+      >
+
+        <div class="calcIcon">⏱️</div>
+
+        <strong>Tid</strong>
+
+        <span>
+          Lägg ihop flera tidsperioder.
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- SPRUTOR -->
+
+  <div
+    id="calcSprutor"
+    class="hidden"
+  >
+
+    <button
+      class="gray calcBack"
+      onclick="backToCalculators()"
+    >
+      ← Till kalkylatorer
+    </button>
+
+
+    <div class="sectionTitle">
+
+      <h2>💉 Sprutor</h2>
+
+      <p>
+        Räkna ut hur sprutorna fördelas i kapslar.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <label>Hur många sprutor har vi?</label>
+
+      <input
+        id="sprutorAntal"
+        type="number"
+        value="0"
+        min="0"
+        oninput="raknaSprutor()"
+      >
+
+
+      <label>Hur många sprutor i en kapsel?</label>
+
+      <input
+        id="sprutorPer"
+        type="number"
+        value="0"
+        min="0"
+        oninput="raknaSprutor()"
+      >
+
+
+      <div class="result">
+
+        <div class="box">
+
+          Antal fulla kapslar
+
+          <span
+            class="number greenNumber"
+            id="sprutorFulla"
+          >
+            0
+          </span>
+
+        </div>
+
+
+        <div class="box">
+
+          Antal sprutor i sista kapseln
+
+          <span
+            class="number blueNumber"
+            id="sprutorSista"
+          >
+            0
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- KAPSLAR -->
+
+  <div
+    id="calcKapslar"
+    class="hidden"
+  >
+
+    <button
+      class="gray calcBack"
+      onclick="backToCalculators()"
+    >
+      ← Till kalkylatorer
+    </button>
+
+
+    <div class="sectionTitle">
+
+      <h2>🧪 Kapslar</h2>
+
+      <p>
+        1 vial = 1 kapsel.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <label>Hur många kapslar har vi?</label>
+
+      <input
+        id="kapslarAntal"
+        type="number"
+        value="0"
+        min="0"
+        oninput="raknaKapslar()"
+      >
+
+
+      <label>Hur många kapslar i ett well/back?</label>
+
+      <input
+        id="kapslarPer"
+        type="number"
+        value="0"
+        min="0"
+        oninput="raknaKapslar()"
+      >
+
+
+      <div class="result">
+
+        <div class="box">
+
+          Antal fulla well/backar
+
+          <span
+            class="number greenNumber"
+            id="kapslarFulla"
+          >
+            0
+          </span>
+
+        </div>
+
+
+        <div class="box">
+
+          Antal kapslar i sista well/backen
+
+          <span
+            class="number blueNumber"
+            id="kapslarSista"
+          >
+            0
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- PALL -->
+
+  <div
+    id="calcPall"
+    class="hidden"
+  >
+
+    <button
+      class="gray calcBack"
+      onclick="backToCalculators()"
+    >
+      ← Till kalkylatorer
+    </button>
+
+
+    <div class="sectionTitle">
+
+      <h2>📦 Pall</h2>
+
+      <p>
+        Räkna ut hur många pallar wellen blir.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <label>Hur många well har du?</label>
+
+      <input
+        id="pallCalcAntal"
+        type="number"
+        value="0"
+        min="0"
+        oninput="raknaPallCalc()"
+      >
+
+
+      <label>Hur många well på en pall?</label>
+
+      <input
+        id="pallCalcPer"
+        type="number"
+        value="0"
+        min="0"
+        oninput="raknaPallCalc()"
+      >
+
+
+      <div class="result">
+
+        <div class="box">
+
+          Antal fulla pallar
+
+          <span
+            class="number greenNumber"
+            id="pallCalcFulla"
+          >
+            0
+          </span>
+
+        </div>
+
+
+        <div class="box">
+
+          Well på sista pallen
+
+          <span
+            class="number blueNumber"
+            id="pallCalcSista"
+          >
+            0
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ETIKETTER -->
+
+  <div
+    id="calcEtiketter"
+    class="hidden"
+  >
+
+    <button
+      class="gray calcBack"
+      onclick="backToCalculators()"
+    >
+      ← Till kalkylatorer
+    </button>
+
+
+    <div class="sectionTitle">
+
+      <h2>🏷️ Etiketter</h2>
+
+      <p>
+        Räkna antal etiketter och kontrollera förbrukningen.
+      </p>
+
+    </div>
+
+
+    <!-- RÄKNA ANTAL -->
+
+    <div class="card">
+
+      <h2>1. Räkna antal etiketter</h2>
+
+
+      <label>Första etikett</label>
+
+      <input
+        id="etikettForsta"
+        type="number"
+        value="0"
+        min="0"
+        oninput="raknaEtiketter()"
+      >
+
+
+      <label>Sista etikett</label>
+
+      <input
+        id="etikettSista"
+        type="number"
+        value="0"
+        min="0"
+        oninput="raknaEtiketter()"
+      >
+
+
+      <div class="result">
+
+        <div class="box">
+
+          Totalt antal etiketter
+
+          <span
+            class="number"
+            id="etikettTotalt"
+          >
+            0
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- KONTROLLERA FÖRBRUKNING -->
+
+    <div class="card">
+
+      <h2>2. Kontrollera etikettförbrukning</h2>
+
+
+      <label>Startnummer</label>
+
+      <input
+        id="etikettStart"
+        type="number"
+        value="0"
+        min="0"
+        oninput="kontrolleraEtiketter()"
+      >
+
+
+      <label>Antal producerade</label>
+
+      <input
+        id="etikettProducerade"
+        type="number"
+        value="0"
+        min="0"
+        oninput="kontrolleraEtiketter()"
+      >
+
+
+      <div class="box calcResult">
+
+        Förväntad nästa etikett
+
+        <span
+          class="number"
+          id="etikettForvantad"
+        >
+          0
+        </span>
+
+      </div>
+
+
+      <label>
+        Vilket nummer visar etiketten/rullen?
+      </label>
+
+      <input
+        id="etikettVerklig"
+        type="number"
+        value="0"
+        min="0"
+        oninput="kontrolleraEtiketter()"
+      >
+
+
+      <div id="etikettKontrollResult"></div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- TID -->
+
+  <div
+    id="calcTid"
+    class="hidden"
+  >
+
+    <button
+      class="gray calcBack"
+      onclick="backToCalculators()"
+    >
+      ← Till kalkylatorer
+    </button>
+
+
+    <div class="sectionTitle">
+
+      <h2>⏱️ Tid</h2>
+
+      <p>
+        Lägg ihop flera tidsperioder.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div id="timeRows"></div>
+
+
+      <button
+        class="blue"
+        onclick="addTimeRow()"
+      >
+        ＋ Lägg till tid
+      </button>
+
+
+      <div class="timeTotal">
+
+        Total tid
+
+        <span
+          class="number"
+          id="timeTotal"
+        >
+          0 h 0 min
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
 <!-- ========================= -->
+<!-- PRINT
+     ORÖRD
+========================= -->
 
 <section id="print" class="hidden">
 
@@ -970,8 +1653,9 @@ th{
 
 
 <!-- ========================= -->
-<!-- PALL -->
-<!-- ========================= -->
+<!-- PALL
+     ORÖRD
+========================= -->
 
 <section id="pall" class="hidden">
 
@@ -1041,14 +1725,15 @@ th{
 
 
 <!-- ========================= -->
-<!-- QR -->
-<!-- ========================= -->
+<!-- QR
+     SAMMA FUNKTION
+========================= -->
 
 <section id="qr" class="hidden">
 
   <div class="sectionTitle">
 
-    <h2>▣ QR-kod</h2>
+    <h2>▣ QR kodläsare</h2>
 
     <p>
       Här kan vi senare koppla på telefonens
@@ -1082,14 +1767,15 @@ th{
 
 
 <!-- ========================= -->
-<!-- DAGBOK -->
-<!-- ========================= -->
+<!-- LOGGBOK
+     SAMMA FUNKTION SOM DAGBOK
+========================= -->
 
 <section id="dagbok" class="hidden">
 
   <div class="sectionTitle">
 
-    <h2>📓 Dagbok</h2>
+    <h2>📖 Loggbok</h2>
 
     <p>
       Information till nästa skift,
@@ -1132,8 +1818,9 @@ th{
 
 
 <!-- ========================= -->
-<!-- HISTORIK -->
-<!-- ========================= -->
+<!-- HISTORIK
+     SAMMA FUNKTION
+========================= -->
 
 <section id="historik" class="hidden">
 
@@ -1205,8 +1892,72 @@ th{
 
 
 <!-- ========================= -->
-<!-- MER -->
+<!-- ÖVERSIKT
+========================= -->
+
+<section id="oversikt" class="hidden">
+
+  <div class="sectionTitle">
+
+    <h2>📊 Översikt</h2>
+
+    <p>
+      För produktionsledning och senare hela företaget.
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>Översikt</h2>
+
+    <p style="color:#687386">
+      Här kommer produktionsöversikten att byggas vidare
+      när den ska användas av produktionsledning och företaget.
+    </p>
+
+  </div>
+
+</section>
+
+
+
 <!-- ========================= -->
+<!-- INSTÄLLNINGAR
+========================= -->
+
+<section id="installningar" class="hidden">
+
+  <div class="sectionTitle">
+
+    <h2>⚙️ Inställningar</h2>
+
+    <p>
+      Administration.
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>Inställningar</h2>
+
+    <p style="color:#687386">
+      Administrativa funktioner kommer att läggas här.
+    </p>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- MER
+     BEFINTLIGT
+========================= -->
 
 <section id="more" class="hidden">
 
@@ -1332,11 +2083,14 @@ function saveData(){
 const pages = [
   "home",
   "pack",
+  "packalkylator",
   "print",
   "pall",
   "qr",
   "dagbok",
   "historik",
+  "oversikt",
+  "installningar",
   "more"
 ];
 
@@ -1382,7 +2136,9 @@ function showPage(page){
     page==="pall" ||
     page==="qr" ||
     page==="dagbok" ||
-    page==="historik"
+    page==="historik" ||
+    page==="oversikt" ||
+    page==="installningar"
   ){
 
     document.getElementById("navMore")
@@ -1399,6 +2155,603 @@ function showPage(page){
 
 
 /* =====================================
+   PACKALKYLATOR NAVIGATION
+===================================== */
+
+function openCalculator(type){
+
+  document
+    .getElementById("calculatorChoice")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("calcSprutor")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("calcKapslar")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("calcPall")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("calcEtiketter")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("calcTid")
+    .classList.add("hidden");
+
+
+  if(type==="sprutor"){
+
+    document
+      .getElementById("calcSprutor")
+      .classList.remove("hidden");
+
+    raknaSprutor();
+
+  }
+
+
+  if(type==="kapslar"){
+
+    document
+      .getElementById("calcKapslar")
+      .classList.remove("hidden");
+
+    raknaKapslar();
+
+  }
+
+
+  if(type==="pallcalc"){
+
+    document
+      .getElementById("calcPall")
+      .classList.remove("hidden");
+
+    raknaPallCalc();
+
+  }
+
+
+  if(type==="etiketter"){
+
+    document
+      .getElementById("calcEtiketter")
+      .classList.remove("hidden");
+
+    raknaEtiketter();
+
+    kontrolleraEtiketter();
+
+  }
+
+
+  if(type==="tid"){
+
+    document
+      .getElementById("calcTid")
+      .classList.remove("hidden");
+
+    renderTimeRows();
+
+  }
+
+}
+
+
+function backToCalculators(){
+
+  document
+    .getElementById("calcSprutor")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("calcKapslar")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("calcPall")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("calcEtiketter")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("calcTid")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("calculatorChoice")
+    .classList.remove("hidden");
+
+}
+
+
+/* =====================================
+   SPRUTOR
+===================================== */
+
+function raknaSprutor(){
+
+  let antal =
+    Number(
+      document.getElementById("sprutorAntal").value
+    ) || 0;
+
+
+  let per =
+    Number(
+      document.getElementById("sprutorPer").value
+    ) || 0;
+
+
+  let full = 0;
+
+  let rem = 0;
+
+
+  if(per > 0){
+
+    full = Math.floor(antal/per);
+
+    rem = antal % per;
+
+  }
+
+
+  document.getElementById("sprutorFulla")
+    .innerText = full;
+
+
+  document.getElementById("sprutorSista")
+    .innerText = rem;
+
+}
+
+
+/* =====================================
+   KAPSLAR
+===================================== */
+
+function raknaKapslar(){
+
+  let antal =
+    Number(
+      document.getElementById("kapslarAntal").value
+    ) || 0;
+
+
+  let per =
+    Number(
+      document.getElementById("kapslarPer").value
+    ) || 0;
+
+
+  let full = 0;
+
+  let rem = 0;
+
+
+  if(per > 0){
+
+    full = Math.floor(antal/per);
+
+    rem = antal % per;
+
+  }
+
+
+  document.getElementById("kapslarFulla")
+    .innerText = full;
+
+
+  document.getElementById("kapslarSista")
+    .innerText = rem;
+
+}
+
+
+/* =====================================
+   PALL KALKYLATOR
+===================================== */
+
+function raknaPallCalc(){
+
+  let antal =
+    Number(
+      document.getElementById("pallCalcAntal").value
+    ) || 0;
+
+
+  let per =
+    Number(
+      document.getElementById("pallCalcPer").value
+    ) || 0;
+
+
+  let full = 0;
+
+  let rem = 0;
+
+
+  if(per > 0){
+
+    full = Math.floor(antal/per);
+
+    rem = antal % per;
+
+  }
+
+
+  document.getElementById("pallCalcFulla")
+    .innerText = full;
+
+
+  document.getElementById("pallCalcSista")
+    .innerText = rem;
+
+}
+
+
+/* =====================================
+   ETIKETTER - RÄKNA
+===================================== */
+
+function raknaEtiketter(){
+
+  let forsta =
+    Number(
+      document.getElementById("etikettForsta").value
+    ) || 0;
+
+
+  let sista =
+    Number(
+      document.getElementById("etikettSista").value
+    ) || 0;
+
+
+  let totalt = 0;
+
+
+  if(sista >= forsta){
+
+    totalt = sista - forsta + 1;
+
+  }
+
+
+  document.getElementById("etikettTotalt")
+    .innerText = totalt;
+
+}
+
+
+/* =====================================
+   ETIKETTER - KONTROLL
+===================================== */
+
+function kontrolleraEtiketter(){
+
+  let start =
+    Number(
+      document.getElementById("etikettStart").value
+    ) || 0;
+
+
+  let producerade =
+    Number(
+      document.getElementById("etikettProducerade").value
+    ) || 0;
+
+
+  let forvantad =
+    start + producerade;
+
+
+  document.getElementById("etikettForvantad")
+    .innerText = forvantad;
+
+
+  let verkligField =
+    document.getElementById("etikettVerklig");
+
+
+  let verkligValue =
+    verkligField.value;
+
+
+  let result =
+    document.getElementById(
+      "etikettKontrollResult"
+    );
+
+
+  if(
+    verkligValue === "" ||
+    verkligValue === null
+  ){
+
+    result.innerHTML = "";
+
+    return;
+
+  }
+
+
+  let verklig =
+    Number(verkligValue);
+
+
+  let diff =
+    verklig - forvantad;
+
+
+  if(diff === 0){
+
+    result.innerHTML = `
+
+      <div class="calcPositive">
+
+        ✓ Etiketten stämmer.
+        Ingen differens.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  if(diff > 0){
+
+    result.innerHTML = `
+
+      <div class="calcPositive">
+
+        +${diff} etikett${diff===1 ? "" : "er"}
+
+      </div>
+
+      <div class="calcExplanation">
+
+        En etikett verkar ha förbrukats extra,
+        tappats eller på annat sätt saknas.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  let minus =
+    Math.abs(diff);
+
+
+  result.innerHTML = `
+
+    <div class="calcNegative">
+
+      −${minus} etikett${minus===1 ? "" : "er"}
+
+    </div>
+
+    <div class="calcExplanation">
+
+      Möjligtvis har en produkt gått igenom
+      utan etikett.
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================
+   TID
+===================================== */
+
+let timeValues = [];
+
+
+function addTimeRow(){
+
+  timeValues.push("");
+
+  renderTimeRows();
+
+}
+
+
+function removeTimeRow(index){
+
+  timeValues.splice(index,1);
+
+  renderTimeRows();
+
+}
+
+
+function updateTime(index,value){
+
+  timeValues[index] = value;
+
+  calculateTime();
+
+}
+
+
+function renderTimeRows(){
+
+  let box =
+    document.getElementById("timeRows");
+
+
+  if(!timeValues.length){
+
+    timeValues.push("");
+
+  }
+
+
+  box.innerHTML = "";
+
+
+  timeValues.forEach(function(value,index){
+
+    let row =
+      document.createElement("div");
+
+
+    row.className =
+      "timeRow";
+
+
+    row.innerHTML = `
+
+      <div>
+
+        <label>
+          Tid ${index+1}
+        </label>
+
+        <input
+          type="text"
+          value="${value}"
+          placeholder="t.ex. 1:10"
+          oninput="updateTime(${index},this.value)"
+        >
+
+      </div>
+
+
+      ${
+        timeValues.length > 1
+        ? `
+          <button
+            class="red removeTime"
+            onclick="removeTimeRow(${index})"
+          >
+            −
+          </button>
+        `
+        : ""
+      }
+
+    `;
+
+
+    box.appendChild(row);
+
+  });
+
+
+  calculateTime();
+
+}
+
+
+function calculateTime(){
+
+  let totalMinutes = 0;
+
+
+  timeValues.forEach(function(value){
+
+    let text =
+      String(value || "").trim();
+
+
+    if(!text){
+
+      return;
+
+    }
+
+
+    let parts =
+      text.split(":");
+
+
+    if(parts.length !== 2){
+
+      return;
+
+    }
+
+
+    let hours =
+      Number(parts[0]);
+
+
+    let minutes =
+      Number(parts[1]);
+
+
+    if(
+      !Number.isFinite(hours) ||
+      !Number.isFinite(minutes)
+    ){
+
+      return;
+
+    }
+
+
+    if(
+      hours < 0 ||
+      minutes < 0
+    ){
+
+      return;
+
+    }
+
+
+    totalMinutes +=
+      (hours * 60) + minutes;
+
+  });
+
+
+  let hours =
+    Math.floor(totalMinutes/60);
+
+
+  let minutes =
+    totalMinutes % 60;
+
+
+  document.getElementById("timeTotal")
+    .innerText =
+      hours + " h " + minutes + " min";
+
+}
+
+
+/* =====================================
    FPK
 ===================================== */
 
@@ -1407,6 +2760,7 @@ function startFpk(){
   let value =
     document.getElementById("fpkNumber")
       .value.trim();
+
 
   if(!value){
 
