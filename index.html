@@ -3,9 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PACKVEX V1.1</title>
+
+<title>PACKVEX</title>
 
 <style>
+*{
+  box-sizing:border-box;
+}
+
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:#f4f6fa;
@@ -16,17 +21,35 @@ body{
 header{
   background:#1459d9;
   color:white;
-  padding:22px 18px;
+  padding:20px 18px;
   text-align:center;
 }
 
-h1{
-  margin:0;
-  font-size:30px;
+.logo{
+  width:48px;
+  height:48px;
+  border-radius:13px;
+  background:linear-gradient(135deg,#35d48a,#24a8e8);
+  color:#071014;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  font-weight:900;
+  margin:0 auto 8px;
 }
 
-header div{
+header h1{
+  margin:0;
+  font-size:29px;
+  letter-spacing:1px;
+}
+
+.tagline{
   margin-top:4px;
+  font-size:11px;
+  letter-spacing:1.5px;
+  opacity:.9;
 }
 
 main{
@@ -47,6 +70,14 @@ h2{
   margin-top:0;
 }
 
+h3{
+  margin-bottom:5px;
+}
+
+p{
+  line-height:1.4;
+}
+
 label{
   display:block;
   font-weight:bold;
@@ -54,13 +85,21 @@ label{
   margin-top:12px;
 }
 
-input,select{
+input,
+select,
+textarea{
   width:100%;
   padding:13px;
   font-size:17px;
   border:1px solid #ccd3df;
   border-radius:10px;
   box-sizing:border-box;
+  background:white;
+}
+
+textarea{
+  min-height:110px;
+  resize:vertical;
 }
 
 button{
@@ -71,6 +110,7 @@ button{
   font-size:16px;
   font-weight:bold;
   margin-top:12px;
+  cursor:pointer;
 }
 
 .blue{
@@ -79,8 +119,8 @@ button{
 }
 
 .green{
-  background:#dff7e8;
-  color:#168044;
+  background:#35b878;
+  color:white;
 }
 
 .red{
@@ -89,8 +129,8 @@ button{
 }
 
 .gray{
-  background:#eef1f5;
-  color:#344054;
+  background:#edf0f5;
+  color:#172033;
 }
 
 .result{
@@ -107,37 +147,61 @@ button{
   border-radius:12px;
 }
 
-.box.greenBox{
-  background:#e5f8eb;
-}
-
-.box.redBox{
-  background:#ffe9eb;
-}
-
-.box.blueBox{
-  background:#eef6ff;
-}
-
 .number{
-  font-size:30px;
+  font-size:32px;
   font-weight:bold;
   color:#1459d9;
   display:block;
   margin-top:5px;
 }
 
-.greenBox .number{
-  color:#168044;
+.greenNumber{
+  color:#1eaa68;
 }
 
-.redBox .number{
-  color:#b21f32;
+.blueNumber{
+  color:#1459d9;
+}
+
+.homeGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.homeCard{
+  background:white;
+  border:0;
+  border-radius:16px;
+  padding:17px;
+  text-align:left;
+  box-shadow:0 2px 10px #0001;
+  min-height:125px;
+  margin:0;
+}
+
+.homeCard .icon{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.homeCard strong{
+  display:block;
+  font-size:18px;
+  margin-bottom:5px;
+}
+
+.homeCard span{
+  display:block;
+  color:#687386;
+  font-size:13px;
+  line-height:1.3;
 }
 
 nav{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(4,1fr);
   gap:7px;
   margin-bottom:15px;
 }
@@ -145,27 +209,56 @@ nav{
 nav button{
   background:white;
   margin:0;
+  padding:11px 5px;
+  font-size:13px;
+  color:#172033;
 }
 
-.bottomnav{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:5px;
-  margin-top:15px;
-}
-
-.bottomnav button{
-  background:white;
-  font-size:11px;
-  padding:10px 3px;
-  margin:0;
+nav button.active{
+  background:#1459d9;
+  color:white;
 }
 
 .hidden{
-  display:none;
+  display:none !important;
 }
 
-.scroll{
+.status{
+  background:#eaf8f1;
+  color:#17764a;
+  border-radius:10px;
+  padding:12px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.warning{
+  background:#fff4df;
+  color:#8a5a00;
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:15px;
+}
+
+.item{
+  border:1px solid #e0e5ed;
+  border-radius:11px;
+  padding:12px;
+  margin-top:8px;
+  background:#fafbfd;
+}
+
+.item strong{
+  display:block;
+}
+
+.small{
+  color:#687386;
+  font-size:13px;
+  margin-top:4px;
+}
+
+.tableWrap{
   overflow:auto;
 }
 
@@ -175,98 +268,118 @@ table{
   font-size:12px;
 }
 
-td,th{
+td,
+th{
   padding:8px;
   border-bottom:1px solid #ddd;
   text-align:left;
+  white-space:nowrap;
 }
 
-.plus{
-  color:#168044;
-  font-weight:bold;
-}
-
-.minus{
-  color:#b21f32;
-  font-weight:bold;
-}
-
-.kolli-card{
-  border-left:6px solid #1459d9;
-}
-
-.kolli-card.active{
-  border-left-color:#168044;
-  background:#f5fff8;
-}
-
-.kolli-card.diff{
-  border-left-color:#b21f32;
-  background:#fff6f7;
-}
-
-.status{
+.badge{
   display:inline-block;
-  padding:5px 9px;
+  padding:5px 8px;
   border-radius:8px;
-  font-size:12px;
+  font-size:11px;
   font-weight:bold;
-  margin-bottom:8px;
+  background:#e8f8f0;
+  color:#17764a;
 }
 
-.status.active{
-  background:#dff7e8;
-  color:#168044;
-}
-
-.status.previous{
-  background:#e4efff;
-  color:#1459d9;
-}
-
-.status.diff{
-  background:#ffe1e4;
-  color:#b21f32;
-}
-
-.diff-button{
-  width:auto;
-  padding:8px 12px;
-  margin-top:8px;
-  font-size:13px;
-}
-
-.history-card{
-  cursor:pointer;
-}
-
-.history-card:active{
-  transform:scale(.99);
-}
-
-.small{
-  font-size:13px;
-  color:#667085;
-}
-
-.big-fpk{
-  font-size:21px;
-  font-weight:bold;
-  color:#1459d9;
-}
-
-.active-fpk{
-  background:#eaf2ff;
-  border:1px solid #c9dcff;
-  padding:12px;
-  border-radius:12px;
+.sectionTitle{
   margin-bottom:15px;
 }
 
-.empty{
+.sectionTitle h2{
+  margin-bottom:3px;
+}
+
+.sectionTitle p{
+  margin-top:0;
+  color:#687386;
+}
+
+.activeKolli{
+  border:2px solid #35b878;
+  background:#f0fbf5;
+}
+
+/* NYTT I V1.1 */
+
+.previousKolli{
+  border:2px solid #1459d9;
+  background:#f4f8ff;
+}
+
+.diffKolli{
+  border:2px solid #d92d20;
+  background:#fff5f5;
+}
+
+.diffBadge{
+  display:inline-block;
+  background:#ffe1e4;
+  color:#b21f32;
+  border-radius:8px;
+  padding:4px 7px;
+  font-size:11px;
+  font-weight:bold;
+  margin-left:5px;
+}
+
+.kassBadge{
+  display:inline-block;
+  background:#fff4df;
+  color:#8a5a00;
+  border-radius:8px;
+  padding:4px 7px;
+  font-size:11px;
+  font-weight:bold;
+  margin-left:5px;
+}
+
+.diffButton{
+  width:auto;
+  padding:7px 10px;
+  margin-top:8px;
+  font-size:12px;
+  background:#fff4df;
+  color:#8a5a00;
+}
+
+.plusHistory{
+  color:#1eaa68;
+  font-weight:bold;
+}
+
+.minusHistory{
+  color:#b21f32;
+  font-weight:bold;
+}
+
+.search{
+  margin-bottom:10px;
+}
+
+.footer{
   text-align:center;
-  padding:20px;
-  color:#667085;
+  color:#8b95a5;
+  font-size:12px;
+  padding:20px 0;
+}
+
+@media(max-width:430px){
+  .homeGrid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .result{
+    grid-template-columns:1fr 1fr;
+  }
+
+  nav button{
+    font-size:12px;
+  }
 }
 </style>
 </head>
@@ -274,1373 +387,2671 @@ td,th{
 <body>
 
 <header>
-  <h1>📦 PACKVEX</h1>
-  <div>Verification. Efficiency. Execution.</div>
+
+  <div class="logo">PV</div>
+
+  <h1>PACKVEX</h1>
+
+  <div class="tagline">
+    VERIFICATION. EFFICIENCY. EXECUTION.
+  </div>
+
 </header>
 
 <main>
 
-<nav>
-  <button onclick="visa('hem')">🏠 Hem</button>
-  <button onclick="visa('pack')">📦 Pack</button>
-  <button onclick="visa('print')">🧪 Print</button>
+<!-- NAVIGATION -->
+
+<nav id="mainNav">
+
+  <button onclick="showPage('home')" id="navHome">
+    🏠 Hem
+  </button>
+
+  <button onclick="showPage('pack')" id="navPack">
+    📦 Pack
+  </button>
+
+  <button onclick="showPage('print')" id="navPrint">
+    🖨️ Print
+  </button>
+
+  <button onclick="showPage('more')" id="navMore">
+    ⋯ Mer
+  </button>
+
 </nav>
 
-<!-- ================= HEM ================= -->
 
-<div id="hem">
+<!-- ========================= -->
+<!-- STARTSIDA -->
+<!-- ========================= -->
 
-<div class="card">
-  <h2>Välkommen till PACKVEX</h2>
-  <p>
-    Välj vad du vill arbeta med.
-  </p>
+<section id="home">
+
+  <div class="card">
+
+    <h2>Produktionsöversikt</h2>
+
+    <p style="color:#687386">
+      Välj vad du vill arbeta med.
+    </p>
+
+    <div id="homeActive"></div>
+
+  </div>
+
+
+  <div class="homeGrid">
+
+    <button class="homeCard" onclick="showPage('pack')">
+
+      <div class="icon">📦</div>
+
+      <strong>Pack</strong>
+
+      <span>
+        Kolli, FPK, kassation och registreringar
+      </span>
+
+    </button>
+
+
+    <button class="homeCard" onclick="showPage('print')">
+
+      <div class="icon">🖨️</div>
+
+      <strong>Print</strong>
+
+      <span>
+        Order, redan packat och sista well
+      </span>
+
+    </button>
+
+
+    <button class="homeCard" onclick="showPage('pall')">
+
+      <div class="icon">🏗️</div>
+
+      <strong>Pall</strong>
+
+      <span>
+        Beräkna wells och pallar
+      </span>
+
+    </button>
+
+
+    <button class="homeCard" onclick="showPage('qr')">
+
+      <div class="icon">▣</div>
+
+      <strong>QR-kod</strong>
+
+      <span>
+        Läs och visa QR-information
+      </span>
+
+    </button>
+
+
+    <button class="homeCard" onclick="showPage('dagbok')">
+
+      <div class="icon">📓</div>
+
+      <strong>Dagbok</strong>
+
+      <span>
+        Anteckningar för skift och information
+      </span>
+
+    </button>
+
+
+    <button class="homeCard" onclick="showPage('historik')">
+
+      <div class="icon">📋</div>
+
+      <strong>Historik</strong>
+
+      <span>
+        Sök tidigare FPK, kolli och händelser
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>Snabbsök</h3>
+
+    <input
+      id="homeSearch"
+      placeholder="Sök FPK eller kollinummer"
+      oninput="homeSearch()"
+    >
+
+    <div id="homeSearchResults"></div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- PACK -->
+<!-- ========================= -->
+
+<section id="pack" class="hidden">
+
+  <div class="sectionTitle">
+
+    <h2>📦 Pack</h2>
+
+    <p>
+      Samma grundkalkylator som i PackCalc,
+      med FPK och aktivt kolli.
+    </p>
+
+  </div>
+
+
+  <div id="activeFpkBox"></div>
+
+
+  <!-- FPK -->
+
+  <div class="card">
+
+    <h2>FPK</h2>
+
+    <label>FPK-nummer</label>
+
+    <input
+      id="fpkNumber"
+      placeholder="t.ex. 2410"
+    >
+
+    <button
+      class="blue"
+      onclick="startFpk()"
+    >
+      Starta FPK
+    </button>
+
+    <button
+      class="gray"
+      onclick="finishFpk()"
+    >
+      Avsluta FPK
+    </button>
+
+  </div>
+
+
+  <!-- KOLLI -->
+
+  <div class="card">
+
+    <h2>Kolli → kapsel / well</h2>
+
+    <label>Produkt</label>
+
+    <select id="produkt">
+      <option>Sprutor</option>
+      <option>Vialer</option>
+      <option>Annan produkt</option>
+    </select>
+
+
+    <label>Kollinummer</label>
+
+    <input
+      id="kollinummer"
+      placeholder="t.ex. 001"
+    >
+
+
+    <label>Antal i kollit</label>
+
+    <input
+      id="antal"
+      type="number"
+      value="0"
+      oninput="raknaKolli()"
+    >
+
+
+    <label>Antal per kapsel / well</label>
+
+    <input
+      id="per"
+      type="number"
+      value="0"
+      oninput="raknaKolli()"
+    >
+
+
+    <div class="result">
+
+      <div class="box">
+
+        Fulla kapslar / wells
+
+        <span
+          class="number greenNumber"
+          id="fulla"
+        >
+          0
+        </span>
+
+      </div>
+
+
+      <div class="box">
+
+        Sista kapseln / well
+
+        <span
+          class="number blueNumber"
+          id="sista"
+        >
+          0
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="blue"
+      onclick="laggTillKolli()"
+    >
+      ＋ Lägg till kolli
+    </button>
+
+  </div>
+
+
+  <!-- AKTUELLT SALDO -->
+
+  <div class="card">
+
+    <h2>Aktuellt saldo</h2>
+
+    <div class="result">
+
+      <div class="box">
+
+        Totalt
+
+        <span
+          class="number"
+          id="totalt"
+        >
+          0
+        </span>
+
+      </div>
+
+
+      <div class="box">
+
+        Totalt kass
+
+        <span
+          class="number"
+          id="totaltKass"
+        >
+          0
+        </span>
+
+      </div>
+
+
+      <div class="box">
+
+        Totalt fulla kapslar
+
+        <span
+          class="number"
+          id="totaltFulla"
+        >
+          0
+        </span>
+
+      </div>
+
+
+      <div class="box">
+
+        Sista kapsel / well
+
+        <span
+          class="number"
+          id="sistaTotal"
+        >
+          0
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- AKTIVA KOLLIN -->
+
+  <div class="card">
+
+    <h2>Registrerade kollin</h2>
+
+    <div id="kolliLista">
+
+      <p style="color:#687386">
+        Inga kollin registrerade ännu.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- KASSATION -->
+
+  <div class="card">
+
+    <h2>➖ Kassation / justering</h2>
+
+    <div class="warning">
+
+      Kassation dras automatiskt från det
+      <strong>aktiva kollit</strong>.
+
+    </div>
+
+
+    <label>Antal att ta bort</label>
+
+    <input
+      id="minus"
+      type="number"
+      value="1"
+    >
+
+
+    <label>Anledning</label>
+
+    <input
+      id="anledning"
+      placeholder="t.ex. 1 spruta kass"
+    >
+
+
+    <button
+      class="red"
+      onclick="taBort()"
+    >
+      Ta bort antal från aktivt kolli
+    </button>
+
+  </div>
+
+
+  <!-- PACK HISTORIK -->
+
+  <div class="card">
+
+    <h2>Registreringar</h2>
+
+    <div class="tableWrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Tid</th>
+            <th>FPK</th>
+            <th>Kolli</th>
+            <th>Produkt</th>
+            <th>Ändring</th>
+            <th>Totalt</th>
+            <th>Sista</th>
+            <th>Notering</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="packHistorikLista"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- PRINT -->
+<!-- ========================= -->
+
+<section id="print" class="hidden">
+
+  <div class="sectionTitle">
+
+    <h2>🖨️ Print</h2>
+
+    <p>
+      Beräkna hur många enheter som återstår
+      och vad som hamnar i sista well.
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>Order → sista well</h2>
+
+
+    <label>FPK-nummer</label>
+
+    <input
+      id="printFpk"
+      placeholder="t.ex. 2410"
+    >
+
+
+    <label>Totalt antal enheter</label>
+
+    <input
+      id="ordertotal"
+      type="number"
+      value="0"
+      oninput="raknaPrint()"
+    >
+
+
+    <label>Redan packat / printat</label>
+
+    <input
+      id="packat"
+      type="number"
+      value="0"
+      oninput="raknaPrint()"
+    >
+
+
+    <label>Antal per well</label>
+
+    <input
+      id="well"
+      type="number"
+      value="0"
+      oninput="raknaPrint()"
+    >
+
+
+    <div class="result">
+
+      <div class="box">
+
+        Kvar
+
+        <span
+          class="number"
+          id="kvar"
+        >
+          0
+        </span>
+
+      </div>
+
+
+      <div class="box">
+
+        Sista well
+
+        <span
+          class="number"
+          id="sistawell"
+        >
+          0
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="card"
+      style="background:#eef6ff;margin-top:15px"
+    >
+
+      <strong id="fullawells">
+        0 fulla wells
+      </strong>
+
+      <div
+        id="totalWells"
+        style="margin-top:5px;color:#687386"
+      >
+        Totalt 0 wells behövs.
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="blue"
+      onclick="sparaPrint()"
+    >
+      Spara Print-beräkning
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- PALL -->
+<!-- ========================= -->
+
+<section id="pall" class="hidden">
+
+  <div class="sectionTitle">
+
+    <h2>🏗️ Pall</h2>
+
+    <p>
+      Beräkna hur många wells och pallar
+      hela ordern blir.
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <label>Total order, enheter</label>
+
+    <input
+      id="pallTotal"
+      type="number"
+      value="0"
+      oninput="raknaPall()"
+    >
+
+
+    <label>Enheter per well</label>
+
+    <input
+      id="pallWell"
+      type="number"
+      value="0"
+      oninput="raknaPall()"
+    >
+
+
+    <label>Enheter per pall</label>
+
+    <input
+      id="pallCap"
+      type="number"
+      value="0"
+      oninput="raknaPall()"
+    >
+
+
+    <label>Well per pall</label>
+
+    <input
+      id="pallWellCap"
+      type="number"
+      value="0"
+      oninput="raknaPall()"
+    >
+
+  </div>
+
+
+  <div
+    class="card"
+    id="pallResult"
+  ></div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- QR -->
+<!-- ========================= -->
+
+<section id="qr" class="hidden">
+
+  <div class="sectionTitle">
+
+    <h2>▣ QR-kod</h2>
+
+    <p>
+      Här kan vi senare koppla på telefonens
+      riktiga QR-kamera.
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>QR-information</h2>
+
+    <textarea
+      id="qrText"
+      placeholder="Text från QR-koden..."
+    ></textarea>
+
+
+    <button
+      class="blue"
+      onclick="sparaQR()"
+    >
+      Spara QR-information
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- DAGBOK -->
+<!-- ========================= -->
+
+<section id="dagbok" class="hidden">
+
+  <div class="sectionTitle">
+
+    <h2>📓 Dagbok</h2>
+
+    <p>
+      Information till nästa skift,
+      problem och viktiga anteckningar.
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>Dagens anteckning</h2>
+
+    <textarea
+      id="dagbokText"
+      placeholder="Skriv problem, information eller något som nästa skift behöver veta..."
+    ></textarea>
+
+
+    <button
+      class="green"
+      onclick="sparaDagbok()"
+    >
+      Spara anteckning
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>Tidigare anteckningar</h2>
+
+    <div id="dagbokLista"></div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- HISTORIK -->
+<!-- ========================= -->
+
+<section id="historik" class="hidden">
+
+  <div class="sectionTitle">
+
+    <h2>📋 Historik</h2>
+
+    <p>
+      Välj ett FPK för att se all historik
+      för just det FPK-numret.
+    </p>
+
+  </div>
+
+
+  <div
+    id="fpkLista"
+    class="card"
+  ></div>
+
+
+  <div
+    id="fpkHistorik"
+    class="card hidden"
+  >
+
+    <button
+      class="gray"
+      onclick="visaFpkLista()"
+    >
+      ← Tillbaka till FPK
+    </button>
+
+
+    <h2 id="fpkHistorikTitel"></h2>
+
+
+    <div class="tableWrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Tid</th>
+            <th>FPK</th>
+            <th>Kolli</th>
+            <th>Produkt</th>
+            <th>Ändring</th>
+            <th>Totalt</th>
+            <th>Sista</th>
+            <th>Notering</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="fpkHistorikLista"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- MER -->
+<!-- ========================= -->
+
+<section id="more" class="hidden">
+
+  <div class="card">
+
+    <h2>Fler funktioner</h2>
+
+    <button
+      class="homeCard"
+      onclick="showPage('pall')"
+    >
+
+      🏗️ <strong>Pall</strong>
+
+      <span>
+        Well och pallar
+      </span>
+
+    </button>
+
+
+    <button
+      class="homeCard"
+      onclick="showPage('qr')"
+    >
+
+      ▣ <strong>QR-kod</strong>
+
+      <span>
+        Läs QR-information
+      </span>
+
+    </button>
+
+
+    <button
+      class="homeCard"
+      onclick="showPage('dagbok')"
+    >
+
+      📓 <strong>Dagbok</strong>
+
+      <span>
+        Skiftanteckningar
+      </span>
+
+    </button>
+
+
+    <button
+      class="homeCard"
+      onclick="showPage('historik')"
+    >
+
+      📋 <strong>Historik</strong>
+
+      <span>
+        Tidigare arbete
+      </span>
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<div class="footer">
+
+  PACKVEX<br>
+  Verification. Efficiency. Execution.
+
 </div>
-
-<div class="card">
-  <h2>Aktivt FPK</h2>
-
-  <div id="hemAktivtFpk"></div>
-</div>
-
-<div class="card">
-  <h2>Snabbåtkomst</h2>
-
-  <button class="blue" onclick="visa('pack')">
-    📦 Starta / fortsätt Pack
-  </button>
-
-  <button class="gray" onclick="visa('print')">
-    🧪 Print
-  </button>
-
-  <button class="gray" onclick="visa('pall')">
-    🏭 Pall
-  </button>
-
-  <button class="gray" onclick="visa('qr')">
-    🔳 QR-kod
-  </button>
-
-  <button class="gray" onclick="visa('dagbok')">
-    📓 Dagbok
-  </button>
-
-  <button class="gray" onclick="visa('historik')">
-    📋 Historik
-  </button>
-</div>
-
-</div>
-
-
-<!-- ================= PACK ================= -->
-
-<div id="pack" class="hidden">
-
-<div class="card">
-
-<h2>📦 Pack</h2>
-
-<label>FPK-nummer</label>
-<input id="fpk" type="text" placeholder="Skriv FPK-nummer">
-
-<button class="blue" onclick="startaFPK()">
-  Starta FPK
-</button>
-
-</div>
-
-
-<div id="aktivtFpkPack"></div>
-
-
-<div class="card">
-
-<h2>➕ Lägg till kolli</h2>
-
-<label>Kollinummer</label>
-<input id="kollinummer" type="text" placeholder="Skriv kollinummer">
-
-<label>Produkt</label>
-<select id="produkt">
-  <option value="">Välj produkt</option>
-  <option>Sprutor</option>
-  <option>Vialer</option>
-  <option>Annan produkt</option>
-</select>
-
-<label>Antal i kollit</label>
-<input id="antal" type="number" min="0" value="0">
-
-<label>Antal per kapsel / well</label>
-<input id="per" type="number" min="1" value="0">
-
-<button class="blue" onclick="laggTillKolli()">
-  ＋ Lägg till kolli
-</button>
-
-</div>
-
-
-<!-- AKTUELLA KOLLI -->
-
-<div class="card">
-
-<h2>📦 Aktiva kolli</h2>
-
-<div id="aktivaKolli"></div>
-
-</div>
-
-
-<!-- AKTUELLT SALDO -->
-
-<div class="card">
-
-<h2>Aktuellt saldo</h2>
-
-<div class="result">
-
-<div class="box">
-  Totalt
-  <span class="number" id="totalt">0</span>
-</div>
-
-<div class="box redBox">
-  Totalt kass
-  <span class="number" id="totaltKass">0</span>
-</div>
-
-<div class="box">
-  Totalt fulla kapslar
-  <span class="number" id="totaltFulla">0</span>
-</div>
-
-<div class="box">
-  Sista kapsel / well
-  <span class="number" id="sistaTotal">0</span>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- KASSATION -->
-
-<div class="card">
-
-<h2>➖ Kassation</h2>
-
-<label>Antal att kassera</label>
-<input id="minus" type="number" min="0" value="0">
-
-<label>Anledning</label>
-<input id="anledning" placeholder="t.ex. skadad spruta">
-
-<button class="red" onclick="taBort()">
-  Kassera antal
-</button>
-
-</div>
-
-
-<!-- HISTORIK PÅ PACK-SIDAN -->
-
-<div class="card">
-
-<h2>📋 Historik för aktivt FPK</h2>
-
-<div class="scroll">
-<table>
-<thead>
-<tr>
-<th>Tid</th>
-<th>Kolli</th>
-<th>Produkt</th>
-<th>Ändring</th>
-<th>Totalt</th>
-<th>Status</th>
-</tr>
-</thead>
-
-<tbody id="packHistorikLista"></tbody>
-
-</table>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- ================= PRINT ================= -->
-
-<div id="print" class="hidden">
-
-<div class="card">
-
-<h2>🧪 Print → sista well</h2>
-
-<label>FPK-nummer</label>
-<input id="printFpk" type="text" placeholder="Skriv FPK-nummer">
-
-<label>Totalt antal enheter</label>
-<input id="ordertotal" type="number" min="0" value="0">
-
-<label>Redan packat / printat</label>
-<input id="packat" type="number" min="0" value="0">
-
-<label>Antal per well</label>
-<input id="well" type="number" min="1" value="0">
-
-<div class="result">
-
-<div class="box">
-  Kvar
-  <span class="number" id="kvar">0</span>
-</div>
-
-<div class="box">
-  Sista well
-  <span class="number" id="sistawell">0</span>
-</div>
-
-</div>
-
-<p id="fullawells">0 fulla wells</p>
-
-</div>
-
-</div>
-
-
-<!-- ================= PALL ================= -->
-
-<div id="pall" class="hidden">
-
-<div class="card">
-
-<h2>🏭 Pall</h2>
-
-<label>Totalt antal enheter</label>
-<input id="pallTotal" type="number" min="0" value="0">
-
-<label>Antal per well</label>
-<input id="pallWell" type="number" min="1" value="0">
-
-<label>Antal enheter per pall</label>
-<input id="pallKapacitet" type="number" min="1" value="0">
-
-<div class="result">
-
-<div class="box">
-  Antal pallar
-  <span class="number" id="antalPallar">0</span>
-</div>
-
-<div class="box">
-  Totalt wells
-  <span class="number" id="pallWells">0</span>
-</div>
-
-</div>
-
-<p id="pallInfo">0 wells</p>
-
-</div>
-
-</div>
-
-
-<!-- ================= QR ================= -->
-
-<div id="qr" class="hidden">
-
-<div class="card">
-
-<h2>🔳 QR-kod</h2>
-
-<p class="small">
-Skanna en QR-kod med telefonens kamera och klistra in innehållet här.
-</p>
-
-<label>QR-innehåll</label>
-<input id="qrText" placeholder="QR-kodens innehåll">
-
-<button class="blue" onclick="visaQR()">
-  Visa innehåll
-</button>
-
-<div id="qrResult"></div>
-
-</div>
-
-</div>
-
-
-<!-- ================= DAGBOK ================= -->
-
-<div id="dagbok" class="hidden">
-
-<div class="card">
-
-<h2>📓 Dagbok</h2>
-
-<label>Datum</label>
-<input id="dagbokDatum" type="date">
-
-<label>Anteckning</label>
-<input id="dagbokText" placeholder="Skriv information till nästa skift">
-
-<button class="blue" onclick="sparaDagbok()">
-  Spara anteckning
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>Anteckningar</h2>
-
-<div id="dagbokLista"></div>
-
-</div>
-
-</div>
-
-
-<!-- ================= HISTORIK ================= -->
-
-<div id="historik" class="hidden">
-
-<div class="card">
-
-<h2>📋 Historik</h2>
-
-<p class="small">
-Välj ett FPK för att se all historik för just det FPK-numret.
-</p>
-
-<div id="fpkHistorikLista"></div>
-
-</div>
-
-<div id="valdFpkHistorik" class="hidden">
-
-<div class="card">
-
-<h2 id="valdFpkTitel"></h2>
-
-<button class="gray" onclick="tillbakaTillFpkLista()">
-  ← Tillbaka
-</button>
-
-<div class="scroll">
-<table>
-
-<thead>
-<tr>
-<th>Tid</th>
-<th>Kolli</th>
-<th>Produkt</th>
-<th>Ändring</th>
-<th>Totalt</th>
-<th>Status</th>
-</tr>
-</thead>
-
-<tbody id="fpkDetaljLista"></tbody>
-
-</table>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- ================= BOTTOM NAV ================= -->
-
-<div class="bottomnav">
-
-<button onclick="visa('hem')">🏠<br>Hem</button>
-<button onclick="visa('pack')">📦<br>Pack</button>
-<button onclick="visa('print')">🧪<br>Print</button>
-<button onclick="visa('pall')">🏭<br>Pall</button>
-<button onclick="visa('qr')">🔳<br>QR</button>
-<button onclick="visa('dagbok')">📓<br>Dagbok</button>
-
-</div>
-
 
 </main>
 
 
 <script>
 
-/* ================= DATA ================= */
+/* =====================================
+   DATA
+===================================== */
 
 let data = JSON.parse(
   localStorage.getItem("packvex_data") || "{}"
 );
 
-let historik = JSON.parse(
-  localStorage.getItem("packvex_historik") || "[]"
-);
+if(!data.fpk){
+  data.fpk = "";
+}
 
-let dagbok = JSON.parse(
-  localStorage.getItem("packvex_dagbok") || "[]"
-);
+if(!data.kollin){
+  data.kollin = [];
+}
 
-let aktivtFPK =
-  localStorage.getItem("packvex_aktivt_fpk") || "";
+if(!data.historik){
+  data.historik = [];
+}
 
-let aktivaKolli = JSON.parse(
-  localStorage.getItem("packvex_aktiva_kolli") || "[]"
-);
-
-let totaltKass = Number(
-  localStorage.getItem("packvex_totalt_kass") || 0
-);
+if(!data.dagbok){
+  data.dagbok = [];
+}
 
 
-/* ================= SAVE ================= */
+/* =====================================
+   SAVE
+===================================== */
 
-function spara(){
+function saveData(){
 
   localStorage.setItem(
     "packvex_data",
     JSON.stringify(data)
   );
 
-  localStorage.setItem(
-    "packvex_historik",
-    JSON.stringify(historik)
-  );
-
-  localStorage.setItem(
-    "packvex_dagbok",
-    JSON.stringify(dagbok)
-  );
-
-  localStorage.setItem(
-    "packvex_aktivt_fpk",
-    aktivtFPK
-  );
-
-  localStorage.setItem(
-    "packvex_aktiva_kolli",
-    JSON.stringify(aktivaKolli)
-  );
-
-  localStorage.setItem(
-    "packvex_totalt_kass",
-    totaltKass
-  );
 }
 
 
-/* ================= NAVIGATION ================= */
+/* =====================================
+   PAGE NAVIGATION
+===================================== */
 
-function visa(id){
+const pages = [
+  "home",
+  "pack",
+  "print",
+  "pall",
+  "qr",
+  "dagbok",
+  "historik",
+  "more"
+];
 
-  [
-    "hem",
-    "pack",
-    "print",
-    "pall",
-    "qr",
-    "dagbok",
-    "historik"
-  ].forEach(x => {
+function showPage(page){
 
-    const el = document.getElementById(x);
+  pages.forEach(function(p){
 
-    if(el){
-      el.classList.add("hidden");
-    }
+    document.getElementById(p)
+      .classList.add("hidden");
 
   });
 
-  const selected =
-    document.getElementById(id);
 
-  if(selected){
-    selected.classList.remove("hidden");
+  document.getElementById(page)
+    .classList.remove("hidden");
+
+
+  document.querySelectorAll("nav button")
+    .forEach(function(btn){
+
+      btn.classList.remove("active");
+
+    });
+
+
+  if(page==="home"){
+    document.getElementById("navHome")
+      .classList.add("active");
   }
 
-  if(id === "pack"){
-    renderPack();
+  if(page==="pack"){
+    document.getElementById("navPack")
+      .classList.add("active");
   }
 
-  if(id === "historik"){
-    renderFpkHistorik();
+  if(page==="print"){
+    document.getElementById("navPrint")
+      .classList.add("active");
   }
 
-  if(id === "dagbok"){
-    renderDagbok();
+  if(
+    page==="more" ||
+    page==="pall" ||
+    page==="qr" ||
+    page==="dagbok" ||
+    page==="historik"
+  ){
+
+    document.getElementById("navMore")
+      .classList.add("active");
+
   }
 
-  if(id === "hem"){
-    renderHem();
-  }
+
+  renderAll();
+
+  window.scrollTo(0,0);
+
 }
 
 
-/* ================= FPK ================= */
+/* =====================================
+   FPK
+===================================== */
 
-function startaFPK(){
+function startFpk(){
 
-  const fpk =
-    document.getElementById("fpk").value.trim();
+  let value =
+    document.getElementById("fpkNumber")
+      .value.trim();
 
-  if(!fpk){
-    alert("Skriv ett FPK-nummer först.");
+  if(!value){
+
+    alert("Skriv in ett FPK-nummer.");
+
     return;
   }
 
-  aktivtFPK = fpk;
 
-  if(!data[aktivtFPK]){
-    data[aktivtFPK] = {
-      totalt:0,
-      kass:0,
-      kolli:[]
-    };
+  if(data.fpk){
+
+    if(!confirm(
+      "Det finns redan en aktiv FPK. Vill du byta?"
+    )){
+
+      return;
+
+    }
+
   }
 
-  aktivaKolli = data[aktivtFPK].kolli || [];
 
-  spara();
+  data.fpk = value;
 
-  renderPack();
+  saveData();
 
-  document.getElementById("fpk").value = "";
+  addHistory(
+    "FPK",
+    "-",
+    "-",
+    "",
+    "Startade FPK",
+    "",
+    "",
+    ""
+  );
+
+  renderAll();
+
+  alert("FPK " + value + " är nu aktiv.");
+
 }
 
 
-/* ================= ADD KOLLI ================= */
+function finishFpk(){
+
+  if(!data.fpk){
+
+    alert("Det finns ingen aktiv FPK.");
+
+    return;
+
+  }
+
+
+  if(!confirm(
+    "Vill du avsluta FPK " + data.fpk + "?"
+  )){
+
+    return;
+
+  }
+
+
+  addHistory(
+    "FPK",
+    "-",
+    "-",
+    "",
+    "Avslutade FPK",
+    "",
+    "",
+    ""
+  );
+
+
+  data.fpk = "";
+
+  data.kollin = [];
+
+  saveData();
+
+  renderAll();
+
+}
+
+
+/* =====================================
+   KOLLI LIVE
+===================================== */
+
+function raknaKolli(){
+
+  let antal =
+    Number(
+      document.getElementById("antal").value
+    ) || 0;
+
+
+  let per =
+    Number(
+      document.getElementById("per").value
+    ) || 0;
+
+
+  if(per > 0){
+
+    let full =
+      Math.floor(antal/per);
+
+
+    let rem =
+      antal % per;
+
+
+    document.getElementById("fulla")
+      .innerText = full;
+
+
+    document.getElementById("sista")
+      .innerText = rem;
+
+  }else{
+
+    document.getElementById("fulla")
+      .innerText = 0;
+
+
+    document.getElementById("sista")
+      .innerText = 0;
+
+  }
+
+
+  updateTotal();
+
+}
+
+
+/* =====================================
+   TOTAL
+===================================== */
+
+function updateTotal(){
+
+  let total = 0;
+
+  let totalKass = 0;
+
+
+  data.kollin.forEach(function(k){
+
+    total += Number(k.used) || 0;
+
+    totalKass +=
+      (Number(k.original) || 0) -
+      (Number(k.used) || 0);
+
+  });
+
+
+  let per =
+    Number(
+      document.getElementById("per").value
+    ) || 0;
+
+
+  document.getElementById("totalt")
+    .innerText = total;
+
+
+  document.getElementById("totaltKass")
+    .innerText = totalKass;
+
+
+  if(per > 0){
+
+    document.getElementById("totaltFulla")
+      .innerText =
+        Math.floor(total/per);
+
+
+    document.getElementById("sistaTotal")
+      .innerText =
+        total % per;
+
+  }else{
+
+    document.getElementById("totaltFulla")
+      .innerText = 0;
+
+
+    document.getElementById("sistaTotal")
+      .innerText = 0;
+
+  }
+
+}
+
+
+/* =====================================
+   ADD KOLLI
+===================================== */
 
 function laggTillKolli(){
 
-  if(!aktivtFPK){
-    alert("Starta ett FPK först.");
+  if(!data.fpk){
+
+    alert(
+      "Starta en FPK först."
+    );
+
     return;
+
   }
 
-  const kolli =
-    document.getElementById("kollinummer").value.trim() || "-";
 
-  const produkt =
-    document.getElementById("produkt").value || "Annan produkt";
+  let produkt =
+    document.getElementById("produkt").value;
 
-  const antal =
-    Number(document.getElementById("antal").value) || 0;
 
-  const per =
-    Number(document.getElementById("per").value) || 0;
+  let nummer =
+    document.getElementById("kollinummer")
+      .value.trim();
 
-  if(antal <= 0){
-    alert("Skriv antal i kollit.");
+
+  let antal =
+    Number(
+      document.getElementById("antal").value
+    );
+
+
+  let per =
+    Number(
+      document.getElementById("per").value
+    );
+
+
+  if(!nummer){
+
+    alert("Skriv kollinumret.");
+
     return;
+
   }
 
-  if(per <= 0){
-    alert("Skriv antal per kapsel / well.");
+
+  if(antal<=0){
+
+    alert("Antalet måste vara större än 0.");
+
     return;
+
   }
 
-  if(!data[aktivtFPK]){
-    data[aktivtFPK] = {
-      totalt:0,
-      kass:0,
-      kolli:[]
-    };
+
+  if(per<=0){
+
+    alert(
+      "Antal per kapsel/well måste vara större än 0."
+    );
+
+    return;
+
   }
 
-  /* Alla tidigare blir blå */
-  aktivaKolli.forEach(x => {
-    x.active = false;
-    if(!x.diff){
-      x.previous = true;
-    }
-  });
 
-  const nytt = {
-    id:Date.now(),
-    tid:new Date().toLocaleString("sv-SE"),
-    kolli:kolli,
+  let kolli = {
+
+    nummer:nummer,
+
     produkt:produkt,
-    antal:antal,
-    originalAntal:antal,
-    kass:0,
+
+    original:antal,
+
+    used:antal,
+
+    per:per,
+
     diff:false,
-    active:true,
-    previous:false,
-    per:per
+
+    datum:new Date().toLocaleString("sv-SE")
+
   };
 
-  aktivaKolli.push(nytt);
 
-  data[aktivtFPK].kolli = aktivaKolli;
-  data[aktivtFPK].totalt =
-    (data[aktivtFPK].totalt || 0) + antal;
+  data.kollin.push(kolli);
 
-  historik.push({
-    fpk:aktivtFPK,
-    tid:nytt.tid,
-    kolli:kolli,
-    produkt:produkt,
-    andring:"+" + antal,
-    totalt:data[aktivtFPK].totalt,
-    status:"Kolli tillagt"
-  });
 
-  spara();
+  addHistory(
+    "+",
+    nummer,
+    produkt,
+    "+" + antal,
+    "La till kolli",
+    totalKolli(),
+    totalKolli() % per,
+    ""
+  );
 
-  document.getElementById("kollinummer").value="";
-  document.getElementById("antal").value=0;
-  document.getElementById("per").value=0;
-  document.getElementById("produkt").value="";
 
-  renderPack();
+  saveData();
+
+
+  document.getElementById("kollinummer")
+    .value = "";
+
+
+  renderAll();
+
 }
 
 
-/* ================= KASSATION ================= */
+/* =====================================
+   TOTAL KOLLI
+===================================== */
+
+function totalKolli(){
+
+  return data.kollin.reduce(
+    function(sum,k){
+
+      return sum + Number(k.used);
+
+    },
+    0
+  );
+
+}
+
+
+/* =====================================
+   KASSATION
+===================================== */
 
 function taBort(){
 
-  if(!aktivtFPK){
-    alert("Starta ett FPK först.");
+  if(!data.fpk){
+
+    alert("Starta en FPK först.");
+
     return;
+
   }
 
-  const antal =
-    Number(document.getElementById("minus").value) || 0;
 
-  const anledning =
-    document.getElementById("anledning").value.trim()
-    || "Kassation";
+  if(!data.kollin.length){
 
-  if(antal <= 0){
-    alert("Skriv antal att kassera.");
+    alert(
+      "Det finns inget aktivt kolli."
+    );
+
     return;
+
   }
 
-  const fpkData = data[aktivtFPK];
 
-  if(!fpkData){
+  let antal =
+    Number(
+      document.getElementById("minus").value
+    );
+
+
+  let anledning =
+    document.getElementById("anledning")
+      .value.trim();
+
+
+  if(antal<=0){
+
+    alert(
+      "Ange antal att ta bort."
+    );
+
     return;
+
   }
 
-  const aktivt =
-    aktivaKolli.find(x => x.active);
 
-  if(!aktivt){
-    alert("Det finns inget aktivt kolli.");
+  let active =
+    data.kollin[data.kollin.length-1];
+
+
+  if(antal > active.used){
+
+    alert(
+      "Kassationen är större än antalet kvar i aktivt kolli."
+    );
+
     return;
+
   }
 
-  if(antal > aktivt.antal){
-    alert("Du kan inte kassera fler än antal i det aktiva kollit.");
-    return;
-  }
 
-  aktivt.antal -= antal;
-  aktivt.kass += antal;
+  active.used -= antal;
 
-  fpkData.totalt =
-    Math.max(0, fpkData.totalt - antal);
 
-  fpkData.kass =
-    (fpkData.kass || 0) + antal;
+  addHistory(
+    "-",
+    active.nummer,
+    active.produkt,
+    "-" + antal,
+    "Kassation",
+    totalKolli(),
+    totalKolli() % active.per,
+    anledning || "Kassation"
+  );
 
-  totaltKass += antal;
 
-  historik.push({
-    fpk:aktivtFPK,
-    tid:new Date().toLocaleString("sv-SE"),
-    kolli:aktivt.kolli,
-    produkt:aktivt.produkt,
-    andring:"-" + antal,
-    totalt:fpkData.totalt,
-    status:"Kass: " + anledning
-  });
+  saveData();
 
-  spara();
 
-  document.getElementById("minus").value=0;
-  document.getElementById("anledning").value="";
+  document.getElementById("anledning")
+    .value = "";
 
-  renderPack();
+
+  renderAll();
+
 }
 
 
-/* ================= FLAGGA DIFF ================= */
+/* =====================================
+   DIFF
+===================================== */
 
-function flaggaDiff(id){
+function flaggaDiff(index){
 
-  const kolli =
-    aktivaKolli.find(x => x.id === id);
+  if(!data.kollin[index]){
 
-  if(!kolli){
     return;
+
   }
 
-  kolli.diff = !kolli.diff;
 
-  if(kolli.diff){
-    kolli.previous = false;
-  }
+  data.kollin[index].diff =
+    !data.kollin[index].diff;
 
-  if(data[aktivtFPK]){
-    data[aktivtFPK].kolli = aktivaKolli;
-  }
 
-  historik.push({
-    fpk:aktivtFPK,
-    tid:new Date().toLocaleString("sv-SE"),
-    kolli:kolli.kolli,
-    produkt:kolli.produkt,
-    andring:"DIFF",
-    totalt:data[aktivtFPK].totalt,
-    status:kolli.diff ? "Differens flaggad" : "Differens borttagen"
-  });
+  let kolli =
+    data.kollin[index];
 
-  spara();
 
-  renderPack();
+  addHistory(
+    "DIFF",
+    kolli.nummer,
+    kolli.produkt,
+    "",
+    kolli.diff
+      ? "Flaggade differens"
+      : "Tog bort differens",
+    totalKolli(),
+    kolli.per > 0
+      ? totalKolli() % kolli.per
+      : 0,
+    kolli.diff
+      ? "DIFF"
+      : ""
+  );
+
+
+  saveData();
+
+  renderAll();
+
 }
 
 
-/* ================= PACK ================= */
+/* =====================================
+   RENDER KOLLI
+===================================== */
 
-function renderPack(){
+function renderKolli(){
 
-  const fpkBox =
-    document.getElementById("aktivtFpkPack");
+  let list =
+    document.getElementById("kolliLista");
 
-  if(aktivtFPK){
 
-    fpkBox.innerHTML = `
-      <div class="active-fpk">
-        <strong>Aktivt FPK</strong>
-        <div class="big-fpk">${escapeHtml(aktivtFPK)}</div>
-        <div class="small">
-          Du arbetar just nu i detta FPK.
-        </div>
+  if(!data.kollin.length){
+
+    list.innerHTML =
+      "<p style='color:#687386'>Inga kollin registrerade ännu.</p>";
+
+    return;
+
+  }
+
+
+  list.innerHTML = "";
+
+
+  data.kollin.forEach(function(k,index){
+
+    let isActive =
+      index === data.kollin.length - 1;
+
+
+    let isDiff =
+      k.diff === true;
+
+
+    let klass =
+      "item ";
+
+
+    if(isDiff){
+
+      klass += "diffKolli";
+
+    }else if(isActive){
+
+      klass += "activeKolli";
+
+    }else{
+
+      klass += "previousKolli";
+
+    }
+
+
+    let div =
+      document.createElement("div");
+
+
+    div.className =
+      klass;
+
+
+    let status = "";
+
+
+    if(isDiff){
+
+      status +=
+        '<span class="diffBadge">⚠ DIFF</span>';
+
+    }
+
+
+    let kass =
+      (Number(k.original) || 0) -
+      (Number(k.used) || 0);
+
+
+    if(kass > 0){
+
+      status +=
+        '<span class="kassBadge">KASS: ' +
+        kass +
+        '</span>';
+
+    }
+
+
+    if(isActive && !isDiff){
+
+      status +=
+        '<span class="badge">AKTIVT KOLLI</span>';
+
+    }
+
+
+    div.innerHTML = `
+
+      <strong>
+
+        ${k.nummer}
+
+        ${status}
+
+      </strong>
+
+
+      <div class="small">
+
+        Produkt: ${k.produkt}
+
       </div>
+
+
+      <div class="small">
+
+        Antal i kollit:
+        <strong>${k.used}</strong>
+
+      </div>
+
+
+      <div class="small">
+
+        Kass:
+        <strong>${kass}</strong>
+
+      </div>
+
+
+      ${
+        isDiff
+        ? `
+          <div
+            class="small"
+            style="color:#b21f32;font-weight:bold"
+          >
+
+            ⚠ Detta kolli är flaggat för differens.
+
+          </div>
+        `
+        : ""
+      }
+
+
+      <button
+        class="diffButton"
+        onclick="flaggaDiff(${index})"
+      >
+
+        ⚑ ${
+          isDiff
+          ? "Ta bort diff"
+          : "Flagga differens"
+        }
+
+      </button>
+
+    `;
+
+
+    list.appendChild(div);
+
+  });
+
+}
+
+
+/* =====================================
+   ACTIVE FPK
+===================================== */
+
+function renderFpk(){
+
+  let box =
+    document.getElementById("activeFpkBox");
+
+
+  let home =
+    document.getElementById("homeActive");
+
+
+  if(data.fpk){
+
+    box.innerHTML = `
+
+      <div class="status">
+
+        ● Aktiv FPK: ${data.fpk}
+
+      </div>
+
+    `;
+
+
+    home.innerHTML = `
+
+      <div class="status">
+
+        ● Aktiv FPK: ${data.fpk}
+
+        <br>
+
+        <span style="font-weight:normal">
+
+          ${data.kollin.length}
+          registrerade kolli
+
+        </span>
+
+      </div>
+
     `;
 
   }else{
 
-    fpkBox.innerHTML = `
-      <div class="empty">
-        Inget FPK är aktivt.
-      </div>
-    `;
-
-  }
-
-  renderAktivaKolli();
-  renderSaldo();
-  renderPackHistorik();
-
-  document.getElementById("fpk").value =
-    aktivtFPK;
-}
-
-
-/* ================= AKTIVA KOLLI ================= */
-
-function renderAktivaKolli(){
-
-  const box =
-    document.getElementById("aktivaKolli");
-
-  box.innerHTML="";
-
-  if(!aktivtFPK || aktivaKolli.length === 0){
-
     box.innerHTML = `
-      <div class="empty">
-        Inga kolli registrerade ännu.
+
+      <div class="warning">
+
+        Ingen aktiv FPK.
+        Starta en FPK för att börja registrera kollin.
+
       </div>
+
     `;
 
-    return;
+
+    home.innerHTML = "";
+
   }
 
-  aktivaKolli.slice().reverse().forEach(k => {
-
-    let klass = "kolli-card";
-
-    if(k.active){
-      klass += " active";
-    }
-
-    if(k.diff){
-      klass += " diff";
-    }
-
-    let status = "";
-
-    if(k.diff){
-
-      status = `
-        <span class="status diff">
-          ⚠️ DIFFERENS
-        </span>
-      `;
-
-    }else if(k.active){
-
-      status = `
-        <span class="status active">
-          AKTIVT KOLLI
-        </span>
-      `;
-
-    }else{
-
-      status = `
-        <span class="status previous">
-          FÖREGÅENDE
-        </span>
-      `;
-
-    }
-
-    box.innerHTML += `
-
-      <div class="card ${klass}">
-
-        ${status}
-
-        <strong>Kolli ${escapeHtml(k.kolli)}</strong>
-
-        <p class="small">
-          ${escapeHtml(k.produkt)}
-        </p>
-
-        <div class="result">
-
-          <div class="box">
-            Antal i kollit
-            <span class="number">
-              ${k.antal}
-            </span>
-          </div>
-
-          <div class="box redBox">
-            Kass
-            <span class="number">
-              ${k.kass}
-            </span>
-          </div>
-
-        </div>
-
-        <p class="small">
-          Registrerat: ${escapeHtml(k.tid)}
-        </p>
-
-        <button
-          class="${k.diff ? "green" : "red"} diff-button"
-          onclick="flaggaDiff(${k.id})"
-        >
-          ${k.diff ? "✓ Ta bort diff-flagga" : "⚑ Flagga differens"}
-        </button>
-
-      </div>
-    `;
-  });
 }
 
 
-/* ================= SALDO ================= */
+/* =====================================
+   HISTORY
+===================================== */
 
-function renderSaldo(){
+function addHistory(
+  type,
+  kolli,
+  produkt,
+  change,
+  text,
+  total,
+  last,
+  note=""
+){
 
-  if(!aktivtFPK || !data[aktivtFPK]){
+  data.historik.push({
 
-    document.getElementById("totalt").innerText=0;
-    document.getElementById("totaltKass").innerText=0;
-    document.getElementById("totaltFulla").innerText=0;
-    document.getElementById("sistaTotal").innerText=0;
+    tid:new Date().toLocaleString("sv-SE"),
 
-    return;
-  }
+    fpk:data.fpk || "-",
 
-  const fpkData =
-    data[aktivtFPK];
+    kolli:kolli || "-",
 
-  const totalt =
-    fpkData.totalt || 0;
+    produkt:produkt || "-",
 
-  let fulla = 0;
-  let sista = 0;
+    change:change || "",
 
-  aktivaKolli.forEach(k => {
+    text:text || "",
 
-    if(k.per > 0){
+    total:total || "",
 
-      fulla += Math.floor(k.antal / k.per);
+    last:last || "",
 
-      sista = k.antal % k.per;
-
-    }
+    note:note || ""
 
   });
 
-  document.getElementById("totalt").innerText =
-    totalt;
 
-  document.getElementById("totaltKass").innerText =
-    fpkData.kass || 0;
+  saveData();
 
-  document.getElementById("totaltFulla").innerText =
-    fulla;
-
-  document.getElementById("sistaTotal").innerText =
-    sista;
 }
 
 
-/* ================= PACK HISTORIK ================= */
+/* =====================================
+   PACK HISTORY
+===================================== */
 
-function renderPackHistorik(){
+function renderPackHistory(){
 
-  const lista =
-    document.getElementById("packHistorikLista");
+  let tbody =
+    document.getElementById(
+      "packHistorikLista"
+    );
 
-  lista.innerHTML="";
 
-  if(!aktivtFPK){
-    return;
-  }
+  tbody.innerHTML = "";
 
-  historik
-    .filter(x => x.fpk === aktivtFPK)
-    .slice()
-    .reverse()
-    .forEach(x => {
 
-      const rad =
-        document.createElement("tr");
+  let arr =
+    data.historik
+      .filter(function(x){
 
-      const andring =
-        String(x.andring || "");
+        return x.fpk === data.fpk;
 
-      const klass =
-        andring.startsWith("+")
-        ? "plus"
-        : andring.startsWith("-")
-        ? "minus"
-        : "";
+      })
+      .slice()
+      .reverse();
 
-      rad.innerHTML = `
-        <td>${escapeHtml(x.tid)}</td>
-        <td>${escapeHtml(x.kolli)}</td>
-        <td>${escapeHtml(x.produkt)}</td>
-        <td class="${klass}">
-          ${escapeHtml(andring)}
-        </td>
-        <td>${x.totalt}</td>
-        <td>${escapeHtml(x.status || "")}</td>
-      `;
 
-      lista.appendChild(rad);
-    });
+  arr.forEach(function(x){
+
+    let tr =
+      document.createElement("tr");
+
+
+    let changeClass = "";
+
+
+    if(
+      String(x.change).startsWith("+")
+    ){
+
+      changeClass =
+        "plusHistory";
+
+    }
+
+
+    if(
+      String(x.change).startsWith("-")
+    ){
+
+      changeClass =
+        "minusHistory";
+
+    }
+
+
+    tr.innerHTML = `
+
+      <td>${x.tid}</td>
+
+      <td>${x.fpk}</td>
+
+      <td>${x.kolli}</td>
+
+      <td>${x.produkt}</td>
+
+      <td class="${changeClass}">
+        ${x.change}
+      </td>
+
+      <td>${x.total}</td>
+
+      <td>${x.last}</td>
+
+      <td>${x.note || x.text}</td>
+
+    `;
+
+
+    tbody.appendChild(tr);
+
+  });
+
 }
 
 
-/* ================= PRINT ================= */
+/* =====================================
+   PRINT
+===================================== */
 
 function raknaPrint(){
 
-  const total =
-    Number(document.getElementById("ordertotal").value) || 0;
+  let total =
+    Number(
+      document.getElementById("ordertotal").value
+    ) || 0;
 
-  const packat =
-    Number(document.getElementById("packat").value) || 0;
 
-  const per =
-    Number(document.getElementById("well").value) || 0;
+  let packed =
+    Number(
+      document.getElementById("packat").value
+    ) || 0;
 
-  const kvar =
-    Math.max(0,total-packat);
 
-  let sista=0;
-  let fulla=0;
+  let per =
+    Number(
+      document.getElementById("well").value
+    ) || 0;
+
+
+  let kvar =
+    Math.max(0,total-packed);
+
+
+  let full = 0;
+
+  let rem = 0;
+
+  let totalWells = 0;
+
 
   if(per > 0){
 
-    fulla =
+    full =
       Math.floor(kvar/per);
 
-    sista =
+
+    rem =
       kvar % per;
+
+
+    totalWells =
+      full + (rem ? 1 : 0);
 
   }
 
-  document.getElementById("kvar").innerText =
-    kvar;
 
-  document.getElementById("sistawell").innerText =
-    sista;
+  document.getElementById("kvar")
+    .innerText = kvar;
 
-  document.getElementById("fullawells").innerText =
-    fulla + " fulla wells";
+
+  document.getElementById("sistawell")
+    .innerText = rem;
+
+
+  document.getElementById("fullawells")
+    .innerText =
+      full + " fulla wells";
+
+
+  document.getElementById("totalWells")
+    .innerText =
+      "Totalt " +
+      totalWells +
+      " wells behövs.";
+
 }
 
 
-/* ================= PALL ================= */
+/* =====================================
+   SAVE PRINT
+===================================== */
+
+function sparaPrint(){
+
+  let total =
+    Number(
+      document.getElementById("ordertotal").value
+    ) || 0;
+
+
+  let packed =
+    Number(
+      document.getElementById("packat").value
+    ) || 0;
+
+
+  let kvar =
+    Math.max(0,total-packed);
+
+
+  let per =
+    Number(
+      document.getElementById("well").value
+    ) || 1;
+
+
+  let fpk =
+    document.getElementById("printFpk")
+      .value.trim();
+
+
+  addHistory(
+    "PRINT",
+    "-",
+    "-",
+    "",
+    "Print-beräkning",
+    kvar,
+    per > 0
+      ? kvar % per
+      : 0,
+    "FPK: " + (fpk || "-")
+  );
+
+
+  alert(
+    "Print-beräkningen är sparad i historiken."
+  );
+
+}
+
+
+/* =====================================
+   PALL
+===================================== */
 
 function raknaPall(){
 
-  const total =
-    Number(document.getElementById("pallTotal").value) || 0;
+  let total =
+    Number(
+      document.getElementById("pallTotal").value
+    ) || 0;
 
-  const perWell =
-    Number(document.getElementById("pallWell").value) || 0;
 
-  const perPall =
-    Number(document.getElementById("pallKapacitet").value) || 0;
+  let well =
+    Number(
+      document.getElementById("pallWell").value
+    ) || 0;
 
-  let pallar=0;
-  let wells=0;
 
-  if(perWell > 0 && perPall > 0){
+  let cap =
+    Number(
+      document.getElementById("pallCap").value
+    ) || 0;
 
-    wells =
-      Math.ceil(total/perWell);
 
-    pallar =
-      Math.ceil(total/perPall);
+  let wellCap =
+    Number(
+      document.getElementById("pallWellCap").value
+    ) || 0;
+
+
+  let result =
+    document.getElementById("pallResult");
+
+
+  if(!total || !well || !cap){
+
+    result.innerHTML =
+      "<p style='color:#687386'>Fyll i uppgifterna.</p>";
+
+    return;
 
   }
 
-  document.getElementById("antalPallar").innerText =
-    pallar;
 
-  document.getElementById("pallWells").innerText =
-    wells;
-
-  document.getElementById("pallInfo").innerText =
-    wells + " wells totalt";
-}
+  let pallar =
+    Math.ceil(total/cap);
 
 
-/* ================= QR ================= */
+  let totalWells =
+    Math.ceil(total/well);
 
-function visaQR(){
 
-  const text =
-    document.getElementById("qrText").value;
+  let html = `
 
-  document.getElementById("qrResult").innerHTML = `
+    <div class="result">
 
-    <div class="box" style="margin-top:15px;text-align:left;">
-      <strong>QR-innehåll</strong>
-      <p>${escapeHtml(text || "Inget innehåll.")}</p>
+      <div class="box">
+
+        Totalt pallar
+
+        <span class="number">
+
+          ${pallar}
+
+        </span>
+
+      </div>
+
+      <div class="box">
+
+        Totalt wells
+
+        <span class="number">
+
+          ${totalWells}
+
+        </span>
+
+      </div>
+
     </div>
 
   `;
-}
 
 
-/* ================= DAGBOK ================= */
+  for(
+    let i=0;
+    i<pallar;
+    i++
+  ){
 
-function sparaDagbok(){
-
-  const datum =
-    document.getElementById("dagbokDatum").value
-    || new Date().toISOString().slice(0,10);
-
-  const text =
-    document.getElementById("dagbokText").value.trim();
-
-  if(!text){
-    alert("Skriv en anteckning först.");
-    return;
-  }
-
-  dagbok.push({
-    datum:datum,
-    text:text,
-    tid:new Date().toLocaleString("sv-SE")
-  });
-
-  spara();
-
-  document.getElementById("dagbokText").value="";
-
-  renderDagbok();
-}
+    let units =
+      Math.min(
+        cap,
+        total-(i*cap)
+      );
 
 
-function renderDagbok(){
+    let wells =
+      Math.ceil(units/well);
 
-  const lista =
-    document.getElementById("dagbokLista");
 
-  lista.innerHTML="";
+    if(
+      wellCap>0 &&
+      wells>wellCap
+    ){
 
-  dagbok
-    .slice()
-    .reverse()
-    .forEach(x => {
+      wells = wellCap;
 
-      lista.innerHTML += `
+    }
 
-        <div class="card">
 
-          <strong>${escapeHtml(x.datum)}</strong>
+    html += `
 
-          <p>${escapeHtml(x.text)}</p>
+      <div class="item">
 
-          <div class="small">
-            ${escapeHtml(x.tid)}
-          </div>
+        <strong>
+          Pall ${i+1}
+        </strong>
+
+        <div class="small">
+
+          ${units} enheter
 
         </div>
 
-      `;
+        <div class="small">
 
-    });
+          ${wells} wells
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  result.innerHTML = html;
+
 }
 
 
-/* ================= FPK HISTORIK ================= */
+/* =====================================
+   QR
+===================================== */
+
+function sparaQR(){
+
+  let text =
+    document.getElementById("qrText")
+      .value.trim();
+
+
+  if(!text){
+
+    alert(
+      "Det finns ingen QR-information."
+    );
+
+    return;
+
+  }
+
+
+  addHistory(
+    "QR",
+    "-",
+    "-",
+    "",
+    "QR-information sparad",
+    "",
+    "",
+    text
+  );
+
+
+  alert(
+    "QR-informationen är sparad i historiken."
+  );
+
+}
+
+
+/* =====================================
+   DAGBOK
+===================================== */
+
+function sparaDagbok(){
+
+  let text =
+    document.getElementById("dagbokText")
+      .value.trim();
+
+
+  if(!text){
+
+    alert(
+      "Skriv en anteckning först."
+    );
+
+    return;
+
+  }
+
+
+  data.dagbok.unshift({
+
+    datum:new Date()
+      .toLocaleString("sv-SE"),
+
+    text:text
+
+  });
+
+
+  addHistory(
+    "DAGBOK",
+    "-",
+    "-",
+    "",
+    "Dagboksanteckning",
+    "",
+    "",
+    text
+  );
+
+
+  saveData();
+
+
+  document.getElementById("dagbokText")
+    .value = "";
+
+
+  renderDagbok();
+
+}
+
+
+/* =====================================
+   RENDER DAGBOK
+===================================== */
+
+function renderDagbok(){
+
+  let list =
+    document.getElementById(
+      "dagbokLista"
+    );
+
+
+  list.innerHTML = "";
+
+
+  if(!data.dagbok.length){
+
+    list.innerHTML =
+      "<p style='color:#687386'>Inga anteckningar ännu.</p>";
+
+    return;
+
+  }
+
+
+  data.dagbok.forEach(function(n){
+
+    let div =
+      document.createElement("div");
+
+
+    div.className =
+      "item";
+
+
+    div.innerHTML = `
+
+      <strong>
+
+        ${n.datum}
+
+      </strong>
+
+      <div class="small">
+
+        ${n.text}
+
+      </div>
+
+    `;
+
+
+    list.appendChild(div);
+
+  });
+
+}
+
+
+/* =====================================
+   HISTORIK - FPK LISTA
+===================================== */
 
 function renderFpkHistorik(){
 
-  const lista =
-    document.getElementById("fpkHistorikLista");
+  let box =
+    document.getElementById("fpkLista");
 
-  lista.innerHTML="";
 
-  const fpks =
-    [...new Set(
-      historik
-        .map(x => x.fpk)
-        .filter(Boolean)
-    )];
-
-  if(fpks.length === 0){
-
-    lista.innerHTML = `
-      <div class="empty">
-        Ingen FPK-historik ännu.
-      </div>
-    `;
+  if(!box){
 
     return;
+
   }
 
-  fpks.reverse().forEach(fpk => {
 
-    const antal =
-      historik.filter(x => x.fpk === fpk).length;
+  box.innerHTML = "";
 
-    const card =
-      document.createElement("div");
 
-    card.className =
-      "card history-card";
+  let fpks = [];
 
-    card.onclick = () =>
-      visaFpkHistorik(fpk);
 
-    card.innerHTML = `
+  data.historik.forEach(function(x){
 
-      <div class="big-fpk">
-        FPK ${escapeHtml(fpk)}
-      </div>
+    if(
+      x.fpk &&
+      x.fpk !== "-" &&
+      !fpks.includes(x.fpk)
+    ){
 
-      <div class="small">
+      fpks.push(x.fpk);
+
+    }
+
+  });
+
+
+  if(!fpks.length){
+
+    box.innerHTML =
+      "<p style='color:#687386'>Ingen FPK-historik ännu.</p>";
+
+    return;
+
+  }
+
+
+  fpks.reverse();
+
+
+  fpks.forEach(function(fpk){
+
+    let antal =
+      data.historik.filter(function(x){
+
+        return x.fpk === fpk;
+
+      }).length;
+
+
+    let button =
+      document.createElement("button");
+
+
+    button.className =
+      "homeCard";
+
+
+    button.style.width =
+      "100%";
+
+
+    button.style.textAlign =
+      "left";
+
+
+    button.innerHTML = `
+
+      <strong>
+        FPK ${fpk}
+      </strong>
+
+      <span>
         ${antal} registreringar
-      </div>
+      </span>
 
     `;
 
-    lista.appendChild(card);
+
+    button.onclick = function(){
+
+      visaFpkHistorik(fpk);
+
+    };
+
+
+    box.appendChild(button);
+
   });
+
 }
 
+
+/* =====================================
+   VISA FPK HISTORIK
+===================================== */
 
 function visaFpkHistorik(fpk){
 
   document
-    .getElementById("fpkHistorikLista")
+    .getElementById("fpkLista")
     .classList.add("hidden");
 
+
   document
-    .getElementById("valdFpkHistorik")
+    .getElementById("fpkHistorik")
     .classList.remove("hidden");
 
-  document.getElementById("valdFpkTitel").innerText =
-    "FPK " + fpk;
 
-  const lista =
-    document.getElementById("fpkDetaljLista");
+  document
+    .getElementById("fpkHistorikTitel")
+    .innerText =
+      "FPK " + fpk;
 
-  lista.innerHTML="";
 
-  historik
-    .filter(x => x.fpk === fpk)
+  let tbody =
+    document.getElementById(
+      "fpkHistorikLista"
+    );
+
+
+  tbody.innerHTML = "";
+
+
+  data.historik
+    .filter(function(x){
+
+      return x.fpk === fpk;
+
+    })
     .slice()
     .reverse()
-    .forEach(x => {
+    .forEach(function(x){
 
-      const rad =
+      let tr =
         document.createElement("tr");
 
-      const andring =
-        String(x.andring || "");
 
-      const klass =
-        andring.startsWith("+")
-        ? "plus"
-        : andring.startsWith("-")
-        ? "minus"
-        : "";
+      let changeClass = "";
 
-      rad.innerHTML = `
 
-        <td>${escapeHtml(x.tid)}</td>
-        <td>${escapeHtml(x.kolli)}</td>
-        <td>${escapeHtml(x.produkt)}</td>
+      if(
+        String(x.change).startsWith("+")
+      ){
 
-        <td class="${klass}">
-          ${escapeHtml(andring)}
+        changeClass =
+          "plusHistory";
+
+      }
+
+
+      if(
+        String(x.change).startsWith("-")
+      ){
+
+        changeClass =
+          "minusHistory";
+
+      }
+
+
+      tr.innerHTML = `
+
+        <td>${x.tid}</td>
+
+        <td>${x.fpk}</td>
+
+        <td>${x.kolli}</td>
+
+        <td>${x.produkt}</td>
+
+        <td class="${changeClass}">
+          ${x.change}
         </td>
 
-        <td>${x.totalt}</td>
+        <td>${x.total}</td>
 
-        <td>
-          ${escapeHtml(x.status || "")}
-        </td>
+        <td>${x.last}</td>
+
+        <td>${x.note || x.text}</td>
 
       `;
 
-      lista.appendChild(rad);
+
+      tbody.appendChild(tr);
+
     });
+
 }
 
 
-function tillbakaTillFpkLista(){
+/* =====================================
+   VISA FPK LISTA
+===================================== */
+
+function visaFpkLista(){
 
   document
-    .getElementById("valdFpkHistorik")
+    .getElementById("fpkLista")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("fpkHistorik")
     .classList.add("hidden");
 
-  document
-    .getElementById("fpkHistorikLista")
-    .classList.remove("hidden");
+
+  renderFpkHistorik();
+
 }
 
 
-/* ================= HEM ================= */
+/* =====================================
+   HOME SEARCH
+===================================== */
 
-function renderHem(){
+function homeSearch(){
 
-  const box =
-    document.getElementById("hemAktivtFpk");
+  let q =
+    (
+      document.getElementById(
+        "homeSearch"
+      ).value || ""
+    ).toLowerCase();
 
-  if(!aktivtFPK){
 
-    box.innerHTML = `
-      <div class="empty">
-        Inget FPK är aktivt.
-      </div>
-    `;
+  let box =
+    document.getElementById(
+      "homeSearchResults"
+    );
+
+
+  if(!q){
+
+    box.innerHTML = "";
 
     return;
+
   }
 
-  const fpkData =
-    data[aktivtFPK] || {};
 
-  box.innerHTML = `
+  let arr =
+    data.historik
+      .slice()
+      .reverse()
+      .filter(function(x){
 
-    <div class="active-fpk">
+        return [
 
-      <strong>Aktivt FPK</strong>
+          x.fpk,
+          x.kolli,
+          x.produkt,
+          x.text,
+          x.note
 
-      <div class="big-fpk">
-        ${escapeHtml(aktivtFPK)}
-      </div>
+        ]
+        .join(" ")
+        .toLowerCase()
+        .includes(q);
+
+      })
+      .slice(0,10);
+
+
+  if(!arr.length){
+
+    box.innerHTML =
+      "<p style='color:#687386'>Ingen träff.</p>";
+
+    return;
+
+  }
+
+
+  box.innerHTML = "";
+
+
+  arr.forEach(function(x){
+
+    let div =
+      document.createElement("div");
+
+
+    div.className =
+      "item";
+
+
+    div.innerHTML = `
+
+      <strong>
+
+        ${x.fpk}
+        ·
+        ${x.kolli}
+
+      </strong>
 
       <div class="small">
-        ${fpkData.totalt || 0} registrerade enheter
+
+        ${x.tid}
+        ·
+        ${x.text}
+
       </div>
 
-      <button class="blue"
-        onclick="visa('pack')">
-        Fortsätt packa
-      </button>
-
-    </div>
-
-  `;
-}
+    `;
 
 
-/* ================= SÄKER TEXT ================= */
+    box.appendChild(div);
 
-function escapeHtml(text){
-
-  return String(text)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  });
 
 }
 
 
-/* ================= LIVE CALCULATIONS ================= */
+/* =====================================
+   CLEAR HISTORY
+===================================== */
 
-[
-  "ordertotal",
-  "packat",
-  "well"
-].forEach(id => {
+function rensaHistorik(){
 
-  document
-    .getElementById(id)
-    .addEventListener("input",raknaPrint);
+  if(
+    !confirm(
+      "Vill du verkligen rensa all historik?"
+    )
+  ){
 
-});
+    return;
 
-
-[
-  "pallTotal",
-  "pallWell",
-  "pallKapacitet"
-].forEach(id => {
-
-  document
-    .getElementById(id)
-    .addEventListener("input",raknaPall);
-
-});
+  }
 
 
-/* ================= START ================= */
+  data.historik = [];
 
-renderHem();
-renderPack();
-raknaPrint();
-raknaPall();
+  saveData();
+
+  renderAll();
+
+}
+
+
+/* =====================================
+   RENDER ALL
+===================================== */
+
+function renderAll(){
+
+  renderFpk();
+
+  renderKolli();
+
+  renderPackHistory();
+
+  renderDagbok();
+
+  renderFpkHistorik();
+
+  updateTotal();
+
+  raknaKolli();
+
+  raknaPrint();
+
+  raknaPall();
+
+}
+
+
+/* =====================================
+   START
+===================================== */
+
+document
+  .getElementById("navHome")
+  .classList.add("active");
+
+
+renderAll();
 
 </script>
 
