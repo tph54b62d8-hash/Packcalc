@@ -531,22 +531,56 @@ stangKassPanel();
 renderAll();
 }
 
+/* ÄNDRAD ENDAST HÄR:
+   Om flera DIFF-händelser finns på samma kolli ska Ångra
+   bara ta bort den senaste och därefter kontrollera om
+   någon tidigare aktiv diff fortfarande finns kvar. */
+
 function angraSenaste(){
 if(!data.historik.length){alert("Det finns inget att ångra.");return;}
+
 let currentFpk=data.fpk;
+
 if(!currentFpk){alert("Det finns ingen aktiv batch.");return;}
+
 let events=data.historik.filter(x=>x.fpk===currentFpk);
+
 if(!events.length){alert("Det finns ingen händelse att ångra.");return;}
+
 let last=events[events.length-1];
 
 if(last.type==="DIFF"&&!last.undone){
+
 let k=data.kollin.find(x=>x.nummer===last.kolli),
 delta=Number(last.change)||0;
+
 if(k&&delta){
+
 k.used-=delta;
-k.diff=false;
 last.undone=true;
-addHistory("UNDO",k.nummer,k.produkt,(delta>0?"-":"+")+Math.abs(delta),"Ångrade senaste diff",totalKolli(),k.per>0?totalKolli()%k.per:0,last.note||"",last.reason||"");
+
+let finnsTidigareDiff=data.historik.some(x=>
+x.type==="DIFF"&&
+x.fpk===currentFpk&&
+x.kolli===k.nummer&&
+!x.undone&&
+Number(x.change)!==0
+);
+
+k.diff=finnsTidigareDiff;
+
+addHistory(
+"UNDO",
+k.nummer,
+k.produkt,
+(delta>0?"-":"+")+Math.abs(delta),
+"Ångrade senaste diff",
+totalKolli(),
+k.per>0?totalKolli()%k.per:0,
+last.note||"",
+last.reason||""
+);
+
 saveData();
 renderAll();
 return;
@@ -559,12 +593,16 @@ data.historik.pop();
 }else if(last.type==="KASS"){
 let antal=Math.abs(Number(last.change)||0),
 active=data.kollin[data.kollin.length-1];
+
 if(active){
 active.used+=antal;
 active.kassation=Math.max(0,(Number(active.kassation)||0)-antal);
 }
+
 data.historik.pop();
-}else data.historik.pop();
+}else{
+data.historik.pop();
+}
 
 saveData();
 renderAll();
