@@ -77,6 +77,14 @@ nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:15px}
 .historyInfoValue{font-weight:700;text-align:right}
 .historyClearItem{cursor:pointer}
 .historyClearItem:has(input:checked){border-color:#1459d9;background:#f4f8ff}
+
+/* NYTT: klickbara kollin i tidslinjen */
+.historyTimelineKolli{cursor:pointer;border-radius:9px;padding:5px 4px;margin:-5px -4px 0}
+.historyTimelineKolli:active{background:#eef6ff}
+.historyKolliDetailBack{margin:0 0 10px!important;text-align:left;background:transparent!important;color:#1459d9!important;padding:8px 2px!important}
+.historyKolliDetailTitle{color:#1459d9;margin:0 0 3px}
+.historyKolliDetailSubtitle{color:#687386;font-size:13px;margin:0}
+
 @media(max-width:430px){.historyDetailHead h2{font-size:19px}.historyInfoRow{font-size:11px}}
 </style>
 </head>
@@ -1135,7 +1143,10 @@ produkt,
 "La till kolli",
 totalKolli(),
 totalKolli()%per,
-""
+"",
+"",
+antal,
+per
 );
 
 saveData();
@@ -2046,6 +2057,97 @@ if(historyDetailTab==="details")
 renderHistoryDetails(b);
 }
 
+/* =========================
+   NYTT: KOLLIDETALJER FRÅN TIDSLINJEN
+========================= */
+
+function openHistoryKolliDetail(productionId,kolliNumber){
+
+let b=historyBatches()
+.find(x=>x.productionId===productionId);
+
+if(!b)return;
+
+let k=b.kollis.find(x=>String(x.nummer)===String(kolliNumber));
+
+if(!k)return;
+
+let box=document.getElementById("historyDetailTimeline");
+
+let evs=b.events
+.filter(x=>x.kolli===kolliNumber)
+.sort((a,z)=>
+(historyParseDate(a.tid)?.getTime()||0)-
+(historyParseDate(z.tid)?.getTime()||0)
+);
+
+let original=0;
+
+let kolliEvent=evs.find(x=>x.type==="KOLLI");
+
+if(kolliEvent){
+original=Math.abs(Number(String(kolliEvent.change).replace("+","")))||0;
+}
+
+let finalAmount=k.amount,
+per=k.per||"-",
+kass=k.kass||0;
+
+let diffEvents=evs.filter(x=>x.type==="DIFF"&&!x.undone);
+
+let diffTotal=diffEvents.reduce((s,x)=>s+(Number(x.change)||0),0);
+
+let registrationTime=k.time||"—";
+
+let changes="";
+
+if(!diffEvents.length&&kass===0){
+
+changes='<div class="item"><strong>Inga ändringar</strong><div class="small">Kollit registrerades utan kassation eller differens.</div></div>';
+
+}else{
+
+changes=evs
+.filter(x=>x.type==="DIFF"||x.type==="KASS")
+.map(x=>{
+
+let typ=x.type==="KASS"?"Kassation":"Differens",
+antal=x.change||"—",
+info=(x.reason?
+x.reason+(x.note?" · "+x.note:""):
+x.note)||x.text||"";
+
+return '<div class="item"><strong>'+typ+' · '+antal+' st</strong><div class="small">'+
+(x.tid||"—")+
+(info?" · "+info:"")+
+"</div></div>";
+
+}).join("");
+
+if(!changes)
+changes='<div class="item"><strong>Inga ändringar</strong></div>';
+}
+
+box.innerHTML=
+'<button class="historyKolliDetailBack" onclick="renderHistoryDetail()">‹ Tillbaka till tidslinjen</button>'+
+'<div class="card" style="margin-bottom:0">'+
+'<div class="historyKolliDetailTitle"><h2>Kolli '+k.nummer+'</h2></div>'+
+'<p class="historyKolliDetailSubtitle">'+k.produkt+'</p>'+
+'<div class="historyDetailStats">'+
+'<div class="historyStat"><div class="historyStatLabel">Ursprungligt antal</div><span class="historyStatValue">'+original+' st</span></div>'+
+'<div class="historyStat"><div class="historyStatLabel">Slutligt antal</div><span class="historyStatValue">'+finalAmount+' st</span></div>'+
+'<div class="historyStat"><div class="historyStatLabel">Antal per kapsel / well</div><span class="historyStatValue">'+per+'</span></div>'+
+'<div class="historyStat"><div class="historyStatLabel">Kassation</div><span class="historyStatValue">'+kass+' st</span></div>'+
+'<div class="historyStat"><div class="historyStatLabel">Differens</div><span class="historyStatValue">'+(diffTotal>0?"+":"")+diffTotal+' st</span></div>'+
+'<div class="historyStat"><div class="historyStatLabel">Registreringstid</div><span class="historyStatValue">'+registrationTime+'</span></div>'+
+'</div>'+
+'<h3 style="margin-top:18px">Ändringar</h3>'+
+changes+
+'</div>';
+
+window.scrollTo(0,0);
+}
+
 function renderHistoryTimeline(b){
 
 let box=document.getElementById("historyDetailTimeline");
@@ -2057,7 +2159,7 @@ return;
 
 box.innerHTML=
 '<div class="timeline historyTimelineWrap">'+
-b.events.map(x=>{
+b.events.map((x,i)=>{
 
 let icon="⚫",
 text=x.text||x.type,
@@ -2092,16 +2194,31 @@ icon="⚫";
 text="Produktion avslutad";
 }
 
-return '<div class="timelineItem"><div class="timelineTime">'+
+let clickable=type==="KOLLI";
+
+return '<div class="timelineItem">'+
+'<div class="timelineTime">'+
 (historyParseDate(x.tid)?.toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"})||"—")+
-'</div><div class="timelineDot">'+icon+'</div><div class="timelineText"><strong>'+
-text+
-'</strong>'+
+'</div>'+
+'<div class="timelineDot">'+icon+'</div>'+
+'<div class="timelineText'+(clickable?" historyTimelineKolli":"")+'"'+
+(clickable?' data-kolli="'+String(x.kolli).replace(/"/g,"&quot;")+'"':"")+'>'+
+'<strong>'+text+'</strong>'+
 (sub?'<span class="timelineSub">'+sub+"</span>":"")+
+(clickable?'<span class="timelineSub">Tryck för detaljer ›</span>':"")+
 "</div></div>";
 
 }).join("")+
 "</div>";
+
+box.querySelectorAll(".historyTimelineKolli").forEach(el=>{
+el.onclick=()=>{
+openHistoryKolliDetail(
+b.productionId,
+el.dataset.kolli
+);
+};
+});
 }
 
 function renderHistoryKolli(b){
