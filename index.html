@@ -547,7 +547,23 @@ let events=data.historik.filter(x=>x.fpk===currentFpk);
 
 if(!events.length){alert("Det finns ingen händelse att ångra.");return;}
 
-let last=events[events.length-1];
+let last=null;
+
+for(let i=events.length-1;i>=0;i--){
+let x=events[i];
+
+if(x.type==="UNDO")continue;
+if(x.type==="DIFF"&&x.undone)continue;
+if(x.type==="DIFF"&&Number(x.change)===0)continue;
+
+last=x;
+break;
+}
+
+if(!last){
+alert("Det finns ingen händelse att ångra.");
+return;
+}
 
 if(last.type==="DIFF"&&!last.undone){
 
@@ -588,26 +604,41 @@ return;
 }
 
 if(last.type==="KOLLI"){
-data.kollin.pop();
-data.historik.pop();
+let index=data.historik.findIndex(x=>x===last);
+
+if(index>=0)data.historik.splice(index,1);
+
+let kolliIndex=data.kollin.findIndex(x=>x.nummer===last.kolli);
+
+if(kolliIndex>=0)data.kollin.splice(kolliIndex,1);
+
 }else if(last.type==="KASS"){
+
 let antal=Math.abs(Number(last.change)||0),
-active=data.kollin[data.kollin.length-1];
+active=data.kollin.find(x=>x.nummer===last.kolli);
 
 if(active){
 active.used+=antal;
-active.kassation=Math.max(0,(Number(active.kassation)||0)-antal);
+active.kassation=Math.max(
+0,
+(Number(active.kassation)||0)-antal
+);
 }
 
-data.historik.pop();
+let index=data.historik.findIndex(x=>x===last);
+
+if(index>=0)data.historik.splice(index,1);
+
 }else{
-data.historik.pop();
+
+let index=data.historik.findIndex(x=>x===last);
+
+if(index>=0)data.historik.splice(index,1);
 }
 
 saveData();
 renderAll();
 }
-
 function flaggaDiff(i){
 if(!data.kollin[i])return;
 data.kollin[i].diff=!data.kollin[i].diff;
