@@ -579,9 +579,12 @@ let finnsTidigareDiff=data.historik.some(x=>
 x.type==="DIFF"&&
 x.fpk===currentFpk&&
 x.kolli===k.nummer&&
+x!==last&&
 !x.undone&&
 Number(x.change)!==0
 );
+
+k.diff=finnsTidigareDiff;
 
 k.diff=finnsTidigareDiff;
 
