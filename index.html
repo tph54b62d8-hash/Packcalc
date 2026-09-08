@@ -538,68 +538,19 @@ renderAll();
 
 function angraSenaste(){
 if(!data.historik.length){alert("Det finns inget att ångra.");return;}
-
 let currentFpk=data.fpk;
-
 if(!currentFpk){alert("Det finns ingen aktiv batch.");return;}
-
 let events=data.historik.filter(x=>x.fpk===currentFpk);
-
 if(!events.length){alert("Det finns ingen händelse att ångra.");return;}
-
-let last=null;
-
-for(let i=events.length-1;i>=0;i--){
-let x=events[i];
-
-if(x.type==="UNDO")continue;
-if(x.type==="DIFF"&&x.undone)continue;
-if(x.type==="DIFF"&&Number(x.change)===0)continue;
-
-last=x;
-break;
-}
-
-if(!last){
-alert("Det finns ingen händelse att ångra.");
-return;
-}
+let last=events[events.length-1];
 
 if(last.type==="DIFF"&&!last.undone){
-
-let k=data.kollin.find(x=>x.nummer===last.kolli),
-delta=Number(last.change)||0;
-
+let k=data.kollin.find(x=>x.nummer===last.kolli),delta=Number(last.change)||0;
 if(k&&delta){
-
 k.used-=delta;
+k.diff=false;
 last.undone=true;
-
-let finnsTidigareDiff=data.historik.some(x=>
-x.type==="DIFF"&&
-x.fpk===currentFpk&&
-x.kolli===k.nummer&&
-x!==last&&
-!x.undone&&
-Number(x.change)!==0
-);
-
-k.diff=finnsTidigareDiff;
-
-k.diff=finnsTidigareDiff;
-
-addHistory(
-"UNDO",
-k.nummer,
-k.produkt,
-(delta>0?"-":"+")+Math.abs(delta),
-"Ångrade senaste diff",
-totalKolli(),
-k.per>0?totalKolli()%k.per:0,
-last.note||"",
-last.reason||""
-);
-
+addHistory("UNDO",k.nummer,k.produkt,(delta>0?"-":"+")+Math.abs(delta),"Ångrade senaste diff",totalKolli(),k.per>0?totalKolli()%k.per:0,last.note||"",last.reason||"");
 saveData();
 renderAll();
 return;
@@ -607,41 +558,33 @@ return;
 }
 
 if(last.type==="KOLLI"){
-let index=data.historik.findIndex(x=>x===last);
+let removed=data.kollin.pop();
 
-if(index>=0)data.historik.splice(index,1);
-
-let kolliIndex=data.kollin.findIndex(x=>x.nummer===last.kolli);
-
-if(kolliIndex>=0)data.kollin.splice(kolliIndex,1);
+addHistory(
+"UNDO",
+removed.nummer,
+removed.produkt,
+"-"+removed.original,
+"Ångrade kolli",
+totalKolli(),
+removed.per>0?totalKolli()%removed.per:0,
+"",
+"Ångrade kolli"
+);
 
 }else if(last.type==="KASS"){
-
-let antal=Math.abs(Number(last.change)||0),
-active=data.kollin.find(x=>x.nummer===last.kolli);
-
+let antal=Math.abs(Number(last.change)||0),active=data.kollin[data.kollin.length-1];
 if(active){
 active.used+=antal;
-active.kassation=Math.max(
-0,
-(Number(active.kassation)||0)-antal
-);
+active.kassation=Math.max(0,(Number(active.kassation)||0)-antal);
 }
-
-let index=data.historik.findIndex(x=>x===last);
-
-if(index>=0)data.historik.splice(index,1);
-
-}else{
-
-let index=data.historik.findIndex(x=>x===last);
-
-if(index>=0)data.historik.splice(index,1);
-}
+data.historik.pop();
+}else data.historik.pop();
 
 saveData();
 renderAll();
 }
+   
 function flaggaDiff(i){
 if(!data.kollin[i])return;
 data.kollin[i].diff=!data.kollin[i].diff;
