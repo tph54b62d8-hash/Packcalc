@@ -643,13 +643,11 @@ let antal=Math.abs(Number(last.change)||0),
 active=data.kollin.find(x=>x.nummer===last.kolli);
 
 if(active){
-
 active.used+=antal;
 active.kassation=Math.max(
 0,
 (Number(active.kassation)||0)-antal
 );
-
 }
 
 let hi=data.historik.findIndex(x=>x===last);
