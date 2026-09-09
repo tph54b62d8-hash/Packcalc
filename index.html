@@ -207,6 +207,7 @@ if(!data.fpk)data.fpk="";
 if(!data.kollin)data.kollin=[];
 if(!data.historik)data.historik=[];
 if(!data.dagbok)data.dagbok=[];
+if(!data.produktioner)data.produktioner=[];
 
 function saveData(){localStorage.setItem("packvex_data",JSON.stringify(data));}
 
@@ -327,6 +328,7 @@ if(!v){alert("Skriv in ett Batch ID.");return;}
 if(data.fpk&&!confirm("Det finns redan en aktiv batch. Vill du byta?"))return;
 data.fpk=v;
 data.activeProductionId="P"+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+data.activeProductionStart=new Date().toISOString();
 saveData();
 addHistory("START","-","","","Startade produktion","","","Batch "+v);
 renderAll();
@@ -336,9 +338,30 @@ alert("Batch "+v+" är nu aktiv.");
 function finishFpk(){
 if(!data.fpk){alert("Det finns ingen aktiv batch.");return;}
 if(!confirm("Vill du avsluta batch "+data.fpk+"?"))return;
+let productionId=data.activeProductionId,
+end=new Date().toISOString(),
+events=data.historik.filter(x=>x.productionId===productionId),
+kollin=data.kollin.map(k=>({...k})),
+total=kollin.reduce((s,k)=>s+Number(k.used||0),0),
+kassation=kollin.reduce((s,k)=>s+Number(k.kassation||0),0),
+diffCount=events.filter(x=>x.type==="DIFF"&&!x.undone&&Number(x.change)!==0).length,
+products=[...new Set(kollin.map(k=>k.produkt).filter(Boolean))];
+data.produktioner.push({
+productionId,
+batchId:data.fpk,
+start:data.activeProductionStart||null,
+end,
+products,
+kollin,
+total,
+kolliCount:kollin.length,
+kassation,
+diffCount
+});
 addHistory("SLUT","-","","","Avslutade produktion","","","Batch avslutad");
 data.fpk="";
 data.activeProductionId="";
+data.activeProductionStart="";
 data.kollin=[];
 saveData();
 renderAll();
