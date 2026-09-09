@@ -1016,77 +1016,47 @@ return isNaN(d)?null:d;
 function historyBatches(){
 let map={};
 
-data.historik.forEach((x,i)=>{
-let pid=x.productionId||(x.fpk&&x.fpk!=="-"?"LEGACY_"+x.fpk:"");
+(data.produktioner||[]).forEach(p=>{
+let pid=p.productionId;
 if(!pid)return;
 
-let type=x.type;
+let events=(data.historik||[]).filter(x=>x.productionId===pid);
+let kollis=(p.kollin||[]).map(k=>({
+nummer:k.nummer,
+produkt:k.produkt,
+amount:Number(k.used)||0,
+per:k.per||null,
+diff:!!k.diff,
+kass:Number(k.kassation)||0,
+time:k.datum||null
+}));
+let products=Array.isArray(p.products)?p.products.filter(Boolean):[...new Set(kollis.map(k=>k.produkt).filter(Boolean))];
 
-if(type==="Kolli"||type==="+")type="KOLLI";
-else if(type==="-"||x.text==="Kassation")type="KASS";
-else if(x.text==="Flaggade differens"||x.text==="Tog bort differens")type="DIFF";
-else if(x.text==="Startade produktion")type="START";
-else if(x.text==="Avslutade produktion")type="SLUT";
+let b={
+ id:p.batchId||"—",
+ productionId:pid,
+ events:events.map((x,i)=>({...x,_index:i})),
+ kollis,
+ products,
+ start:p.start?new Date(p.start):null,
+ end:p.end?new Date(p.end):null,
+ total:Number(p.total)||0,
+ kolliCount:Number(p.kolliCount)||kollis.length,
+ diffCount:Number(p.diffCount)||0,
+ kassCount:events.filter(x=>x.type==="KASS").length,
+ product:products[0]||"Produkt saknas",
+ order:p.order||"",
+ line:p.line||"",
+ operator:p.operator||"",
+ comment:p.comment||""
+};
 
-let ev={...x,type,originalType:x.type,_index:i},
-batchId=pid.startsWith("LEGACY_")?(x.fpk||"—"):(x.fpk||String(x.note||"").replace(/^Batch /,"")||"—");
-
-if(!map[pid])map[pid]={id:batchId,productionId:pid,events:[],kollis:[],products:[],start:null,end:null};
-
-let b=map[pid];
-b.events.push(ev);
-
-if(x.produkt&&x.produkt!=="-"&&!b.products.includes(x.produkt))b.products.push(x.produkt);
-
-if(type==="KOLLI"&&x.kolli&&x.kolli!=="-"){
-let amount=Math.abs(Number(String(x.change).replace("+","")))||0,
-found=b.kollis.find(k=>k.nummer===x.kolli);
-
-if(!found)b.kollis.push({nummer:x.kolli,produkt:x.produkt,amount,per:x.per||null,diff:false,kass:0,time:x.tid});
-}
-
-let d=historyParseDate(x.tid);
-
-if(type==="START"&&d&&(!b.start||d<b.start))b.start=d;
-if(type==="SLUT"&&d&&(!b.end||d>b.end))b.end=d;
-});
-
-Object.values(map).forEach(b=>{
 b.events.sort((a,z)=>(historyParseDate(a.tid)?.getTime()||0)-(historyParseDate(z.tid)?.getTime()||0));
-
-b.kollis.forEach(k=>{
-let evs=b.events.filter(x=>x.kolli===k.nummer);
-
-evs.forEach(x=>{
-if(x.type==="DIFF"&&!x.undone){
-k.amount+=Number(x.change)||0;
-k.diff=true;
-}
-
-if(x.type==="KASS"){
-k.amount-=Math.abs(Number(x.change)||0);
-k.kass+=Math.abs(Number(x.change)||0);
-}
-});
-});
-
-if(!b.start&&b.events.length)b.start=historyParseDate(b.events[0].tid);
-if(!b.end&&b.events.length)b.end=historyParseDate(b.events[b.events.length-1].tid);
-
-b.total=b.kollis.reduce((s,k)=>s+k.amount,0);
-b.kolliCount=b.kollis.length;
-b.diffCount=b.events.filter(x=>x.type==="DIFF"&&!x.undone&&x.change).length;
-b.kassCount=b.events.filter(x=>x.type==="KASS").length;
-b.product=b.products[0]||"Produkt saknas";
-b.order="";
-b.line="";
-b.operator="";
-b.comment="";
+map[pid]=b;
 });
 
 return Object.values(map).sort((a,b)=>(b.start?.getTime()||0)-(a.start?.getTime()||0));
 }
-
 function historyFormatDate(d){
 if(!d||isNaN(d))return "—";
 return d.toLocaleDateString("sv-SE",{day:"numeric",month:"short",year:"numeric"}).replace(".","")+" · "+d.toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"});
@@ -1354,6 +1324,7 @@ function deleteSelectedHistory(){
 let ids=new Set(historyDeleteBatch||[]);
 
 data.historik=data.historik.filter(x=>!ids.has(x.productionId||(x.fpk&&x.fpk!=="-"?"LEGACY_"+x.fpk:"")));
+data.produktioner=(data.produktioner||[]).filter(p=>!ids.has(p.productionId));
 
 saveData();
 
