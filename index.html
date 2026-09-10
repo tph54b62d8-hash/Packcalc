@@ -136,7 +136,7 @@ nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:15px}
 <div id="calcSprutor" class="hidden"><button class="gray calcBack" onclick="backToCalculators()">← Till kalkylatorer</button><div class="sectionTitle"><h2>💉 Sprutor</h2><p>Räkna ut hur sprutorna fördelas i kapslar.</p></div><div class="card"><label>Hur många sprutor har vi?</label><input id="sprutorAntal" type="number" value="0" min="0" oninput="raknaSprutor()"><label>Hur många sprutor i en kapsel?</label><input id="sprutorPer" type="number" value="0" min="0" oninput="raknaSprutor()"><div class="result"><div class="box">Antal fulla kapslar<span class="number greenNumber" id="sprutorFulla">0</span></div><div class="box">Antal sprutor i sista kapseln<span class="number blueNumber" id="sprutorSista">0</span></div></div></div></div>
 <div id="calcKapslar" class="hidden"><button class="gray calcBack" onclick="backToCalculators()">← Till kalkylatorer</button><div class="sectionTitle"><h2>🧪 Kapslar</h2><p>1 vial = 1 kapsel.</p></div><div class="card"><label>Hur många kapslar har vi?</label><input id="kapslarAntal" type="number" value="0" min="0" oninput="raknaKapslar()"><label>Hur många kapslar i ett well/back?</label><input id="kapslarPer" type="number" value="0" min="0" oninput="raknaKapslar()"><div class="result"><div class="box">Antal fulla well/backar<span class="number greenNumber" id="kapslarFulla">0</span></div><div class="box">Antal kapslar i sista well/backen<span class="number blueNumber" id="kapslarSista">0</span></div></div></div></div>
 <div id="calcPall" class="hidden"><button class="gray calcBack" onclick="backToCalculators()">← Till kalkylatorer</button><div class="sectionTitle"><h2>📦 Pall</h2><p>Räkna ut hur många pallar wellen blir.</p></div><div class="card"><label>Hur många well har du?</label><input id="pallCalcAntal" type="number" value="0" min="0" oninput="raknaPallCalc()"><label>Hur många well på en pall?</label><input id="pallCalcPer" type="number" value="0" min="0" oninput="raknaPallCalc()"><div class="result"><div class="box">Antal fulla pallar<span class="number greenNumber" id="pallCalcFulla">0</span></div><div class="box">Well på sista pallen<span class="number blueNumber" id="pallCalcSista">0</span></div></div></div></div>
-<div id="calcEtiketter" class="hidden"><button class="gray calcBack" onclick="backToCalculators()">← Till kalkylatorer</button><div class="sectionTitle"><h2>🏷️ Etiketter</h2><p>Räkna antal etiketter och kontrollera förbrukningen.</p></div><div class="card"><h2>1. Räkna antal etiketter</h2><label>Första etikett</label><input id="etikettForsta" type="number" value="0" min="0" oninput="raknaEtiketter()"><label>Sista etikett</label><input id="etikettSista" type="number" value="0" min="0" oninput="raknaEtiketter()"><div class="result"><div class="box">Totalt antal etiketter<span class="number" id="etikettTotalt">0</span></div></div></div><div class="card"><h2>2. Kontrollera etikettförbrukning</h2><label>Startnummer</label><input id="etikettStart" type="number" value="0" min="0" oninput="kontrolleraEtiketter()"><label>Antal producerade</label><input id="etikettProducerade" type="number" value="0" min="0" oninput="kontrolleraEtiketter()"><div class="box calcResult">Förväntad nästa etikett<span class="number" id="etikettForvantad">0</span></div><label>Vilket nummer visar etiketten/rullen?</label><input id="etikettVerklig" type="number" value="0" min="0" oninput="kontrolleraEtiketter()"><div id="etikettKontrollResult"></div></div></div>
+<div id="calcEtiketter" class="hidden"><button class="gray calcBack" onclick="backToCalculators()">← Till kalkylatorer</button><div class="sectionTitle"><h2>🏷️ Etiketter</h2><p>Välj vilken etikettkalkylator du vill använda.</p></div><div class="calculatorGrid"><button class="calculatorCard" onclick="openEtikettCalculator('etiketter')"><div class="calcIcon">🏷️</div><strong>Etiketter</strong><span>Stäm av mottagna och redovisade etiketter.</span></button><button class="calculatorCard" onclick="openEtikettCalculator('tillagg')"><div class="calcIcon">➕</div><strong>Tilläggsetiketter</strong><span>Räkna och kontrollera etikettförbrukning.</span></button></div></div><div id="calcEtiketterMain" class="hidden"><button class="gray calcBack" onclick="backToEtikettChoice()">← Tillbaka till Etiketter</button><div class="sectionTitle"><h2>🏷️ Etiketter</h2><p>Stäm av förprintade tilläggsetiketter.</p></div><div class="card"><label>Mottagna etiketter</label><input id="etikettMottagna" type="number" value="0" min="0" oninput="raknaEtikettAvstamning()"><label>Till order</label><input id="etikettTillOrder" type="number" value="0" min="0" oninput="raknaEtikettAvstamning()"><label>Till rapportering</label><input id="etikettTillRapportering" type="number" value="0" min="0" oninput="raknaEtikettAvstamning()"><label>Kassation</label><input id="etikettKassation" type="number" value="0" min="0" oninput="raknaEtikettAvstamning()"><label>Återlämnade</label><input id="etikettAterlamnade" type="number" value="0" min="0" oninput="raknaEtikettAvstamning()"></div><div class="card"><div class="result"><div class="box">Redovisat totalt<span class="number" id="etikettRedovisat">0</span></div><div class="box">Avvikelse<span class="number" id="etikettAvvikelse">0</span></div></div><div id="etikettAvstamningResult"></div></div></div><div id="calcTillaggsetiketter" class="hidden"><button class="gray calcBack" onclick="backToEtikettChoice()">← Tillbaka till Etiketter</button><div class="sectionTitle"><h2>➕ Tilläggsetiketter</h2><p>Räkna antal etiketter och kontrollera förbrukningen.</p></div><div class="card"><h2>1. Räkna antal etiketter</h2><label>Första etikett</label><input id="etikettForsta" type="number" value="0" min="0" oninput="raknaEtiketter()"><label>Sista etikett</label><input id="etikettSista" type="number" value="0" min="0" oninput="raknaEtiketter()"><div class="result"><div class="box">Totalt antal etiketter<span class="number" id="etikettTotalt">0</span></div></div></div><div class="card"><h2>2. Kontrollera etikettförbrukning</h2><label>Startnummer</label><input id="etikettStart" type="number" value="0" min="0" oninput="kontrolleraEtiketter()"><label>Antal producerade</label><input id="etikettProducerade" type="number" value="0" min="0" oninput="kontrolleraEtiketter()"><div class="box calcResult">Förväntad nästa etikett<span class="number" id="etikettForvantad">0</span></div><label>Vilket nummer visar etiketten/rullen?</label><input id="etikettVerklig" type="number" value="0" min="0" oninput="kontrolleraEtiketter()"><div id="etikettKontrollResult"></div></div></div>
 <div id="calcTid" class="hidden"><button class="gray calcBack" onclick="backToCalculators()">← Till kalkylatorer</button><div class="sectionTitle"><h2>⏱️ Tid</h2><p>Lägg ihop flera tidsperioder.</p></div><div class="card"><div id="timeRows"></div><button class="blue" onclick="addTimeRow()">＋ Lägg till tid</button><div class="timeTotal">Total tid<span class="number" id="timeTotal">0 h 0 min</span></div></div></div>
 </section>
 
@@ -245,16 +245,27 @@ document.getElementById("registrationsView").classList.add("hidden");
 }
 
 function openCalculator(type){
-["calculatorChoice","calcSprutor","calcKapslar","calcPall","calcEtiketter","calcTid"].forEach(id=>document.getElementById(id).classList.add("hidden"));
+["calculatorChoice","calcSprutor","calcKapslar","calcPall","calcEtiketter","calcEtiketterMain","calcTillaggsetiketter","calcTid"].forEach(id=>{let el=document.getElementById(id);if(el)el.classList.add("hidden")});
 if(type==="sprutor"){document.getElementById("calcSprutor").classList.remove("hidden");raknaSprutor();}
 if(type==="kapslar"){document.getElementById("calcKapslar").classList.remove("hidden");raknaKapslar();}
 if(type==="pallcalc"){document.getElementById("calcPall").classList.remove("hidden");raknaPallCalc();}
-if(type==="etiketter"){document.getElementById("calcEtiketter").classList.remove("hidden");raknaEtiketter();kontrolleraEtiketter();}
+if(type==="etiketter"){document.getElementById("calcEtiketter").classList.remove("hidden");}
 if(type==="tid"){document.getElementById("calcTid").classList.remove("hidden");renderTimeRows();}
 }
 
+function openEtikettCalculator(type){
+["calcEtiketter","calcEtiketterMain","calcTillaggsetiketter"].forEach(id=>{let el=document.getElementById(id);if(el)el.classList.add("hidden")});
+if(type==="etiketter"){document.getElementById("calcEtiketterMain").classList.remove("hidden");raknaEtikettAvstamning();}
+if(type==="tillagg"){document.getElementById("calcTillaggsetiketter").classList.remove("hidden");raknaEtiketter();kontrolleraEtiketter();}
+}
+
+function backToEtikettChoice(){
+["calcEtiketterMain","calcTillaggsetiketter"].forEach(id=>{let el=document.getElementById(id);if(el)el.classList.add("hidden")});
+document.getElementById("calcEtiketter").classList.remove("hidden");
+}
+
 function backToCalculators(){
-["calcSprutor","calcKapslar","calcPall","calcEtiketter","calcTid"].forEach(id=>document.getElementById(id).classList.add("hidden"));
+["calcSprutor","calcKapslar","calcPall","calcEtiketter","calcEtiketterMain","calcTillaggsetiketter","calcTid"].forEach(id=>{let el=document.getElementById(id);if(el)el.classList.add("hidden")});
 document.getElementById("calculatorChoice").classList.remove("hidden");
 }
 
@@ -277,6 +288,30 @@ let a=Number(document.getElementById("pallCalcAntal").value)||0,p=Number(documen
 if(p>0){f=Math.floor(a/p);r=a%p;}
 document.getElementById("pallCalcFulla").innerText=f;
 document.getElementById("pallCalcSista").innerText=r;
+}
+
+function raknaEtikettAvstamning(){
+let mottagna=Number(document.getElementById("etikettMottagna")?.value)||0,
+tillOrder=Number(document.getElementById("etikettTillOrder")?.value)||0,
+tillRapportering=Number(document.getElementById("etikettTillRapportering")?.value)||0,
+kassation=Number(document.getElementById("etikettKassation")?.value)||0,
+aterlamnade=Number(document.getElementById("etikettAterlamnade")?.value)||0,
+redovisat=tillOrder+tillRapportering+kassation+aterlamnade,
+avvikelse=redovisat-mottagna;
+
+document.getElementById("etikettRedovisat").innerText=redovisat;
+document.getElementById("etikettAvvikelse").innerText=(avvikelse>0?"+":"")+avvikelse;
+
+let result=document.getElementById("etikettAvstamningResult");
+if(avvikelse===0){
+result.innerHTML='<div class="calcPositive">Avvikelse: 0<br><span style="font-weight:normal">Allt stämmer</span></div>';
+}else if(avvikelse>0){
+let n=avvikelse;
+result.innerHTML='<div class="calcPositive">Avvikelse: +'+n+' etikett'+(n===1?"":"er")+'<br><span style="font-weight:normal">Förmodligen '+n+' enhet'+(n===1?"":"er")+' utan etikett</span></div>';
+}else{
+let n=Math.abs(avvikelse);
+result.innerHTML='<div class="calcNegative">Avvikelse: −'+n+' etikett'+(n===1?"":"er")+'<br><span style="font-weight:normal">Förmodligen '+n+' etikett'+(n===1?"":"er")+' borttappad eller en enhet dubbelprintad</span></div>';
+}
 }
 
 function raknaEtiketter(){
