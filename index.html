@@ -1218,8 +1218,39 @@ status=k.kass>0
 ?'<span class="historyOrange">'+diffLabel+'</span>'
 :'<span class="historyOk">OK</span>';
 
-return '<div class="historyKolliCard '+cls+'"><div class="historyKolliTop"><div><strong>▣ Kolli '+k.nummer+'</strong><div class="historyKolliAmount">'+k.amount+' st</div></div><div style="display:flex;align-items:center;gap:8px">'+status+'<span class="historyKolliArrow">›</span></div></div></div>';
+return '<div class="historyKolliCard '+cls+'" onclick="openHistoryKolliDetail(\''+b.productionId+'\',\''+String(k.nummer).replace(/\'/g,"\\'")+'\')" style="cursor:pointer"><div class="historyKolliTop"><div><strong>▣ Kolli '+k.nummer+'</strong><div class="historyKolliAmount">'+k.amount+' st</div></div><div style="display:flex;align-items:center;gap:8px">'+status+'<span class="historyKolliArrow">›</span></div></div></div>';
 }).join("");
+}
+
+function openHistoryKolliDetail(productionId,kolliNummer){
+let b=historyBatches().find(x=>x.productionId===productionId);
+if(!b)return;
+let k=b.kollis.find(x=>String(x.nummer)===String(kolliNummer));
+if(!k)return;
+let events=b.events.filter(x=>String(x.kolli)===String(kolliNummer));
+let startEvent=events.find(x=>x.type==="KOLLI"||x.type==="Kolli"||x.text==="La till kolli"),
+original=startEvent?Math.abs(Number(String(startEvent.change).replace("+",""))||0):k.amount+Number(k.kass||0),
+product=k.produkt||"Produkt saknas",
+per=k.per?String(k.per)+"/kapsel":"—";
+
+let registrations=events.filter(x=>x.type==="KASS"||x.type==="DIFF"||x.type==="KOLLI"||x.type==="Kolli"||x.type==="-"||x.text==="Flaggade differens"||x.text==="La till kolli");
+let rows=registrations.map(x=>{
+let type=x.type==="KASS"||x.type==="-"||x.text==="Kassation"?"Kassation":x.type==="DIFF"||x.text==="Flaggade differens"?"Diff":"Registrerat";
+let value=type==="Kassation"?"−"+Math.abs(Number(x.change)||0)+" st":type==="Diff"?(x.change||"Diff"):"+"+Math.abs(Number(String(x.change).replace("+",""))||0)+" st";
+let detail=(x.reason?(x.reason+(x.note?" · "+x.note:"")):x.note)||"";
+return '<div style="padding:10px 0;border-bottom:1px solid #e7ebf1"><div style="display:flex;justify-content:space-between;gap:10px"><strong>'+type+'</strong><strong>'+value+'</strong></div><div style="color:#687386;font-size:12px;margin-top:3px">'+(historyParseDate(x.tid)?historyFormatDate(historyParseDate(x.tid)):"—")+(detail?" · "+detail:"")+'</div></div>';
+}).join("");
+
+let modal=document.createElement("div");
+modal.id="historyKolliDetailModal";
+modal.className="productionModal";
+modal.innerHTML='<div class="card productionModalCard"><button class="historyBack" onclick="closeHistoryKolliDetail()">‹ Tillbaka</button><div class="historyDetailHead"><div><h2 style="color:#1459d9;margin:0 0 3px">Kolli '+k.nummer+'</h2><div style="color:#687386;font-size:13px">'+product+'</div></div></div><div class="historyDetailInfo" style="margin-top:12px"><div class="historyInfoRow"><span class="historyInfoLabel">Ursprungligt antal</span><span class="historyInfoValue">'+original+' st</span></div><div class="historyInfoRow"><span class="historyInfoLabel">Slutligt antal</span><span class="historyInfoValue">'+k.amount+' st</span></div><div class="historyInfoRow"><span class="historyInfoLabel">Kapacitet</span><span class="historyInfoValue">'+per+'</span></div><div class="historyInfoRow"><span class="historyInfoLabel">Kassation</span><span class="historyInfoValue">'+(k.kass||0)+' st</span></div><div class="historyInfoRow"><span class="historyInfoLabel">Diff</span><span class="historyInfoValue">'+(k.diff?(events.filter(x=>x.type==="DIFF"&&!x.undone).map(x=>x.change).join(", ")||"Ja"):"Ingen")+'</span></div></div><h3 style="margin:18px 0 6px">Registreringar</h3><div>'+ (rows||'<p style="color:#687386">Inga registreringar.</p>') +'</div></div>';
+document.body.appendChild(modal);
+}
+
+function closeHistoryKolliDetail(){
+let m=document.getElementById("historyKolliDetailModal");
+if(m)m.remove();
 }
 
 function renderHistoryDetails(b){
