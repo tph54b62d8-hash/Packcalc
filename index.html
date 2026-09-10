@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PACKVEX</title>
+<title>PACKVEX V1.6</title>
 <style>
 *{box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f4f6fa;margin:0;color:#172033}
@@ -23,6 +23,47 @@ button{width:100%;padding:14px;border:0;border-radius:11px;font-size:16px;font-w
 .homeCard{background:white;border:0;border-radius:16px;padding:17px;text-align:left;box-shadow:0 2px 10px #0001;min-height:125px;margin:0}
 .homeCard .icon{font-size:28px;margin-bottom:10px}.homeCard strong{display:block;font-size:18px;margin-bottom:5px}.homeCard span{display:block;color:#687386;font-size:13px;line-height:1.3}
 nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:15px}nav button{background:white;margin:0;padding:11px 5px;font-size:13px;color:#172033}nav button.active{background:#1459d9;color:white}
+/* V1.6 VISUAL/NAVIGATION ONLY */
+body{background:#f6f8fb;padding-bottom:94px}
+header{background:#fff;color:#14203a;padding:24px 18px 15px;text-align:left;border-bottom:1px solid #e4e9f1}
+header .logo{display:none}
+header h1{margin:0;font-size:42px;line-height:1;letter-spacing:-1.5px;font-weight:900;color:#172a55}
+header h1::first-letter{color:#1459d9}
+.tagline{margin-top:7px;font-size:11px;letter-spacing:3px;color:#7a8496;opacity:1;font-weight:700}
+nav#mainNav{position:fixed;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:900;width:min(96vw,680px);height:74px;margin:0;padding:6px 8px;display:grid;grid-template-columns:repeat(6,1fr);gap:2px;background:rgba(255,255,255,.97);border:1px solid #e6eaf0;border-radius:24px;box-shadow:0 8px 28px rgba(25,43,74,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+nav#mainNav button{background:transparent;color:#687386;margin:0;padding:6px 3px;border-radius:16px;font-size:10px;font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;line-height:1.05}
+nav#mainNav button.active{background:#eef5ff;color:#1459d9}
+.navIcon{width:22px;height:22px;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+nav#mainNav button.active .navIcon{stroke-width:2.4}
+#home{padding-top:4px}
+.homeTopMeta{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:2px 2px 12px;color:#687386;font-size:13px}
+.homeTopMeta strong{color:#172033;font-size:13px}
+.homeTopMetaRight{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;text-align:right;max-width:180px}
+#home .card{border:1px solid #e7ebf1;box-shadow:0 4px 16px rgba(30,48,82,.06)}
+.homeProductionCard{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr) 28px;gap:16px;align-items:center;background:#effaf4!important;border:1px solid #dff1e7!important;border-radius:18px!important;padding:17px!important;box-shadow:0 6px 18px rgba(25,90,55,.07)!important}
+.homeProductionLabel{font-size:11px;letter-spacing:1.4px;color:#6d7b8c;font-weight:800}
+.homeProductionBatch{font-size:24px;font-weight:900;color:#15284f;margin-top:3px}
+.homeProductionCount{font-size:13px;color:#687386;margin-top:4px}
+.homeProductionDot{width:14px;height:14px;border-radius:50%;background:#13a15c;box-shadow:0 0 0 8px #dff6e9;margin:0 auto}
+.homeProductionInfo{border-left:1px solid #d8e8df;padding-left:16px;display:grid;gap:4px;font-size:12px;color:#687386}
+.homeProductionInfo strong{color:#172033;font-weight:700}
+.homeProductionArrow{font-size:30px;color:#16834d;text-align:center}
+#home .sectionTitle{margin:18px 4px 12px}
+#home .sectionTitle h2{font-size:28px;letter-spacing:-.5px;margin:0 0 3px}
+#home .sectionTitle p{font-size:15px;margin:0;color:#687386}
+.homeGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.homeCard{position:relative;min-height:164px;padding:17px 16px!important;border:1px solid #e4e9f1!important;border-radius:17px!important;box-shadow:0 3px 12px rgba(30,48,82,.05)!important;overflow:hidden}
+.homeCard .icon{width:42px;height:42px;margin-bottom:14px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:0}
+.homeCard .homeIcon{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.homeCard strong{font-size:18px;letter-spacing:-.2px;margin-bottom:4px}
+.homeCard span{font-size:13px;line-height:1.35;max-width:190px}
+.homeCard::after{content:'›';position:absolute;right:14px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;line-height:1;color:#1459d9;background:#eaf2ff}
+.homeCard:nth-child(2){background:#effaf4;border-color:#dff1e7!important}.homeCard:nth-child(2)::after{color:#16834d;background:#e2f5e9}.homeCard:nth-child(3){background:#fffaf0;border-color:#f2ead7!important}.homeCard:nth-child(3)::after{color:#9b6800;background:#fff0ca}.homeCard:nth-child(4){background:#f8f3ff;border-color:#ebe2fa!important}.homeCard:nth-child(4)::after{color:#5d32a6;background:#eee5ff}.homeCard:nth-child(5){background:#fff3f4;border-color:#f4dfe2!important}.homeCard:nth-child(5)::after{color:#a21f32;background:#ffe5e8}.homeCard:nth-child(6){background:#eff6ff;border-color:#deebfa!important}.homeCard:nth-child(7){grid-column:1/-1;min-height:84px;display:flex;align-items:center;gap:14px;text-align:left;background:#f4f6f9}.homeCard:nth-child(7) .icon{margin:0;flex:0 0 42px}.homeCard:nth-child(7) strong{margin:0}.homeCard:nth-child(7) span{max-width:none}.homeCard:nth-child(7)::after{color:#44526a;background:#e7ebf1}
+.homeSearchCard{padding:14px!important;margin-top:2px!important}
+.homeSearchTitle{font-size:13px;font-weight:800;color:#172033;margin-bottom:7px}
+#homeSearch{border:1px solid #dfe5ee;border-radius:14px;padding:13px 14px 13px 42px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='19' viewBox='0 0 24 24' fill='none' stroke='%23687386' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-4-4'/%3E%3C/svg%3E") no-repeat 14px center;box-shadow:none}
+@media(max-width:430px){body{padding-bottom:92px}header h1{font-size:39px}.homeProductionCard{grid-template-columns:16px minmax(0,1fr) 24px;gap:11px}.homeProductionInfo{display:none}.homeGrid{gap:10px}.homeCard{min-height:158px;padding:15px 13px!important}.homeCard strong{font-size:17px}.homeCard span{font-size:12px}.homeCard::after{right:10px;width:34px;height:34px;font-size:27px}nav#mainNav{height:70px;border-radius:22px;width:98vw}}
+
 .hidden{display:none!important}.status{background:#eaf8f1;color:#17764a;border-radius:10px;padding:12px;font-weight:bold;margin-bottom:15px}.warning{background:#fff4df;color:#8a5a00;border-radius:10px;padding:12px;margin-bottom:15px}
 .item{border:1px solid #e0e5ed;border-radius:11px;padding:12px;margin-top:8px;background:#fafbfd}.item strong{display:block}.small{color:#687386;font-size:13px;margin-top:4px}
 .tableWrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:8px;border-bottom:1px solid #ddd;text-align:left;white-space:nowrap}
@@ -84,24 +125,28 @@ nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:15px}
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
 <main>
 <nav id="mainNav">
-<button onclick="showPage('home')" id="navHome">🏠 Hem</button>
-<button onclick="showPage('pack')" id="navPack">🏭 Produktion</button>
-<button onclick="showPage('print')" id="navPrint">🖨️ Print</button>
-<button onclick="showPage('more')" id="navMore">⋯ Mer</button>
+<button onclick="showPage('home')" id="navHome"><svg class="navIcon" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg><span>Hem</span></button>
+<button onclick="showPage('pack')" id="navPack"><svg class="navIcon" viewBox="0 0 24 24"><path d="M4 20V9h5v11"/><path d="M15 20V4h5v16"/><path d="M9 20v-6h6v6"/><path d="M4 9h5"/></svg><span>Produktion</span></button>
+<button onclick="showPage('packalkylator')" id="navCalc"><svg class="navIcon" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg><span>Packalkylator</span></button>
+<button onclick="showPage('dagbok')" id="navDagbok"><svg class="navIcon" viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg><span>Loggbok</span></button>
+<button onclick="showPage('historik')" id="navHistorik"><svg class="navIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><span>Historik</span></button>
+<button onclick="showPage('more')" id="navMore"><svg class="navIcon" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg><span>Mer</span></button>
 </nav>
 
 <section id="home">
-<div class="card"><h2>Produktionsöversikt</h2><p style="color:#687386">Välj vad du vill arbeta med.</p><div id="homeActive"></div></div>
+<div class="homeTopMeta"><div><strong>PACKVEX</strong><br>Production Control</div><div class="homeTopMetaRight">Effektiv produktion.<br>Säker kontroll.</div></div>
+<div id="homeActive"></div>
+<div class="sectionTitle"><h2>Vad vill du göra?</h2><p>Välj en funktion för att komma igång.</p></div>
 <div class="homeGrid">
-<button class="homeCard" onclick="showPage('pack')"><div class="icon">🏭</div><strong>Produktion</strong><span>Kolli, FPK, kassation och registreringar</span></button>
-<button class="homeCard" onclick="showPage('packalkylator')"><div class="icon">🧮</div><strong>Packalkylator</strong><span>Allt du snabbt behöver räkna.</span></button>
-<button class="homeCard" onclick="showPage('dagbok')"><div class="icon">📖</div><strong>Loggbok</strong><span>Information mellan skift och operatörer.</span></button>
-<button class="homeCard" onclick="showPage('qr')"><div class="icon">▣</div><strong>QR kodläsare</strong><span>Läs och visa QR-information tydligt.</span></button>
-<button class="homeCard" onclick="showPage('historik')"><div class="icon">📋</div><strong>Historik</strong><span>Sök gamla körningar och se exakt vad som hänt.</span></button>
-<button class="homeCard" onclick="showPage('oversikt')"><div class="icon">📊</div><strong>Översikt</strong><span>För produktionsledning och senare hela företaget.</span></button>
-<button class="homeCard" onclick="showPage('installningar')"><div class="icon">⚙️</div><strong>Inställningar</strong><span>Administration.</span></button>
+<button class="homeCard" onclick="showPage('pack')"><div class="icon" style="color:#1459d9;background:#e5efff"><svg class="homeIcon" viewBox="0 0 24 24"><path d="M3 20V9h5v11M16 20V4h5v16M8 20v-5h8v5M3 9h5"/></svg></div><strong>Produktion</strong><span>Kolli, FPK, kassation och registreringar.</span></button>
+<button class="homeCard" onclick="showPage('packalkylator')"><div class="icon" style="color:#16834d;background:#e3f6ea"><svg class="homeIcon" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg></div><strong>Packalkylator</strong><span>Allt du snabbt behöver räkna.</span></button>
+<button class="homeCard" onclick="showPage('dagbok')"><div class="icon" style="color:#9b6800;background:#fff0ca"><svg class="homeIcon" viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg></div><strong>Loggbok</strong><span>Information mellan skift och operatörer.</span></button>
+<button class="homeCard" onclick="showPage('qr')"><div class="icon" style="color:#5d32a6;background:#eee5ff"><svg class="homeIcon" viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M14 14h3v3h-3zM18 18h2v2h-2zM17 17h1v1h-1z"/></svg></div><strong>QR kodläsare</strong><span>Läs och visa QR-information tydligt.</span></button>
+<button class="homeCard" onclick="showPage('historik')"><div class="icon" style="color:#a21f32;background:#ffe5e8"><svg class="homeIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></div><strong>Historik</strong><span>Sök gamla körningar och se exakt vad som hänt.</span></button>
+<button class="homeCard" onclick="showPage('oversikt')"><div class="icon" style="color:#1459d9;background:#e5efff"><svg class="homeIcon" viewBox="0 0 24 24"><path d="M5 20V11h4v9M10 20V6h4v14M15 20V3h4v17"/></svg></div><strong>Översikt</strong><span>För produktionsledning och senare hela företaget.</span></button>
+<button class="homeCard" onclick="showPage('installningar')"><div class="icon" style="color:#44526a;background:#e7ebf1"><svg class="homeIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 13.5a7.7 7.7 0 0 0 0-3l2-1.5-2-3-2.3.9a7.6 7.6 0 0 0-2.6-1.5L13.8 3h-3.6l-.3 2.4a7.6 7.6 0 0 0-2.6 1.5L5 6 3 9l2 1.5a7.7 7.7 0 0 0 0 3L3 15l2 3 2.3-.9a7.6 7.6 0 0 0 2.6 1.5l.3 2.4h3.6l.3-2.4a7.6 7.6 0 0 0 2.6-1.5L19 18l2-3z"/></svg></div><div><strong>Inställningar</strong><span>Administration.</span></div></button>
 </div>
-<div class="card"><h3>Snabbsök</h3><input id="homeSearch" placeholder="Sök FPK eller kollinummer" oninput="homeSearch()"><div id="homeSearchResults"></div></div>
+<div class="card homeSearchCard"><div class="homeSearchTitle">Snabbsök</div><input id="homeSearch" placeholder="Sök FPK eller kollinummer" oninput="homeSearch()"><div id="homeSearchResults"></div></div>
 </section>
 
 <section id="pack" class="hidden">
@@ -197,7 +242,7 @@ nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:15px}
 
 <section id="oversikt" class="hidden"><div class="sectionTitle"><h2>📊 Översikt</h2><p>För produktionsledning och senare hela företaget.</p></div><div class="card"><h2>Översikt</h2><p style="color:#687386">Här kommer produktionsöversikten att byggas vidare när den ska användas av produktionsledning och företaget.</p></div></section>
 <section id="installningar" class="hidden"><div class="sectionTitle"><h2>⚙️ Inställningar</h2><p>Administration.</p></div><div class="card"><h2>Inställningar</h2><p style="color:#687386">Administrativa funktioner kommer att läggas här.</p></div></section>
-<section id="more" class="hidden"><div class="card"><h2>Fler funktioner</h2><button class="homeCard" onclick="showPage('pall')">🏗️ <strong>Pall</strong><span>Well och pallar</span></button><button class="homeCard" onclick="showPage('qr')">▣ <strong>QR-kod</strong><span>Läs QR-information</span></button><button class="homeCard" onclick="showPage('dagbok')">📓 <strong>Dagbok</strong><span>Skiftanteckningar</span></button><button class="homeCard" onclick="showPage('historik')">📋 <strong>Historik</strong><span>Tidigare arbete</span></button></div></section>
+<section id="more" class="hidden"><div class="sectionTitle"><h2>Mer</h2><p>Övriga funktioner i PACKVEX.</p></div><div class="card"><button class="productionLink" onclick="showPage('print')"><strong>Print</strong><span style="float:right">›</span></button><button class="productionLink" onclick="showPage('pall')"><strong>Pall</strong><span style="float:right">›</span></button><button class="productionLink" onclick="showPage('qr')"><strong>QR kodläsare</strong><span style="float:right">›</span></button><button class="productionLink" onclick="showPage('oversikt')"><strong>Översikt</strong><span style="float:right">›</span></button><button class="productionLink" onclick="showPage('installningar')"><strong>Inställningar</strong><span style="float:right">›</span></button></div></section>
 <div class="footer">PACKVEX<br>Verification. Efficiency. Execution.</div>
 </main>
 
@@ -219,8 +264,10 @@ document.getElementById(page).classList.remove("hidden");
 document.querySelectorAll("nav button").forEach(btn=>btn.classList.remove("active"));
 if(page==="home")document.getElementById("navHome").classList.add("active");
 if(page==="pack"){document.getElementById("navPack").classList.add("active");closeProductionView();}
-if(page==="print")document.getElementById("navPrint").classList.add("active");
-if(["more","pall","qr","dagbok","historik","oversikt","installningar"].includes(page))document.getElementById("navMore").classList.add("active");
+if(page==="packalkylator")document.getElementById("navCalc").classList.add("active");
+if(page==="dagbok")document.getElementById("navDagbok").classList.add("active");
+if(page==="historik")document.getElementById("navHistorik").classList.add("active");
+if(["more","print","pall","qr","oversikt","installningar"].includes(page))document.getElementById("navMore").classList.add("active");
 renderAll();
 window.scrollTo(0,0);
 }
@@ -842,10 +889,12 @@ batch=document.getElementById("productionActiveBatch");
 
 if(data.fpk){
 batch.innerHTML='<span class="activeBatchDot">●</span>Aktiv batch:<br><strong>'+data.fpk+'</strong>';
-home.innerHTML='<div class="status">● Aktiv FPK: '+data.fpk+'<br><span style="font-weight:normal">'+data.kollin.length+" registrerade kolli</span></div>";
+let activeProduct=data.kollin.length?(data.kollin[data.kollin.length-1].produkt||"—"):"—";
+let activeStart=data.activeProductionStart?new Date(data.activeProductionStart).toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"}):"—";
+home.innerHTML='<div class="homeProductionCard"><div class="homeProductionDot"></div><div><div class="homeProductionLabel">AKTIV PRODUKTION</div><div class="homeProductionBatch">FPK '+data.fpk+'</div><div class="homeProductionCount">'+data.kollin.length+' registrerade kolli</div></div><div class="homeProductionInfo"><div>Produkt <strong>'+activeProduct+'</strong></div><div>Batch ID <strong>'+data.fpk+'</strong></div><div>Starttid <strong>'+activeStart+'</strong></div></div><div class="homeProductionArrow">›</div></div>';
 }else{
 batch.innerHTML='<span style="color:#8b95a5">Ingen aktiv batch</span>';
-home.innerHTML="";
+home.innerHTML='<div class="homeProductionCard" style="background:#f8f9fb!important;border-color:#e5e9ef!important"><div class="homeProductionDot" style="background:#9aa4b3;box-shadow:0 0 0 8px #e9edf2"></div><div><div class="homeProductionLabel">AKTIV PRODUKTION</div><div class="homeProductionBatch" style="font-size:20px">Ingen aktiv produktion</div><div class="homeProductionCount">Starta en batch för att komma igång.</div></div><div></div><div class="homeProductionArrow" style="color:#687386">›</div></div>';
 }
 }
 
