@@ -150,7 +150,7 @@ nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:15px}
 <div id="historyOverviewView">
 <div class="sectionTitle"><h2>📋 Historik</h2><p>Sök, filtrera och se alla tidigare produktioner.</p></div>
 <div class="card">
-<input class="historyModernSearch" id="historyProductionSearch" placeholder="🔍 Sök batch, produkt eller order…" oninput="renderProductionHistory">
+<input class="historyModernSearch" id="historyProductionSearch" placeholder="🔍 Sök batch, produkt eller order…" oninput="renderProductionHistory()">
 <div class="historyFilterGrid">
 <button id="historyFilterAll" class="historyFilterBtn active" onclick="setHistoryFilter('all')">Alla</button>
 <button id="historyFilterToday" class="historyFilterBtn" onclick="setHistoryFilter('today')">Idag</button>
