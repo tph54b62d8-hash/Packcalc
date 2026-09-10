@@ -1218,8 +1218,11 @@ status=k.kass>0
 ?'<span class="historyOrange">'+diffLabel+'</span>'
 :'<span class="historyOk">OK</span>';
 
-return '<div class="historyKolliCard '+cls+'" onclick="openHistoryKolliDetail(\''+b.productionId+'\',\''+String(k.nummer).replace(/\'/g,"\\'")+'\')" style="cursor:pointer"><div class="historyKolliTop"><div><strong>▣ Kolli '+k.nummer+'</strong><div class="historyKolliAmount">'+k.amount+' st</div></div><div style="display:flex;align-items:center;gap:8px">'+status+'<span class="historyKolliArrow">›</span></div></div></div>';
+return '<div class="historyKolliCard '+cls+'" style="cursor:pointer"><div class="historyKolliTop"><div><strong>▣ Kolli '+k.nummer+'</strong><div class="historyKolliAmount">'+k.amount+' st</div></div><div style="display:flex;align-items:center;gap:8px">'+status+'<span class="historyKolliArrow">›</span></div></div></div>';
 }).join("");
+box.querySelectorAll(".historyKolliCard").forEach((card,i)=>{
+card.onclick=()=>openHistoryKolliDetail(b.productionId,b.kollis[i].nummer);
+});
 }
 
 function openHistoryKolliDetail(productionId,kolliNummer){
