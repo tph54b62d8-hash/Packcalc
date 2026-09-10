@@ -1218,10 +1218,14 @@ status=k.kass>0
 ?'<span class="historyOrange">'+diffLabel+'</span>'
 :'<span class="historyOk">OK</span>';
 
-return '<div class="historyKolliCard '+cls+'" style="cursor:pointer"><div class="historyKolliTop"><div><strong>▣ Kolli '+k.nummer+'</strong><div class="historyKolliAmount">'+k.amount+' st</div></div><div style="display:flex;align-items:center;gap:8px">'+status+'<span class="historyKolliArrow">›</span></div></div></div>';
+return '<div class="historyKolliCard '+cls+'" data-production-id="'+String(b.productionId).replace(/"/g,'&quot;')+'" data-kolli-nummer="'+String(k.nummer).replace(/"/g,'&quot;')+'" style="cursor:pointer"><div class="historyKolliTop"><div><strong>▣ Kolli '+k.nummer+'</strong><div class="historyKolliAmount">'+k.amount+' st</div></div><div style="display:flex;align-items:center;gap:8px">'+status+'<span class="historyKolliArrow">›</span></div></div></div>';
 }).join("");
-box.querySelectorAll(".historyKolliCard").forEach((card,i)=>{
-card.onclick=()=>openHistoryKolliDetail(b.productionId,b.kollis[i].nummer);
+box.querySelectorAll(".historyKolliCard").forEach(card=>{
+card.addEventListener("click",function(e){
+ e.preventDefault();
+ e.stopPropagation();
+ openHistoryKolliDetail(this.getAttribute("data-production-id"),this.getAttribute("data-kolli-nummer"));
+});
 });
 }
 
