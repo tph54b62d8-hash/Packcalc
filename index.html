@@ -119,6 +119,12 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .historyClearItem{cursor:pointer}
 .historyClearItem:has(input:checked){border-color:#1459d9;background:#f4f8ff}
 @media(max-width:430px){.historyDetailHead h2{font-size:19px}.historyInfoRow{font-size:11px}}
+
+/* PACKVEX V1.6.2 — iPhone keyboard handling only */
+html{scroll-behavior:auto;}
+@supports (-webkit-touch-callout:none){
+  body{overscroll-behavior-y:none;}
+}
 </style>
 </head>
 <body>
@@ -1506,6 +1512,41 @@ else if(!document.getElementById("historyClearView").classList.contains("hidden"
 
 document.getElementById("navHome").classList.add("active");
 renderAll();
+
+
+/* PACKVEX V1.6.2 — keep focused inputs visible above iPhone keyboard */
+(function(){
+  let keyboardScrollTimer=null;
+  function keepInputVisible(el){
+    if(!el || el.disabled || el.offsetParent===null)return;
+    if(keyboardScrollTimer)clearTimeout(keyboardScrollTimer);
+    keyboardScrollTimer=setTimeout(function(){
+      try{
+        el.scrollIntoView({behavior:"smooth",block:"center",inline:"nearest"});
+      }catch(e){
+        try{el.scrollIntoView(true);}catch(_){}
+      }
+    },80);
+  }
+  document.addEventListener("focusin",function(e){
+    let el=e.target;
+    if(el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))keepInputVisible(el);
+  },{passive:true});
+  document.addEventListener("focusout",function(){
+    if(keyboardScrollTimer)clearTimeout(keyboardScrollTimer);
+  },{passive:true});
+  if(window.visualViewport){
+    let lastHeight=window.visualViewport.height;
+    window.visualViewport.addEventListener("resize",function(){
+      let height=window.visualViewport.height;
+      if(height<lastHeight-80){
+        let el=document.activeElement;
+        if(el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))keepInputVisible(el);
+      }
+      lastHeight=height;
+    },{passive:true});
+  }
+})();
 </script>
 </body>
 </html>
