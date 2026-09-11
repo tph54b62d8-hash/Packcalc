@@ -409,9 +409,11 @@ let v=document.getElementById("fpkNumber").value.trim();
 if(!v){alert("Skriv in ett Batch ID.");return;}
 if(data.fpk&&!confirm("Det finns redan en aktiv batch. Vill du byta?"))return;
 data.fpk=v;
+document.getElementById("fpkNumber").value=v;
 data.activeProductionId="P"+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 data.activeProductionStart=new Date().toISOString();
 saveData();
+renderFpk();
 addHistory("START","-","","","Startade produktion","","","Batch "+v);
 renderAll();
 alert("Batch "+v+" är nu aktiv.");
