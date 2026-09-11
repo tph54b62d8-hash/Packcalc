@@ -89,148 +89,6 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .timeRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-top:10px}.timeRow input{margin:0}.removeTime{width:auto;margin:0;padding:13px 15px}.timeTotal{background:#eef6ff;border-radius:12px;padding:18px;text-align:center;margin-top:15px}.timeTotal .number{font-size:30px}
 .productionModal{position:fixed;inset:0;background:#0006;z-index:1000;padding:15px;overflow:auto}.productionModalCard{max-width:600px;margin:40px auto}
 /* V1.6.2 — Registreringar UI + production subview transition only */
-
-/* V1.6.3 — Packalkylator start page visual only */
-#packalkylator #calculatorChoice .sectionTitle{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin:8px 4px 20px;
-}
-#packalkylator #calculatorChoice .calculatorHeroIcon{
-  width:54px;
-  height:54px;
-  flex:0 0 54px;
-  border-radius:15px;
-  background:#eaf2ff;
-  color:#1459d9;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-#packalkylator #calculatorChoice .calculatorHeroIcon svg{
-  width:30px;
-  height:30px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.9;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-#packalkylator #calculatorChoice .sectionTitle h2{
-  margin:0 0 3px;
-  font-size:28px;
-  letter-spacing:-.6px;
-  color:#172033;
-}
-#packalkylator #calculatorChoice .sectionTitle p{
-  margin:0;
-  color:#172033;
-  font-size:15px;
-}
-#packalkylator #calculatorChoice .calculatorGrid{
-  gap:12px;
-}
-#packalkylator #calculatorChoice .calculatorCard{
-  position:relative;
-  min-height:190px;
-  padding:18px 16px!important;
-  border:1px solid #e5eaf2!important;
-  border-radius:19px!important;
-  background:#fff!important;
-  box-shadow:0 4px 15px rgba(30,48,82,.06)!important;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  justify-content:flex-start;
-  text-align:left;
-  overflow:hidden;
-}
-#packalkylator #calculatorChoice .calculatorCard .calcIcon{
-  width:58px;
-  height:58px;
-  margin:0 0 15px;
-  border-radius:50%;
-  background:#edf4ff;
-  color:#14264b;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:0;
-}
-#packalkylator #calculatorChoice .calculatorCard .calcIcon svg{
-  width:36px;
-  height:36px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.8;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-#packalkylator #calculatorChoice .calculatorCard strong{
-  position:relative;
-  z-index:1;
-  margin:0 0 6px;
-  font-size:20px;
-  line-height:1.1;
-  letter-spacing:-.25px;
-  color:#172033;
-}
-#packalkylator #calculatorChoice .calculatorCard span{
-  position:relative;
-  z-index:1;
-  max-width:150px;
-  color:#172033;
-  font-size:13px;
-  line-height:1.4;
-}
-@media(max-width:430px){
-  #packalkylator #calculatorChoice .sectionTitle{
-    gap:12px;
-    margin:5px 3px 16px;
-  }
-  #packalkylator #calculatorChoice .calculatorHeroIcon{
-    width:50px;
-    height:50px;
-    flex-basis:50px;
-    border-radius:14px;
-  }
-  #packalkylator #calculatorChoice .calculatorHeroIcon svg{
-    width:28px;
-    height:28px;
-  }
-  #packalkylator #calculatorChoice .sectionTitle h2{
-    font-size:26px;
-  }
-  #packalkylator #calculatorChoice .sectionTitle p{
-    font-size:14px;
-  }
-  #packalkylator #calculatorChoice .calculatorGrid{
-    gap:10px;
-  }
-  #packalkylator #calculatorChoice .calculatorCard{
-    min-height:184px;
-    padding:16px 14px!important;
-    border-radius:18px!important;
-  }
-  #packalkylator #calculatorChoice .calculatorCard .calcIcon{
-    width:54px;
-    height:54px;
-    margin-bottom:13px;
-  }
-  #packalkylator #calculatorChoice .calculatorCard .calcIcon svg{
-    width:33px;
-    height:33px;
-  }
-  #packalkylator #calculatorChoice .calculatorCard strong{
-    font-size:18px;
-  }
-  #packalkylator #calculatorChoice .calculatorCard span{
-    font-size:12px;
-    max-width:145px;
-  }
-}
-
 .registrationsCard{padding:14px!important}
 .registrationsBack{margin:0 0 9px!important;padding:8px 10px!important;text-align:left;font-size:14px}
 .registrationsHeader{margin-bottom:8px}
@@ -297,6 +155,35 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .historyClearItem{cursor:pointer}
 .historyClearItem:has(input:checked){border-color:#1459d9;background:#f4f8ff}
 @media(max-width:430px){.historyDetailHead h2{font-size:19px}.historyInfoRow{font-size:11px}}
+
+/* V1.6.3 — Packalkylator start page visual only */
+#packalkylator #calculatorChoice{padding-top:2px}
+#packalkylator #calculatorChoice>.sectionTitle{display:flex;align-items:center;gap:14px;margin:0 4px 12px}
+#packalkylator #calculatorChoice>.sectionTitle:before{content:"";width:54px;height:54px;flex:0 0 54px;border-radius:15px;background:#eaf2ff;display:block;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231459d9' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='6' y='3' width='12' height='18' rx='2'/%3E%3Cpath d='M9 7h6M9 11h2M13 11h2M9 15h2M13 15h2M9 19h2M13 19h2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;background-size:34px 34px}
+#packalkylator #calculatorChoice>.sectionTitle h2{font-size:28px;letter-spacing:-.6px;margin:0 0 2px;color:#172033}
+#packalkylator #calculatorChoice>.sectionTitle p{font-size:15px;margin:0;color:#687386}
+#packalkylator .calculatorGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0}
+#packalkylator .calculatorCard{position:relative;background:#fff;border:1px solid #e1e6ee;border-radius:18px;padding:15px 14px!important;text-align:left;box-shadow:0 3px 12px rgba(30,48,82,.06);min-height:158px;margin:0;display:flex;flex-direction:column;align-items:flex-start;overflow:hidden}
+#packalkylator .calculatorCard:active{transform:scale(.992)}
+#packalkylator .calculatorCard .calcIcon{width:58px;height:58px;flex:0 0 58px;border-radius:50%;background:#edf4ff;margin:0 0 13px;display:flex;align-items:center;justify-content:center;font-size:0;color:#15284f}
+#packalkylator .calculatorCard .calcIcon svg{width:36px;height:36px;fill:none;stroke:currentColor;stroke-width:2.05;stroke-linecap:round;stroke-linejoin:round}
+#packalkylator .calculatorCard strong{display:block;font-size:19px;line-height:1.08;letter-spacing:-.35px;margin:0 0 6px;color:#172033}
+#packalkylator .calculatorCard span{display:block;color:#687386;font-size:13px;line-height:1.32;max-width:170px}
+#packalkylator .calculatorCard:nth-child(2){background:#fff}
+#packalkylator .calculatorCard:nth-child(3){background:#fff}
+#packalkylator .calculatorCard:nth-child(4){background:#fff}
+#packalkylator .calculatorCard:nth-child(5){background:#fff}
+@media(max-width:430px){
+ #packalkylator #calculatorChoice>.sectionTitle{gap:12px;margin-bottom:10px}
+ #packalkylator #calculatorChoice>.sectionTitle:before{width:54px;height:54px;flex-basis:54px}
+ #packalkylator #calculatorChoice>.sectionTitle h2{font-size:27px}
+ #packalkylator #calculatorChoice>.sectionTitle p{font-size:14px}
+ #packalkylator .calculatorGrid{gap:10px}
+ #packalkylator .calculatorCard{min-height:158px;padding:14px 13px!important;border-radius:18px}
+ #packalkylator .calculatorCard .calcIcon{width:58px;height:58px;flex-basis:58px;margin-bottom:12px}
+ #packalkylator .calculatorCard strong{font-size:18px;margin-bottom:5px}
+ #packalkylator .calculatorCard span{font-size:12px;line-height:1.32}
+}
 </style>
 </head>
 <body>
@@ -349,8 +236,8 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 <div id="kassModal" class="productionModal hidden"><div class="card productionModalCard"><span class="closeX" onclick="stangKassPanel()">×</span><h3>Snabb kassation</h3><label>Antal att ta bort</label><input id="minus" type="number" value="1"><label>Anledning</label><select id="anledning"><option>Skadad vara</option><option>Felräkning</option><option>Annat</option></select><label>Kommentar</label><textarea id="kassKommentar" placeholder="Skriv en kommentar..." style="min-height:80px"></textarea><button class="red quickButton" onclick="taBort()">Ta bort från aktivt kolli</button></div></div>
 
 <section id="packalkylator" class="hidden">
-<div id="calculatorChoice"><div class="sectionTitle"><div class="calculatorHeroIcon"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg></div><div><h2>Packalkylator</h2><p>Allt du snabbt behöver räkna.</p></div></div><div class="calculatorGrid">
-<button class="calculatorCard" onclick="openCalculator('sprutor')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="M5 15.5 14.5 6l3.5 3.5-9.5 9.5-4 1z"/><path d="m14.5 6 2-2 4 4-2 2"/><path d="m4 20 3.5-1"/><path d="m6 13 4 4"/><path d="m3 16 3 3"/></svg></div><strong>Sprutor</strong><span>Räkna sprutor till kapslar.</span></button>
+<div id="calculatorChoice"><div class="sectionTitle"><div><h2>Packalkylator</h2><p>Allt du snabbt behöver räkna.</p></div></div><div class="calculatorGrid">
+<button class="calculatorCard" onclick="openCalculator('sprutor')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="m4 16 10-10 3.5 3.5-10 10L3 21l1-5Z"/><path d="m14 6 2-2 4 4-2 2"/><path d="m7 13 4 4"/><path d="m3 16 4 4"/><path d="m6 18-2 2"/></svg></div><strong>Sprutor</strong><span>Räkna sprutor till kapslar.</span></button>
 <button class="calculatorCard" onclick="openCalculator('kapslar')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="m4 8 8-3 8 3-8 3-8-3Z"/><path d="M4 8v10l8 3 8-3V8"/><path d="M12 11v10"/><path d="m8 6.5 8 3"/></svg></div><strong>Kapslar</strong><span>Räkna kapslar till well/backar.</span></button>
 <button class="calculatorCard" onclick="openCalculator('pallcalc')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="M4 17h16v3H4Z"/><path d="M6 12h5v5H6zM13 12h5v5h-5z"/><path d="M8 7h8v5H8z"/><path d="M5 20v1M19 20v1"/></svg></div><strong>Pall</strong><span>Räkna well till pallar.</span></button>
 <button class="calculatorCard" onclick="openCalculator('etiketter')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="m4 11 7-7h6l3 3v6l-9 9-7-7Z"/><circle cx="15.5" cy="8.5" r="1"/></svg></div><strong>Etiketter</strong><span>Räkna och kontrollera etiketter.</span></button>
