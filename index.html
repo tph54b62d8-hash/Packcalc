@@ -205,6 +205,19 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
   #calculatorChoice .calculatorCard{height:158px;min-height:158px;padding:15px 13px}
 }
 
+
+/* V1.6.6 — Loggbok only */
+#dagbok{position:relative}
+.dagbokPageHead{padding:3px 4px 13px}.dagbokPageHead h2{margin:0;font-size:30px;letter-spacing:-.7px;color:#172a55}.dagbokPageHead p{margin:5px 0 0;color:#687386;font-size:14px}
+.dagbokActions{display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:10px;margin-bottom:18px}.dagbokActions button{margin:0}
+.dagbokNewButton{display:grid;grid-template-columns:42px 1fr 24px;align-items:center;text-align:left;padding:11px 13px;background:#1459d9;color:#fff;border-radius:15px;box-shadow:0 5px 16px rgba(20,89,217,.16)}.dagbokPlus{width:38px;height:38px;border-radius:50%;background:#fff;color:#1459d9;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:400;line-height:1}.dagbokChevron{font-size:28px;font-weight:400;text-align:right}.dagbokSearchButton{background:#f2f5f9;color:#172033;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:12px}.dagbokSearchButton svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.dagbokSearchWrap{margin:-7px 0 15px}.dagbokSearchWrap input{border:1px solid #dfe5ee;border-radius:13px;padding:12px 14px;background:#fff}
+.dagbokListHead{display:flex;align-items:center;justify-content:space-between;margin:0 4px 9px}.dagbokListHead h3{font-size:21px;margin:0;letter-spacing:-.3px}.dagbokListHead span{font-size:11px;color:#b21f32;font-weight:800}
+.dagbokTimeline{position:relative;padding-left:16px}.dagbokTimeline:before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:1px;background:#d8dee8}.dagbokDate{position:relative;margin:12px 0 7px 22px;font-size:13px;font-weight:800;color:#172033}.dagbokDate:first-child{margin-top:0}.dagbokSwipeWrap{position:relative;margin:0 0 8px 22px;overflow:hidden;border-radius:13px}.dagbokNote{position:relative;z-index:2;background:#fff;border:1px solid #e1e6ee;border-radius:13px;padding:11px 12px;min-height:82px;display:flex;gap:10px;box-shadow:0 2px 9px rgba(30,48,82,.045);transition:transform .2s ease;will-change:transform}.dagbokNote.unread{background:#fff8f8;border-color:#f0d7da}.dagbokNoteDot{position:absolute;left:-29px;top:17px;width:13px;height:13px;border-radius:50%;background:#aeb8c8;border:2px solid #fff;box-shadow:0 0 0 1px #d8dee8}.dagbokNote.unread .dagbokNoteDot{background:#e62f3e;box-shadow:0 0 0 1px #f2c4c8}.dagbokNoteContent{min-width:0;flex:1}.dagbokNoteMeta{display:flex;align-items:center;gap:9px;color:#687386;font-size:11px;margin-bottom:6px}.dagbokUnread{background:#ef3340;color:#fff;border-radius:6px;padding:3px 6px;font-size:10px;font-weight:900}.dagbokRead{font-size:11px;color:#687386}.dagbokNoteText{font-size:14px;line-height:1.42;color:#172033;overflow-wrap:anywhere}.dagbokMarkRead{width:auto;margin:9px 0 0;padding:7px 10px;background:#eef5ff;color:#1459d9;font-size:11px;border-radius:8px}.dagbokDelete{position:absolute;z-index:1;right:0;top:0;width:105px;height:100%;margin:0;border-radius:0 13px 13px 0;background:#ef3340;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12px}.dagbokDelete svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.dagbokEmpty{background:#f7f9fc;border:1px dashed #d9e0ea;border-radius:13px;padding:24px 14px;text-align:center;color:#687386;font-size:13px}
+nav#mainNav button{position:relative}.navDagbokNotice,.homeDagbokNotice{display:none}.navDagbokNotice.visible{display:block;position:absolute;width:8px;height:8px;border-radius:50%;background:#ef3340;top:7px;right:calc(50% - 18px);box-shadow:0 0 0 2px #fff}.homeDagbokNotice.visible{display:block;position:absolute;width:10px;height:10px;border-radius:50%;background:#ef3340;top:-3px;right:-3px;box-shadow:0 0 0 2px #fff}.homeCard .icon{position:relative}
+.dagbokComposer{position:fixed;inset:0;background:#fff;z-index:850;transform:translateX(-100%);display:block;overflow:auto;padding-bottom:calc(90px + env(safe-area-inset-bottom));animation:dagbokComposerIn .28s cubic-bezier(.22,.61,.36,1) both}.dagbokComposer.closing{animation:dagbokComposerOut .28s cubic-bezier(.22,.61,.36,1) both}.dagbokComposerHeader{height:62px;padding:calc(8px + env(safe-area-inset-top)) 14px 8px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;border-bottom:1px solid #e7ebf1}.dagbokComposerHeader button{width:auto;margin:0;padding:7px 2px;background:transparent;font-size:16px}.dagbokComposerCancel{text-align:left;color:#172033}.dagbokComposerSaveTop{text-align:right;color:#1459d9}.dagbokComposerHeader strong{font-size:16px}.dagbokComposerBody{padding:16px}.dagbokComposerBody p{margin:0 0 10px;color:#687386;font-size:14px}.dagbokComposerBody textarea{min-height:430px;border:1px solid #dfe5ee;border-radius:13px;padding:15px;font-size:16px;line-height:1.45;box-shadow:inset 0 1px 3px rgba(30,48,82,.03)}.dagbokSaveButton{display:flex;align-items:center;justify-content:center;gap:8px}.dagbokSaveButton svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@keyframes dagbokComposerIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}@keyframes dagbokComposerOut{from{transform:translateY(0)}to{transform:translateY(100%)}}
+body.dagbokComposerOpen{overflow:hidden}
+@media(max-width:430px){.dagbokPageHead h2{font-size:29px}.dagbokActions{grid-template-columns:minmax(0,1fr) 82px}.dagbokNewButton{grid-template-columns:40px 1fr 20px;padding:10px 11px}.dagbokPlus{width:36px;height:36px}.dagbokTimeline{padding-left:14px}.dagbokSwipeWrap{margin-left:21px}.dagbokNote{padding:10px 11px}.dagbokNoteText{font-size:13px}.dagbokComposerBody textarea{min-height:390px}.navDagbokNotice.visible{right:calc(50% - 16px)}}
 </style>
 </head>
 <body>
@@ -214,7 +227,7 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 <button onclick="showPage('home')" id="navHome"><svg class="navIcon" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg><span>Hem</span></button>
 <button onclick="showPage('pack')" id="navPack"><svg class="navIcon" viewBox="0 0 24 24"><path d="M4 20V9h5v11"/><path d="M15 20V4h5v16"/><path d="M9 20v-6h6v6"/><path d="M4 9h5"/></svg><span>Produktion</span></button>
 <button onclick="showPage('packalkylator')" id="navCalc"><svg class="navIcon" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg><span>Packalkylator</span></button>
-<button onclick="showPage('dagbok')" id="navDagbok"><svg class="navIcon" viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg><span>Loggbok</span></button>
+<button onclick="showPage('dagbok')" id="navDagbok"><svg class="navIcon" viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg><span>Loggbok</span><i class="navDagbokNotice" id="navDagbokNotice"></i></button>
 <button onclick="showPage('historik')" id="navHistorik"><svg class="navIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><span>Historik</span></button>
 <button onclick="showPage('more')" id="navMore"><svg class="navIcon" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg><span>Mer</span></button>
 </nav>
@@ -226,7 +239,7 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 <div class="homeGrid">
 <button class="homeCard" onclick="showPage('pack')"><div class="icon" style="color:#1459d9;background:#e5efff"><svg class="homeIcon" viewBox="0 0 24 24"><path d="M3 20V9h5v11M16 20V4h5v16M8 20v-5h8v5M3 9h5"/></svg></div><strong>Produktion</strong><span>Kolli, FPK, kassation och registreringar.</span></button>
 <button class="homeCard" onclick="showPage('packalkylator')"><div class="icon" style="color:#16834d;background:#e3f6ea"><svg class="homeIcon" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg></div><strong>Packalkylator</strong><span>Allt du snabbt behöver räkna.</span></button>
-<button class="homeCard" onclick="showPage('dagbok')"><div class="icon" style="color:#9b6800;background:#fff0ca"><svg class="homeIcon" viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg></div><strong>Loggbok</strong><span>Information mellan skift och operatörer.</span></button>
+<button class="homeCard" onclick="showPage('dagbok')"><div class="icon" style="color:#1459d9;background:#eaf2ff"><svg class="homeIcon" viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg><i class="homeDagbokNotice" id="homeDagbokNotice"></i></div><div><strong>Loggbok</strong><span>Information mellan skift och operatörer.</span></div></button>
 <button class="homeCard" onclick="showPage('qr')"><div class="icon" style="color:#5d32a6;background:#eee5ff"><svg class="homeIcon" viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M14 14h3v3h-3zM18 18h2v2h-2zM17 17h1v1h-1z"/></svg></div><strong>QR kodläsare</strong><span>Läs och visa QR-information tydligt.</span></button>
 <button class="homeCard" onclick="showPage('historik')"><div class="icon" style="color:#a21f32;background:#ffe5e8"><svg class="homeIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></div><strong>Historik</strong><span>Sök gamla körningar och se exakt vad som hänt.</span></button>
 <button class="homeCard" onclick="showPage('oversikt')"><div class="icon" style="color:#1459d9;background:#e5efff"><svg class="homeIcon" viewBox="0 0 24 24"><path d="M5 20V11h4v9M10 20V6h4v14M15 20V3h4v17"/></svg></div><strong>Översikt</strong><span>För produktionsledning och senare hela företaget.</span></button>
@@ -281,7 +294,17 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 
 <section id="pall" class="hidden"><div class="sectionTitle"><h2>🏗️ Pall</h2><p>Beräkna hur många wells och pallar hela ordern blir.</p></div><div class="card"><label>Total order, enheter</label><input id="pallTotal" type="number" value="0" oninput="raknaPall()"><label>Enheter per well</label><input id="pallWell" type="number" value="0" oninput="raknaPall()"><label>Enheter per pall</label><input id="pallCap" type="number" value="0" oninput="raknaPall()"><label>Well per pall</label><input id="pallWellCap" type="number" value="0" oninput="raknaPall()"></div><div class="card" id="pallResult"></div></section>
 <section id="qr" class="hidden"><div class="sectionTitle"><h2>▣ QR kodläsare</h2><p>Här kan vi senare koppla på telefonens riktiga QR-kamera.</p></div><div class="card"><h2>QR-information</h2><textarea id="qrText" placeholder="Text från QR-koden..."></textarea><button class="blue" onclick="sparaQR()">Spara QR-information</button></div></section>
-<section id="dagbok" class="hidden"><div class="sectionTitle"><h2>📖 Loggbok</h2><p>Information till nästa skift, problem och viktiga anteckningar.</p></div><div class="card"><h2>Dagens anteckning</h2><textarea id="dagbokText" placeholder="Skriv problem, information eller något som nästa skift behöver veta..."></textarea><button class="green" onclick="sparaDagbok()">Spara anteckning</button></div><div class="card"><h2>Tidigare anteckningar</h2><div id="dagbokLista"></div></div></section>
+<section id="dagbok" class="hidden">
+<div class="dagbokPageHead"><div><h2>Loggbok</h2><p>Information mellan skiften och operatörer.</p></div></div>
+<div class="dagbokActions"><button class="dagbokNewButton" onclick="openDagbokComposer()"><span class="dagbokPlus">＋</span><span>Ny anteckning</span><span class="dagbokChevron">›</span></button><button class="dagbokSearchButton" onclick="toggleDagbokSearch()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>Sök</span></button></div>
+<div id="dagbokSearchWrap" class="dagbokSearchWrap hidden"><input id="dagbokSearch" placeholder="Sök i anteckningar…" oninput="renderDagbok()"></div>
+<div class="dagbokListHead"><h3>Senaste anteckningar</h3><span id="dagbokUnreadCount"></span></div>
+<div id="dagbokLista" class="dagbokTimeline"></div>
+<div id="dagbokComposer" class="dagbokComposer hidden" aria-hidden="true">
+  <div class="dagbokComposerHeader"><button class="dagbokComposerCancel" onclick="closeDagbokComposer()">Avbryt</button><strong>Ny anteckning</strong><button class="dagbokComposerSaveTop" onclick="sparaDagbok()">Spara</button></div>
+  <div class="dagbokComposerBody"><p>Skriv fritt. Allt som är relevant för nästa skift.</p><textarea id="dagbokText" placeholder="Skriv din anteckning här…"></textarea><button class="blue dagbokSaveButton" onclick="sparaDagbok()"><svg viewBox="0 0 24 24"><path d="m4 12 16-8-5 16-3-6-8-2z"/><path d="m12 14 4-6"/></svg><span>Spara anteckning</span></button></div>
+</div>
+</section>
 
 <section id="historik" class="hidden">
 <div id="historyOverviewView">
@@ -1180,29 +1203,105 @@ addHistory("QR","-","-","","QR-information sparad","","",text);
 alert("QR-informationen är sparad i historiken.");
 }
 
+function dagbokHasUnread(){return data.dagbok.some(n=>n.olast===true);}
+
+function updateDagbokNotifications(){
+let unread=dagbokHasUnread();
+let nav=document.getElementById("navDagbokNotice"),home=document.getElementById("homeDagbokNotice");
+if(nav)nav.classList.toggle("visible",unread);
+if(home)home.classList.toggle("visible",unread);
+let count=document.getElementById("dagbokUnreadCount");
+if(count)count.textContent=unread?data.dagbok.filter(n=>n.olast===true).length+" oläst": "";
+}
+
+function openDagbokComposer(){
+let panel=document.getElementById("dagbokComposer");
+if(!panel)return;
+panel.classList.remove("hidden","closing");
+panel.setAttribute("aria-hidden","false");
+document.body.classList.add("dagbokComposerOpen");
+setTimeout(()=>{let t=document.getElementById("dagbokText");if(t){t.focus({preventScroll:true});}},180);
+}
+
+function closeDagbokComposer(){
+let panel=document.getElementById("dagbokComposer");
+if(!panel)return;
+panel.classList.add("closing");
+panel.setAttribute("aria-hidden","true");
+setTimeout(()=>{panel.classList.add("hidden");panel.classList.remove("closing");document.body.classList.remove("dagbokComposerOpen");},280);
+}
+
 function sparaDagbok(){
 let text=document.getElementById("dagbokText").value.trim();
 if(!text){alert("Skriv en anteckning först.");return;}
-data.dagbok.unshift({datum:new Date().toLocaleString("sv-SE"),text});
+let now=new Date();
+data.dagbok.unshift({datum:now.toLocaleString("sv-SE"),createdAt:now.getTime(),text,olast:true});
 addHistory("DAGBOK","-","-","","Dagboksanteckning","","",text);
 saveData();
 document.getElementById("dagbokText").value="";
+renderDagbok();
+closeDagbokComposer();
+}
+
+function markDagbokRead(index){
+let note=data.dagbok[index];
+if(!note)return;
+note.olast=false;
+saveData();
+renderDagbok();
+}
+
+function toggleDagbokSearch(){
+let wrap=document.getElementById("dagbokSearchWrap");
+if(!wrap)return;
+wrap.classList.toggle("hidden");
+if(!wrap.classList.contains("hidden")){let input=document.getElementById("dagbokSearch");if(input){input.focus();}}
+}
+
+function deleteDagbok(index){
+if(index<0||index>=data.dagbok.length)return;
+data.dagbok.splice(index,1);
+saveData();
 renderDagbok();
 }
 
 function renderDagbok(){
 let list=document.getElementById("dagbokLista");
+if(!list)return;
 list.innerHTML="";
-if(!data.dagbok.length){
-list.innerHTML="<p style='color:#687386'>Inga anteckningar ännu.</p>";
+updateDagbokNotifications();
+let q=(document.getElementById("dagbokSearch")?.value||"").trim().toLowerCase();
+let notes=data.dagbok.map((n,i)=>({n,i})).filter(({n})=>!q||String(n.text||"").toLowerCase().includes(q));
+if(!notes.length){
+list.innerHTML="<div class='dagbokEmpty'>"+(q?"Ingen anteckning matchar din sökning.":"Inga anteckningar ännu.")+"</div>";
 return;
 }
-data.dagbok.forEach(n=>{
-let d=document.createElement("div");
-d.className="item";
-d.innerHTML="<strong>"+n.datum+"</strong><div class='small'>"+n.text+"</div>";
-list.appendChild(d);
+let lastDate="";
+notes.forEach(({n,i})=>{
+let dateObj=n.createdAt?new Date(n.createdAt):new Date(n.datum);
+let dateLabel=isNaN(dateObj.getTime())?String(n.datum||"").split(" ")[0]:dateObj.toLocaleDateString("sv-SE",{day:"numeric",month:"short",year:"numeric"});
+if(dateLabel!==lastDate){
+let day=document.createElement("div");day.className="dagbokDate";day.textContent=dateLabel;list.appendChild(day);lastDate=dateLabel;
+}
+let wrap=document.createElement("div");wrap.className="dagbokSwipeWrap";
+let del=document.createElement("button");del.className="dagbokDelete";del.type="button";del.innerHTML="<svg viewBox='0 0 24 24'><path d='M6 7h12M9 7V4h6v3M8 7l1 13h6l1-13M10 11v6M14 11v6'/></svg><span>Radera</span>";del.onclick=()=>deleteDagbok(i);
+let card=document.createElement("div");card.className="dagbokNote"+(n.olast===true?" unread":"");
+let time=n.createdAt?new Date(n.createdAt).toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"}):String(n.datum||"").split(" ")[1]?.slice(0,5)||"";
+card.innerHTML="<div class='dagbokNoteDot'></div><div class='dagbokNoteContent'><div class='dagbokNoteMeta'><span>"+time+"</span>"+(n.olast===true?"<span class='dagbokUnread'>OLÄST</span>":"<span class='dagbokRead'>✓ Läst</span>")+"</div><div class='dagbokNoteText'></div>"+(n.olast===true?"<button class='dagbokMarkRead' type='button'>Markera som läst</button>":"")+"</div>";
+card.querySelector(".dagbokNoteText").textContent=n.text||"";
+let readBtn=card.querySelector(".dagbokMarkRead");if(readBtn)readBtn.onclick=(e)=>{e.stopPropagation();markDagbokRead(i);};
+wrap.appendChild(del);wrap.appendChild(card);list.appendChild(wrap);enableDagbokSwipe(wrap,card);
 });
+updateDagbokNotifications();
+}
+
+function enableDagbokSwipe(wrap,card){
+let startX=0,startY=0,currentX=0,tracking=false,horizontal=false,open=false;
+card.addEventListener("touchstart",e=>{if(e.touches.length!==1)return;startX=e.touches[0].clientX;startY=e.touches[0].clientY;currentX=0;tracking=true;horizontal=false;},{passive:true});
+card.addEventListener("touchmove",e=>{if(!tracking)return;let dx=e.touches[0].clientX-startX,dy=e.touches[0].clientY-startY;if(!horizontal){if(Math.abs(dy)>Math.abs(dx)&&Math.abs(dy)>6){tracking=false;return;}if(Math.abs(dx)>8){horizontal=true;}}
+if(!horizontal)return;e.preventDefault();let x=Math.max(-105,Math.min(0,dx));if(open)x=Math.max(-105,Math.min(0,dx-105));currentX=x;card.style.transform="translateX("+x+"px)";},{passive:false});
+card.addEventListener("touchend",()=>{if(!tracking)return;tracking=false;if(!horizontal)return;if(currentX<-55){open=true;card.style.transform="translateX(-105px)";}else{open=false;card.style.transform="translateX(0)";} });
+card.addEventListener("click",()=>{if(open){open=false;card.style.transform="translateX(0)";}});
 }
 
 function homeSearch(){
