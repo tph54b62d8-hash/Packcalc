@@ -1306,6 +1306,19 @@ if(index<0||index>=data.dagbok.length)return;
 data.dagbok.splice(index,1);
 saveData();
 renderDagbok();
+showDagbokToast();
+}
+
+function showDagbokToast(){
+let old=document.getElementById("dagbokToast");
+if(old)old.remove();
+let toast=document.createElement("div");
+toast.id="dagbokToast";
+toast.className="historyToast";
+toast.textContent="✓ Anteckningen har tagits bort";
+document.body.appendChild(toast);
+requestAnimationFrame(()=>toast.classList.add("show"));
+setTimeout(()=>{toast.classList.remove("show");setTimeout(()=>toast.remove(),220);},1800);
 }
 
 function renderDagbok(){
