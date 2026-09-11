@@ -89,147 +89,19 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .timeRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-top:10px}.timeRow input{margin:0}.removeTime{width:auto;margin:0;padding:13px 15px}.timeTotal{background:#eef6ff;border-radius:12px;padding:18px;text-align:center;margin-top:15px}.timeTotal .number{font-size:30px}
 .productionModal{position:fixed;inset:0;background:#0006;z-index:1000;padding:15px;overflow:auto}.productionModalCard{max-width:600px;margin:40px auto}
 /* V1.6.2 — Registreringar UI + production subview transition only */
-
 /* V1.6.3 — Packalkylator start page visual only */
-#packalkylator #calculatorChoice .sectionTitle{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin:8px 4px 20px;
-}
-#packalkylator #calculatorChoice .calculatorHeroIcon{
-  width:54px;
-  height:54px;
-  flex:0 0 54px;
-  border-radius:15px;
-  background:#eaf2ff;
-  color:#1459d9;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-#packalkylator #calculatorChoice .calculatorHeroIcon svg{
-  width:30px;
-  height:30px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.9;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-#packalkylator #calculatorChoice .sectionTitle h2{
-  margin:0 0 3px;
-  font-size:28px;
-  letter-spacing:-.6px;
-  color:#172033;
-}
-#packalkylator #calculatorChoice .sectionTitle p{
-  margin:0;
-  color:#172033;
-  font-size:15px;
-}
-#packalkylator #calculatorChoice .calculatorGrid{
-  gap:12px;
-}
-#packalkylator #calculatorChoice .calculatorCard{
-  position:relative;
-  min-height:190px;
-  padding:18px 16px!important;
-  border:1px solid #e5eaf2!important;
-  border-radius:19px!important;
-  background:#fff!important;
-  box-shadow:0 4px 15px rgba(30,48,82,.06)!important;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  justify-content:flex-start;
-  text-align:left;
-  overflow:hidden;
-}
-#packalkylator #calculatorChoice .calculatorCard .calcIcon{
-  width:58px;
-  height:58px;
-  margin:0 0 15px;
-  border-radius:50%;
-  background:#edf4ff;
-  color:#14264b;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:0;
-}
-#packalkylator #calculatorChoice .calculatorCard .calcIcon svg{
-  width:36px;
-  height:36px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.8;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-#packalkylator #calculatorChoice .calculatorCard strong{
-  position:relative;
-  z-index:1;
-  margin:0 0 6px;
-  font-size:20px;
-  line-height:1.1;
-  letter-spacing:-.25px;
-  color:#172033;
-}
-#packalkylator #calculatorChoice .calculatorCard span{
-  position:relative;
-  z-index:1;
-  max-width:150px;
-  color:#172033;
-  font-size:13px;
-  line-height:1.4;
-}
-@media(max-width:430px){
-  #packalkylator #calculatorChoice .sectionTitle{
-    gap:12px;
-    margin:5px 3px 16px;
-  }
-  #packalkylator #calculatorChoice .calculatorHeroIcon{
-    width:50px;
-    height:50px;
-    flex-basis:50px;
-    border-radius:14px;
-  }
-  #packalkylator #calculatorChoice .calculatorHeroIcon svg{
-    width:28px;
-    height:28px;
-  }
-  #packalkylator #calculatorChoice .sectionTitle h2{
-    font-size:26px;
-  }
-  #packalkylator #calculatorChoice .sectionTitle p{
-    font-size:14px;
-  }
-  #packalkylator #calculatorChoice .calculatorGrid{
-    gap:10px;
-  }
-  #packalkylator #calculatorChoice .calculatorCard{
-    min-height:184px;
-    padding:16px 14px!important;
-    border-radius:18px!important;
-  }
-  #packalkylator #calculatorChoice .calculatorCard .calcIcon{
-    width:54px;
-    height:54px;
-    margin-bottom:13px;
-  }
-  #packalkylator #calculatorChoice .calculatorCard .calcIcon svg{
-    width:33px;
-    height:33px;
-  }
-  #packalkylator #calculatorChoice .calculatorCard strong{
-    font-size:18px;
-  }
-  #packalkylator #calculatorChoice .calculatorCard span{
-    font-size:12px;
-    max-width:145px;
-  }
-}
+#packalkylator #calculatorChoice .sectionTitle{display:flex;align-items:center;gap:12px;margin:5px 3px 16px}
+#packalkylator #calculatorChoice .calculatorHeroIcon{width:50px;height:50px;flex:0 0 50px;border-radius:15px;background:#eaf2ff;color:#1459d9;display:flex;align-items:center;justify-content:center}
+#packalkylator #calculatorChoice .calculatorHeroIcon svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#packalkylator #calculatorChoice .sectionTitle h2{margin:0 0 2px;font-size:27px;letter-spacing:-.5px;color:#172033}
+#packalkylator #calculatorChoice .sectionTitle p{margin:0;color:#172033;font-size:14px}
+#packalkylator #calculatorChoice .calculatorGrid{gap:10px}
+#packalkylator #calculatorChoice .calculatorCard{position:relative;min-height:145px;padding:14px 13px!important;border:1px solid #e3e9f2!important;border-radius:18px!important;background:#fff!important;box-shadow:0 3px 12px rgba(30,48,82,.055)!important;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;overflow:hidden}
+#packalkylator #calculatorChoice .calculatorCard .calcIcon{width:50px;height:50px;margin:0 0 11px;border-radius:50%;background:#edf4ff;color:#14264b;display:flex;align-items:center;justify-content:center;font-size:0}
+#packalkylator #calculatorChoice .calculatorCard .calcIcon svg{width:32px;height:32px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+#packalkylator #calculatorChoice .calculatorCard strong{position:relative;z-index:1;margin:0 0 5px;font-size:19px;line-height:1.1;letter-spacing:-.25px;color:#172033}
+#packalkylator #calculatorChoice .calculatorCard span{position:relative;z-index:1;max-width:150px;color:#172033;font-size:12.5px;line-height:1.3}
+@media(max-width:430px){#packalkylator #calculatorChoice .sectionTitle{gap:10px;margin:4px 2px 12px}#packalkylator #calculatorChoice .calculatorHeroIcon{width:46px;height:46px;flex-basis:46px;border-radius:14px}#packalkylator #calculatorChoice .calculatorHeroIcon svg{width:26px;height:26px}#packalkylator #calculatorChoice .sectionTitle h2{font-size:25px}#packalkylator #calculatorChoice .sectionTitle p{font-size:13px}#packalkylator #calculatorChoice .calculatorGrid{gap:8px}#packalkylator #calculatorChoice .calculatorCard{min-height:132px;padding:12px 11px!important;border-radius:17px!important}#packalkylator #calculatorChoice .calculatorCard .calcIcon{width:45px;height:45px;margin-bottom:8px}#packalkylator #calculatorChoice .calculatorCard .calcIcon svg{width:29px;height:29px}#packalkylator #calculatorChoice .calculatorCard strong{font-size:17px}#packalkylator #calculatorChoice .calculatorCard span{font-size:11.5px;max-width:145px}}
 
 .registrationsCard{padding:14px!important}
 .registrationsBack{margin:0 0 9px!important;padding:8px 10px!important;text-align:left;font-size:14px}
@@ -349,12 +221,12 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 <div id="kassModal" class="productionModal hidden"><div class="card productionModalCard"><span class="closeX" onclick="stangKassPanel()">×</span><h3>Snabb kassation</h3><label>Antal att ta bort</label><input id="minus" type="number" value="1"><label>Anledning</label><select id="anledning"><option>Skadad vara</option><option>Felräkning</option><option>Annat</option></select><label>Kommentar</label><textarea id="kassKommentar" placeholder="Skriv en kommentar..." style="min-height:80px"></textarea><button class="red quickButton" onclick="taBort()">Ta bort från aktivt kolli</button></div></div>
 
 <section id="packalkylator" class="hidden">
-<div id="calculatorChoice"><div class="sectionTitle"><div class="calculatorHeroIcon"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg></div><div><h2>Packalkylator</h2><p>Allt du snabbt behöver räkna.</p></div></div><div class="calculatorGrid">
-<button class="calculatorCard" onclick="openCalculator('sprutor')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="M4 16l9-9 4 4-9 9-4 1z"/><path d="M13 7l2-2 4 4-2 2"/><path d="M3 21l4-1"/><path d="M2.5 14.5l3 3M5 12l3 3"/></svg></div><strong>Sprutor</strong><span>Räkna sprutor till kapslar.</span></button>
-<button class="calculatorCard" onclick="openCalculator('kapslar')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="M4 8l8-3 8 3v11l-8 3-8-3z"/><path d="M4 8l8 3 8-3"/><path d="M12 11v11"/><path d="M8 6.5l8 3"/><path d="M16 4.5l4 3.5-4 2-4-3.5z"/></svg></div><strong>Kapslar</strong><span>Räkna kapslar till well/backar.</span></button>
-<button class="calculatorCard" onclick="openCalculator('pallcalc')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="M4 17h16v3H4z"/><path d="M5 12h6v5H5zM13 12h6v5h-6z"/><path d="M7 7h10v5H7z"/><path d="M9 4h6v3H9z"/><path d="M6 20v1M18 20v1"/></svg></div><strong>Pall</strong><span>Räkna well till pallar.</span></button>
-<button class="calculatorCard" onclick="openCalculator('etiketter')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="M4 11l7-7h6l3 3v6l-9 9-7-7z"/><circle cx="15.5" cy="8.5" r="1.2"/></svg></div><strong>Etiketter</strong><span>Räkna och kontrollera etiketter.</span></button>
-<button class="calculatorCard" onclick="openCalculator('tid')"><div class="calcIcon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/><path d="M9 3h6"/></svg></div><strong>Tid</strong><span>Lägg ihop flera tidsperioder.</span></button>
+<div id="calculatorChoice"><div class="sectionTitle"><div class="calculatorHeroIcon"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg></div><div><h2>Packalkylator</h2><p>Allt du snabbt behöver räkna.</p></div></div><div class="calculatorGrid">
+<button class="calculatorCard" onclick="openCalculator('sprutor')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="M5 17l8-8 3 3-8 8-4 1zM13 9l2-2 4 4-2 2M4 20l2-2M6 14l4 4"/></svg></div><strong>Sprutor</strong><span>Räkna sprutor till kapslar.</span></button>
+<button class="calculatorCard" onclick="openCalculator('kapslar')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="M4 8l8-3 8 3-8 3-8-3zM4 8v10l8 3 8-3V8M12 11v10M8 6.5l8 3"/></svg></div><strong>Kapslar</strong><span>Räkna kapslar till well/backar.</span></button>
+<button class="calculatorCard" onclick="openCalculator('pallcalc')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="M4 17h16v3H4zM6 12h5v5H6zM13 12h5v5h-5zM8 7h8v5H8zM5 20v1M19 20v1"/></svg></div><strong>Pall</strong><span>Räkna well till pallar.</span></button>
+<button class="calculatorCard" onclick="openCalculator('etiketter')"><div class="calcIcon"><svg viewBox="0 0 24 24"><path d="M4 11l7-7h6l3 3v6l-9 9-7-7z"/><circle cx="15.5" cy="8.5" r="1.1"/></svg></div><strong>Etiketter</strong><span>Räkna och kontrollera etiketter.</span></button>
+<button class="calculatorCard" onclick="openCalculator('tid')"><div class="calcIcon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2M9 3h6"/></svg></div><strong>Tid</strong><span>Lägg ihop flera tidsperioder.</span></button>
 </div></div>
 <div id="calcSprutor" class="hidden"><button class="gray calcBack" onclick="backToCalculators()">← Till kalkylatorer</button><div class="sectionTitle"><h2>💉 Sprutor</h2><p>Räkna ut hur sprutorna fördelas i kapslar.</p></div><div class="card"><label>Hur många sprutor har vi?</label><input id="sprutorAntal" type="number" value="0" min="0" oninput="raknaSprutor()"><label>Hur många sprutor i en kapsel?</label><input id="sprutorPer" type="number" value="0" min="0" oninput="raknaSprutor()"><div class="result"><div class="box">Antal fulla kapslar<span class="number greenNumber" id="sprutorFulla">0</span></div><div class="box">Antal sprutor i sista kapseln<span class="number blueNumber" id="sprutorSista">0</span></div></div></div></div>
 <div id="calcKapslar" class="hidden"><button class="gray calcBack" onclick="backToCalculators()">← Till kalkylatorer</button><div class="sectionTitle"><h2>🧪 Kapslar</h2><p>1 vial = 1 kapsel.</p></div><div class="card"><label>Hur många kapslar har vi?</label><input id="kapslarAntal" type="number" value="0" min="0" oninput="raknaKapslar()"><label>Hur många kapslar i ett well/back?</label><input id="kapslarPer" type="number" value="0" min="0" oninput="raknaKapslar()"><div class="result"><div class="box">Antal fulla well/backar<span class="number greenNumber" id="kapslarFulla">0</span></div><div class="box">Antal kapslar i sista well/backen<span class="number blueNumber" id="kapslarSista">0</span></div></div></div></div>
