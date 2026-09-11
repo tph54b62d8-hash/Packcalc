@@ -350,7 +350,11 @@ function saveData(){localStorage.setItem("packvex_data",JSON.stringify(data));}
 
 const pages=["home","pack","packalkylator","print","pall","qr","dagbok","historik","oversikt","installningar","more"];
 
+const PAGE_STATE_KEY="packvex_current_page";
+
 function showPage(page){
+localStorage.setItem(PAGE_STATE_KEY,page);
+
 pages.forEach(p=>document.getElementById(p).classList.add("hidden"));
 document.getElementById(page).classList.remove("hidden");
 document.querySelectorAll("nav button").forEach(btn=>btn.classList.remove("active"));
@@ -1639,6 +1643,11 @@ else if(!document.getElementById("historyClearView").classList.contains("hidden"
 
 document.getElementById("navHome").classList.add("active");
 renderAll();
+(function(){
+let savedPage=localStorage.getItem(PAGE_STATE_KEY);
+if(savedPage&&pages.includes(savedPage))showPage(savedPage);
+})();
+
 </script>
 </body>
 </html>
