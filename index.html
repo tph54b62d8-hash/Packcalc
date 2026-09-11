@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PACKVEX V1.6</title>
+<title>PACKVEX</title>
 <style>
 *{box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f4f6fa;margin:0;color:#172033}
@@ -44,7 +44,7 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .homeProductionLabel{font-size:11px;letter-spacing:1.4px;color:#6d7b8c;font-weight:800}
 .homeProductionBatch{font-size:24px;font-weight:900;color:#15284f;margin-top:3px}
 .homeProductionCount{font-size:13px;color:#687386;margin-top:4px}
-.homeProductionDot{width:14px;height:14px;border-radius:50%;background:#13a15c;box-shadow:0 0 0 8px #dff6e9;margin:0 auto}
+.homeProductionDot{width:14px;height:14px;border-radius:50%;background:#13a15c;box-shadow:0 0 0 8px #dff6e9;margin:0 auto;position:relative}.homeProductionDot.pulsing::after{content:"";position:absolute;inset:-1px;border:2px solid rgba(19,161,92,.28);border-radius:50%;animation:homeProductionPulse 2.5s ease-out infinite}@keyframes homeProductionPulse{0%{transform:scale(1);opacity:.65}70%{transform:scale(2.25);opacity:0}100%{transform:scale(2.25);opacity:0}}.homeProductionCard.clickable{cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease}.homeProductionCard.clickable:active{transform:scale(.992);box-shadow:0 4px 14px rgba(25,90,55,.05)!important}.homeProductionCard.opening{animation:homeProductionOpen .2s ease-out both}@keyframes homeProductionOpen{0%{transform:scale(1);box-shadow:0 6px 18px rgba(25,90,55,.07)!important}45%{transform:scale(.985);box-shadow:0 0 0 2px rgba(20,89,217,.14),0 5px 16px rgba(20,89,217,.09)!important}100%{transform:scale(1);box-shadow:0 6px 18px rgba(25,90,55,.07)!important}}
 .homeProductionInfo{border-left:1px solid #d8e8df;padding-left:16px;display:grid;gap:4px;font-size:12px;color:#687386}
 .homeProductionInfo strong{color:#172033;font-weight:700}
 .homeProductionArrow{font-size:30px;color:#16834d;text-align:center}
@@ -891,11 +891,17 @@ if(data.fpk){
 batch.innerHTML='<span class="activeBatchDot">●</span>Aktiv batch:<br><strong>'+data.fpk+'</strong>';
 let activeProduct=data.kollin.length?(data.kollin[data.kollin.length-1].produkt||"—"):"—";
 let activeStart=data.activeProductionStart?new Date(data.activeProductionStart).toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"}):"—";
-home.innerHTML='<div class="homeProductionCard"><div class="homeProductionDot"></div><div><div class="homeProductionLabel">AKTIV PRODUKTION</div><div class="homeProductionBatch">FPK '+data.fpk+'</div><div class="homeProductionCount">'+data.kollin.length+' registrerade kolli</div></div><div class="homeProductionInfo"><div>Produkt <strong>'+activeProduct+'</strong></div><div>Batch ID <strong>'+data.fpk+'</strong></div><div>Starttid <strong>'+activeStart+'</strong></div></div><div class="homeProductionArrow">›</div></div>';
+home.innerHTML='<div class="homeProductionCard clickable" onclick="openActiveProduction(this)"><div class="homeProductionDot pulsing"></div><div><div class="homeProductionLabel">AKTIV PRODUKTION</div><div class="homeProductionBatch">'+data.fpk+'</div><div class="homeProductionCount">'+data.kollin.length+(data.kollin.length===1?' registrerat kolli':' registrerade kollin')+'</div></div><div class="homeProductionArrow">›</div></div>';
 }else{
 batch.innerHTML='<span style="color:#8b95a5">Ingen aktiv batch</span>';
 home.innerHTML='<div class="homeProductionCard" style="background:#f8f9fb!important;border-color:#e5e9ef!important"><div class="homeProductionDot" style="background:#9aa4b3;box-shadow:0 0 0 8px #e9edf2"></div><div><div class="homeProductionLabel">AKTIV PRODUKTION</div><div class="homeProductionBatch" style="font-size:20px">Ingen aktiv produktion</div><div class="homeProductionCount">Starta en batch för att komma igång.</div></div><div></div><div class="homeProductionArrow" style="color:#687386">›</div></div>';
 }
+}
+
+function openActiveProduction(card){
+if(!data.fpk||!card)return;
+card.classList.add("opening");
+setTimeout(function(){showPage("pack");},200);
 }
 
 function addHistory(type,kolli,produkt,change,text,total,last,note="",reason="",oldAmount="",newAmount=""){
