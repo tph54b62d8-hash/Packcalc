@@ -88,6 +88,43 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .calculatorGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.calculatorCard{background:white;border:0;border-radius:16px;padding:18px;text-align:left;box-shadow:0 2px 10px #0001;min-height:120px;margin:0}.calculatorCard .calcIcon{font-size:29px;margin-bottom:10px}.calculatorCard strong{display:block;font-size:18px;margin-bottom:5px}.calculatorCard span{display:block;color:#687386;font-size:13px;line-height:1.3}.calcBack{margin-bottom:15px}.calcResult{margin-top:15px}.calcExplanation{background:#fff4df;color:#8a5a00;border-radius:10px;padding:12px;margin-top:15px;line-height:1.4}.calcPositive{background:#eaf8f1;color:#17764a;border-radius:10px;padding:14px;margin-top:15px;font-weight:bold}.calcNegative{background:#ffe1e4;color:#b21f32;border-radius:10px;padding:14px;margin-top:15px;font-weight:bold}
 .timeRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-top:10px}.timeRow input{margin:0}.removeTime{width:auto;margin:0;padding:13px 15px}.timeTotal{background:#eef6ff;border-radius:12px;padding:18px;text-align:center;margin-top:15px}.timeTotal .number{font-size:30px}
 .productionModal{position:fixed;inset:0;background:#0006;z-index:1000;padding:15px;overflow:auto}.productionModalCard{max-width:600px;margin:40px auto}
+/* V1.6.2 — Registreringar UI + production subview transition only */
+.registrationsCard{padding:14px!important}
+.registrationsBack{margin:0 0 9px!important;padding:8px 10px!important;text-align:left;font-size:14px}
+.registrationsHeader{margin-bottom:8px}
+.registrationsHeader h2{font-size:22px;margin:0}
+.registrationsTableWrap{overflow-x:auto;margin:0 -2px}
+.registrationsTable{font-size:11px;table-layout:fixed;width:100%}
+.registrationsTable th{font-size:11px;color:#687386;padding:6px 4px;border-bottom:1px solid #dfe5ee;font-weight:800;text-align:left}
+.registrationsTable td{padding:6px 4px;border-bottom:1px solid #e7ebf1;vertical-align:middle;line-height:1.15}
+.registrationsTable th:first-child,.registrationsTable td:first-child{color:#687386;width:43px;white-space:nowrap}
+.registrationsTable th:nth-child(2),.registrationsTable td:nth-child(2){width:62px;white-space:nowrap}
+.registrationsTable th:nth-child(3),.registrationsTable td:nth-child(3){width:39px;white-space:nowrap}
+.registrationsTable th:nth-child(4),.registrationsTable td:nth-child(4){width:55px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.registrationsTable th:nth-child(5),.registrationsTable td:nth-child(5){width:50px;white-space:nowrap}
+.registrationsTable td:nth-child(5){font-weight:800}
+.registrationsTable th:last-child,.registrationsTable td:last-child{white-space:normal;word-break:break-word}
+.registrationType{display:inline-flex;align-items:center;gap:5px;font-weight:800;font-size:10px;white-space:nowrap}
+.registrationTypeIcon{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;flex:0 0 20px;font-size:10px;font-weight:900}
+.registrationType.diff .registrationTypeIcon{background:#f39a12}
+.registrationType.kass .registrationTypeIcon{background:#d92d20}
+.registrationType.kolli .registrationTypeIcon{background:#1eaa68}
+.registrationType.start .registrationTypeIcon,.registrationType.paus .registrationTypeIcon,.registrationType.neutral .registrationTypeIcon{background:#7c8798}
+.registrationCountPlus{color:#1eaa68;font-weight:800}
+.registrationCountMinus{color:#b21f32;font-weight:800}
+.registrationCountDiff{color:#8a5a00;font-weight:800}
+#pack.productionNavTransition{overflow:hidden}
+#pack.productionNavTransition #productionMainLayout,#pack.productionNavTransition #productionSubView{will-change:transform}
+#pack.productionNavTransition #productionSubView{position:absolute;left:0;top:0;width:100%;z-index:2}
+#pack.productionNavTransition.navForward #productionMainLayout{animation:productionPushOutLeft .32s cubic-bezier(.22,.68,.36,1) both}
+#pack.productionNavTransition.navForward #productionSubView{animation:productionPushInRight .32s cubic-bezier(.22,.68,.36,1) both}
+#pack.productionNavTransition.navBack #productionSubView{animation:productionPushOutRight .32s cubic-bezier(.22,.68,.36,1) both}
+#pack.productionNavTransition.navBack #productionMainLayout{animation:productionPushInLeft .32s cubic-bezier(.22,.68,.36,1) both}
+@keyframes productionPushOutLeft{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@keyframes productionPushInRight{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes productionPushOutRight{from{transform:translateX(0)}to{transform:translateX(100%)}}
+@keyframes productionPushInLeft{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+@media(max-width:430px){.registrationsCard{padding:12px!important}.registrationsHeader{gap:7px}.registrationsHeader h2{font-size:21px}.registrationsTable{font-size:10px}.registrationsTable th{font-size:10px;padding:5px 3px}.registrationsTable td{padding:5px 3px}.registrationsTable th:first-child,.registrationsTable td:first-child{width:41px}.registrationsTable th:nth-child(2),.registrationsTable td:nth-child(2){width:59px}.registrationsTable th:nth-child(3),.registrationsTable td:nth-child(3){width:37px}.registrationsTable th:nth-child(4),.registrationsTable td:nth-child(4){width:51px}.registrationsTable th:nth-child(5),.registrationsTable td:nth-child(5){width:47px}.registrationTypeIcon{width:18px;height:18px;flex-basis:18px;font-size:9px}.registrationType{font-size:9px;gap:4px}}
 .historyModernSearch{margin-bottom:10px}.historyFilterGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.historyFilterBtn{background:#edf0f5;color:#172033;margin:0;padding:10px 5px;font-size:12px}.historyFilterBtn.active{background:#1459d9;color:white}.productionHistoryCard{border:1px solid #e0e5ed;border-radius:14px;padding:14px;margin-top:9px;background:white;cursor:pointer;box-shadow:0 2px 8px #0001}.productionHistoryCard:active{transform:scale(.99)}.historyCardTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.historyBatch{font-size:17px;font-weight:800;color:#1459d9}.historyProduct{color:#687386;font-size:13px;margin-top:3px}.historyDate{color:#687386;font-size:12px;margin-top:8px}.historyCardBottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:9px}.historyMeta{font-size:13px;font-weight:700}.historyMeta span{margin-right:10px}.historyStatus{display:inline-block;background:#eaf8f1;color:#17764a;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:800}.historyAlerts{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px;font-size:11px;font-weight:800}.historyDiffBadge{display:inline-block;background:#fff0bf;color:#8a5a00;border-radius:999px;padding:6px 9px}.historyKassBadge{display:inline-block;background:#ffe1e4;color:#b21f32;border-radius:999px;padding:6px 9px}.historyDetailStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.historyStat{background:#f7f9fc;border:1px solid #e4e8ef;border-radius:10px;padding:10px}.historyStatLabel{font-size:11px;color:#687386}.historyStatValue{display:block;font-size:14px;font-weight:800;margin-top:3px}.historySubNav{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:12px 0}.historySubBtn{margin:0;background:#edf0f5;color:#172033;padding:10px 6px;font-size:13px}.historySubBtn.active{background:#1459d9;color:white}.timeline{position:relative;margin-top:12px}.timelineItem{display:grid;grid-template-columns:52px 24px 1fr;gap:7px;align-items:start;min-height:52px}.timelineTime{color:#687386;font-size:12px;padding-top:3px;text-align:right}.timelineDot{font-size:16px;text-align:center}.timelineText{font-size:13px;padding-bottom:12px}.timelineText strong{font-weight:800}.historyKolliCard{border:1px solid #e0e5ed;border-radius:11px;padding:12px;margin-top:8px;background:#fff;box-shadow:0 1px 5px #0000000a}.historyKolliCard.diff{border:2px solid #e8a400;background:#fffaf0}.historyKolliCard.kass{border:2px solid #d92d20;background:#fff5f5}.historyKolliTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.historyKolliAmount{font-size:16px;font-weight:800;margin-top:5px}.historyOk{background:#eaf8f1;color:#17764a;border-radius:999px;padding:5px 8px;font-weight:800;font-size:11px}.historyOrange{background:#fff0bf;color:#8a5a00;border-radius:999px;padding:5px 8px;font-weight:800;font-size:11px}.historyRed{background:#ffe1e4;color:#b21f32;border-radius:999px;padding:5px 8px;font-weight:800;font-size:11px}.historyClearItem{border:1px solid #e0e5ed;border-radius:11px;padding:12px;margin-top:8px;display:flex;gap:10px;align-items:flex-start;background:#fff}.historyClearItem input{width:20px;height:20px;margin:2px 0 0;padding:0}.historyClearInfo{flex:1}.historyClearInfo strong{display:block}.historyClearMeta{color:#687386;font-size:12px;margin-top:4px}.historySelected{background:#eef6ff;border-radius:10px;padding:11px;margin-top:12px;font-weight:800;text-align:center}.historyDanger{background:#ffe1e4;color:#b21f32}.historyModalIcon{font-size:30px;text-align:center;margin-bottom:4px}.historyModalButtons{display:grid;grid-template-columns:1fr 1fr;gap:10px}.historyModalButtons button{margin-top:10px}
 @media(max-width:700px){main{max-width:600px}.productionLayout{grid-template-columns:1fr}}
 @media(max-width:430px){.homeGrid{grid-template-columns:1fr 1fr}.result{grid-template-columns:1fr 1fr}nav button{font-size:12px}.calculatorGrid{grid-template-columns:1fr 1fr}.productionTop{flex-direction:column}.activeBatch{width:100%}.productionInputGrid{grid-template-columns:1fr 1fr}.productionActionGrid{grid-template-columns:1fr 1fr}.activeKolliData{grid-template-columns:1fr 1fr 1fr}.registeredHeader{align-items:flex-start;flex-direction:column}.sortSelect{width:100%}.activeKolliHeader{align-items:flex-start}.diffFlag{font-size:12px;padding:7px 8px}.historyFilterGrid{grid-template-columns:repeat(3,1fr)}.historyFilterBtn{font-size:11px}.detailGrid{grid-template-columns:1fr}.detailItem:nth-child(odd){border-right:0}.historySubNav{grid-template-columns:repeat(3,1fr)}}
@@ -119,12 +156,6 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .historyClearItem{cursor:pointer}
 .historyClearItem:has(input:checked){border-color:#1459d9;background:#f4f8ff}
 @media(max-width:430px){.historyDetailHead h2{font-size:19px}.historyInfoRow{font-size:11px}}
-
-/* PACKVEX V1.6.2 — iPhone keyboard handling only */
-html{scroll-behavior:auto;}
-@supports (-webkit-touch-callout:none){
-  body{overscroll-behavior-y:none;}
-}
 </style>
 </head>
 <body>
@@ -158,7 +189,7 @@ html{scroll-behavior:auto;}
 <section id="pack" class="hidden">
 <div id="productionSubView" class="hidden">
 <div id="registeredView" class="hidden"><div class="card"><button class="gray" onclick="closeProductionView()">← Tillbaka till Produktion</button><div class="registeredHeader"><h2>Registrerade kollin (<span id="registeredCountView">0</span>)</h2><select id="kolliSortView" class="sortSelect" onchange="renderKolliView()"><option value="newest">Visa: Senaste först</option><option value="oldest">Visa: Äldsta först</option></select></div><div id="kolliListaView" class="kolliRows"></div></div></div>
-<div id="registrationsView" class="hidden"><div class="card"><button class="gray" onclick="closeProductionView()">← Tillbaka till Produktion</button><div class="productionHistoryHeader"><h2>Registreringar</h2><select id="historyFilterView" class="historyFilter" onchange="renderPackHistoryView()"><option value="all">Visa: Alla händelser</option><option value="kolli">Visa: Kollin</option><option value="kass">Visa: Kassation</option><option value="diff">Visa: Differenser</option></select></div><div class="tableWrap"><table class="historyTable"><thead><tr><th>Tid</th><th>Typ</th><th>Kolli</th><th>Produkt</th><th>Totalt</th><th>Info</th></tr></thead><tbody id="packHistorikListaView"></tbody></table></div></div></div>
+<div id="registrationsView" class="hidden"><div class="card registrationsCard"><button class="gray registrationsBack" onclick="closeProductionView()">← Tillbaka till Produktion</button><div class="productionHistoryHeader registrationsHeader"><h2>Registreringar</h2><select id="historyFilterView" class="historyFilter" onchange="renderPackHistoryView()"><option value="all">Visa: Alla händelser</option><option value="kolli">Visa: Kollin</option><option value="kass">Visa: Kassation</option><option value="diff">Visa: Differenser</option></select></div><div class="tableWrap registrationsTableWrap"><table class="historyTable registrationsTable"><thead><tr><th>Tid</th><th>Typ</th><th>Kolli</th><th>Produkt</th><th>Antal</th><th>Info</th></tr></thead><tbody id="packHistorikListaView"></tbody></table></div></div></div>
 </div>
 <div id="productionMainLayout" class="productionLayout">
 <div class="productionLeft">
@@ -279,22 +310,53 @@ window.scrollTo(0,0);
 }
 
 function openProductionView(view){
-document.getElementById("productionMainLayout").classList.add("hidden");
-document.getElementById("productionSubView").classList.remove("hidden");
+let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
+if(!main||!sub||!pack)return;
+main.classList.remove("hidden");
+sub.classList.remove("hidden");
 document.getElementById("registeredView").classList.add("hidden");
 document.getElementById("registrationsView").classList.add("hidden");
 if(view==="registered"){document.getElementById("registeredView").classList.remove("hidden");renderKolliView();}
 if(view==="registrations"){document.getElementById("registrationsView").classList.remove("hidden");renderPackHistoryView();}
-window.scrollTo(0,0);
+if(view==="registrations"){
+ pack.classList.remove("navBack");pack.classList.add("productionNavTransition","navForward");
+ requestAnimationFrame(function(){requestAnimationFrame(function(){
+  window.scrollTo(0,0);
+  setTimeout(function(){
+   main.classList.add("hidden");
+   pack.classList.remove("productionNavTransition","navForward");
+  },320);
+ });});
+}else{
+ main.classList.add("hidden");
+ sub.classList.remove("productionNavTransition");
+ window.scrollTo(0,0);
+}
 }
 
 function closeProductionView(){
-let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView");
-if(!main||!sub)return;
+let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
+if(!main||!sub||!pack)return;
+let wasRegistrations=!document.getElementById("registrationsView").classList.contains("hidden");
+if(!wasRegistrations){
+ main.classList.remove("hidden");
+ sub.classList.add("hidden");
+ document.getElementById("registeredView").classList.add("hidden");
+ document.getElementById("registrationsView").classList.add("hidden");
+ return;
+}
 main.classList.remove("hidden");
-sub.classList.add("hidden");
-document.getElementById("registeredView").classList.add("hidden");
-document.getElementById("registrationsView").classList.add("hidden");
+sub.classList.remove("hidden");
+pack.classList.remove("navForward");
+pack.classList.add("productionNavTransition","navBack");
+requestAnimationFrame(function(){
+ setTimeout(function(){
+  sub.classList.add("hidden");
+  document.getElementById("registeredView").classList.add("hidden");
+  document.getElementById("registrationsView").classList.add("hidden");
+  pack.classList.remove("productionNavTransition","navBack");
+ },320);
+});
 }
 
 function openCalculator(type){
@@ -953,13 +1015,20 @@ if(filter==="diff")arr=arr.filter(x=>x.type==="DIFF"||x.text==="Flaggade differe
 
 arr.forEach(x=>{
 let tr=document.createElement("tr"),
-cc=String(x.change).startsWith("+")?"plusHistory":String(x.change).startsWith("-")?"minusHistory":x.type==="DIFF"?"historyDiff":"",
-typ=x.type||"Kolli";
+rawType=x.type||"Kolli",
+typ=rawType,kind="neutral",icon="•",
+cc=String(x.change).startsWith("+")?"registrationCountPlus":String(x.change).startsWith("-")?"registrationCountMinus":rawType==="DIFF"?"registrationCountDiff":"";
 
-if(typ==="+")typ="Kolli";
-if(typ==="-")typ="Kass";
+if(typ==="+"){typ="Kolli";kind="kolli";icon="✓";}
+else if(typ==="-"){typ="Kass";kind="kass";icon="×";}
+else if(rawType==="DIFF"||x.text==="Flaggade differens"){typ="DIFF";kind="diff";icon="!";}
+else if(rawType==="KASS"||x.text==="Kassation"){typ="KASS";kind="kass";icon="×";}
+else if(rawType==="KOLLI"||rawType==="Kolli"||x.text==="La till kolli"){typ="KOLLI";kind="kolli";icon="✓";}
+else if(rawType==="START"){typ="START";kind="start";icon="▶";}
+else if(rawType==="PAUS"){typ="PAUS";kind="paus";icon="Ⅱ";}
+else {typ=rawType;kind="neutral";icon="•";}
 
-tr.innerHTML="<td>"+x.tid+"</td><td>"+typ+"</td><td>"+x.kolli+"</td><td>"+x.produkt+"</td><td class='"+cc+"'>"+(x.total!==""&&x.total!=null?x.total:"–")+"</td><td>"+((x.reason?(x.reason+(x.note?" · "+x.note:"")):x.note)||x.text||"–")+"</td>";
+tr.innerHTML="<td>"+x.tid+"</td><td><span class='registrationType "+kind+"'><span class='registrationTypeIcon'>"+icon+"</span>"+typ+"</span></td><td>"+x.kolli+"</td><td>"+x.produkt+"</td><td class='"+cc+"'>"+(x.total!==""&&x.total!=null?x.total:"–")+"</td><td>"+((x.reason?(x.reason+(x.note?" · "+x.note:"")):x.note)||x.text||"–")+"</td>";
 
 tbody.appendChild(tr);
 });
@@ -1512,41 +1581,6 @@ else if(!document.getElementById("historyClearView").classList.contains("hidden"
 
 document.getElementById("navHome").classList.add("active");
 renderAll();
-
-
-/* PACKVEX V1.6.2 — keep focused inputs visible above iPhone keyboard */
-(function(){
-  let keyboardScrollTimer=null;
-  function keepInputVisible(el){
-    if(!el || el.disabled || el.offsetParent===null)return;
-    if(keyboardScrollTimer)clearTimeout(keyboardScrollTimer);
-    keyboardScrollTimer=setTimeout(function(){
-      try{
-        el.scrollIntoView({behavior:"smooth",block:"center",inline:"nearest"});
-      }catch(e){
-        try{el.scrollIntoView(true);}catch(_){}
-      }
-    },80);
-  }
-  document.addEventListener("focusin",function(e){
-    let el=e.target;
-    if(el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))keepInputVisible(el);
-  },{passive:true});
-  document.addEventListener("focusout",function(){
-    if(keyboardScrollTimer)clearTimeout(keyboardScrollTimer);
-  },{passive:true});
-  if(window.visualViewport){
-    let lastHeight=window.visualViewport.height;
-    window.visualViewport.addEventListener("resize",function(){
-      let height=window.visualViewport.height;
-      if(height<lastHeight-80){
-        let el=document.activeElement;
-        if(el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))keepInputVisible(el);
-      }
-      lastHeight=height;
-    },{passive:true});
-  }
-})();
 </script>
 </body>
 </html>
