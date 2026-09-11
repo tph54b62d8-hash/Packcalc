@@ -157,7 +157,7 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 <div id="productionMainLayout" class="productionLayout">
 <div class="productionLeft">
 <div class="card"><div class="productionTop"><div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div><div id="productionActiveBatch" class="activeBatch"></div></div></div>
-<div class="card"><h2>Batch ID</h2><input id="fpkNumber" placeholder="C0211B"><div class="batchButtons"><button class="blue" onclick="startFpk()">Starta batch</button><button class="red" onclick="finishFpk()">Avsluta batch</button></div></div>
+<div class="card"><h2>Batch ID</h2><input id="fpkNumber" placeholder=""><div class="batchButtons"><button class="blue" onclick="startFpk()">Starta batch</button><button class="red" onclick="finishFpk()">Avsluta batch</button></div></div>
 <div class="card"><div class="productionSectionHeader"><h2>Kolli → kapsel / well</h2><span class="collapseArrow">⌃</span></div><div class="productionInputGrid"><div><label>Produkt</label><select id="produkt"><option>Vialer</option><option>Sprutor</option><option>Annan produkt</option></select></div><div><label>Kollinummer</label><input id="kollinummer" placeholder="001"></div><div><label>Antal i kollit</label><input id="antal" type="number" value="0" oninput="raknaKolli()"></div><div><label>Antal per</label><input id="per" type="number" value="0" oninput="raknaKolli()"></div></div><div class="productionActionGrid"><button class="scanButton" onclick="skannaKolli()"><span>📷</span>Skanna kolli</button><button class="blue" onclick="laggTillKolli()">＋ Lägg till kolli</button></div></div>
 <div class="card"><h2>Aktuellt saldo</h2><div class="balanceGrid"><div class="balanceBox"><div class="balanceLabel">Totalt</div><span class="balanceNumber" id="totalt">0</span></div><div class="balanceBox"><div class="balanceLabel">Total kass</div><span class="balanceNumber" id="totaltKass">0</span></div><div class="balanceBox"><div class="balanceLabel">Fulla kapslar / wells</div><span class="balanceNumber" id="totaltFulla">0</span></div><div class="balanceBox"><div class="balanceLabel">Sista kapsel / well</div><span class="balanceNumber" id="sistaTotal">0</span></div></div></div>
 <div class="card"><div class="activeKolliHeader"><div id="activeKolliTitle" class="activeKolliTitle">🟢 Aktivt kolli</div><button id="activeDiffFlag" class="diffFlag" onclick="visaDiffPanel()">⚑ Flagga diff</button></div><div id="activeKolliData" class="activeKolliData"><div><div class="activeDataLabel">Produkt</div><span class="activeDataValue" id="activeProdukt">-</span></div><div><div class="activeDataLabel">Antal i kollit</div><span class="activeDataValue" id="activeAntal">0</span></div><div><div class="activeDataLabel">Kass</div><span class="activeDataValue" id="activeKass">0</span></div></div><div class="activeActionGrid"><button class="red" onclick="visaKassation()">− Kassation / justering</button><button class="gray" onclick="angraSenaste()">↶ Ångra senaste</button></div></div>
@@ -892,12 +892,15 @@ fpkInput=document.getElementById("fpkNumber");
 
 if(data.fpk){
 fpkInput.value=data.fpk;
+fpkInput.placeholder="";
 batch.innerHTML='<span class="activeBatchDot">●</span>Aktiv batch:<br><strong>'+data.fpk+'</strong>';
 let activeProduct=data.kollin.length?(data.kollin[data.kollin.length-1].produkt||"—"):"—";
 let activeStart=data.activeProductionStart?new Date(data.activeProductionStart).toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"}):"—";
 home.innerHTML='<div class="homeProductionCard clickable" onclick="openActiveProduction(this)"><div class="homeProductionDot pulsing"></div><div><div class="homeProductionLabel">AKTIV PRODUKTION</div><div class="homeProductionBatch">'+data.fpk+'</div><div class="homeProductionCount">'+data.kollin.length+(data.kollin.length===1?' registrerat kolli':' registrerade kollin')+'</div></div><div class="homeProductionArrow">›</div></div>';
 }else{
 fpkInput.value="";
+fpkInput.placeholder="";
+fpkInput.placeholder="";
 batch.innerHTML='<span style="color:#8b95a5">Ingen aktiv batch</span>';
 home.innerHTML='<div class="homeProductionCard" style="background:#f8f9fb!important;border-color:#e5e9ef!important"><div class="homeProductionDot" style="background:#9aa4b3;box-shadow:0 0 0 8px #e9edf2"></div><div><div class="homeProductionLabel">AKTIV PRODUKTION</div><div class="homeProductionBatch" style="font-size:20px">Ingen aktiv produktion</div><div class="homeProductionCount">Starta en batch för att komma igång.</div></div><div></div><div class="homeProductionArrow" style="color:#687386">›</div></div>';
 }
