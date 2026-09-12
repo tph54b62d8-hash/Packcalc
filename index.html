@@ -228,154 +228,85 @@ nav#mainNav button{position:relative}.navDagbokNotice,.homeDagbokNotice{display:
 @keyframes dagbokComposerIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}@keyframes dagbokComposerOut{from{transform:translateY(0)}to{transform:translateY(100%)}}
 body.dagbokComposerOpen{overflow:hidden}
 @media(max-width:430px){.dagbokPageHead h2{font-size:29px}.dagbokActions{grid-template-columns:minmax(0,1fr) 82px}.dagbokNewButton{grid-template-columns:40px 1fr 20px;padding:10px 11px}.dagbokPlus{width:36px;height:36px}.dagbokTimeline{padding-left:14px}.dagbokSwipeWrap{margin-left:21px}.dagbokNote{padding:10px 11px}.dagbokNoteText{font-size:13px}.dagbokComposerBody textarea{min-height:390px}.navDagbokNotice.visible{right:calc(50% - 16px)}}
+</style>
 
-/* V1.7 – Produktionssida: visuell feedback och interaktion */
-#pack .productionMainLayout{display:block;max-width:720px;margin:0 auto}
-#pack .productionLeft{min-width:0}
-#pack .productionRight{display:none}
-#pack .productionTop{align-items:center}
-#pack .productionTop h2,#pack .card h2{color:#172a55;letter-spacing:-.35px}
-#pack .card{border:1px solid #e3e8f0;box-shadow:0 4px 16px rgba(30,48,82,.06);border-radius:17px}
-#pack .activeBatch{background:#eaf8f1;color:#17764a;border:1px solid #d9eee2;min-width:132px}
-#pack .activeBatchDot{color:#159447}
-#pack .activeBatchDot.pulsing{display:inline-block;position:relative}
-#pack .activeBatchDot.pulsing:after{content:"";position:absolute;inset:-3px;border:2px solid rgba(21,148,71,.24);border-radius:50%;animation:productionActivePulse 2.6s ease-out infinite}
-@keyframes productionActivePulse{0%{transform:scale(.8);opacity:.7}70%{transform:scale(1.8);opacity:0}100%{transform:scale(1.8);opacity:0}}
-#pack .batchButtons button,#pack .productionActionGrid button,#pack .activeActionGrid button{transition:transform .14s ease,box-shadow .14s ease,filter .14s ease}
-#pack .batchButtons button:active,#pack .productionActionGrid button:active,#pack .activeActionGrid button:active{transform:scale(.975);filter:brightness(.98)}
-#pack .blue{box-shadow:0 4px 10px rgba(20,89,217,.13)}
-#pack .productionSectionHeader h2{font-size:20px}
-#pack .productionInputGrid input,#pack .productionInputGrid select{background:#fbfcfe;border-color:#dfe5ed}
-#pack .scanButton span{display:inline-flex;vertical-align:middle}
-.productionScanIcon,.productionEventIcon,.productionLatestIcon,.productionStatusIcon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.productionScanIcon{width:18px;height:18px;margin-right:5px}
-#pack .balanceBox{background:#f2f7fd;border:1px solid #e1eaf5;transition:transform .2s ease,box-shadow .2s ease}
-#pack .balanceBox.valueFlash{animation:productionValueFlash .32s ease-out}
-#pack .activeKolliData.valueFlash{animation:productionValueFlash .32s ease-out}
-@keyframes productionValueFlash{0%{transform:scale(1)}45%{transform:scale(1.025);box-shadow:0 5px 16px rgba(20,89,217,.10)}100%{transform:scale(1)}}
-#pack .activeKolliTitle{display:flex;align-items:center;gap:7px}
-.productionActiveDot{width:13px;height:13px;border-radius:50%;background:#159447;display:inline-block;position:relative;flex:0 0 13px}
-.productionActiveDot:after{content:"";position:absolute;inset:-3px;border:2px solid rgba(21,148,71,.22);border-radius:50%;animation:productionActivePulse 2.6s ease-out infinite}
-#pack .activeKolliData{border:1px solid #dcefe4}
-#pack .diffFlag{display:inline-flex;align-items:center;gap:6px;background:#fff0bf;color:#8a5a00;border:1px solid #f2df9c}
-#pack .diffFlag.flagged{display:inline-flex;align-items:center;gap:6px;background:#fff0bf;color:#8a5a00;border-color:#f0c86a}
-#pack .kassBadge{background:#fff0f1;color:#b21f32}
-#pack .latestEvent{border:0}
-#pack .latestEventIcon{width:28px;height:28px;border-radius:50%;background:#eef5ff;display:flex;align-items:center;justify-content:center;color:#1459d9;font-size:0}
-#pack .latestEventChange{transition:transform .2s ease}
-.productionToast{position:fixed;bottom:calc(82px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,18px);z-index:1500;width:min(88vw,390px);border-radius:13px;padding:9px 11px;display:grid;grid-template-columns:26px 1fr 20px;gap:8px;align-items:center;color:#fff;box-shadow:0 7px 20px rgba(25,43,74,.13);opacity:0;pointer-events:none}
-.productionToast.show{animation:productionToastIn .2s ease-out forwards}
-.productionToast.hide{animation:productionToastOut .18s ease-in forwards}
-.productionToast.green{background:#13834c}.productionToast.red{background:#d92d20}.productionToast.orange{background:#ef8f00}.productionToast.neutral{background:#3c485c}
-.productionToastIcon{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.13);display:flex;align-items:center;justify-content:center}
-.productionToastIcon svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.productionToastTitle{font-size:13px;font-weight:800;line-height:1.1}.productionToastDetail{font-size:10.5px;opacity:.92;margin-top:3px;line-height:1.2}.productionToastClose{width:22px;height:22px;padding:0!important;margin:0!important;background:transparent!important;color:#fff!important;font-size:20px!important;font-weight:400!important;line-height:1!important}
-@keyframes productionToastIn{from{transform:translate(-50%,18px);opacity:0}to{transform:translate(-50%,0);opacity:1}}@keyframes productionToastOut{from{transform:translate(-50%,0);opacity:1}to{transform:translate(-50%,18px);opacity:0}}
-.productionFinishOverlay{position:fixed;inset:0;z-index:1450;background:rgba(14,23,39,.46);display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;transition:opacity .2s ease}
-.productionFinishOverlay:not(.hidden){opacity:1}
-.productionFinishCard{width:min(100%,480px);max-height:calc(100vh - 36px);overflow:auto;background:#fff;border-radius:22px;padding:20px;box-shadow:0 18px 50px rgba(15,29,55,.22);transform:scale(.96);transition:transform .22s cubic-bezier(.22,.8,.25,1)}
-.productionFinishOverlay:not(.hidden) .productionFinishCard{transform:scale(1)}
-.productionFinishHead{display:flex;align-items:flex-start;gap:12px}.productionFinishIcon{width:42px;height:42px;border-radius:13px;background:#fff0f1;color:#d92d20;display:flex;align-items:center;justify-content:center;flex:0 0 42px}.productionFinishIcon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.productionFinishHead h3{margin:1px 0 3px;font-size:21px;color:#172a55}.productionFinishHead p{margin:0;color:#687386;font-size:13px}.productionFinishSummary{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:17px}.productionFinishSummaryItem{background:#f5f7fa;border:1px solid #e5e9ef;border-radius:12px;padding:10px 11px}.productionFinishSummaryItem span{display:block;color:#687386;font-size:11px}.productionFinishSummaryItem strong{display:block;color:#172033;font-size:15px;margin-top:3px}.productionFinishConfirm{display:flex;align-items:flex-start;gap:10px;margin-top:15px;padding:12px;background:#f2f6fb;border-radius:12px;cursor:pointer}.productionFinishConfirm input{width:20px;height:20px;flex:0 0 20px;margin:0;padding:0;accent-color:#1459d9}.productionFinishConfirm span{font-size:13px;font-weight:700;color:#172033;line-height:1.35}.productionFinishActions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}.productionFinishActions button{margin:0}.productionFinishActions .finishDisabled{opacity:.45;pointer-events:none;filter:grayscale(.15)}
-.productionCompleteToast{background:#13834c}
-@media(max-width:430px){#pack .card{border-radius:16px;padding:15px}#pack .productionTop{gap:8px}#pack .activeBatch{min-width:118px;padding:10px 11px}.productionFinishCard{padding:17px}.productionFinishSummary{gap:7px}.productionFinishSummaryItem{padding:9px}.productionToast{width:calc(100vw - 32px)}}
-
-
-/* V1.7 TEST2 — Production visual/interactions */
-#pack{padding-top:2px}
+<style id="v17-production-visual-only">
+/* V1.7 — Production visual redesign only. Existing behavior/data remains unchanged. */
+#pack{background:#f5f7fb;padding-bottom:24px}
 #pack .productionLayout{display:block;max-width:620px;margin:0 auto}
 #pack .productionLeft{width:100%}
 #pack .productionRight{display:none}
-#pack .card{border:1px solid #e3e8ef;border-radius:18px;background:#fff;box-shadow:0 4px 16px rgba(24,42,72,.055);padding:16px;margin-bottom:11px}
-#pack .productionTop{align-items:center;gap:12px}
-#pack .productionTop h2{font-size:25px;letter-spacing:-.5px;color:#172a55}
-#pack .productionSubtitle{font-size:12px;color:#687386;margin-top:3px}
-#pack .activeBatch{min-width:138px;padding:10px 12px;background:#eaf8f1;color:#17764a;border:1px solid #d8efdf;border-radius:13px;line-height:1.25}
-#pack .activeBatchDot{font-size:0;display:inline-block;width:9px;height:9px;border-radius:50%;background:#159447;margin-right:7px;vertical-align:1px;position:relative}
-#pack .activeBatchDot:after{content:"";position:absolute;inset:-3px;border:1.5px solid rgba(21,148,71,.22);border-radius:50%;animation:productionActivePulse 2.6s ease-out infinite}
-#pack .activeBatch strong{display:inline-block;margin-top:2px;color:#167044;font-size:15px}
-#pack .card>h2{font-size:18px;letter-spacing:-.2px;color:#172033}
-#pack input,#pack select{border:1px solid #d9e0ea;background:#fbfcfe;border-radius:11px;padding:12px;font-size:16px;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
-#pack input:focus,#pack select:focus{border-color:#8db5ff;box-shadow:0 0 0 3px rgba(20,89,217,.09);outline:none}
-#pack button{transition:transform .12s ease,box-shadow .18s ease,filter .18s ease}
-#pack button:active{transform:scale(.985);filter:brightness(.98)}
-#pack button.buttonPress{animation:productionButtonPress .18s ease-out}
-@keyframes productionButtonPress{0%{transform:scale(1)}45%{transform:scale(.965)}100%{transform:scale(1)}}
-#pack .blue{box-shadow:0 5px 14px rgba(20,89,217,.16)}
-#pack .red{background:#fff0f1;color:#c52938;border:1px solid #f3d2d6}
-#pack .gray{background:#f1f4f8;border:1px solid #e0e5ed}
-#pack .productionInputGrid{gap:9px}
-#pack .productionActionGrid{gap:9px;margin-top:9px}
-#pack .scanButton{background:#f1f4f8}
+#pack .card{background:#fff;border:1px solid #e6eaf0;border-radius:18px;padding:16px;box-shadow:0 4px 14px rgba(25,43,74,.06);margin-bottom:10px}
+#pack .productionTop{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px}
+#pack .productionTop h2{font-size:25px;line-height:1.1;color:#172033;letter-spacing:-.3px}
+#pack .productionSubtitle{font-size:13px;line-height:1.35;color:#687386;margin-top:5px}
+#pack .productionHeaderIcon{width:42px;height:42px;border-radius:12px;background:#edf4ff;color:#1459d9;display:flex;align-items:center;justify-content:center;margin-bottom:9px}
+#pack .productionHeaderIcon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#pack .activeBatch{min-width:116px;background:#eaf8f1;color:#17764a;border:1px solid #d5efdf;border-radius:13px;padding:10px 12px;line-height:1.2}
+#pack .activeBatchDot{font-size:13px;color:#15965a;margin-right:5px}
+#pack .batchCardTitle,#pack .productionSectionTitle{font-size:18px;color:#172033;margin:0 0 10px;font-weight:800}
+#pack #fpkNumber{height:48px;border:1px solid #d9dfe8;border-radius:12px;background:#fff;font-size:16px;padding:0 13px;box-shadow:inset 0 1px 2px rgba(25,43,74,.03)}
+#pack .batchButtons{gap:10px;margin-top:0}
+#pack .batchButtons button{height:48px;margin-top:10px;border-radius:11px;font-weight:800;font-size:15px}
+#pack .batchButtons .blue{box-shadow:0 4px 10px rgba(20,89,217,.16)}
+#pack .batchButtons .red{background:#fff0f2;color:#c52b3a;border:1px solid #f5cbd1}
+#pack .productionSectionHeader{margin-bottom:10px}
+#pack .productionSectionHeader h2{font-size:19px;color:#172033}
+#pack .productionSectionHeader h2:before{content:"";display:inline-block;width:28px;height:28px;margin-right:8px;vertical-align:-7px;border-radius:8px;background:#edf4ff}
+#pack .collapseArrow{color:#687386;font-size:19px}
+#pack .productionInputGrid{gap:10px}
+#pack .productionInputGrid label{display:block;font-size:13px;color:#172033;font-weight:750;margin-bottom:5px}
+#pack .productionInputGrid input,#pack .productionInputGrid select{height:46px;border-radius:11px;border:1px solid #d9dfe8;background:#fff;padding:0 12px;font-size:15px}
+#pack .productionActionGrid{gap:10px;margin-top:10px}
+#pack .productionActionGrid button{height:46px;border-radius:11px;font-size:14px;font-weight:800}
+#pack .scanButton{background:#f0f3f7;color:#172033;border:1px solid #e1e6ed}
+#pack .productionScanIcon{width:19px;height:19px;vertical-align:-5px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#pack .balanceTitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+#pack .balanceTitle h2{margin:0;font-size:19px;color:#172033}
+#pack .balanceTitleIcon{width:30px;height:30px;border-radius:8px;background:#edf4ff;color:#1459d9;display:inline-flex;align-items:center;justify-content:center;margin-right:7px;vertical-align:-8px}
+#pack .balanceTitleIcon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 #pack .balanceGrid{gap:9px}
-#pack .balanceBox{min-height:86px;padding:12px 9px;border-radius:13px;background:#f2f7fd;border:1px solid #e1eaf5;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
-#pack .balanceLabel{font-size:11px;color:#687386;line-height:1.15}
-#pack .balanceNumber{font-size:28px;color:#1459d9;margin-top:5px}
-#pack .activeKolliHeader{align-items:center}
-#pack .activeKolliTitle{font-size:19px;color:#167044}
-#pack .activeKolliData{background:#edf9f2;border:1px solid #dcefe4;padding:12px;border-radius:13px;transition:transform .2s ease,box-shadow .2s ease}
+#pack .balanceBox{min-height:76px;padding:10px 8px;border-radius:12px;background:#edf5ff;border:1px solid #e0ebfa}
+#pack .balanceBox:nth-child(2){background:#fff0f2;border-color:#f8d8dd}
+#pack .balanceLabel{font-size:12px;color:#687386;font-weight:650;line-height:1.2}
+#pack .balanceNumber{font-size:27px;margin-top:4px;color:#1459d9}
+#pack .balanceBox:nth-child(2) .balanceNumber{color:#c52b3a}
+#pack .activeKolliHeader{align-items:center;gap:8px}
+#pack .activeKolliTitle{font-size:19px;display:flex;align-items:center;color:#17764a}
+#pack .productionActiveDot{width:12px;height:12px;border-radius:50%;background:#25ad67;box-shadow:0 0 0 5px #e4f7ec;margin-right:8px;display:inline-block;flex:0 0 12px}
+#pack .diffFlag{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 10px;background:#fff6e8;color:#a96800;border:1px solid #f5dfbd;border-radius:9px;font-size:12px;font-weight:800}
+#pack .diffFlag.flagged{background:#fff0dc;color:#b96b00;border-color:#f3c97e;box-shadow:inset 0 0 0 1px rgba(239,143,0,.08)}
+#pack .diffFlag .diffFlagIcon{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#pack .activeKolliData{gap:8px;background:#eef8f2;border:1px solid #dff0e6;border-radius:12px;padding:12px;margin-top:10px}
 #pack .activeDataLabel{font-size:11px;color:#687386}
-#pack .activeDataValue{font-size:17px;color:#172033}
-#pack .diffFlag{border:1px solid #f0d38b!important;border-radius:10px!important}
-#pack .activeActionGrid{gap:9px}
-#pack .activeActionGrid button{border-radius:11px}
-#pack .latestEvent{min-height:45px}
-#pack .latestEventTitle{font-size:14px}
-#pack .latestEventText{font-size:12px}
-#pack .latestEventChange{font-size:16px}
-#pack .productionLink{background:#fff;border:1px solid #e1e6ee;box-shadow:0 2px 8px rgba(30,48,82,.045);border-radius:14px;padding:13px 14px;font-size:14px}
-#pack .productionBottomLinks{margin-top:1px}
-#pack .registrationsTable .registrationTypeIcon{font-size:0}
-#pack .registrationsTable .registrationTypeIcon svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-#pack .registrationType.undo{color:#44526a}.registrationType.undo .registrationTypeIcon{background:#e7ebf1}
-#pack .registrationType.stop{color:#172033}.registrationType.stop .registrationTypeIcon{background:#172033}
-#pack .registrationType.start .registrationTypeIcon,.registrationType.pause .registrationTypeIcon{background:#7b8798}
-#pack .registrationsTable tbody tr{animation:registrationRowIn .22s ease-out both}
-@keyframes registrationRowIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-#pack .card.newProductionCard{animation:productionCardIn .24s ease-out both}
-@keyframes productionCardIn{from{opacity:.55;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-#productionFinishModal.productionFinishOverlay.closing{opacity:0}
-#productionFinishModal.productionFinishOverlay.closing .productionFinishCard{transform:scale(.96)}
-.productionFinishOverlay.closing{pointer-events:none}
-#pack .productionToast{will-change:transform,opacity}
-
-
-/* V1.7 TEST3 — complete Production visual/interactions */
-#pack .batchButtons button,#pack .productionActionGrid button,#pack .activeActionGrid button{position:relative;overflow:hidden}
-#pack .batchButtons .blue,#pack .productionActionGrid .blue{background:#1459d9;color:#fff;border:1px solid #1459d9}
-#pack .batchButtons .red{background:#fff0f1;color:#c52938}
-#pack .productionSectionHeader h2{font-size:18px;color:#172033;letter-spacing:-.25px}
-#pack .productionSectionHeader .collapseArrow{color:#172033}
-#pack .productionScanIcon{stroke-width:1.9}
-#pack .activeKolliData>div{min-width:0}
-#pack .activeKolliData .activeDataValue{color:#172033}
-#pack .activeKolliData .activeDataValue#activeKass{color:#b21f32}
-#pack .latestEvent{transition:transform .2s ease,box-shadow .2s ease}
-#pack .productionLink{display:flex;align-items:center;justify-content:space-between;gap:10px}
-#pack .productionLink::after{content:'›';font-size:23px;color:#7b8798}
-#pack .productionLink span{display:none!important}
-#pack .productionLink:active{transform:scale(.988)}
-.productionUpdateIn{animation:productionUpdateIn .26s cubic-bezier(.22,.8,.25,1)}
-@keyframes productionUpdateIn{0%{opacity:.72;transform:translateY(5px)}55%{opacity:1;transform:translateY(-1px)}100%{opacity:1;transform:translateY(0)}}
-.productionPageIn{animation:productionPageSlideIn .28s cubic-bezier(.22,.8,.25,1)}
-@keyframes productionPageSlideIn{from{opacity:.72;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
-#productionFinishModal.productionFinishOverlay{transition:opacity .22s ease}
-#productionFinishModal .productionFinishConfirm input{appearance:none;-webkit-appearance:none;border:1.5px solid #aeb8c8;border-radius:6px;background:#fff;position:relative;cursor:pointer;transition:background .16s ease,border-color .16s ease,transform .16s ease}
-#productionFinishModal .productionFinishConfirm input:checked{background:#1459d9;border-color:#1459d9;transform:scale(1.04)}
-#productionFinishModal .productionFinishConfirm input:checked:after{content:'';position:absolute;left:5px;top:1px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);animation:productionCheck .16s ease-out}
-@keyframes productionCheck{from{opacity:0;transform:rotate(45deg) scale(.5)}to{opacity:1;transform:rotate(45deg) scale(1)}}
-#productionFinishModal .productionFinishActions .finishDisabled{opacity:.4;filter:none}
-#pack .productionToast{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-#pack .productionToastTitle,#pack .productionToastDetail{overflow:hidden;text-overflow:ellipsis}
+#pack .activeDataValue{font-size:17px;margin-top:3px;color:#172033}
+#pack .activeActionGrid{gap:10px;margin-top:10px}
+#pack .activeActionGrid button{height:44px;border-radius:11px;font-size:13px;font-weight:800}
+#pack .activeActionGrid .red{background:#fff0f2;color:#c52b3a;border:1px solid #f4cbd1}
+#pack .activeActionGrid .gray{background:#f0f3f7;color:#263247;border:1px solid #e0e5ec}
+#pack .latestEvent{grid-template-columns:36px 1fr auto;gap:10px}
+#pack .latestEventIcon{width:34px;height:34px;border-radius:10px;background:#edf4ff;display:flex;align-items:center;justify-content:center}
+#pack .productionLatestIcon{width:19px;height:19px;fill:none;stroke:#1459d9;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#pack .latestEventTitle{font-size:15px;color:#172033}
+#pack .latestEventText{font-size:12px;color:#687386}
+#pack .latestEventChange{font-size:17px;color:#1eaa68}
+#pack .productionBottomLinks{display:grid;gap:8px;margin-top:0}
+#pack .productionLink{height:58px;margin:0;background:#fff;border:1px solid #e1e6ee;border-radius:14px;box-shadow:0 3px 10px rgba(25,43,74,.045);color:#172033;font-size:14px;font-weight:800;padding:0 15px}
+#pack .productionLink:after{content:""}
+#pack .productionLink span{color:#687386;font-size:25px;line-height:1}
 @media(max-width:430px){
-#pack .card{padding:14px;border-radius:16px;margin-bottom:10px}
-#pack .productionTop h2{font-size:23px}
-#pack .activeBatch{min-width:124px}
-#pack .batchButtons,#pack .productionInputGrid,#pack .productionActionGrid{gap:8px}
-#pack .balanceGrid{gap:8px}
-#pack .balanceBox{min-height:82px}
-#pack .activeKolliData{gap:8px;padding:11px}
+ #pack{padding-bottom:20px}
+ #pack .card{padding:14px;border-radius:16px}
+ #pack .productionTop{grid-template-columns:1fr;gap:9px}
+ #pack .activeBatch{width:100%;box-sizing:border-box}
+ #pack .productionTop h2{font-size:23px}
+ #pack .productionInputGrid{gap:9px}
+ #pack .productionActionGrid{gap:9px}
+ #pack .balanceGrid{gap:8px}
+ #pack .balanceBox{min-height:73px}
+ #pack .activeKolliHeader{align-items:center}
+ #pack .diffFlag{height:32px;padding:0 8px;font-size:11px}
 }
-
 </style>
 </head>
 <body>
@@ -413,17 +344,16 @@ body.dagbokComposerOpen{overflow:hidden}
 </div>
 <div id="productionMainLayout" class="productionLayout">
 <div class="productionLeft">
-<div class="card"><div class="productionTop"><div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div><div id="productionActiveBatch" class="activeBatch"></div></div></div>
-<div class="card"><h2>Batch ID</h2><input id="fpkNumber" placeholder=""><div class="batchButtons"><button class="blue" onclick="startFpk()">Starta batch</button><button class="red" onclick="finishFpk()">Avsluta batch</button></div></div>
-<div class="card"><div class="productionSectionHeader"><h2>Kolli → kapsel / well</h2><span class="collapseArrow">⌃</span></div><div class="productionInputGrid"><div><label>Produkt</label><select id="produkt"><option>Vialer</option><option>Sprutor</option><option>Annan produkt</option></select></div><div><label>Kollinummer</label><input id="kollinummer" placeholder="001"></div><div><label>Antal i kollit</label><input id="antal" type="number" value="0" oninput="raknaKolli()"></div><div><label>Antal per</label><input id="per" type="number" value="0" oninput="raknaKolli()"></div></div><div class="productionActionGrid"><button class="scanButton" onclick="skannaKolli()"><span><svg class="productionScanIcon" viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M8 10h8v4H8z"/></svg></span>Skanna kolli</button><button class="blue" onclick="laggTillKolli()">＋ Lägg till kolli</button></div></div>
-<div class="card"><h2>Aktuellt saldo</h2><div class="balanceGrid"><div class="balanceBox"><div class="balanceLabel">Totalt</div><span class="balanceNumber" id="totalt">0</span></div><div class="balanceBox"><div class="balanceLabel">Total kass</div><span class="balanceNumber" id="totaltKass">0</span></div><div class="balanceBox"><div class="balanceLabel">Fulla kapslar / wells</div><span class="balanceNumber" id="totaltFulla">0</span></div><div class="balanceBox"><div class="balanceLabel">Sista kapsel / well</div><span class="balanceNumber" id="sistaTotal">0</span></div></div></div>
-<div class="card"><div class="activeKolliHeader"><div id="activeKolliTitle" class="activeKolliTitle"><span class="productionActiveDot"></span>Aktivt kolli</div><button id="activeDiffFlag" class="diffFlag" onclick="visaDiffPanel()"><svg class="productionEventIcon" viewBox="0 0 24 24"><path d="M5 20V5"/><path d="M6 5h10l-2 4 2 4H6"/></svg><span>Flagga diff</span></button></div><div id="activeKolliData" class="activeKolliData"><div><div class="activeDataLabel">Produkt</div><span class="activeDataValue" id="activeProdukt">-</span></div><div><div class="activeDataLabel">Antal i kollit</div><span class="activeDataValue" id="activeAntal">0</span></div><div><div class="activeDataLabel">Kass</div><span class="activeDataValue" id="activeKass">0</span></div></div><div class="activeActionGrid"><button class="red" onclick="visaKassation()">− Kassation / justering</button><button class="gray" onclick="angraSenaste()"><svg class="productionEventIcon" viewBox="0 0 24 24"><path d="M9 7 4 12l5 5"/><path d="M5 12h8a6 6 0 0 1 6 6"/></svg><span>Ångra senaste</span></button></div></div>
-<div class="card"><div class="latestEvent"><div class="latestEventIcon"><svg class="productionLatestIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></div><div><div class="latestEventTitle">Senaste händelse</div><div id="latestEventText" class="latestEventText">Ingen händelse ännu.</div></div><div id="latestEventChange" class="latestEventChange">-</div></div></div>
+<div class="card"><div class="productionTop"><div><div class="productionHeaderIcon"><svg viewBox="0 0 24 24"><path d="M4 19V9l4-3 4 3 4-3 4 3v10H4Z"/><path d="M8 19v-5h3v5M15 19v-4h3v4"/></svg></div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div><div id="productionActiveBatch" class="activeBatch"></div></div></div>
+<div class="card"><h2 class="batchCardTitle">Batch ID</h2><input id="fpkNumber" placeholder=""><div class="batchButtons"><button class="blue" onclick="startFpk()">Starta batch</button><button class="red" onclick="finishFpk()">Avsluta batch</button></div></div>
+<div class="card"><div class="productionSectionHeader"><h2>Kolli → kapsel / well</h2><span class="collapseArrow">⌃</span></div><div class="productionInputGrid"><div><label>Produkt</label><select id="produkt"><option>Vialer</option><option>Sprutor</option><option>Annan produkt</option></select></div><div><label>Kollinummer</label><input id="kollinummer" placeholder="001"></div><div><label>Antal i kollit</label><input id="antal" type="number" value="0" oninput="raknaKolli()"></div><div><label>Antal per</label><input id="per" type="number" value="0" oninput="raknaKolli()"></div></div><div class="productionActionGrid"><button class="scanButton" onclick="skannaKolli()"><span>📷</span>Skanna kolli</button><button class="blue" onclick="laggTillKolli()">＋ Lägg till kolli</button></div></div>
+<div class="card"><div class="balanceTitle"><h2><span class="balanceTitleIcon"><svg viewBox="0 0 24 24"><path d="M4 18V9M10 18V5M16 18v-8M22 18V3"/></svg></span>Aktuellt saldo</h2></div><div class="balanceGrid"><div class="balanceBox"><div class="balanceLabel">Totalt</div><span class="balanceNumber" id="totalt">0</span></div><div class="balanceBox"><div class="balanceLabel">Total kass</div><span class="balanceNumber" id="totaltKass">0</span></div><div class="balanceBox"><div class="balanceLabel">Fulla kapslar / wells</div><span class="balanceNumber" id="totaltFulla">0</span></div><div class="balanceBox"><div class="balanceLabel">Sista kapsel / well</div><span class="balanceNumber" id="sistaTotal">0</span></div></div></div>
+<div class="card"><div class="activeKolliHeader"><div id="activeKolliTitle" class="activeKolliTitle"><span class="productionActiveDot"></span>Aktivt kolli</div><button id="activeDiffFlag" class="diffFlag" onclick="visaDiffPanel()"><svg class="diffFlagIcon" viewBox="0 0 24 24"><path d="M6 20V4M7 5h10l-2 4 2 4H7"/></svg><span>Flagga diff</span></button></div><div id="activeKolliData" class="activeKolliData"><div><div class="activeDataLabel">Produkt</div><span class="activeDataValue" id="activeProdukt">-</span></div><div><div class="activeDataLabel">Antal i kollit</div><span class="activeDataValue" id="activeAntal">0</span></div><div><div class="activeDataLabel">Kass</div><span class="activeDataValue" id="activeKass">0</span></div></div><div class="activeActionGrid"><button class="red" onclick="visaKassation()">− Kassation / justering</button><button class="gray" onclick="angraSenaste()">↶ Ångra senaste</button></div></div>
+<div class="card"><div class="latestEvent"><div class="latestEventIcon">◷</div><div><div class="latestEventTitle">Senaste händelse</div><div id="latestEventText" class="latestEventText">Ingen händelse ännu.</div></div><div id="latestEventChange" class="latestEventChange">-</div></div></div>
 <div class="productionBottomLinks"><button class="productionLink" onclick="openProductionView('registered')">Registrerade kollin <span style="float:right">›</span></button><button class="productionLink" onclick="openProductionView('registrations')">Registreringar <span style="float:right">›</span></button></div>
 </div><div class="productionRight"></div></div>
 </section>
 
-<div id="productionFinishModal" class="productionFinishOverlay hidden" aria-hidden="true"><div class="productionFinishCard"><div class="productionFinishHead"><div class="productionFinishIcon"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 9l6 6M15 9l-6 6"/></svg></div><div><h3>Avsluta batch?</h3><p>Kontrollera sammanfattningen innan du avslutar.</p></div></div><div id="productionFinishSummary" class="productionFinishSummary"></div><label class="productionFinishConfirm"><input id="productionFinishCheck" type="checkbox" onchange="toggleFinishConfirmation(this)"><span>Jag bekräftar att alla uppgifter stämmer.</span></label><div class="productionFinishActions"><button class="gray" onclick="closeFinishModal()">Avbryt</button><button id="productionFinishConfirmButton" class="red finishDisabled" onclick="confirmFinishFpk()">Avsluta batch</button></div></div></div>
 <div id="diffModal" class="productionModal hidden"><div class="card productionModalCard"><span class="closeX" onclick="stangDiffPanel()">×</span><h3>Flagga differens</h3><div id="diffOption1" class="diffOption" onclick="valjDiff('En för mycket i sista','')"><span>För mycket</span><span class="positive">›</span></div><div id="diffOption2" class="diffOption" onclick="valjDiff('En för lite i sista','')"><span>För lite</span><span class="negative">›</span></div><div id="diffOption3" class="diffOption" onclick="valjDiff('Fel antal i kolli','')"><span>Kollit stämde inte i antal</span><span>›</span></div><div id="diffOption4" class="diffOption" onclick="valjDiff('Skadad vara','')"><span>Skadad vara</span><span>›</span></div><div id="diffOption5" class="diffOption" onclick="valjDiff('Annat','')"><span>Annat</span><span>›</span></div><div id="diffFields" class="hidden"></div><button class="blue" onclick="sparaValdDiff()">Spara</button></div></div>
 
 <div id="kassModal" class="productionModal hidden"><div class="card productionModalCard"><span class="closeX" onclick="stangKassPanel()">×</span><h3>Snabb kassation</h3><label>Antal att ta bort</label><input id="minus" type="number" value="1"><label>Anledning</label><select id="anledning"><option>Skadad vara</option><option>Felräkning</option><option>Annat</option></select><label>Kommentar</label><textarea id="kassKommentar" placeholder="Skriv en kommentar..." style="min-height:80px"></textarea><button class="red quickButton" onclick="taBort()">Ta bort från aktivt kolli</button></div></div>
@@ -574,7 +504,7 @@ pages.forEach(p=>document.getElementById(p).classList.add("hidden"));
 document.getElementById(page).classList.remove("hidden");
 document.querySelectorAll("nav button").forEach(btn=>btn.classList.remove("active"));
 if(page==="home")document.getElementById("navHome").classList.add("active");
-if(page==="pack"){document.getElementById("navPack").classList.add("active");closeProductionView();let production=document.getElementById("pack");if(production){production.classList.remove("productionPageIn");void production.offsetWidth;production.classList.add("productionPageIn");}}
+if(page==="pack"){document.getElementById("navPack").classList.add("active");closeProductionView();}
 if(page==="packalkylator")document.getElementById("navCalc").classList.add("active");
 if(page==="dagbok")document.getElementById("navDagbok").classList.add("active");
 if(page==="historik")document.getElementById("navHistorik").classList.add("active");
@@ -747,8 +677,6 @@ document.getElementById("timeTotal").innerText=Math.floor(t/60)+" h "+t%60+" min
 }
 
 function startFpk(){
-let sourceButton=document.querySelector('#pack .batchButtons .blue');
-if(sourceButton){sourceButton.classList.remove('buttonPress');void sourceButton.offsetWidth;sourceButton.classList.add('buttonPress');}
 let v=document.getElementById("fpkNumber").value.trim();
 if(!v){alert("Skriv in ett Batch ID.");return;}
 if(data.fpk&&!confirm("Det finns redan en aktiv batch. Vill du byta?"))return;
@@ -760,47 +688,41 @@ saveData();
 renderFpk();
 addHistory("START","-","","","Startade produktion","","","Batch "+v);
 renderAll();
-showProductionToast("green","Batch startad",v,"check");
+alert("Batch "+v+" är nu aktiv.");
 }
 
 function finishFpk(){
 if(!data.fpk){alert("Det finns ingen aktiv batch.");return;}
-openFinishModal();
-}
-
-function openFinishModal(){
-let modal=document.getElementById("productionFinishModal"), summary=document.getElementById("productionFinishSummary"), check=document.getElementById("productionFinishCheck"), btn=document.getElementById("productionFinishConfirmButton");
-if(!modal||!summary)return;
-let kollin=data.kollin||[], total=kollin.reduce((s,k)=>s+Number(k.used||0),0), kassation=kollin.reduce((s,k)=>s+Number(k.kassation||0),0), events=data.historik.filter(x=>x.productionId===data.activeProductionId), diffCount=events.filter(x=>x.type==="DIFF"&&!x.undone&&Number(x.change)!==0).length, per=Number(document.getElementById("per")?.value)||0, fulla=per>0?Math.floor(total/per):0, sista=per>0?total%per:0;
-summary.innerHTML='<div class="productionFinishSummaryItem"><span>Batch ID</span><strong>'+data.fpk+'</strong></div><div class="productionFinishSummaryItem"><span>Registrerade kollin</span><strong>'+kollin.length+'</strong></div><div class="productionFinishSummaryItem"><span>Totalt antal</span><strong>'+total+' st</strong></div><div class="productionFinishSummaryItem"><span>Kassation</span><strong>'+kassation+' st</strong></div><div class="productionFinishSummaryItem"><span>Diffar</span><strong>'+diffCount+'</strong></div><div class="productionFinishSummaryItem"><span>Fulla kapslar / wells</span><strong>'+fulla+'</strong></div><div class="productionFinishSummaryItem"><span>Sista kapsel / well</span><strong>'+sista+'</strong></div>';
-if(check)check.checked=false;
-if(btn){btn.classList.add("finishDisabled");}
-modal.classList.remove("hidden");modal.setAttribute("aria-hidden","false");
-}
-
-function toggleFinishConfirmation(box){
-let btn=document.getElementById("productionFinishConfirmButton");
-if(!btn)return;
-btn.classList.toggle("finishDisabled",!box.checked);
-if(box.checked){btn.animate([{transform:"scale(.97)"},{transform:"scale(1)"}],{duration:180,easing:"ease-out"});}
-}
-
-function closeFinishModal(){
-let modal=document.getElementById("productionFinishModal");
-if(!modal)return;
-modal.classList.add("closing");modal.setAttribute("aria-hidden","true");
-setTimeout(()=>{modal.classList.add("hidden");modal.classList.remove("closing");},210);
-}
-
-function confirmFinishFpk(){
-let check=document.getElementById("productionFinishCheck");
-if(!check||!check.checked)return;
-let batch=data.fpk, productionId=data.activeProductionId, end=new Date().toISOString(), events=data.historik.filter(x=>x.productionId===productionId), kollin=data.kollin.map(k=>({...k})), total=kollin.reduce((s,k)=>s+Number(k.used||0),0), kassation=kollin.reduce((s,k)=>s+Number(k.kassation||0),0), diffCount=events.filter(x=>x.type==="DIFF"&&!x.undone&&Number(x.change)!==0).length, products=[...new Set(kollin.map(k=>k.produkt).filter(Boolean))];
-data.produktioner.push({productionId,batchId:data.fpk,start:data.activeProductionStart||null,end,products,kollin,total,kolliCount:kollin.length,kassation,diffCount});
+if(!confirm("Vill du avsluta batch "+data.fpk+"?"))return;
+let productionId=data.activeProductionId,
+end=new Date().toISOString(),
+events=data.historik.filter(x=>x.productionId===productionId),
+kollin=data.kollin.map(k=>({...k})),
+total=kollin.reduce((s,k)=>s+Number(k.used||0),0),
+kassation=kollin.reduce((s,k)=>s+Number(k.kassation||0),0),
+diffCount=events.filter(x=>x.type==="DIFF"&&!x.undone&&Number(x.change)!==0).length,
+products=[...new Set(kollin.map(k=>k.produkt).filter(Boolean))];
+data.produktioner.push({
+productionId,
+batchId:data.fpk,
+start:data.activeProductionStart||null,
+end,
+products,
+kollin,
+total,
+kolliCount:kollin.length,
+kassation,
+diffCount
+});
 addHistory("SLUT","-","","","Avslutade produktion","","","Batch avslutad");
-data.fpk="";data.activeProductionId="";data.activeProductionStart="";data.kollin=[];saveData();closeFinishModal();renderAll();
-showProductionToast("green","Batch avslutad",batch+" · Totalt: "+total+" st · Kassation: "+kassation+" st · Differens: "+diffCount,"check");
+data.fpk="";
+data.activeProductionId="";
+data.activeProductionStart="";
+data.kollin=[];
+saveData();
+renderAll();
 }
+
 function skannaKolli(){alert("QR-skanning kopplas på här. Kamerafunktionen kan läggas till senare.");}
 
 function visaKassation(){
@@ -929,9 +851,6 @@ saveData();
 valdDiff=null;
 stangDiffPanel();
 renderAll();
-flashProductionValues();
-animateProductionUpdate();
-showProductionToast("orange","Diff registrerad",(delta>0?"+":"")+delta+" st · "+reason,"warning");
 }
 
 function raknaKolli(){updateTotal();}
@@ -969,9 +888,6 @@ addHistory("KOLLI",nummer,produkt,"+"+antal,"La till kolli",totalKolli(),totalKo
 saveData();
 document.getElementById("kollinummer").value="";
 renderAll();
-flashProductionValues();
-animateProductionUpdate();
-showProductionToast("green","Kolli registrerat","Kolli "+nummer+" · "+antal+" st","check");
 }
 
 function totalKolli(){return data.kollin.reduce((s,k)=>s+Number(k.used||0),0);}
@@ -992,9 +908,6 @@ saveData();
 document.getElementById("kassKommentar").value="";
 stangKassPanel();
 renderAll();
-flashProductionValues();
-animateProductionUpdate();
-showProductionToast("red","Kassation registrerad",antal+" st · "+(anledning||"Kassation"),"trash");
 }
 
 /* ÄNDRAD ENDAST HÄR:
@@ -1027,7 +940,6 @@ let x=events[i];
 
 if(x.type==="UNDO")continue;
 if(x.type==="DIFF"&&x.undone)continue;
-if(x.type==="KOLLI"&&x.undone)continue;
 if(x.type==="DIFF"&&Number(x.change)===0)continue;
 
 last=x;
@@ -1073,9 +985,6 @@ last.reason||""
 
 saveData();
 renderAll();
-flashProductionValues();
-animateProductionUpdate();
-showProductionToast("neutral","Senaste ändringen ångrad","Diff återställd","undo");
 return;
 }
 }
@@ -1088,10 +997,10 @@ if(index>=0){
 
 let removed=data.kollin[index];
 
-/* Behåll den ursprungliga KOLLI-registreringen i Registreringar.
-   Markera den som ångrad och lägg därefter till en separat UNDO-händelse. */
-last.undone=true;
 data.kollin.splice(index,1);
+
+let hi=data.historik.findIndex(x=>x===last);
+if(hi>=0)data.historik.splice(hi,1);
 
 addHistory(
 "UNDO",
@@ -1123,18 +1032,6 @@ active.kassation=Math.max(
 let hi=data.historik.findIndex(x=>x===last);
 if(hi>=0)data.historik.splice(hi,1);
 
-addHistory(
-"UNDO",
-last.kolli,
-last.produkt,
-"+"+antal,
-"Ångrade kassation",
-totalKolli(),
-active&&active.per>0?totalKolli()%active.per:0,
-last.note||"",
-last.reason||""
-);
-
 }else{
 
 let hi=data.historik.findIndex(x=>x===last);
@@ -1144,10 +1041,6 @@ if(hi>=0)data.historik.splice(hi,1);
 
 saveData();
 renderAll();
-flashProductionValues();
-if(last.type==="KOLLI")showProductionToast("neutral","Senaste ändringen ångrad","Kolli återställt","undo");
-else if(last.type==="KASS")showProductionToast("neutral","Senaste ändringen ångrad","Kassation återställd","undo");
-else showProductionToast("neutral","Senaste ändringen ångrad","Ändringen återställd","undo");
 }
 
 function flaggaDiff(i){
@@ -1157,8 +1050,6 @@ let k=data.kollin[i];
 addHistory("DIFF",k.nummer,k.produkt,"",k.diff?"Flaggade differens":"Tog bort differens",totalKolli(),k.per>0?totalKolli()%k.per:0,k.diff?"":"",k.diff?"Flaggad differens":"Tog bort differens");
 saveData();
 renderAll();
-if(k.diff)showProductionToast("orange","Diff registrerad","Flaggad differens · Kolli "+k.nummer,"warning");
-else showProductionToast("neutral","Diff borttagen","Kolli "+k.nummer,"undo");
 }
 
 function renderKolli(){renderActiveKolli();}
@@ -1244,7 +1135,7 @@ title.innerHTML='<span class="productionActiveDot"></span>Aktivt kolli';
 produkt.innerText="-";
 antal.innerText="0";
 kass.innerText="0";
-diff.innerHTML='<svg class="productionEventIcon" viewBox="0 0 24 24"><path d="M5 20V5"/><path d="M6 5h10l-2 4 2 4H6"/></svg><span>Flagga diff</span>';
+diff.innerHTML='<svg class="diffFlagIcon" viewBox="0 0 24 24"><path d="M6 20V4M7 5h10l-2 4 2 4H7"/></svg><span>Flagga diff</span>';
 diff.classList.remove("flagged");
 return;
 }
@@ -1258,33 +1149,12 @@ antal.innerText=a.used;
 kass.innerText=tk;
 
 if(a.diff){
-diff.innerHTML='<svg class="productionEventIcon" viewBox="0 0 24 24"><path d="M5 20V5"/><path d="M6 5h10l-2 4 2 4H6"/></svg><span>Diff flaggad</span>';
+diff.innerHTML='<svg class="diffFlagIcon" viewBox="0 0 24 24"><path d="M6 20V4M7 5h10l-2 4 2 4H7"/></svg><span>Diff flaggad</span>';
 diff.classList.add("flagged");
 }else{
-diff.innerHTML='<svg class="productionEventIcon" viewBox="0 0 24 24"><path d="M5 20V5"/><path d="M6 5h10l-2 4 2 4H6"/></svg><span>Flagga diff</span>';
+diff.innerHTML='<svg class="diffFlagIcon" viewBox="0 0 24 24"><path d="M6 20V4M7 5h10l-2 4 2 4H7"/></svg><span>Flagga diff</span>';
 diff.classList.remove("flagged");
 }
-}
-
-function showProductionToast(tone,title,detail,iconType){
-let old=document.getElementById("productionToast");
-if(old){old.classList.remove("show");old.classList.add("hide");setTimeout(()=>old.remove(),220);}
-let toast=document.createElement("div");toast.id="productionToast";toast.className="productionToast "+(tone||"neutral");
-let icon={check:'<svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>',trash:'<svg viewBox="0 0 24 24"><path d="M6 7h12M9 7V4h6v3M8 7l1 13h6l1-13"/></svg>',warning:'<svg viewBox="0 0 24 24"><path d="M12 4 21 20H3z"/><path d="M12 9v5M12 17h.01"/></svg>',undo:'<svg viewBox="0 0 24 24"><path d="M9 7 4 12l5 5"/><path d="M5 12h8a6 6 0 0 1 6 6"/></svg>'}[iconType]||'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>';
-toast.innerHTML='<div class="productionToastIcon">'+icon+'</div><div><div class="productionToastTitle">'+title+'</div><div class="productionToastDetail">'+detail+'</div></div><button class="productionToastClose" type="button" aria-label="Stäng">×</button>';
-toast.querySelector(".productionToastClose").onclick=()=>{toast.classList.remove("show");toast.classList.add("hide");setTimeout(()=>toast.remove(),240);};
-document.body.appendChild(toast);requestAnimationFrame(()=>toast.classList.add("show"));setTimeout(()=>{if(toast.isConnected){toast.classList.remove("show");toast.classList.add("hide");setTimeout(()=>{if(toast.isConnected)toast.remove();},240);}},2200);
-}
-
-function flashProductionValues(){
-["totalt","totaltKass","totaltFulla","sistaTotal","activeAntal","activeKass"].forEach(id=>{let el=document.getElementById(id);if(!el)return;let target=el.closest(".balanceBox")||el.parentElement;if(!target)return;target.classList.remove("valueFlash");void target.offsetWidth;target.classList.add("valueFlash");});
-}
-
-function animateProductionUpdate(){
-let card=document.querySelector('#pack .activeKolliHeader')?.closest('.card');
-if(card){card.classList.remove('productionUpdateIn');void card.offsetWidth;card.classList.add('productionUpdateIn');}
-let latest=document.querySelector('#pack .latestEvent')?.closest('.card');
-if(latest){latest.classList.remove('productionUpdateIn');void latest.offsetWidth;latest.classList.add('productionUpdateIn');}
 }
 
 function renderFpk(){
@@ -1358,11 +1228,9 @@ else if(typ==="-"){typ="Kass";kind="kass";icon="×";}
 else if(rawType==="DIFF"||x.text==="Flaggade differens"){typ="DIFF";kind="diff";icon="!";}
 else if(rawType==="KASS"||x.text==="Kassation"){typ="KASS";kind="kass";icon="×";}
 else if(rawType==="KOLLI"||rawType==="Kolli"||x.text==="La till kolli"){typ="KOLLI";kind="kolli";icon="✓";}
-else if(rawType==="START"){typ="START";kind="start";icon='<svg viewBox="0 0 24 24"><path d="m9 7 8 5-8 5z"></path></svg>';}
-else if(rawType==="PAUS"){typ="PAUS";kind="paus";icon='<svg viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"></path></svg>';}
-else if(rawType==="UNDO"){typ="ÅNGRA";kind="undo";icon='<svg viewBox="0 0 24 24"><path d="M9 7 4 12l5 5"></path><path d="M5 12h8a6 6 0 0 1 6 6"></path></svg>';}
-else if(rawType==="SLUT"){typ="AVSLUT";kind="stop";icon='<svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1"></rect></svg>';}
-else {typ=rawType;kind="neutral";icon='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg>';}
+else if(rawType==="START"){typ="START";kind="start";icon="▶";}
+else if(rawType==="PAUS"){typ="PAUS";kind="paus";icon="Ⅱ";}
+else {typ=rawType;kind="neutral";icon="•";}
 
 let displayTime=String(x.tid||"").split(" ")[1]||String(x.tid||"");
 displayTime=displayTime.slice(0,5);
