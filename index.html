@@ -562,13 +562,32 @@ let etState={batch:"",received:0,report:0,scrapLabels:0,fetched:0,fetchedTotal:0
 function openProductionChooser(){
  let pack=document.getElementById("pack"); if(pack) pack.classList.remove("etOnlyMode");
  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),et=document.getElementById("etiketteringView");
- if(!chooser||!main)return; chooser.classList.remove("hidden"); main.classList.add("hidden"); if(sub)sub.classList.add("hidden"); if(et)et.classList.add("hidden"); window.scrollTo(0,0);
+ if(!chooser||!main)return;
+ chooser.classList.remove("hidden"); chooser.style.display="";
+ main.classList.add("hidden"); main.style.display="none";
+ if(sub){sub.classList.add("hidden");sub.style.display="none";}
+ if(et){et.classList.add("hidden");et.style.display="none";}
+ window.scrollTo(0,0);
 }
 function chooseProductionMode(mode){
-let pack=document.getElementById("pack"); if(pack) pack.classList.toggle("etOnlyMode",mode==="etikettering");
+ let pack=document.getElementById("pack");
  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),et=document.getElementById("etiketteringView"),sub=document.getElementById("productionSubView");
- if(mode==="kolli"){if(pack)pack.classList.remove("etOnlyMode");chooser.classList.add("hidden");main.classList.remove("hidden");if(et)et.classList.add("hidden");if(sub)sub.classList.add("hidden");window.scrollTo(0,0);return;}
- chooser.classList.add("hidden");main.classList.add("hidden");if(sub)sub.classList.add("hidden");et.classList.remove("hidden");etRender();window.scrollTo(0,0);
+ if(!chooser||!main||!et)return;
+ if(mode==="kolli"){
+   if(pack)pack.classList.remove("etOnlyMode");
+   chooser.classList.add("hidden"); chooser.style.display="none";
+   main.classList.remove("hidden"); main.style.display="";
+   et.classList.add("hidden"); et.style.display="none";
+   if(sub){sub.classList.add("hidden");sub.style.display="none";}
+   window.scrollTo(0,0);return;
+ }
+ if(pack)pack.classList.add("etOnlyMode");
+ chooser.classList.add("hidden"); chooser.style.display="none";
+ main.classList.add("hidden"); main.style.display="none";
+ if(sub){sub.classList.add("hidden");sub.style.display="none";}
+ et.classList.remove("hidden"); et.style.display="block";
+ etRender();
+ window.scrollTo(0,0);
 }
 function backToProductionChooser(){openProductionChooser();}
 function etFmt(n){return Number(n||0).toLocaleString("sv-SE")}
