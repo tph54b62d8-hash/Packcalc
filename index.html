@@ -1290,7 +1290,7 @@ tbody.innerHTML="";
 let arr=data.historik.filter(x=>x.fpk===data.fpk).slice().reverse(),
 filter=document.getElementById("historyFilterView")?document.getElementById("historyFilterView").value:"all";
 
-if(filter==="kolli")arr=arr.filter(x=>x.type==="KOLLI"||x.type==="Kolli"||x.text==="La till kolli");
+if(filter==="kolli")arr=arr.filter(x=>x.type==="KOLLI"||x.type==="Kolli"||x.type==="UNDO"||x.text==="La till kolli"||x.text==="Ångrade kolli");
 if(filter==="kass")arr=arr.filter(x=>x.type==="KASS"||x.type==="KASS_UNDO"||x.type==="-");
 if(filter==="diff")arr=arr.filter(x=>x.type==="DIFF"||x.text==="Flaggade differens");
 
