@@ -280,104 +280,8 @@ body.dagbokComposerOpen{overflow:hidden}
 @media(max-width:430px){#pack .card{border-radius:16px;padding:15px}#pack .productionTop{gap:8px}#pack .activeBatch{min-width:118px;padding:10px 11px}.productionFinishCard{padding:17px}.productionFinishSummary{gap:7px}.productionFinishSummaryItem{padding:9px}.productionToast{width:calc(100vw - 20px)}}
 
 
-/* V1.6.10 — ENDAST Produktions-headern */
-#pack .productionTop{
-  align-items:center;
-  gap:18px;
-}
-#pack .productionTop > div:first-child{
-  position:relative;
-  min-height:58px;
-  padding-left:68px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-#pack .productionTop > div:first-child::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:50%;
-  transform:translateY(-50%);
-  width:54px;
-  height:54px;
-  border-radius:15px;
-  background:#1459d9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M10 52V28l13-10v10l13-10v10l13-10v34' fill='none' stroke='%23fff' stroke-width='4' stroke-linejoin='round'/%3E%3Cpath d='M10 52h42M18 52V40h8v12M33 52V40h8v12' fill='none' stroke='%23fff' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E") center/38px 38px no-repeat;
-}
-#pack .productionTop h2{
-  margin:0 0 3px!important;
-  font-size:32px;
-  line-height:1.05;
-  letter-spacing:-.7px;
-}
-#pack .productionTop .productionSubtitle{
-  margin:0;
-  font-size:14px;
-  line-height:1.25;
-  color:#687386;
-}
-#pack .productionTop .activeBatch{
-  min-width:255px;
-  padding:14px 18px;
-  border-radius:18px;
-  display:grid;
-  grid-template-columns:18px 1fr;
-  grid-template-rows:auto auto;
-  column-gap:10px;
-  align-items:center;
-}
-#pack .productionTop .activeBatchDot{
-  grid-row:1 / span 2;
-  width:14px;
-  height:14px;
-  margin:0;
-  font-size:0;
-  color:transparent;
-  background:#159447;
-  border-radius:50%;
-  position:relative;
-  display:block;
-  box-shadow:0 0 0 7px #dff6e9;
-}
-#pack .productionTop .activeBatchDot::after{
-  content:"";
-  position:absolute;
-  inset:-3px;
-  border:2px solid rgba(21,148,71,.24);
-  border-radius:50%;
-  animation:productionHeaderPulse 2.6s ease-out infinite;
-}
-#pack .productionTop .activeBatch strong{
-  font-size:23px;
-  line-height:1.05;
-  color:#17764a;
-}
-#pack .productionTop .activeBatch{
-  font-size:15px;
-  font-weight:800;
-  color:#17764a;
-}
-@keyframes productionHeaderPulse{
-  0%{transform:scale(.8);opacity:.7}
-  70%{transform:scale(1.9);opacity:0}
-  100%{transform:scale(1.9);opacity:0}
-}
-@media(max-width:700px){
-  #pack .productionTop{gap:12px}
-  #pack .productionTop > div:first-child{padding-left:60px;min-height:50px}
-  #pack .productionTop > div:first-child::before{
-    width:48px;height:48px;border-radius:14px;background-size:34px 34px;
-  }
-  #pack .productionTop h2{font-size:28px}
-  #pack .productionTop .productionSubtitle{font-size:13px}
-  #pack .productionTop .activeBatch{min-width:190px;padding:12px 13px}
-  #pack .productionTop .activeBatch strong{font-size:19px}
-}
-
-
-/* V1.6.10 — endast dimension/placering för Produktions-headern */
+/* V1.6.10 — ENDAST Produktions-headerns storlek och placering */
 #pack #productionMainLayout > .productionLeft > .card:first-child{
-  width:100%;
   max-width:640px;
   margin-left:auto;
   margin-right:auto;
@@ -386,13 +290,12 @@ body.dagbokComposerOpen{overflow:hidden}
   display:grid;
   grid-template-columns:minmax(0,1fr) auto;
   align-items:center;
-  gap:18px;
+  gap:16px;
 }
 #pack #productionMainLayout > .productionLeft > .card:first-child .activeBatch{
-  margin-left:auto;
   width:220px;
   min-width:220px;
-  max-width:220px;
+  margin-left:auto;
 }
 @media(max-width:700px){
   #pack #productionMainLayout > .productionLeft > .card:first-child{
@@ -405,14 +308,8 @@ body.dagbokComposerOpen{overflow:hidden}
   #pack #productionMainLayout > .productionLeft > .card:first-child .activeBatch{
     width:150px;
     min-width:150px;
-    max-width:150px;
-    padding:11px 10px;
-  }
-  #pack #productionMainLayout > .productionLeft > .card:first-child .activeBatch strong{
-    font-size:18px;
   }
 }
-
 </style>
 </head>
 <body>
@@ -1303,7 +1200,7 @@ fpkInput=document.getElementById("fpkNumber");
 if(data.fpk){
 fpkInput.value=data.fpk;
 fpkInput.placeholder="";
-batch.innerHTML='<span class="activeBatchDot">●</span>Aktiv batch<br><strong>'+data.fpk+'</strong>';
+batch.innerHTML='<span class="activeBatchDot">●</span>Aktiv batch:<br><strong>'+data.fpk+'</strong>';
 let activeProduct=data.kollin.length?(data.kollin[data.kollin.length-1].produkt||"—"):"—";
 let activeStart=data.activeProductionStart?new Date(data.activeProductionStart).toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"}):"—";
 home.innerHTML='<div class="homeProductionCard clickable" onclick="openActiveProduction(this)"><div class="homeProductionDot pulsing"></div><div><div class="homeProductionLabel">AKTIV PRODUKTION</div><div class="homeProductionBatch">'+data.fpk+'</div><div class="homeProductionCount">'+data.kollin.length+(data.kollin.length===1?' registrerat kolli':' registrerade kollin')+'</div></div><div class="homeProductionArrow">›</div></div>';
