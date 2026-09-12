@@ -318,7 +318,7 @@ body.dagbokComposerOpen{overflow:hidden}
 .kolliAddedToast.toastKass{background:#d92d20;box-shadow:0 7px 18px rgba(140,25,25,.14)}
 .kolliAddedToast.toastKass .kolliAddedToastIcon{color:#d92d20}
 .kolliAddedToast.toastDiff{background:#f28b00;box-shadow:0 7px 18px rgba(170,100,0,.14)}
-.kolliAddedToast.toastDiff .kolliAddedToastIcon{color:#f28b00}
+.kolliAddedToast.toastDiff .kolliAddedToastIcon{color:#f28b00} .kolliAddedToast.toastUndo{background:#687386;box-shadow:0 7px 18px rgba(60,70,90,.14)}.kolliAddedToast.toastUndo .kolliAddedToastIcon{color:#687386}
 @media(max-width:430px){.activeKolliTitle{font-size:18px}.activeActionGrid button{padding:8px 7px;gap:6px;font-size:14px}.activeActionGrid button svg{width:20px;height:20px}}
 </style>
 </head>
@@ -1084,6 +1084,7 @@ last.reason||""
 
 saveData();
 renderAll();
+showProductionToast("Ångra genomfört","Diff på kolli "+k.nummer+" återställd","toastUndo");
 return;
 }
 }
@@ -1152,6 +1153,9 @@ if(hi>=0)data.historik.splice(hi,1);
 
 saveData();
 renderAll();
+let undoKolli=last.kolli||"";
+let undoText=last.type==="KOLLI"?"Kolli "+undoKolli+" ångrat":last.type==="KASS"?"Kassation på kolli "+undoKolli+" ångrad":"Ångra genomfört";
+showProductionToast("Ångra genomfört",undoText,"toastUndo");
 }
 
 function flaggaDiff(i){
