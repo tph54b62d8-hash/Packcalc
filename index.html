@@ -88,11 +88,6 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .batchStopIcon{font-size:12px;line-height:1}
 .batchWarnIcon{display:inline-flex;width:16px;height:16px;align-items:center;justify-content:center;font-size:11px;font-weight:900;border:1.5px solid currentColor;border-radius:50%;animation:batchWarnBounce 1.8s ease-in-out infinite}
 @keyframes batchWarnBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-.batchFinishWarning{display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:2px}
-.batchFinishWarning .batchWarnIcon{width:24px;height:24px;font-size:14px;border:0;border-radius:0;position:relative;animation:batchWarnBounce 1.6s ease-in-out infinite;color:#e04444}
-.batchFinishWarning .batchWarnIcon::before{content:"";position:absolute;inset:0;background:#e04444;clip-path:polygon(50% 0,100% 88%,0 88%);border-radius:3px}
-.batchFinishWarning .batchWarnIcon::after{content:"!";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:900;padding-top:5px}
-.batchFinishWarning .batchFeedbackTitle{margin:0;color:#b52f38}
 .batchFeedbackOverlay{position:fixed;inset:0;background:rgba(15,24,39,.28);z-index:1600;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;animation:batchOverlayIn .22s ease-out forwards}
 .batchFeedbackCard{width:min(420px,100%);background:#fff;border-radius:20px;padding:24px 20px 20px;text-align:center;box-shadow:0 18px 55px rgba(0,0,0,.18);transform:translateY(12px) scale(.96);animation:batchCardIn .28s cubic-bezier(.22,.8,.25,1) forwards}
 .batchFeedbackIcon{width:64px;height:64px;margin:0 auto 13px;border-radius:50%;background:#e7f8ee;color:#169b5c;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;position:relative}
@@ -288,6 +283,27 @@ body.dagbokComposerOpen{overflow:hidden}
   .productionHeaderCard .activeBatch{width:124px;min-width:124px;height:64px;padding:10px 9px 4px;border-radius:12px;font-size:11px;line-height:1.2;display:flex;align-items:flex-start;position:relative}
   .productionHeaderCard .activeBatch strong{font-size:14px;line-height:1.1;display:block;position:absolute;left:50%;top:24px;transform:translateX(-50%);margin-left:0;white-space:nowrap;max-width:none;overflow:visible;text-overflow:clip;text-align:center}
 }
+
+/* V1.6.23 — Finish confirmation replaces native confirm */
+.batchFinishConfirmCard{text-align:left;padding:22px 18px 18px}
+.batchFinishConfirmHead{display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:5px}
+.batchFinishConfirmWarn{width:28px;height:28px;border-radius:50%;background:#fff0f1;color:#d92d20;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;animation:batchWarnBounce 1.8s ease-in-out infinite}
+.batchFinishConfirmTitle{margin:0;color:#d92d20;font-size:21px;font-weight:900}
+.batchFinishConfirmSub{text-align:center;color:#687386;font-size:13px;margin:0 0 14px}
+.batchFinishConfirmList{border:1px solid #e1e6ed;border-radius:12px;overflow:hidden;background:#fff}
+.batchFinishConfirmRow{display:grid;grid-template-columns:1fr auto;gap:12px;padding:8px 11px;border-bottom:1px solid #e7ebf0;font-size:13px}
+.batchFinishConfirmRow:last-child{border-bottom:0}
+.batchFinishConfirmRow span{color:#687386}
+.batchFinishConfirmRow strong{color:#172033;text-align:right}
+.batchFinishConfirmRow.total strong{color:#1eaa68}
+.batchFinishConfirmRow.kass strong{color:#d92d20}
+.batchFinishConfirmRow.diff strong{color:#f28b00}
+.batchFinishCheck{display:flex;align-items:flex-start;gap:9px;margin:14px 2px 2px;color:#687386;font-size:13px;line-height:1.35;cursor:pointer}
+.batchFinishCheck input{width:18px;height:18px;flex:0 0 18px;margin:0;accent-color:#1459d9}
+.batchFinishConfirmButtons{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}
+.batchFinishConfirmButtons button{margin-top:0!important}
+.batchFinishConfirmButtons .red:disabled{opacity:.42;cursor:not-allowed}
+@media(max-width:430px){.batchFinishConfirmCard{padding:19px 14px 15px}.batchFinishConfirmRow{padding:7px 9px;font-size:12px}.batchFinishConfirmSub{font-size:12px}}
 </style>
 </head>
 <body>
@@ -326,7 +342,7 @@ body.dagbokComposerOpen{overflow:hidden}
 <div id="productionMainLayout" class="productionLayout">
 <div class="productionLeft">
 <div class="card productionHeaderCard"><div class="productionTop"><div class="productionHeaderMain"><div class="productionHeaderIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20V9h5v11M16 20V4h5v16M8 20v-5h8v5M3 9h5"/></svg></div><div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div></div><div id="productionActiveBatch" class="activeBatch"></div></div></div>
-<div class="card batchIdCard"><h2>Batch ID</h2><div class="batchIdInputWrap"><input id="fpkNumber" placeholder="" autocomplete="off"><button id="fpkClear" class="batchIdClear" type="button" onclick="clearBatchId()" aria-label="Rensa Batch ID">×</button></div><div class="batchButtons"><button id="startBatchBtn" class="blue" onclick="startFpk()"><span class="batchPlayIcon">▶</span><span>Starta batch</span></button><button id="finishBatchBtn" class="red" onclick="finishFpk()"><span class="batchStopIcon">■</span><span>Avsluta batch</span></button></div></div>
+<div class="card batchIdCard"><h2>Batch ID</h2><div class="batchIdInputWrap"><input id="fpkNumber" placeholder="" autocomplete="off"><button id="fpkClear" class="batchIdClear" type="button" onclick="clearBatchId()" aria-label="Rensa Batch ID">×</button></div><div class="batchButtons"><button id="startBatchBtn" class="blue" onclick="startFpk()"><span class="batchPlayIcon">▶</span><span>Starta batch</span></button><button id="finishBatchBtn" class="red" onclick="finishFpk()"><span class="batchStopIcon">■</span><span class="batchWarnIcon">!</span><span>Avsluta batch</span></button></div></div>
 <div class="card"><div class="productionSectionHeader"><h2>Kolli → kapsel / well</h2><span class="collapseArrow">⌃</span></div><div class="productionInputGrid"><div><label>Produkt</label><select id="produkt"><option>Vialer</option><option>Sprutor</option><option>Annan produkt</option></select></div><div><label>Kollinummer</label><input id="kollinummer" placeholder="001"></div><div><label>Antal i kollit</label><input id="antal" type="number" value="0" oninput="raknaKolli()"></div><div><label>Antal per</label><input id="per" type="number" value="0" oninput="raknaKolli()"></div></div><div class="productionActionGrid"><button class="scanButton" onclick="skannaKolli()"><span>📷</span>Skanna kolli</button><button class="blue" onclick="laggTillKolli()">＋ Lägg till kolli</button></div></div>
 <div class="card"><h2>Aktuellt saldo</h2><div class="balanceGrid"><div class="balanceBox"><div class="balanceLabel">Totalt</div><span class="balanceNumber" id="totalt">0</span></div><div class="balanceBox"><div class="balanceLabel">Total kass</div><span class="balanceNumber" id="totaltKass">0</span></div><div class="balanceBox"><div class="balanceLabel">Fulla kapslar / wells</div><span class="balanceNumber" id="totaltFulla">0</span></div><div class="balanceBox"><div class="balanceLabel">Sista kapsel / well</div><span class="balanceNumber" id="sistaTotal">0</span></div></div></div>
 <div class="card"><div class="activeKolliHeader"><div id="activeKolliTitle" class="activeKolliTitle">🟢 Aktivt kolli</div><button id="activeDiffFlag" class="diffFlag" onclick="visaDiffPanel()">⚑ Flagga diff</button></div><div id="activeKolliData" class="activeKolliData"><div><div class="activeDataLabel">Produkt</div><span class="activeDataValue" id="activeProdukt">-</span></div><div><div class="activeDataLabel">Antal i kollit</div><span class="activeDataValue" id="activeAntal">0</span></div><div><div class="activeDataLabel">Kass</div><span class="activeDataValue" id="activeKass">0</span></div></div><div class="activeActionGrid"><button class="red" onclick="visaKassation()">− Kassation / justering</button><button class="gray" onclick="angraSenaste()">↶ Ångra senaste</button></div></div>
@@ -685,7 +701,7 @@ let products=(info.products&&info.products.length)?info.products.join(", "):"—
 let el=document.createElement("div");
 el.id="batchFeedbackOverlay";
 el.className="batchFeedbackOverlay";
-el.innerHTML='<div class="batchFeedbackCard"><div class="batchFinishWarning"><span class="batchWarnIcon">!</span><h3 class="batchFeedbackTitle">Avsluta batch?</h3></div><p class="batchFeedbackSub">Sammanfattning av den avslutade batchen.</p><div class="batchFeedbackInfo"><div class="batchFeedbackStat"><span>Batch ID</span><strong>'+esc(info.batchId)+'</strong></div><div class="batchFeedbackStat"><span>Produkt</span><strong>'+esc(products)+'</strong></div><div class="batchFeedbackStat total"><span>Totalt</span><strong>'+Number(info.total||0).toLocaleString("sv-SE")+' st</strong></div><div class="batchFeedbackStat"><span>Kollin</span><strong>'+Number(info.kolliCount||0).toLocaleString("sv-SE")+'</strong></div><div class="batchFeedbackStat"><span>Kassation</span><strong>'+Number(info.kassation||0).toLocaleString("sv-SE")+' st</strong></div><div class="batchFeedbackStat"><span>Diff</span><strong>'+Number(info.diffCount||0).toLocaleString("sv-SE")+'</strong></div><div class="batchFeedbackStat"><span>Startad</span><strong>'+esc(info.start||"—")+'</strong></div><div class="batchFeedbackStat"><span>Avslutad</span><strong>'+esc(info.end||"—")+'</strong></div></div><button class="batchFeedbackClose" onclick="closeBatchFeedback()">Stäng</button></div>';
+el.innerHTML='<div class="batchFeedbackCard"><div class="batchFeedbackIcon pulse">✓</div><h3 class="batchFeedbackTitle">Batch avslutad</h3><p class="batchFeedbackSub">Sammanfattning av den avslutade batchen.</p><div class="batchFeedbackInfo"><div class="batchFeedbackStat"><span>Batch ID</span><strong>'+esc(info.batchId)+'</strong></div><div class="batchFeedbackStat"><span>Produkt</span><strong>'+esc(products)+'</strong></div><div class="batchFeedbackStat total"><span>Totalt</span><strong>'+Number(info.total||0).toLocaleString("sv-SE")+' st</strong></div><div class="batchFeedbackStat"><span>Kollin</span><strong>'+Number(info.kolliCount||0).toLocaleString("sv-SE")+'</strong></div><div class="batchFeedbackStat"><span>Kassation</span><strong>'+Number(info.kassation||0).toLocaleString("sv-SE")+' st</strong></div><div class="batchFeedbackStat"><span>Diff</span><strong>'+Number(info.diffCount||0).toLocaleString("sv-SE")+'</strong></div><div class="batchFeedbackStat"><span>Startad</span><strong>'+esc(info.start||"—")+'</strong></div><div class="batchFeedbackStat"><span>Avslutad</span><strong>'+esc(info.end||"—")+'</strong></div></div><button class="batchFeedbackClose" onclick="closeBatchFeedback()">Stäng</button></div>';
 document.body.appendChild(el);
 }
 
@@ -704,9 +720,39 @@ renderAll();
 showBatchStartFeedback(v);
 }
 
-function finishFpk(){
+function closeBatchFinishConfirm(){
+let el=document.getElementById("batchFinishConfirmOverlay");
+if(el)el.remove();
+}
+
+function showBatchFinishConfirm(){
 if(!data.fpk){alert("Det finns ingen aktiv batch.");return;}
-if(!confirm("Vill du avsluta batch "+data.fpk+"?"))return;
+let productionId=data.activeProductionId,
+events=data.historik.filter(x=>x.productionId===productionId),
+kollin=data.kollin||[],
+total=kollin.reduce((s,k)=>s+Number(k.used||0),0),
+kassation=kollin.reduce((s,k)=>s+Number(k.kassation||0),0),
+diffCount=events.filter(x=>x.type==="DIFF"&&!x.undone&&Number(x.change)!==0).length,
+products=[...new Set(kollin.map(k=>k.produkt).filter(Boolean))];
+let esc=v=>String(v??"").replace(/</g,"&lt;").replace(/>/g,"&gt;"),
+productText=products.length?products.join(", "):"—";
+let el=document.createElement("div");
+el.id="batchFinishConfirmOverlay";
+el.className="batchFeedbackOverlay";
+el.innerHTML='<div class="batchFeedbackCard batchFinishConfirmCard"><div class="batchFinishConfirmHead"><div class="batchFinishConfirmWarn">!</div><h3 class="batchFinishConfirmTitle">Avsluta batch?</h3></div><p class="batchFinishConfirmSub">Kontrollera sammanfattningen innan du avslutar.</p><div class="batchFinishConfirmList"><div class="batchFinishConfirmRow"><span>Batch</span><strong>'+esc(data.fpk)+'</strong></div><div class="batchFinishConfirmRow"><span>Produkt</span><strong>'+esc(productText)+'</strong></div><div class="batchFinishConfirmRow"><span>Registrerade kollin</span><strong>'+Number(kollin.length).toLocaleString("sv-SE")+'</strong></div><div class="batchFinishConfirmRow total"><span>Totalt antal</span><strong>'+Number(total).toLocaleString("sv-SE")+' st</strong></div><div class="batchFinishConfirmRow kass"><span>Kassation</span><strong>'+Number(kassation).toLocaleString("sv-SE")+' st</strong></div><div class="batchFinishConfirmRow diff"><span>Diffar</span><strong>'+Number(diffCount).toLocaleString("sv-SE")+'</strong></div></div><label class="batchFinishCheck"><input id="batchFinishConfirmCheck" type="checkbox"><span>Jag bekräftar att alla uppgifter stämmer.</span></label><div class="batchFinishConfirmButtons"><button class="gray" type="button" onclick="closeBatchFinishConfirm()">Avbryt</button><button class="red" type="button" id="batchFinishConfirmBtn" disabled onclick="finishFpkConfirmed()">Avsluta batch</button></div></div>';
+document.body.appendChild(el);
+let check=document.getElementById("batchFinishConfirmCheck"),btn=document.getElementById("batchFinishConfirmBtn");
+check.addEventListener("change",()=>{btn.disabled=!check.checked;});
+}
+
+function finishFpk(){
+showBatchFinishConfirm();
+}
+
+function finishFpkConfirmed(){
+let check=document.getElementById("batchFinishConfirmCheck");
+if(!check||!check.checked)return;
+closeBatchFinishConfirm();
 let productionId=data.activeProductionId,
 end=new Date().toISOString(),
 events=data.historik.filter(x=>x.productionId===productionId),
@@ -715,27 +761,10 @@ total=kollin.reduce((s,k)=>s+Number(k.used||0),0),
 kassation=kollin.reduce((s,k)=>s+Number(k.kassation||0),0),
 diffCount=events.filter(x=>x.type==="DIFF"&&!x.undone&&Number(x.change)!==0).length,
 products=[...new Set(kollin.map(k=>k.produkt).filter(Boolean))];
-data.produktioner.push({
-productionId,
-batchId:data.fpk,
-start:data.activeProductionStart||null,
-end,
-products,
-kollin,
-total,
-kolliCount:kollin.length,
-kassation,
-diffCount
-});
+data.produktioner.push({productionId,batchId:data.fpk,start:data.activeProductionStart||null,end,products,kollin,total,kolliCount:kollin.length,kassation,diffCount});
 addHistory("SLUT","-","","","Avslutade produktion","","","Batch avslutad");
 let finishInfo={batchId:data.fpk,products,start:data.activeProductionStart?new Date(data.activeProductionStart).toLocaleString("sv-SE"):"—",end:new Date(end).toLocaleString("sv-SE"),total,kolliCount:kollin.length,kassation,diffCount};
-data.fpk="";
-data.activeProductionId="";
-data.activeProductionStart="";
-data.kollin=[];
-saveData();
-renderAll();
-showBatchFinishFeedback(finishInfo);
+data.fpk="";data.activeProductionId="";data.activeProductionStart="";data.kollin=[];saveData();renderAll();showBatchFinishFeedback(finishInfo);
 }
 
 function skannaKolli(){alert("QR-skanning kopplas på här. Kamerafunktionen kan läggas till senare.");}
