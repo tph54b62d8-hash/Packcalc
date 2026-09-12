@@ -241,6 +241,7 @@ body.dagbokComposerOpen{overflow:hidden}
 /* Samma pulserande punkt som på Hem */
 .productionHeaderCard .activeBatchDot{width:14px;height:14px;border-radius:50%;background:#13a15c;color:transparent;display:inline-block;vertical-align:middle;margin-right:7px;position:relative;box-shadow:0 0 0 8px #dff6e9;animation:none;transform:none}
 .productionHeaderCard .activeBatchDot::after{content:"";position:absolute;inset:-1px;border:2px solid rgba(19,161,92,.28);border-radius:50%;animation:homeProductionPulse 2.5s ease-out infinite}
+.productionHeaderCard .activeBatch{display:flex;align-items:center}.productionHeaderCard .activeBatchText{position:relative;top:6px}
 @media(max-width:430px){
   .productionHeaderCard{width:calc(100% - 12px)}
   .productionHeaderCard .productionTop{display:grid;grid-template-columns:minmax(0,1fr) 124px;align-items:center;gap:8px}
@@ -1110,7 +1111,7 @@ fpkInput=document.getElementById("fpkNumber");
 if(data.fpk){
 fpkInput.value=data.fpk;
 fpkInput.placeholder="";
-batch.innerHTML='<span class="activeBatchDot">●</span>Aktiv batch:<br><strong>'+data.fpk+'</strong>';
+batch.innerHTML='<span class="activeBatchDot">●</span><span class="activeBatchText">Aktiv batch:<br><strong>'+data.fpk+'</strong></span>';
 let activeProduct=data.kollin.length?(data.kollin[data.kollin.length-1].produkt||"—"):"—";
 let activeStart=data.activeProductionStart?new Date(data.activeProductionStart).toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"}):"—";
 home.innerHTML='<div class="homeProductionCard clickable" onclick="openActiveProduction(this)"><div class="homeProductionDot pulsing"></div><div><div class="homeProductionLabel">AKTIV PRODUKTION</div><div class="homeProductionBatch">'+data.fpk+'</div><div class="homeProductionCount">'+data.kollin.length+(data.kollin.length===1?' registrerat kolli':' registrerade kollin')+'</div></div><div class="homeProductionArrow">›</div></div>';
