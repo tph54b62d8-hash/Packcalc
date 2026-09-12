@@ -229,85 +229,6 @@ nav#mainNav button{position:relative}.navDagbokNotice,.homeDagbokNotice{display:
 body.dagbokComposerOpen{overflow:hidden}
 @media(max-width:430px){.dagbokPageHead h2{font-size:29px}.dagbokActions{grid-template-columns:minmax(0,1fr) 82px}.dagbokNewButton{grid-template-columns:40px 1fr 20px;padding:10px 11px}.dagbokPlus{width:36px;height:36px}.dagbokTimeline{padding-left:14px}.dagbokSwipeWrap{margin-left:21px}.dagbokNote{padding:10px 11px}.dagbokNoteText{font-size:13px}.dagbokComposerBody textarea{min-height:390px}.navDagbokNotice.visible{right:calc(50% - 16px)}}
 </style>
-
-<style id="v17-production-visual-only">
-/* V1.7 — Production visual redesign only. Existing behavior/data remains unchanged. */
-#pack{background:#f5f7fb;padding-bottom:24px}
-#pack .productionLayout{display:block;max-width:620px;margin:0 auto}
-#pack .productionLeft{width:100%}
-#pack .productionRight{display:none}
-#pack .card{background:#fff;border:1px solid #e6eaf0;border-radius:18px;padding:16px;box-shadow:0 4px 14px rgba(25,43,74,.06);margin-bottom:10px}
-#pack .productionTop{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px}
-#pack .productionTop h2{font-size:25px;line-height:1.1;color:#172033;letter-spacing:-.3px}
-#pack .productionSubtitle{font-size:13px;line-height:1.35;color:#687386;margin-top:5px}
-#pack .productionHeaderIcon{width:42px;height:42px;border-radius:12px;background:#edf4ff;color:#1459d9;display:flex;align-items:center;justify-content:center;margin-bottom:9px}
-#pack .productionHeaderIcon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-#pack .activeBatch{min-width:116px;background:#eaf8f1;color:#17764a;border:1px solid #d5efdf;border-radius:13px;padding:10px 12px;line-height:1.2}
-#pack .activeBatchDot{font-size:13px;color:#15965a;margin-right:5px}
-#pack .batchCardTitle,#pack .productionSectionTitle{font-size:18px;color:#172033;margin:0 0 10px;font-weight:800}
-#pack #fpkNumber{height:48px;border:1px solid #d9dfe8;border-radius:12px;background:#fff;font-size:16px;padding:0 13px;box-shadow:inset 0 1px 2px rgba(25,43,74,.03)}
-#pack .batchButtons{gap:10px;margin-top:0}
-#pack .batchButtons button{height:48px;margin-top:10px;border-radius:11px;font-weight:800;font-size:15px}
-#pack .batchButtons .blue{box-shadow:0 4px 10px rgba(20,89,217,.16)}
-#pack .batchButtons .red{background:#fff0f2;color:#c52b3a;border:1px solid #f5cbd1}
-#pack .productionSectionHeader{margin-bottom:10px}
-#pack .productionSectionHeader h2{font-size:19px;color:#172033}
-#pack .productionSectionHeader h2:before{content:"";display:inline-block;width:28px;height:28px;margin-right:8px;vertical-align:-7px;border-radius:8px;background:#edf4ff}
-#pack .collapseArrow{color:#687386;font-size:19px}
-#pack .productionInputGrid{gap:10px}
-#pack .productionInputGrid label{display:block;font-size:13px;color:#172033;font-weight:750;margin-bottom:5px}
-#pack .productionInputGrid input,#pack .productionInputGrid select{height:46px;border-radius:11px;border:1px solid #d9dfe8;background:#fff;padding:0 12px;font-size:15px}
-#pack .productionActionGrid{gap:10px;margin-top:10px}
-#pack .productionActionGrid button{height:46px;border-radius:11px;font-size:14px;font-weight:800}
-#pack .scanButton{background:#f0f3f7;color:#172033;border:1px solid #e1e6ed}
-#pack .productionScanIcon{width:19px;height:19px;vertical-align:-5px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-#pack .balanceTitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
-#pack .balanceTitle h2{margin:0;font-size:19px;color:#172033}
-#pack .balanceTitleIcon{width:30px;height:30px;border-radius:8px;background:#edf4ff;color:#1459d9;display:inline-flex;align-items:center;justify-content:center;margin-right:7px;vertical-align:-8px}
-#pack .balanceTitleIcon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-#pack .balanceGrid{gap:9px}
-#pack .balanceBox{min-height:76px;padding:10px 8px;border-radius:12px;background:#edf5ff;border:1px solid #e0ebfa}
-#pack .balanceBox:nth-child(2){background:#fff0f2;border-color:#f8d8dd}
-#pack .balanceLabel{font-size:12px;color:#687386;font-weight:650;line-height:1.2}
-#pack .balanceNumber{font-size:27px;margin-top:4px;color:#1459d9}
-#pack .balanceBox:nth-child(2) .balanceNumber{color:#c52b3a}
-#pack .activeKolliHeader{align-items:center;gap:8px}
-#pack .activeKolliTitle{font-size:19px;display:flex;align-items:center;color:#17764a}
-#pack .productionActiveDot{width:12px;height:12px;border-radius:50%;background:#25ad67;box-shadow:0 0 0 5px #e4f7ec;margin-right:8px;display:inline-block;flex:0 0 12px}
-#pack .diffFlag{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 10px;background:#fff6e8;color:#a96800;border:1px solid #f5dfbd;border-radius:9px;font-size:12px;font-weight:800}
-#pack .diffFlag.flagged{background:#fff0dc;color:#b96b00;border-color:#f3c97e;box-shadow:inset 0 0 0 1px rgba(239,143,0,.08)}
-#pack .diffFlag .diffFlagIcon{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-#pack .activeKolliData{gap:8px;background:#eef8f2;border:1px solid #dff0e6;border-radius:12px;padding:12px;margin-top:10px}
-#pack .activeDataLabel{font-size:11px;color:#687386}
-#pack .activeDataValue{font-size:17px;margin-top:3px;color:#172033}
-#pack .activeActionGrid{gap:10px;margin-top:10px}
-#pack .activeActionGrid button{height:44px;border-radius:11px;font-size:13px;font-weight:800}
-#pack .activeActionGrid .red{background:#fff0f2;color:#c52b3a;border:1px solid #f4cbd1}
-#pack .activeActionGrid .gray{background:#f0f3f7;color:#263247;border:1px solid #e0e5ec}
-#pack .latestEvent{grid-template-columns:36px 1fr auto;gap:10px}
-#pack .latestEventIcon{width:34px;height:34px;border-radius:10px;background:#edf4ff;display:flex;align-items:center;justify-content:center}
-#pack .productionLatestIcon{width:19px;height:19px;fill:none;stroke:#1459d9;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-#pack .latestEventTitle{font-size:15px;color:#172033}
-#pack .latestEventText{font-size:12px;color:#687386}
-#pack .latestEventChange{font-size:17px;color:#1eaa68}
-#pack .productionBottomLinks{display:grid;gap:8px;margin-top:0}
-#pack .productionLink{height:58px;margin:0;background:#fff;border:1px solid #e1e6ee;border-radius:14px;box-shadow:0 3px 10px rgba(25,43,74,.045);color:#172033;font-size:14px;font-weight:800;padding:0 15px}
-#pack .productionLink:after{content:""}
-#pack .productionLink span{color:#687386;font-size:25px;line-height:1}
-@media(max-width:430px){
- #pack{padding-bottom:20px}
- #pack .card{padding:14px;border-radius:16px}
- #pack .productionTop{grid-template-columns:1fr;gap:9px}
- #pack .activeBatch{width:100%;box-sizing:border-box}
- #pack .productionTop h2{font-size:23px}
- #pack .productionInputGrid{gap:9px}
- #pack .productionActionGrid{gap:9px}
- #pack .balanceGrid{gap:8px}
- #pack .balanceBox{min-height:73px}
- #pack .activeKolliHeader{align-items:center}
- #pack .diffFlag{height:32px;padding:0 8px;font-size:11px}
-}
-</style>
 </head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
@@ -344,11 +265,11 @@ body.dagbokComposerOpen{overflow:hidden}
 </div>
 <div id="productionMainLayout" class="productionLayout">
 <div class="productionLeft">
-<div class="card"><div class="productionTop"><div><div class="productionHeaderIcon"><svg viewBox="0 0 24 24"><path d="M4 19V9l4-3 4 3 4-3 4 3v10H4Z"/><path d="M8 19v-5h3v5M15 19v-4h3v4"/></svg></div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div><div id="productionActiveBatch" class="activeBatch"></div></div></div>
-<div class="card"><h2 class="batchCardTitle">Batch ID</h2><input id="fpkNumber" placeholder=""><div class="batchButtons"><button class="blue" onclick="startFpk()">Starta batch</button><button class="red" onclick="finishFpk()">Avsluta batch</button></div></div>
+<div class="card"><div class="productionTop"><div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div><div id="productionActiveBatch" class="activeBatch"></div></div></div>
+<div class="card"><h2>Batch ID</h2><input id="fpkNumber" placeholder=""><div class="batchButtons"><button class="blue" onclick="startFpk()">Starta batch</button><button class="red" onclick="finishFpk()">Avsluta batch</button></div></div>
 <div class="card"><div class="productionSectionHeader"><h2>Kolli → kapsel / well</h2><span class="collapseArrow">⌃</span></div><div class="productionInputGrid"><div><label>Produkt</label><select id="produkt"><option>Vialer</option><option>Sprutor</option><option>Annan produkt</option></select></div><div><label>Kollinummer</label><input id="kollinummer" placeholder="001"></div><div><label>Antal i kollit</label><input id="antal" type="number" value="0" oninput="raknaKolli()"></div><div><label>Antal per</label><input id="per" type="number" value="0" oninput="raknaKolli()"></div></div><div class="productionActionGrid"><button class="scanButton" onclick="skannaKolli()"><span>📷</span>Skanna kolli</button><button class="blue" onclick="laggTillKolli()">＋ Lägg till kolli</button></div></div>
-<div class="card"><div class="balanceTitle"><h2><span class="balanceTitleIcon"><svg viewBox="0 0 24 24"><path d="M4 18V9M10 18V5M16 18v-8M22 18V3"/></svg></span>Aktuellt saldo</h2></div><div class="balanceGrid"><div class="balanceBox"><div class="balanceLabel">Totalt</div><span class="balanceNumber" id="totalt">0</span></div><div class="balanceBox"><div class="balanceLabel">Total kass</div><span class="balanceNumber" id="totaltKass">0</span></div><div class="balanceBox"><div class="balanceLabel">Fulla kapslar / wells</div><span class="balanceNumber" id="totaltFulla">0</span></div><div class="balanceBox"><div class="balanceLabel">Sista kapsel / well</div><span class="balanceNumber" id="sistaTotal">0</span></div></div></div>
-<div class="card"><div class="activeKolliHeader"><div id="activeKolliTitle" class="activeKolliTitle"><span class="productionActiveDot"></span>Aktivt kolli</div><button id="activeDiffFlag" class="diffFlag" onclick="visaDiffPanel()"><svg class="diffFlagIcon" viewBox="0 0 24 24"><path d="M6 20V4M7 5h10l-2 4 2 4H7"/></svg><span>Flagga diff</span></button></div><div id="activeKolliData" class="activeKolliData"><div><div class="activeDataLabel">Produkt</div><span class="activeDataValue" id="activeProdukt">-</span></div><div><div class="activeDataLabel">Antal i kollit</div><span class="activeDataValue" id="activeAntal">0</span></div><div><div class="activeDataLabel">Kass</div><span class="activeDataValue" id="activeKass">0</span></div></div><div class="activeActionGrid"><button class="red" onclick="visaKassation()">− Kassation / justering</button><button class="gray" onclick="angraSenaste()">↶ Ångra senaste</button></div></div>
+<div class="card"><h2>Aktuellt saldo</h2><div class="balanceGrid"><div class="balanceBox"><div class="balanceLabel">Totalt</div><span class="balanceNumber" id="totalt">0</span></div><div class="balanceBox"><div class="balanceLabel">Total kass</div><span class="balanceNumber" id="totaltKass">0</span></div><div class="balanceBox"><div class="balanceLabel">Fulla kapslar / wells</div><span class="balanceNumber" id="totaltFulla">0</span></div><div class="balanceBox"><div class="balanceLabel">Sista kapsel / well</div><span class="balanceNumber" id="sistaTotal">0</span></div></div></div>
+<div class="card"><div class="activeKolliHeader"><div id="activeKolliTitle" class="activeKolliTitle">🟢 Aktivt kolli</div><button id="activeDiffFlag" class="diffFlag" onclick="visaDiffPanel()">⚑ Flagga diff</button></div><div id="activeKolliData" class="activeKolliData"><div><div class="activeDataLabel">Produkt</div><span class="activeDataValue" id="activeProdukt">-</span></div><div><div class="activeDataLabel">Antal i kollit</div><span class="activeDataValue" id="activeAntal">0</span></div><div><div class="activeDataLabel">Kass</div><span class="activeDataValue" id="activeKass">0</span></div></div><div class="activeActionGrid"><button class="red" onclick="visaKassation()">− Kassation / justering</button><button class="gray" onclick="angraSenaste()">↶ Ångra senaste</button></div></div>
 <div class="card"><div class="latestEvent"><div class="latestEventIcon">◷</div><div><div class="latestEventTitle">Senaste händelse</div><div id="latestEventText" class="latestEventText">Ingen händelse ännu.</div></div><div id="latestEventChange" class="latestEventChange">-</div></div></div>
 <div class="productionBottomLinks"><button class="productionLink" onclick="openProductionView('registered')">Registrerade kollin <span style="float:right">›</span></button><button class="productionLink" onclick="openProductionView('registrations')">Registreringar <span style="float:right">›</span></button></div>
 </div><div class="productionRight"></div></div>
@@ -1131,11 +1052,11 @@ diff=document.getElementById("activeDiffFlag");
 if(!title)return;
 
 if(!data.kollin.length){
-title.innerHTML='<span class="productionActiveDot"></span>Aktivt kolli';
+title.innerText="🟢 Aktivt kolli";
 produkt.innerText="-";
 antal.innerText="0";
 kass.innerText="0";
-diff.innerHTML='<svg class="diffFlagIcon" viewBox="0 0 24 24"><path d="M6 20V4M7 5h10l-2 4 2 4H7"/></svg><span>Flagga diff</span>';
+diff.innerText="⚑ Flagga diff";
 diff.classList.remove("flagged");
 return;
 }
@@ -1143,16 +1064,16 @@ return;
 let a=data.kollin[data.kollin.length-1],
 tk=Number(a.kassation)||0;
 
-title.innerHTML='<span class="productionActiveDot"></span>Aktivt kolli ('+a.nummer+')';
+title.innerText="🟢 Aktivt kolli ("+a.nummer+")";
 produkt.innerText=a.produkt;
 antal.innerText=a.used;
 kass.innerText=tk;
 
 if(a.diff){
-diff.innerHTML='<svg class="diffFlagIcon" viewBox="0 0 24 24"><path d="M6 20V4M7 5h10l-2 4 2 4H7"/></svg><span>Diff flaggad</span>';
+diff.innerText="⚑ Diff flaggad";
 diff.classList.add("flagged");
 }else{
-diff.innerHTML='<svg class="diffFlagIcon" viewBox="0 0 24 24"><path d="M6 20V4M7 5h10l-2 4 2 4H7"/></svg><span>Flagga diff</span>';
+diff.innerText="⚑ Flagga diff";
 diff.classList.remove("flagged");
 }
 }
