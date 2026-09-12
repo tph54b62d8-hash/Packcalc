@@ -1057,10 +1057,11 @@ if(index>=0){
 
 let removed=data.kollin[index];
 
+/* Behåll originalregistreringen i historiken även när kollit ångras.
+   Själva kollit tas bort från aktiv data, men händelsen ska ligga kvar
+   så att hela kedjan kan följas i Registreringar. */
 data.kollin.splice(index,1);
-
-let hi=data.historik.findIndex(x=>x===last);
-if(hi>=0)data.historik.splice(hi,1);
+last.undone=true;
 
 addHistory(
 "UNDO",
@@ -1302,8 +1303,9 @@ cc=String(x.change).startsWith("+")?"registrationCountPlus":String(x.change).sta
 if(typ==="+"){typ="Kolli";kind="kolli";icon="✓";}
 else if(typ==="-"){typ="Kass";kind="kass";icon="×";}
 else if(rawType==="DIFF"||x.text==="Flaggade differens"){typ="DIFF";kind="diff";icon="!";}
-else if(rawType==="KASS_UNDO"){typ="Ångrad kass";kind="neutral";icon="↶";}
+else if(rawType==="KASS_UNDO"){typ="Ångrad kass";kind="neutral";icon='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:18px;height:18px;vertical-align:-4px"><path stroke-linecap="round" stroke-linejoin="round" d="m15 15-6 6m0 0-6-6m6 6V9a6 6 0 0 1 12 0v3" /></svg>';}
 else if(rawType==="KASS"||x.text==="Kassation"){typ="KASS";kind="kass";icon="×";}
+else if(rawType==="UNDO"){typ=x.text||"Ångrad";kind="neutral";icon='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:18px;height:18px;vertical-align:-4px"><path stroke-linecap="round" stroke-linejoin="round" d="m15 15-6 6m0 0-6-6m6 6V9a6 6 0 0 1 12 0v3" /></svg>';}
 else if(rawType==="KOLLI"||rawType==="Kolli"||x.text==="La till kolli"){typ="KOLLI";kind="kolli";icon="✓";}
 else if(rawType==="START"){typ="START";kind="start";icon="▶";}
 else if(rawType==="PAUS"){typ="PAUS";kind="paus";icon="Ⅱ";}
