@@ -997,8 +997,9 @@ let last=null;
 for(let i=events.length-1;i>=0;i--){
 let x=events[i];
 
-if(x.type==="UNDO")continue;
+if(x.type==="UNDO"||x.type==="KASS_UNDO")continue;
 if(x.type==="DIFF"&&x.undone)continue;
+if(x.type==="KASS"&&x.undone)continue;
 if(x.type==="DIFF"&&Number(x.change)===0)continue;
 
 last=x;
@@ -1088,8 +1089,19 @@ active.kassation=Math.max(
 );
 }
 
-let hi=data.historik.findIndex(x=>x===last);
-if(hi>=0)data.historik.splice(hi,1);
+last.undone=true;
+
+addHistory(
+"KASS_UNDO",
+active.nummer,
+active.produkt,
+"+"+antal,
+"Ångrade kassation",
+totalKolli(),
+active.per>0?totalKolli()%active.per:0,
+last.note||"",
+last.reason||""
+);
 
 }else{
 
@@ -1278,7 +1290,7 @@ let arr=data.historik.filter(x=>x.fpk===data.fpk).slice().reverse(),
 filter=document.getElementById("historyFilterView")?document.getElementById("historyFilterView").value:"all";
 
 if(filter==="kolli")arr=arr.filter(x=>x.type==="KOLLI"||x.type==="Kolli"||x.text==="La till kolli");
-if(filter==="kass")arr=arr.filter(x=>x.type==="KASS"||x.type==="-");
+if(filter==="kass")arr=arr.filter(x=>x.type==="KASS"||x.type==="KASS_UNDO"||x.type==="-");
 if(filter==="diff")arr=arr.filter(x=>x.type==="DIFF"||x.text==="Flaggade differens");
 
 arr.forEach(x=>{
@@ -1290,6 +1302,7 @@ cc=String(x.change).startsWith("+")?"registrationCountPlus":String(x.change).sta
 if(typ==="+"){typ="Kolli";kind="kolli";icon="✓";}
 else if(typ==="-"){typ="Kass";kind="kass";icon="×";}
 else if(rawType==="DIFF"||x.text==="Flaggade differens"){typ="DIFF";kind="diff";icon="!";}
+else if(rawType==="KASS_UNDO"){typ="Ångrad kass";kind="neutral";icon="↶";}
 else if(rawType==="KASS"||x.text==="Kassation"){typ="KASS";kind="kass";icon="×";}
 else if(rawType==="KOLLI"||rawType==="Kolli"||x.text==="La till kolli"){typ="KOLLI";kind="kolli";icon="✓";}
 else if(rawType==="START"){typ="START";kind="start";icon="▶";}
@@ -1968,10 +1981,10 @@ original=startEvent?Math.abs(Number(String(startEvent.change).replace("+",""))||
 product=k.produkt||"Produkt saknas",
 per=k.per?String(k.per)+"/kapsel":"—";
 
-let registrations=events.filter(x=>x.type==="KASS"||x.type==="DIFF"||x.type==="KOLLI"||x.type==="Kolli"||x.type==="-"||x.text==="Flaggade differens"||x.text==="La till kolli");
+let registrations=events.filter(x=>x.type==="KASS"||x.type==="KASS_UNDO"||x.type==="DIFF"||x.type==="KOLLI"||x.type==="Kolli"||x.type==="-"||x.text==="Flaggade differens"||x.text==="La till kolli");
 let rows=registrations.map(x=>{
-let type=x.type==="KASS"||x.type==="-"||x.text==="Kassation"?"Kassation":x.type==="DIFF"||x.text==="Flaggade differens"?"Diff":"Registrerat";
-let value=type==="Kassation"?"−"+Math.abs(Number(x.change)||0)+" st":type==="Diff"?(x.change||"Diff"):"+"+Math.abs(Number(String(x.change).replace("+",""))||0)+" st";
+let type=x.type==="KASS_UNDO"?"Ångrad kassation":x.type==="KASS"||x.type==="-"||x.text==="Kassation"?"Kassation":x.type==="DIFF"||x.text==="Flaggade differens"?"Diff":"Registrerat";
+let value=type==="Kassation"?"−"+Math.abs(Number(x.change)||0)+" st":type==="Ångrad kassation"?"+"+Math.abs(Number(x.change)||0)+" st":type==="Diff"?(x.change||"Diff"):"+"+Math.abs(Number(String(x.change).replace("+",""))||0)+" st";
 let detail=(x.reason?(x.reason+(x.note?" · "+x.note:"")):x.note)||"";
 return '<div style="padding:10px 0;border-bottom:1px solid #e7ebf1"><div style="display:flex;justify-content:space-between;gap:10px"><strong>'+type+'</strong><strong>'+value+'</strong></div><div style="color:#687386;font-size:12px;margin-top:3px">'+(historyParseDate(x.tid)?historyFormatDate(historyParseDate(x.tid)):"—")+(detail?" · "+detail:"")+'</div></div>';
 }).join("");
