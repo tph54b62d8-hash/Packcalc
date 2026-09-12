@@ -228,18 +228,29 @@ nav#mainNav button{position:relative}.navDagbokNotice,.homeDagbokNotice{display:
 @keyframes dagbokComposerIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}@keyframes dagbokComposerOut{from{transform:translateY(0)}to{transform:translateY(100%)}}
 body.dagbokComposerOpen{overflow:hidden}
 @media(max-width:430px){.dagbokPageHead h2{font-size:29px}.dagbokActions{grid-template-columns:minmax(0,1fr) 82px}.dagbokNewButton{grid-template-columns:40px 1fr 20px;padding:10px 11px}.dagbokPlus{width:36px;height:36px}.dagbokTimeline{padding-left:14px}.dagbokSwipeWrap{margin-left:21px}.dagbokNote{padding:10px 11px}.dagbokNoteText{font-size:13px}.dagbokComposerBody textarea{min-height:390px}.navDagbokNotice.visible{right:calc(50% - 16px)}}
-/* V1.6.10 — Produktion header visual only */
-.productionHeaderCard{padding:14px!important;border-radius:16px!important}
-.productionHeaderCard .productionTop{min-height:82px}
+/* V1.6.11 — Produktion header visual only */
+.productionHeaderCard{width:calc(100% - 20px);margin-left:auto;margin-right:auto;padding:11px!important;border-radius:15px!important}
+.productionHeaderCard .productionTop{min-height:68px}
+.productionHeaderMain{gap:9px}
+.productionHeaderIcon{width:40px;height:40px;flex-basis:40px}
+.productionHeaderIcon svg{width:38px;height:38px}
+.productionHeaderCard h2{font-size:22px;line-height:1.05}
+.productionHeaderCard .productionSubtitle{font-size:12px;line-height:1.15;margin-top:4px}
+.productionHeaderCard .activeBatch{min-width:124px;padding:9px 10px;border-radius:11px;font-size:12px;line-height:1.2}
+.productionHeaderCard .activeBatch strong{font-size:18px;line-height:1.1}
+/* Samma pulserande punkt som på Hem */
+.productionHeaderCard .activeBatchDot{width:14px;height:14px;border-radius:50%;background:#13a15c;color:transparent;display:inline-block;vertical-align:middle;margin-right:7px;position:relative;box-shadow:0 0 0 8px #dff6e9;animation:none;transform:none}
+.productionHeaderCard .activeBatchDot::after{content:"";position:absolute;inset:-1px;border:2px solid rgba(19,161,92,.28);border-radius:50%;animation:homeProductionPulse 2.5s ease-out infinite}
 @media(max-width:430px){
-  .productionHeaderCard .productionTop{display:grid;grid-template-columns:minmax(0,1fr) 138px;align-items:center;gap:10px}
-  .productionHeaderMain{gap:10px}
-  .productionHeaderIcon{width:44px;height:44px;flex-basis:44px}
-  .productionHeaderIcon svg{width:42px;height:42px}
-  .productionHeaderCard h2{font-size:25px;line-height:1.05}
-  .productionHeaderCard .productionSubtitle{font-size:14px;line-height:1.15;margin-top:5px}
-  .productionHeaderCard .activeBatch{width:138px;min-width:138px;height:76px;padding:10px 11px;border-radius:14px;font-size:14px;line-height:1.25}
-  .productionHeaderCard .activeBatch strong{font-size:22px;line-height:1.15}
+  .productionHeaderCard{width:calc(100% - 12px)}
+  .productionHeaderCard .productionTop{display:grid;grid-template-columns:minmax(0,1fr) 124px;align-items:center;gap:8px}
+  .productionHeaderMain{gap:8px}
+  .productionHeaderIcon{width:38px;height:38px;flex-basis:38px}
+  .productionHeaderIcon svg{width:36px;height:36px}
+  .productionHeaderCard h2{font-size:21px;line-height:1.05}
+  .productionHeaderCard .productionSubtitle{font-size:11px;line-height:1.15;margin-top:4px}
+  .productionHeaderCard .activeBatch{width:124px;min-width:124px;height:64px;padding:8px 9px;border-radius:12px;font-size:11px;line-height:1.2}
+  .productionHeaderCard .activeBatch strong{font-size:18px;line-height:1.1}
 }
 </style>
 </head>
