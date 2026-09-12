@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PACKVEX</title>
+<title>PACKVEX v1.6.10</title>
 <style>
 *{box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f4f6fa;margin:0;color:#172033}
@@ -83,7 +83,7 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .diffBadge{display:inline-block;background:#ffe1e4;color:#b21f32;border-radius:8px;padding:4px 7px;font-size:11px;font-weight:bold;margin-left:5px}.kassBadge{display:inline-block;background:#fff4df;color:#8a5a00;border-radius:8px;padding:4px 7px;font-size:11px;font-weight:bold;margin-left:5px}
 .diffButton{width:auto;padding:7px 10px;margin-top:8px;font-size:12px;background:#fff4df;color:#8a5a00}.plusHistory{color:#1eaa68;font-weight:bold}.minusHistory{color:#b21f32;font-weight:bold}
 .productionLayout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:15px}.productionLeft,.productionRight{min-width:0}
-.productionTop{display:flex;align-items:center;justify-content:space-between;gap:12px}.productionSubtitle{color:#687386;margin-top:4px}.activeBatch{background:#eaf8f1;color:#17764a;border:1px solid #d8f0e2;border-radius:14px;padding:10px 14px;min-width:145px;line-height:1.15}.activeBatchDot{display:inline-block;width:13px;height:13px;border-radius:50%;background:#169b5c;margin-right:7px;vertical-align:-1px;position:relative;box-shadow:0 0 0 0 rgba(22,155,92,.22);font-size:0}.activeBatchDot::after{content:"";position:absolute;inset:-1px;border:1.5px solid rgba(22,155,92,.24);border-radius:50%;animation:activeBatchPulse 2.8s ease-out infinite}@keyframes activeBatchPulse{0%{transform:scale(1);opacity:.65}65%{transform:scale(1.7);opacity:0}100%{transform:scale(1.7);opacity:0}}.activeBatch strong{display:block;font-size:19px;margin-top:6px;color:#17764a}
+.productionTop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.productionSubtitle{color:#687386;margin-top:4px}.activeBatch{background:#eaf8f1;color:#17764a;border-radius:11px;padding:12px 14px;min-width:130px}.activeBatchDot{color:#169b5c;margin-right:5px}
 .batchButtons{display:grid;grid-template-columns:1fr 1fr;gap:10px}.batchButtons button{margin-top:12px}.productionInputGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.productionInputGrid label{margin-top:0}.productionActionGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.productionActionGrid button{margin-top:0}
 .scanButton{background:#edf0f5;color:#172033}.scanButton span{margin-right:7px}.productionSectionHeader{display:flex;align-items:center;justify-content:space-between;gap:10px}.productionSectionHeader h2{margin:0}.collapseArrow{font-size:20px}
 .balanceGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.balanceBox{background:#eef6ff;padding:12px;border-radius:12px;text-align:center;min-height:80px}.balanceLabel{font-size:15px}.balanceNumber{display:block;font-size:31px;font-weight:800;color:#1459d9;margin-top:3px}
@@ -136,7 +136,7 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 @media(max-width:430px){.registrationsCard{padding:12px!important}.registrationsHeader{gap:7px}.registrationsHeader h2{font-size:21px}.registrationsTable{font-size:10px}.registrationsTable th{font-size:10px;padding:5px 4px}.registrationsTable td{padding:5px 4px}.registrationTypeIcon{width:18px;height:18px;flex-basis:18px;font-size:9px}.registrationType{font-size:9px;gap:4px}}
 .historyModernSearch{margin-bottom:10px}.historyFilterGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.historyFilterBtn{background:#edf0f5;color:#172033;margin:0;padding:10px 5px;font-size:12px}.historyFilterBtn.active{background:#1459d9;color:white}.productionHistoryCard{border:1px solid #e0e5ed;border-radius:14px;padding:14px;margin-top:9px;background:white;cursor:pointer;box-shadow:0 2px 8px #0001}.productionHistoryCard:active{transform:scale(.99)}.historyCardTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.historyBatch{font-size:17px;font-weight:800;color:#1459d9}.historyProduct{color:#687386;font-size:13px;margin-top:3px}.historyDate{color:#687386;font-size:12px;margin-top:8px}.historyCardBottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:9px}.historyMeta{font-size:13px;font-weight:700}.historyMeta span{margin-right:10px}.historyStatus{display:inline-block;background:#eaf8f1;color:#17764a;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:800}.historyAlerts{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px;font-size:11px;font-weight:800}.historyDiffBadge{display:inline-block;background:#fff0bf;color:#8a5a00;border-radius:999px;padding:6px 9px}.historyKassBadge{display:inline-block;background:#ffe1e4;color:#b21f32;border-radius:999px;padding:6px 9px}.historyDetailStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.historyStat{background:#f7f9fc;border:1px solid #e4e8ef;border-radius:10px;padding:10px}.historyStatLabel{font-size:11px;color:#687386}.historyStatValue{display:block;font-size:14px;font-weight:800;margin-top:3px}.historySubNav{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:12px 0}.historySubBtn{margin:0;background:#edf0f5;color:#172033;padding:10px 6px;font-size:13px}.historySubBtn.active{background:#1459d9;color:white}.timeline{position:relative;margin-top:12px}.timelineItem{display:grid;grid-template-columns:52px 24px 1fr;gap:7px;align-items:start;min-height:52px}.timelineTime{color:#687386;font-size:12px;padding-top:3px;text-align:right}.timelineDot{font-size:16px;text-align:center}.timelineText{font-size:13px;padding-bottom:12px}.timelineText strong{font-weight:800}.historyKolliCard{border:1px solid #e0e5ed;border-radius:11px;padding:12px;margin-top:8px;background:#fff;box-shadow:0 1px 5px #0000000a}.historyKolliCard.diff{border:2px solid #e8a400;background:#fffaf0}.historyKolliCard.kass{border:2px solid #d92d20;background:#fff5f5}.historyKolliTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.historyKolliAmount{font-size:16px;font-weight:800;margin-top:5px}.historyOk{background:#eaf8f1;color:#17764a;border-radius:999px;padding:5px 8px;font-weight:800;font-size:11px}.historyOrange{background:#fff0bf;color:#8a5a00;border-radius:999px;padding:5px 8px;font-weight:800;font-size:11px}.historyRed{background:#ffe1e4;color:#b21f32;border-radius:999px;padding:5px 8px;font-weight:800;font-size:11px}.historyClearItem{border:1px solid #e0e5ed;border-radius:11px;padding:12px;margin-top:8px;display:flex;gap:10px;align-items:flex-start;background:#fff}.historyClearItem input{width:20px;height:20px;margin:2px 0 0;padding:0}.historyClearInfo{flex:1}.historyClearInfo strong{display:block}.historyClearMeta{color:#687386;font-size:12px;margin-top:4px}.historySelected{background:#eef6ff;border-radius:10px;padding:11px;margin-top:12px;font-weight:800;text-align:center}.historyDanger{background:#ffe1e4;color:#b21f32}.historyModalIcon{font-size:30px;text-align:center;margin-bottom:4px}.historyModalButtons{display:grid;grid-template-columns:1fr 1fr;gap:10px}.historyModalButtons button{margin-top:10px}
 @media(max-width:700px){main{max-width:600px}.productionLayout{grid-template-columns:1fr}}
-@media(max-width:430px){.homeGrid{grid-template-columns:1fr 1fr}.result{grid-template-columns:1fr 1fr}nav button{font-size:12px}.calculatorGrid{grid-template-columns:1fr 1fr}.productionTop{flex-direction:row;align-items:center}.activeBatch{width:auto;min-width:145px}.productionInputGrid{grid-template-columns:1fr 1fr}.productionActionGrid{grid-template-columns:1fr 1fr}.activeKolliData{grid-template-columns:1fr 1fr 1fr}.registeredHeader{align-items:flex-start;flex-direction:column}.sortSelect{width:100%}.activeKolliHeader{align-items:flex-start}.diffFlag{font-size:12px;padding:7px 8px}.historyFilterGrid{grid-template-columns:repeat(3,1fr)}.historyFilterBtn{font-size:11px}.detailGrid{grid-template-columns:1fr}.detailItem:nth-child(odd){border-right:0}.historySubNav{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:430px){.homeGrid{grid-template-columns:1fr 1fr}.result{grid-template-columns:1fr 1fr}nav button{font-size:12px}.calculatorGrid{grid-template-columns:1fr 1fr}.productionTop{flex-direction:column}.activeBatch{width:100%}.productionInputGrid{grid-template-columns:1fr 1fr}.productionActionGrid{grid-template-columns:1fr 1fr}.activeKolliData{grid-template-columns:1fr 1fr 1fr}.registeredHeader{align-items:flex-start;flex-direction:column}.sortSelect{width:100%}.activeKolliHeader{align-items:flex-start}.diffFlag{font-size:12px;padding:7px 8px}.historyFilterGrid{grid-template-columns:repeat(3,1fr)}.historyFilterBtn{font-size:11px}.detailGrid{grid-template-columns:1fr}.detailItem:nth-child(odd){border-right:0}.historySubNav{grid-template-columns:repeat(3,1fr)}}
 .historyBack{margin:0 0 10px!important;text-align:left;background:transparent!important;color:#1459d9!important;padding:8px 2px!important}
 .historyDetailHead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .historyDetailHead h2{color:#1459d9;margin:0 0 3px;font-size:20px}
@@ -279,6 +279,24 @@ body.dagbokComposerOpen{overflow:hidden}
 .productionCompleteToast{background:#13834c}
 @media(max-width:430px){#pack .card{border-radius:16px;padding:15px}#pack .productionTop{gap:8px}#pack .activeBatch{min-width:118px;padding:10px 11px}.productionFinishCard{padding:17px}.productionFinishSummary{gap:7px}.productionFinishSummaryItem{padding:9px}.productionToast{width:calc(100vw - 20px)}}
 
+/* V1.6.10 – Produktion header only */
+#pack .productionHeaderCard{padding:18px 20px;border-radius:18px;background:#fff}
+#pack .productionHeaderCard .productionTop{display:flex;align-items:center;justify-content:space-between;gap:18px}
+#pack .productionHeaderBrand{display:flex;align-items:center;gap:14px;min-width:0}
+#pack .productionHeaderIcon{width:54px;height:54px;flex:0 0 54px;border-radius:15px;background:#eef5ff;color:#1459d9;display:flex;align-items:center;justify-content:center}
+#pack .productionHeaderIcon svg{width:38px;height:38px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#pack .productionHeaderText{min-width:0}
+#pack .productionHeaderText h2{margin:0!important;font-size:31px;line-height:1.02;letter-spacing:-.8px;font-weight:900;color:#172a55}
+#pack .productionHeaderText .productionSubtitle{margin-top:6px;font-size:13px;line-height:1.2;color:#687386}
+#pack .productionHeaderCard .activeBatch{min-width:176px;padding:12px 15px;border-radius:14px;background:#effaf4;color:#17764a;border:1px solid #dff1e7}
+#pack .productionHeaderCard .activeBatchStatus{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800;line-height:1.1}
+#pack .productionHeaderCard .activeBatchName{display:block;margin-top:7px;padding-left:21px;font-size:20px;line-height:1;font-weight:900;color:#237447}
+#pack .productionHeaderCard .activeBatchDot{width:13px;height:13px;flex:0 0 13px;border-radius:50%;display:inline-block;position:relative;margin:0;background:#159447;color:transparent}
+#pack .productionHeaderCard .activeBatchDot.pulsing:after{content:"";position:absolute;inset:-3px;border:2px solid rgba(21,148,71,.25);border-radius:50%;animation:productionHeaderPulse 2.6s ease-out infinite}
+@keyframes productionHeaderPulse{0%{transform:scale(.85);opacity:.7}70%{transform:scale(1.85);opacity:0}100%{transform:scale(1.85);opacity:0}}
+@media(max-width:430px){#pack .productionHeaderCard{padding:15px 14px}#pack .productionHeaderCard .productionTop{gap:10px}#pack .productionHeaderBrand{gap:10px}#pack .productionHeaderIcon{width:48px;height:48px;flex-basis:48px;border-radius:13px}#pack .productionHeaderIcon svg{width:34px;height:34px}#pack .productionHeaderText h2{font-size:27px}#pack .productionHeaderText .productionSubtitle{font-size:11px;margin-top:5px}#pack .productionHeaderCard .activeBatch{min-width:132px;padding:10px 10px;border-radius:12px}#pack .productionHeaderCard .activeBatchStatus{font-size:11px;gap:6px}#pack .productionHeaderCard .activeBatchName{font-size:17px;margin-top:6px;padding-left:19px}#pack .productionHeaderCard .activeBatchDot{width:12px;height:12px;flex-basis:12px}}
+
+
 </style>
 </head>
 <body>
@@ -316,7 +334,7 @@ body.dagbokComposerOpen{overflow:hidden}
 </div>
 <div id="productionMainLayout" class="productionLayout">
 <div class="productionLeft">
-<div class="card"><div class="productionTop"><div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div><div id="productionActiveBatch" class="activeBatch"></div></div></div>
+<div class="card productionHeaderCard"><div class="productionTop"><div class="productionHeaderBrand"><div class="productionHeaderIcon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M7 40V20l10-6v7l9-6v7l9-6v24"/><path d="M4 40h40"/><path d="M12 33v3M20 30v6M28 27v9M36 24v12"/></svg></div><div class="productionHeaderText"><h2>Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div></div><div id="productionActiveBatch" class="activeBatch"></div></div></div>
 <div class="card"><h2>Batch ID</h2><input id="fpkNumber" placeholder=""><div class="batchButtons"><button class="blue" onclick="startFpk()">Starta batch</button><button class="red" onclick="finishFpk()">Avsluta batch</button></div></div>
 <div class="card"><div class="productionSectionHeader"><h2>Kolli → kapsel / well</h2><span class="collapseArrow">⌃</span></div><div class="productionInputGrid"><div><label>Produkt</label><select id="produkt"><option>Vialer</option><option>Sprutor</option><option>Annan produkt</option></select></div><div><label>Kollinummer</label><input id="kollinummer" placeholder="001"></div><div><label>Antal i kollit</label><input id="antal" type="number" value="0" oninput="raknaKolli()"></div><div><label>Antal per</label><input id="per" type="number" value="0" oninput="raknaKolli()"></div></div><div class="productionActionGrid"><button class="scanButton" onclick="skannaKolli()"><span><svg class="productionScanIcon" viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M8 10h8v4H8z"/></svg></span>Skanna kolli</button><button class="blue" onclick="laggTillKolli()">＋ Lägg till kolli</button></div></div>
 <div class="card"><h2>Aktuellt saldo</h2><div class="balanceGrid"><div class="balanceBox"><div class="balanceLabel">Totalt</div><span class="balanceNumber" id="totalt">0</span></div><div class="balanceBox"><div class="balanceLabel">Total kass</div><span class="balanceNumber" id="totaltKass">0</span></div><div class="balanceBox"><div class="balanceLabel">Fulla kapslar / wells</div><span class="balanceNumber" id="totaltFulla">0</span></div><div class="balanceBox"><div class="balanceLabel">Sista kapsel / well</div><span class="balanceNumber" id="sistaTotal">0</span></div></div></div>
@@ -1121,7 +1139,7 @@ diff=document.getElementById("activeDiffFlag");
 if(!title)return;
 
 if(!data.kollin.length){
-title.innerHTML="<span class="productionActiveDot"></span>Aktivt kolli";
+title.innerHTML='<span class="productionActiveDot"></span>Aktivt kolli';
 produkt.innerText="-";
 antal.innerText="0";
 kass.innerText="0";
@@ -1133,7 +1151,7 @@ return;
 let a=data.kollin[data.kollin.length-1],
 tk=Number(a.kassation)||0;
 
-title.innerHTML="<span class="productionActiveDot"></span>Aktivt kolli ("+a.nummer+")";
+title.innerHTML='<span class="productionActiveDot"></span>Aktivt kolli ('+a.nummer+')';
 produkt.innerText=a.produkt;
 antal.innerText=a.used;
 kass.innerText=tk;
@@ -1169,7 +1187,7 @@ fpkInput=document.getElementById("fpkNumber");
 if(data.fpk){
 fpkInput.value=data.fpk;
 fpkInput.placeholder="";
-batch.innerHTML='<span class="activeBatchDot">●</span>Aktiv batch:<br><strong>'+data.fpk+'</strong>';
+batch.innerHTML='<span class="activeBatchStatus"><span class="activeBatchDot pulsing"></span><span>Aktiv batch</span></span><strong class="activeBatchName">'+data.fpk+'</strong>';
 let activeProduct=data.kollin.length?(data.kollin[data.kollin.length-1].produkt||"—"):"—";
 let activeStart=data.activeProductionStart?new Date(data.activeProductionStart).toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"}):"—";
 home.innerHTML='<div class="homeProductionCard clickable" onclick="openActiveProduction(this)"><div class="homeProductionDot pulsing"></div><div><div class="homeProductionLabel">AKTIV PRODUKTION</div><div class="homeProductionBatch">'+data.fpk+'</div><div class="homeProductionCount">'+data.kollin.length+(data.kollin.length===1?' registrerat kolli':' registrerade kollin')+'</div></div><div class="homeProductionArrow">›</div></div>';
