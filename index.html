@@ -154,7 +154,7 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .registrationCountPlus{color:#1eaa68;font-weight:800}
 .registrationCountMinus{color:#b21f32;font-weight:800}
 .registrationCountDiff{color:#8a5a00;font-weight:800}
-#pack.productionNavTransition{overflow:hidden}
+#pack.productionNavTransition{overflow:hidden;position:relative;transition:height .32s cubic-bezier(.22,.61,.36,1)}
 #pack.productionNavTransition #productionMainLayout,#pack.productionNavTransition #productionSubView{will-change:transform}
 #pack.productionNavTransition.navForward #productionSubView{animation:productionPushInRight .32s cubic-bezier(.22,.61,.36,1) both}
 #productionSubView.navSubEnter{animation:productionPushInRight .32s cubic-bezier(.22,.61,.36,1) both}
@@ -560,20 +560,32 @@ if(!wasSub){
  main.classList.remove("hidden");
  return;
 }
+
+/* Håll layoutens höjd stabil under tillbakaglidningen så att innehållet
+   under Produktion inte hoppar när sub-vyn byts tillbaka. */
+let subHeight=sub.offsetHeight;
 main.classList.remove("hidden");
-sub.classList.remove("hidden");
+let mainHeight=main.offsetHeight;
+main.style.visibility="hidden";
 sub.classList.remove("navSubEnter","navSubLeave");
+pack.style.height=subHeight+"px";
 pack.classList.remove("navForward");
 pack.classList.add("productionNavTransition","navBack");
 requestAnimationFrame(function(){
+ main.style.visibility="visible";
  sub.classList.add("navSubLeave");
  window.scrollTo(0,0);
+ requestAnimationFrame(function(){
+  pack.style.height=mainHeight+"px";
+ });
  setTimeout(function(){
   sub.classList.add("hidden");
   document.getElementById("registeredView").classList.add("hidden");
   document.getElementById("registrationsView").classList.add("hidden");
   sub.classList.remove("navSubLeave");
+  main.style.visibility="";
   pack.classList.remove("productionNavTransition","navBack");
+  pack.style.height="";
  },320);
 });
 }
