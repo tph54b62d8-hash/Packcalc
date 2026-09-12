@@ -156,12 +156,11 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .registrationCountDiff{color:#8a5a00;font-weight:800}
 #pack.productionNavTransition{overflow:hidden}
 #pack.productionNavTransition #productionMainLayout,#pack.productionNavTransition #productionSubView{will-change:transform}
-#pack.productionNavTransition #productionSubView{position:absolute;left:0;top:0;width:100%;z-index:2}
-#pack.productionNavTransition.navForward #productionMainLayout{animation:productionPushOutLeft .32s cubic-bezier(.22,.61,.36,1) both}
 #pack.productionNavTransition.navForward #productionSubView{animation:productionPushInRight .32s cubic-bezier(.22,.61,.36,1) both}
+#productionSubView.navSubEnter{animation:productionPushInRight .32s cubic-bezier(.22,.61,.36,1) both}
+#productionSubView.navSubLeave{animation:productionPushOutRight .32s cubic-bezier(.22,.61,.36,1) both}
 #pack.productionNavTransition.navBack #productionSubView{animation:productionPushOutRight .32s cubic-bezier(.22,.61,.36,1) both}
-#pack.productionNavTransition.navBack #productionMainLayout{animation:productionPushInLeft .32s cubic-bezier(.22,.61,.36,1) both}
-@keyframes productionPushOutLeft{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+#pack.productionNavTransition.navBack #productionMainLayout{position:absolute;left:0;top:0;width:100%;z-index:1;animation:productionPushInLeft .32s cubic-bezier(.22,.61,.36,1) both}
 @keyframes productionPushInRight{from{transform:translateX(100%)}to{transform:translateX(0)}}
 @keyframes productionPushOutRight{from{transform:translateX(0)}to{transform:translateX(100%)}}
 @keyframes productionPushInLeft{from{transform:translateX(-100%)}to{transform:translateX(0)}}
@@ -529,24 +528,26 @@ window.scrollTo(0,0);
 function openProductionView(view){
 let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
 if(!main||!sub||!pack)return;
-main.classList.remove("hidden");
-sub.classList.remove("hidden");
+main.classList.add("hidden");
+sub.classList.add("hidden");
+sub.classList.remove("navSubEnter","navSubLeave");
 document.getElementById("registeredView").classList.add("hidden");
 document.getElementById("registrationsView").classList.add("hidden");
 if(view==="registered"){document.getElementById("registeredView").classList.remove("hidden");renderKolliView();}
 if(view==="registrations"){document.getElementById("registrationsView").classList.remove("hidden");renderPackHistoryView();}
 if(view==="registered"||view==="registrations"){
- pack.classList.remove("navBack");pack.classList.add("productionNavTransition","navForward");
- requestAnimationFrame(function(){requestAnimationFrame(function(){
+ sub.classList.remove("hidden");
+ pack.classList.remove("navBack");
+ pack.classList.add("productionNavTransition","navForward");
+ requestAnimationFrame(function(){
+  sub.classList.add("navSubEnter");
   window.scrollTo(0,0);
   setTimeout(function(){
-   main.classList.add("hidden");
+   sub.classList.remove("navSubEnter");
    pack.classList.remove("productionNavTransition","navForward");
   },320);
- });});
+ });
 }else{
- main.classList.add("hidden");
- sub.classList.remove("productionNavTransition");
  window.scrollTo(0,0);
 }
 }
@@ -554,28 +555,28 @@ if(view==="registered"||view==="registrations"){
 function closeProductionView(){
 let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
 if(!main||!sub||!pack)return;
-let wasRegistrations=!document.getElementById("registrationsView").classList.contains("hidden");
-if(!wasRegistrations){
+let wasSub=!sub.classList.contains("hidden");
+if(!wasSub){
  main.classList.remove("hidden");
- sub.classList.add("hidden");
- document.getElementById("registeredView").classList.add("hidden");
- document.getElementById("registrationsView").classList.add("hidden");
  return;
 }
 main.classList.remove("hidden");
 sub.classList.remove("hidden");
+sub.classList.remove("navSubEnter","navSubLeave");
 pack.classList.remove("navForward");
 pack.classList.add("productionNavTransition","navBack");
 requestAnimationFrame(function(){
+ sub.classList.add("navSubLeave");
+ window.scrollTo(0,0);
  setTimeout(function(){
   sub.classList.add("hidden");
   document.getElementById("registeredView").classList.add("hidden");
   document.getElementById("registrationsView").classList.add("hidden");
+  sub.classList.remove("navSubLeave");
   pack.classList.remove("productionNavTransition","navBack");
  },320);
 });
 }
-
 function openCalculator(type){
 ["calculatorChoice","calcSprutor","calcKapslar","calcPall","calcEtiketter","calcEtiketterMain","calcTillaggsetiketter","calcTid"].forEach(id=>{let el=document.getElementById(id);if(el)el.classList.add("hidden")});
 if(type==="sprutor"){document.getElementById("calcSprutor").classList.remove("hidden");raknaSprutor();}
