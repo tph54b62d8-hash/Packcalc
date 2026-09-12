@@ -279,37 +279,6 @@ body.dagbokComposerOpen{overflow:hidden}
 .productionCompleteToast{background:#13834c}
 @media(max-width:430px){#pack .card{border-radius:16px;padding:15px}#pack .productionTop{gap:8px}#pack .activeBatch{min-width:118px;padding:10px 11px}.productionFinishCard{padding:17px}.productionFinishSummary{gap:7px}.productionFinishSummaryItem{padding:9px}.productionToast{width:calc(100vw - 20px)}}
 
-
-/* V1.6.10 — ENDAST Produktions-headerns storlek och placering */
-#pack #productionMainLayout > .productionLeft > .card:first-child{
-  max-width:640px;
-  margin-left:auto;
-  margin-right:auto;
-}
-#pack #productionMainLayout > .productionLeft > .card:first-child .productionTop{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) auto;
-  align-items:center;
-  gap:16px;
-}
-#pack #productionMainLayout > .productionLeft > .card:first-child .activeBatch{
-  width:220px;
-  min-width:220px;
-  margin-left:auto;
-}
-@media(max-width:700px){
-  #pack #productionMainLayout > .productionLeft > .card:first-child{
-    max-width:100%;
-  }
-  #pack #productionMainLayout > .productionLeft > .card:first-child .productionTop{
-    grid-template-columns:minmax(0,1fr) auto;
-    gap:10px;
-  }
-  #pack #productionMainLayout > .productionLeft > .card:first-child .activeBatch{
-    width:150px;
-    min-width:150px;
-  }
-}
 </style>
 </head>
 <body>
