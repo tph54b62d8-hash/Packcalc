@@ -535,7 +535,7 @@ document.getElementById("registeredView").classList.add("hidden");
 document.getElementById("registrationsView").classList.add("hidden");
 if(view==="registered"){document.getElementById("registeredView").classList.remove("hidden");renderKolliView();}
 if(view==="registrations"){document.getElementById("registrationsView").classList.remove("hidden");renderPackHistoryView();}
-if(view==="registrations"){
+if(view==="registered"||view==="registrations"){
  pack.classList.remove("navBack");pack.classList.add("productionNavTransition","navForward");
  requestAnimationFrame(function(){requestAnimationFrame(function(){
   window.scrollTo(0,0);
