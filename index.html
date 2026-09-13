@@ -606,7 +606,7 @@ function etApprove(){
  if(etState.approved){etRegisterRun();return;}
  let need=etNeed();
  if(etAvailableLabels()<need){etToast("För få etiketter · lägg till en ny rulle");return;}
- etState.approved=true;etState.actual=Number(etState.nextLabel)||0;document.getElementById("etExpectedText").textContent="Etiketten är godkänd. Körningen kan registreras.";document.getElementById("etApproveBtn").textContent="Registrera körning";document.getElementById("etApproveBtn").classList.add("isRegister");etRender();
+ etState.approved=true;etState.actual=Number(etState.nextLabel)||0;document.getElementById("etExpectedText").textContent="Etiketten är godkänd. Kassa är medräknad i körningen. Inget saldo har förbrukats ännu.";document.getElementById("etApproveBtn").textContent="Registrera körning";document.getElementById("etApproveBtn").classList.add("isRegister");etRender();
 }
 function etRegisterRun(){
  let need=etNeed(),available=etAvailableLabels();
@@ -646,7 +646,7 @@ function etReject(){
 function etAddLabelsIfNeeded(){return etAvailableLabels();}
 function etRender(){
  if(!etState.started){document.getElementById("etRunCounter").textContent="Kört 0 st";return;}
- document.getElementById("etRunCounter").textContent="Kört "+etFmt(etState.totalRun)+" st";document.getElementById("etExpectedLabel").textContent=etFmt(etState.approved?etState.actual:etState.nextLabel);document.getElementById("etRunQtyDisplay").textContent=etFmt(etState.runQty)+" st";document.getElementById("etScrapLabel").textContent=etState.scrapLabel;document.getElementById("etScrapUnit").textContent=etState.scrapUnit;document.getElementById("etLabelsLeft").textContent=etFmt(etAvailableLabels());document.getElementById("etLabelBalanceText").textContent=etState.rolls.length?"Nya rullar finns i banken och används när aktuell rulle tar slut.":"Ingen extra rulle tillagd ännu.";
+ document.getElementById("etRunCounter").textContent="Kört "+etFmt(etState.totalRun)+" st";document.getElementById("etExpectedLabel").textContent=etFmt(etState.nextLabel);document.getElementById("etRunQtyDisplay").textContent=etFmt(etState.runQty)+" st";document.getElementById("etScrapLabel").textContent=etState.scrapLabel;document.getElementById("etScrapUnit").textContent=etState.scrapUnit;document.getElementById("etLabelsLeft").textContent=etFmt(etAvailableLabels());document.getElementById("etLabelBalanceText").textContent=etState.rolls.length?"Nya rullar finns i banken och används när aktuell rulle tar slut.":"Ingen extra rulle tillagd ännu.";
  let h=document.getElementById("etHistory");h.innerHTML=etState.history.length?etState.history.slice(0,5).map((r,i)=>'<div class="etRunItem"><div class="etRunItemTop"><span>Körning '+(etState.history.length-i)+'</span><span>'+etFmt(r.qty)+' godkända enheter</span></div><div class="etRunItemMeta">Start '+etFmt(r.start)+' · nästa '+etFmt(r.next)+' · förbrukat '+etFmt(r.consumed)+' etiketter</div></div>').join(""): '<div class="etMuted">Inga körningar ännu.</div>';
 }
 
