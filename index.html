@@ -595,13 +595,12 @@ function etNeed(){return Math.max(0,etState.runQty+etState.scrapLabel-etState.sc
 function etCurrentBank(){return etState.rolls.reduce((sum,r)=>sum+Math.max(0,Number(r.remaining)||0),0);}
 function etAvailableLabels(){return Math.max(0,(Number(etState.nextLabel)||0)+etCurrentBank());}
 function etPreviewNext(){
- // Förhandsvisa nästa etikett utifrån aktuell körning och kassa.
- // Detta ändrar inte den faktiska rullbanken förrän "Registrera körning" trycks.
- let current=Math.max(0,Number(etState.nextLabel)||0), consume=etNeed();
- if(consume<=current)return Math.max(0,current-consume);
- let remaining=consume-current, bank=etState.rolls.slice();
- while(bank.length){let roll=bank.shift(), r=Math.max(0,Number(roll.remaining)||0);if(remaining<=r)return Math.max(0,r-remaining);remaining-=r;}
- return 0;
+ // Visar etiketten som ska stå på rullen JUST NU.
+ // En vanlig körning förbrukas först när "Registrera körning" trycks.
+ // Kassationer påverkar däremot förhandsvisningen direkt.
+ let current=Math.max(0,Number(etState.nextLabel)||0);
+ let adjustment=(Number(etState.scrapLabel)||0)-(Number(etState.scrapUnit)||0);
+ return Math.max(0,current-adjustment);
 }
 function etApprove(){
  if(!etState.started||etState.finished)return;
