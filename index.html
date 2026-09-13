@@ -571,7 +571,7 @@ body.etStartMode .footer{display:none!important}
 <main>
 <nav id="mainNav">
 <button onclick="showPage('home')" id="navHome"><svg class="navIcon" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg><span>Hem</span></button>
-<button onclick="showPage('pack')" id="navPack"><svg class="navIcon" viewBox="0 0 24 24"><path d="M4 20V9h5v11"/><path d="M15 20V4h5v16"/><path d="M9 20v-6h6v6"/><path d="M4 9h5"/></svg><span>Produktion</span></button>
+<button onclick="showPage('pack',true)" id="navPack"><svg class="navIcon" viewBox="0 0 24 24"><path d="M4 20V9h5v11"/><path d="M15 20V4h5v16"/><path d="M9 20v-6h6v6"/><path d="M4 9h5"/></svg><span>Produktion</span></button>
 <button onclick="showPage('packalkylator')" id="navCalc"><svg class="navIcon" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg><span>Packalkylator</span></button>
 <button onclick="showPage('dagbok')" id="navDagbok"><svg class="navIcon" viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg><span>Loggbok</span><i class="navDagbokNotice" id="navDagbokNotice"></i></button>
 <button onclick="showPage('historik')" id="navHistorik"><svg class="navIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><span>Historik</span></button>
@@ -661,6 +661,7 @@ body.etStartMode .footer{display:none!important}
 </div>
 <div class="etCard"><h3>Senaste körningar</h3><div id="etHistory" class="etRuns"><div class="etMuted">Inga körningar ännu.</div></div></div>
 <button class="etFinish" onclick="etFinishPrompt()">Avsluta etikettering</button>
+</div>
 </div>
 <div id="productionMainLayout" class="productionLayout">
 <div class="productionLeft">
@@ -819,14 +820,14 @@ const PAGE_STATE_KEY="packvex_current_page";
 const PRODUCTION_VIEW_KEY="packvex_production_view";
 const ET_STATE_KEY="packvex_etikettering_state";
 
-function showPage(page){
+function showPage(page,fromNav=false){
 localStorage.setItem(PAGE_STATE_KEY,page);
 
 pages.forEach(p=>document.getElementById(p).classList.add("hidden"));
 document.getElementById(page).classList.remove("hidden");
 document.querySelectorAll("nav button").forEach(btn=>btn.classList.remove("active"));
 if(page==="home")document.getElementById("navHome").classList.add("active");
-if(page==="pack"){document.getElementById("navPack").classList.add("active");openProductionChooser();}
+if(page==="pack"){document.getElementById("navPack").classList.add("active");if(fromNav)openProductionChooser();else restoreProductionView();}
 if(page==="packalkylator")document.getElementById("navCalc").classList.add("active");
 if(page==="dagbok")document.getElementById("navDagbok").classList.add("active");
 if(page==="historik")document.getElementById("navHistorik").classList.add("active");
@@ -2750,7 +2751,7 @@ etInitStartInputs();
 renderAll();
 (function(){
 let savedPage=localStorage.getItem(PAGE_STATE_KEY);
-if(savedPage&&pages.includes(savedPage)){showPage(savedPage);if(savedPage==="pack")restoreProductionView();}
+if(savedPage&&pages.includes(savedPage))showPage(savedPage);
 })();
 
 </script>
