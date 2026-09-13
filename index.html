@@ -606,7 +606,7 @@ function etApprove(){
  if(etState.approved){etRegisterRun();return;}
  let need=etNeed();
  if(etAvailableLabels()<need){etToast("För få etiketter · lägg till en ny rulle");return;}
- etState.approved=true;etState.actual=etPreviewNext();document.getElementById("etExpectedText").textContent="Etiketten är godkänd. Körningen kan registreras.";document.getElementById("etApproveBtn").textContent="Registrera körning";document.getElementById("etApproveBtn").classList.add("isRegister");etRender();
+ etState.approved=true;etState.actual=Number(etState.nextLabel)||0;document.getElementById("etExpectedText").textContent="Etiketten är godkänd. Körningen kan registreras.";document.getElementById("etApproveBtn").textContent="Registrera körning";document.getElementById("etApproveBtn").classList.add("isRegister");etRender();
 }
 function etRegisterRun(){
  let need=etNeed(),available=etAvailableLabels();
@@ -638,7 +638,7 @@ function etRegisterRun(){
 }
 function etReject(){
  if(!etState.started||etState.finished)return;
- let expected=etPreviewNext(),actual=prompt("Förväntad etikett: "+etFmt(expected)+"\nVad står faktiskt på rullen?");if(actual===null)return;
+ let expected=Math.max(0,Number(etState.nextLabel)||0),actual=prompt("Förväntad etikett: "+etFmt(expected)+"\nVad står faktiskt på rullen?");if(actual===null)return;
  let n=Number(String(actual).replace(/\s/g,""));if(!Number.isFinite(n)||n<=0){etToast("Ange ett giltigt etikett nummer");return;}
  let diff=n-expected,box=document.getElementById("etDeviation");box.classList.remove("etHidden");box.innerHTML="<strong>Avvikelse: "+(diff>0?"+":"")+diff+" etikett"+(Math.abs(diff)===1?"":"er")+"</strong>"+(diff>0?"Förmodligen "+diff+" enhet"+(diff===1?"":"er")+" utan etikett.":diff<0?"Förmodligen "+Math.abs(diff)+" etikett"+(Math.abs(diff)===1?"":"er")+" borttappad"+(Math.abs(diff)===1?"":"a")+" eller en enhet dubbelprintad.":"Etiketten stämmer.");
  etState.actual=n;etRender();
