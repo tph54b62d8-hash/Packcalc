@@ -817,6 +817,7 @@ const pages=["home","pack","packalkylator","print","pall","qr","dagbok","histori
 
 const PAGE_STATE_KEY="packvex_current_page";
 const PRODUCTION_VIEW_KEY="packvex_production_view";
+const ET_STATE_KEY="packvex_etikettering_state";
 
 function showPage(page){
 localStorage.setItem(PAGE_STATE_KEY,page);
@@ -846,11 +847,30 @@ function chooseProductionMode(mode){
  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),et=document.getElementById("etiketteringView"),sub=document.getElementById("productionSubView");
  if(!chooser||!main||!et)return;
  chooser.classList.add("hidden"); if(sub)sub.classList.add("hidden");
- if(mode==="kolli"){localStorage.setItem(PRODUCTION_VIEW_KEY,"kolli");main.classList.remove("hidden");window.scrollTo(0,0);return;}
+ if(mode==="kolli"){localStorage.setItem(PRODUCTION_VIEW_KEY,"kolli");main.classList.remove("hidden");et.classList.add("hidden");document.body.classList.remove("etStartMode");window.scrollTo(0,0);return;}
  localStorage.setItem(PRODUCTION_VIEW_KEY,"etikettering");main.classList.add("hidden");et.classList.remove("hidden");document.body.classList.add("etStartMode");etRender();window.scrollTo(0,0);
+}
+function saveEtState(){
+ if(etState&&etState.started&&!etState.finished)localStorage.setItem(ET_STATE_KEY,JSON.stringify(etState));
+ else if(!etState||etState.finished)localStorage.removeItem(ET_STATE_KEY);
+}
+function restoreEtState(){
+ try{
+  let raw=localStorage.getItem(ET_STATE_KEY);
+  if(!raw)return false;
+  let saved=JSON.parse(raw);
+  if(!saved||!saved.started||saved.finished)return false;
+  etState=Object.assign({scrapLabel:0,scrapUnit:0,labelsAdded:0,labelsConsumed:0,approved:false,actual:null,totalRun:0,history:[],finished:false,rolls:[],activeRoll:0},saved);
+  return true;
+ }catch(e){localStorage.removeItem(ET_STATE_KEY);return false;}
 }
 function restoreProductionView(){
  let saved=localStorage.getItem(PRODUCTION_VIEW_KEY)||"chooser";
+ if(saved==="etikettering-active" && restoreEtState()){
+  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),et=document.getElementById("etiketteringView"),sub=document.getElementById("productionSubView");
+  chooser.classList.add("hidden");main.classList.add("hidden");if(sub)sub.classList.add("hidden");et.classList.remove("hidden");document.body.classList.remove("etStartMode");document.getElementById("etStartCard").classList.add("etHidden");document.getElementById("etWorkView").classList.remove("etHidden");etRender();window.scrollTo(0,0);return;
+ }
+ if(saved==="etikettering-active")localStorage.removeItem(ET_STATE_KEY);
  if(saved==="etikettering"){chooseProductionMode("etikettering");return;}
  if(saved==="kolli"){chooseProductionMode("kolli");return;}
  if(saved==="registered"||saved==="registrations"){openProductionView(saved);return;}
@@ -894,6 +914,8 @@ function etStart(){
  setTimeout(()=>{steps[2].classList.remove("active");steps[2].classList.add("done");steps[3].classList.add("final");status.textContent="Klar! Produktion igång";},3000);
  setTimeout(()=>{
    etState={started:true,runQty:q,nextLabel:n,scrapLabel:0,scrapUnit:0,labelsAdded:0,labelsConsumed:0,approved:false,actual:null,totalRun:0,history:[],finished:false,rolls:[],activeRoll:0,batchId:batch};
+   localStorage.setItem(PRODUCTION_VIEW_KEY,"etikettering-active");
+   saveEtState();
    card.classList.remove("etStarting");
    document.getElementById("etWorkView").classList.remove("etHidden");
    card.classList.add("etHidden");
@@ -956,7 +978,7 @@ function etRegisterRun(){
  }
  let next=etState.nextLabel;
  etState.totalRun+=qty;etState.labelsConsumed+=consumed;etState.history.unshift({qty:qty,consumed:consumed,start:start,next:next,scrapUnit:etState.scrapUnit,scrapLabel:etState.scrapLabel});
- etState.scrapUnit=0;etState.scrapLabel=0;etState.approved=false;etState.actual=null;document.getElementById("etApproveBtn").textContent="Godkänn";document.getElementById("etApproveBtn").classList.remove("isRegister");document.getElementById("etExpectedText").textContent="Kontrollera rullen innan nästa körning.";etRender();etToast("Körning registrerad");
+ etState.scrapUnit=0;etState.scrapLabel=0;etState.approved=false;etState.actual=null;localStorage.setItem(PRODUCTION_VIEW_KEY,"etikettering-active");document.getElementById("etApproveBtn").textContent="Godkänn";document.getElementById("etApproveBtn").classList.remove("isRegister");document.getElementById("etExpectedText").textContent="Kontrollera rullen innan nästa körning.";etRender();etToast("Körning registrerad");
 }
 function etReject(){
  if(!etState.started||etState.finished)return;
@@ -968,6 +990,7 @@ function etReject(){
 function etAddLabelsIfNeeded(){return etAvailableLabels();}
 function etRender(){
  if(!etState.started){document.getElementById("etRunCounter").textContent="Kört 0 st";return;}
+ saveEtState();
  let displayedNext=etPreviewNext();
  document.getElementById("etRunCounter").textContent="Kört "+etFmt(etState.totalRun)+" st";document.getElementById("etExpectedLabel").textContent=etFmt(displayedNext);document.getElementById("etRunQtyDisplay").textContent=etFmt(etState.runQty)+" st";document.getElementById("etScrapLabel").textContent=etState.scrapLabel;document.getElementById("etScrapUnit").textContent=etState.scrapUnit;document.getElementById("etLabelsLeft").textContent=etFmt(etAvailableLabels());document.getElementById("etLabelBalanceText").textContent=etState.rolls.length?"Nya rullar finns i banken och används när aktuell rulle tar slut.":"Ingen extra rulle tillagd ännu.";document.getElementById("etExpectedMetaValue").textContent=etFmt(displayedNext);document.getElementById("etActualMetaValue").textContent=etState.actual==null?"—":etFmt(etState.actual);document.getElementById("etStatusQty").textContent=etFmt(etState.runQty)+" st";document.getElementById("etStatusLabel").textContent=etFmt(displayedNext);document.getElementById("etStatusScrapLabel").textContent=etState.scrapLabel;document.getElementById("etStatusScrapUnit").textContent=etState.scrapUnit;let lb=document.getElementById("etLabelBarFill");if(lb){let total=Math.max(1,(Number(etState.nextLabel)||0)+etCurrentBank());lb.style.width=Math.min(100,Math.max(0,((Number(etState.nextLabel)||0)/total)*100))+"%";}let lr=document.getElementById("etLatestRunMain"),ls=document.getElementById("etLatestRunSub");if(lr&&ls){if(etState.history.length){let r=etState.history[0];lr.textContent=etFmt(r.qty)+" st";ls.textContent="Kassa etikett · "+etFmt(r.scrapLabel)+" · Kassa enhet · "+etFmt(r.scrapUnit)+" · Nästa etikett: "+etFmt(r.next);}else{lr.textContent="Ingen körning ännu";ls.textContent="Nästa etikett: —";}}
  let h=document.getElementById("etHistory");h.innerHTML=etState.history.length?etState.history.slice(0,5).map((r,i)=>'<div class="etRunItem"><div class="etRunItemTop"><span>Körning '+(etState.history.length-i)+'</span><span>'+etFmt(r.qty)+' godkända enheter</span></div><div class="etRunItemMeta">Start '+etFmt(r.start)+' · nästa '+etFmt(r.next)+' · förbrukat '+etFmt(r.consumed)+' etiketter</div></div>').join(""): '<div class="etMuted">Inga körningar ännu.</div>';
