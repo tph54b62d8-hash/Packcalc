@@ -377,7 +377,7 @@ body.dagbokComposerOpen{overflow:hidden}
 </div></div>
 <div id="etiketteringView" class="hidden etPage">
 <div class="etTop"><div><button class="etBack" onclick="backToProductionChooser()">‹ Produktion</button><div class="etTopTitle"><div><h2 class="etTitle">Etikettering</h2><div class="etSubtitle">Slipp den handskrivna lappen. PACKVEX håller reda på nästa etikett.</div></div></div></div><div class="etRunCounter" id="etRunCounter">Kört 0 st</div></div>
-<div id="etStartCard" class="etCard"><h3>Starta etikettering</h3><div class="etMuted" style="margin-top:3px">Ange vad som ska köras per omgång och etiketten som står på rullen nu.</div><div class="etStartGrid"><div><label>Körning</label><input id="etRunQty" type="number" min="1" placeholder="108"></div><div><label>Etikett på rullen nu</label><input id="etStartLabel" inputmode="numeric" placeholder="14 109"></div></div><button class="blue" onclick="etStart()">Starta körning</button></div>
+<div id="etStartCard" class="etCard"><h3>Starta etikettering</h3><div class="etMuted" style="margin-top:3px">Ange vad som ska köras per omgång och etiketten som står på rullen nu.</div><div class="etStartGrid"><div><label>Körning</label><input id="etRunQty" type="number" min="1" placeholder="108"></div><div><label>Etikett på rullen nu</label><input id="etStartLabel" inputmode="numeric" placeholder="14 109"></div><div><label>Etiketter kvar på rullen</label><input id="etStartRollCount" type="number" min="1" placeholder="115"></div></div><button class="blue" onclick="etStart()">Starta körning</button></div>
 <div id="etWorkView" class="etHidden">
 <div class="etCard"><div class="etNextRow"><div><h3>Nästa etikett</h3><div class="etMuted">Kontrollera rullen innan körning.</div></div><button class="etPlusBtn" onclick="etAddLabels()" aria-label="Lägg till etiketter">+</button></div><div class="etRollHero"><div class="etRollLabel">DETTA SKA STÅ PÅ RULLEN</div><div id="etExpectedLabel" class="etExpected">—</div><div id="etExpectedText" class="etExpectedText">Väntar på kontroll.</div></div><div class="etCard etInnerCard"><div class="etNextRow"><div><h3>Körning</h3><div class="etMuted">Ändra mängden när som helst.</div></div><div id="etRunQtyDisplay" class="etNextValue">108 st</div></div><input id="etRunQtyEdit" type="number" min="1" style="margin-top:9px" placeholder="Ändra körning"><button class="gray" onclick="etChangeRunQty()">Uppdatera körning</button></div><div class="etAdjustGrid etAdjustGridInline"><div class="etAdjust"><button class="etMinus" onclick="etAdjust('label',-1)">−</button><div><div class="etAdjustName">Kassa etikett</div><div id="etScrapLabel" class="etAdjustValue">0</div></div><button class="etPlus" onclick="etAdjust('label',1)">+</button></div><div class="etAdjust"><button class="etMinus" onclick="etAdjust('unit',-1)">−</button><div><div class="etAdjustName">Kassa enhet</div><div id="etScrapUnit" class="etAdjustValue">0</div></div><button class="etPlus" onclick="etAdjust('unit',1)">+</button></div></div><div class="etMuted etAdjustNote">Kassa etikett förbrukar en extra etikett. Kassa enhet förbrukar en etikett men räknas inte som godkänd enhet.</div><div class="etApprovalGrid"><button id="etApproveBtn" class="etApprove" onclick="etApprove()">Godkänn</button><button class="etReject" onclick="etReject()">Icke godkänd</button></div><div id="etDeviation" class="etDeviation etHidden"></div></div>
 <div class="etCard"><div class="etNextRow"><div><h3>Etiketter kvar</h3><div class="etMuted" id="etLabelBalanceText">Lägg till etiketter vid behov.</div></div><strong id="etLabelsLeft" class="etNextValue">0</strong></div><div class="etMuted" style="margin-top:8px">Lägg till nya etiketter när som helst.</div></div>
@@ -576,7 +576,8 @@ function etToast(t){let old=document.getElementById("etToast");if(old)old.remove
 function etStart(){
  let q=Number(document.getElementById("etRunQty").value)||0, raw=(document.getElementById("etStartLabel").value||"").trim(), n=Number(raw.replace(/\s/g,""));
  if(q<=0||!raw||!Number.isFinite(n)||n<=0){etToast("Fyll i körning och etiketten på rullen");return;}
- etState={started:true,runQty:q,nextLabel:n,scrapLabel:0,scrapUnit:0,labelsAdded:0,labelsConsumed:0,approved:false,actual:null,totalRun:0,history:[],finished:false};
+ let initialRoll=Number(document.getElementById("etStartRollCount").value)||0;if(initialRoll<=0){etToast("Ange hur många etiketter som finns kvar på aktuell rulle");return;}
+ etState={started:true,runQty:q,nextLabel:n,scrapLabel:0,scrapUnit:0,labelsAdded:initialRoll,labelsConsumed:0,approved:false,actual:null,totalRun:0,history:[],finished:false,rolls:[{id:1,count:initialRoll,remaining:initialRoll}],activeRoll:0};
  document.getElementById("etWorkView").classList.remove("etHidden");document.getElementById("etStartCard").classList.add("etHidden");etRender();etToast("Körning startad");
 }
 function etAdjust(type,delta){
@@ -585,42 +586,45 @@ function etAdjust(type,delta){
 }
 function etChangeRunQty(){let q=Number(document.getElementById("etRunQtyEdit").value)||0;if(q<=0){etToast("Ange en giltig körning");return;}etState.runQty=q;document.getElementById("etRunQtyEdit").value="";etRender();etToast("Körning uppdaterad");}
 function etAddLabels(){
- let n=prompt("Hur många nya etiketter läggs till?");if(n===null)return;n=Number(String(n).replace(/\s/g,""));if(!Number.isInteger(n)||n<=0){etToast("Ange ett helt antal etiketter");return;}etState.labelsAdded+=n;etState.approved=false;etState.actual=null;document.getElementById("etApproveBtn").textContent="Godkänn";document.getElementById("etApproveBtn").classList.remove("isRegister");etRender();etToast("Etiketter tillagda: +"+etFmt(n));
+ let n=prompt("Hur många etiketter finns på den nya rullen?");if(n===null)return;n=Number(String(n).replace(/\s/g,""));if(!Number.isInteger(n)||n<=0){etToast("Ange ett helt antal etiketter");return;}
+ etState.rolls.push({id:etState.rolls.length+1,count:n,remaining:n});
+ etState.labelsAdded+=n;etRender();etToast("Ny rulle tillagd: "+etFmt(n)+" etiketter");
 }
 function etNeed(){return Math.max(0,etState.runQty+etState.scrapLabel);}
 function etPreviewNext(){return Math.max(0,etState.nextLabel-etState.scrapLabel+etState.scrapUnit);}
+function etAvailableLabels(){return Math.max(0,etState.labelsAdded-etState.labelsConsumed);}
 function etApprove(){
  if(!etState.started||etState.finished)return;
  if(etState.approved){etRegisterRun();return;}
- let need=etNeed(), available=etState.labelsAdded-etState.labelsConsumed;
- if(etState.labelsAdded>0&&available<need){etToast("För få etiketter · lägg till fler etiketter");return;}
+ let need=etNeed();
+ if(etState.labelsAdded>0&&etAvailableLabels()<need){etToast("För få etiketter · lägg till en ny rulle");return;}
  etState.approved=true;etState.actual=etPreviewNext();document.getElementById("etExpectedText").textContent="Etiketten är godkänd. Körningen kan registreras.";document.getElementById("etApproveBtn").textContent="Registrera körning";document.getElementById("etApproveBtn").classList.add("isRegister");etRender();
 }
 function etRegisterRun(){
- let need=etNeed(),available=etState.labelsAdded-etState.labelsConsumed;
- if(etState.labelsAdded>0&&available<need){etState.approved=false;document.getElementById("etApproveBtn").textContent="Godkänn";document.getElementById("etApproveBtn").classList.remove("isRegister");etToast("För få etiketter · lägg till fler etiketter");return;}
+ let need=etNeed(),available=etAvailableLabels();
+ if(etState.labelsAdded>0&&available<need){etState.approved=false;document.getElementById("etApproveBtn").textContent="Godkänn";document.getElementById("etApproveBtn").classList.remove("isRegister");etToast("För få etiketter · lägg till en ny rulle");return;}
  let qty=Math.max(0,etState.runQty-etState.scrapUnit),consumed=need,start=etPreviewNext(),next=Math.max(0,start-consumed);
+ // Förbrukningen tas från rullarna i den ordning de lades till. En kass enhet är redan en del av körningen och förbrukar därför ingen extra etikett.
+ let leftToConsume=consumed;
+ while(leftToConsume>0 && etState.rolls.length){
+   let roll=etState.rolls[0], take=Math.min(leftToConsume,roll.remaining);roll.remaining-=take;leftToConsume-=take;
+   if(roll.remaining===0) etState.rolls.shift();
+ }
  etState.totalRun+=qty;etState.labelsConsumed+=consumed;etState.history.unshift({qty:qty,consumed:consumed,start:start,next:next,scrapUnit:etState.scrapUnit,scrapLabel:etState.scrapLabel});etState.nextLabel=next;etState.scrapUnit=0;etState.scrapLabel=0;etState.approved=false;etState.actual=null;document.getElementById("etApproveBtn").textContent="Godkänn";document.getElementById("etApproveBtn").classList.remove("isRegister");document.getElementById("etExpectedText").textContent="Kontrollera rullen innan nästa körning.";etRender();etToast("Körning registrerad");
 }
 function etReject(){
  if(!etState.started||etState.finished)return;
- let expected=etPreviewNext();
- let actual=prompt("Förväntad etikett: "+etFmt(expected)+"\nVad står faktiskt på rullen?");if(actual===null)return;
+ let expected=etPreviewNext();let actual=prompt("Förväntad etikett: "+etFmt(expected)+"\nVad står faktiskt på rullen?");if(actual===null)return;
  let n=Number(String(actual).replace(/\s/g,""));if(!Number.isFinite(n)||n<=0){etToast("Ange ett giltigt etikett nummer");return;}
  let diff=n-expected, box=document.getElementById("etDeviation");box.classList.remove("etHidden");box.innerHTML="<strong>Avvikelse: "+(diff>0?"+":"")+diff+" etikett"+(Math.abs(diff)===1?"":"er")+"</strong>"+(diff>0?"Förmodligen "+diff+" enhet"+(diff===1?"":"er")+" utan etikett.":diff<0?"Förmodligen "+Math.abs(diff)+" etikett"+(Math.abs(diff)===1?"":"er")+" borttappad"+(Math.abs(diff)===1?"":"a")+" eller en enhet dubbelprintad.":"Etiketten stämmer.");
  etState.actual=n;etRender();
 }
-function etAddLabelsIfNeeded(){return etState.labelsAdded-etState.labelsConsumed;}
+function etAddLabelsIfNeeded(){return etAvailableLabels();}
 function etRender(){
  if(!etState.started){document.getElementById("etRunCounter").textContent="Kört 0 st";return;}
- document.getElementById("etRunCounter").textContent="Kört "+etFmt(etState.totalRun)+" st";document.getElementById("etExpectedLabel").textContent=etFmt(etPreviewNext());document.getElementById("etRunQtyDisplay").textContent=etFmt(etState.runQty)+" st";document.getElementById("etScrapLabel").textContent=etState.scrapLabel;document.getElementById("etScrapUnit").textContent=etState.scrapUnit;document.getElementById("etLabelsLeft").textContent=etFmt(etAddLabelsIfNeeded());document.getElementById("etLabelBalanceText").textContent=etState.labelsAdded?"Tillagda etiketter minus förbrukade etiketter.":"Inga etiketter har lagts till ännu.";
+ document.getElementById("etRunCounter").textContent="Kört "+etFmt(etState.totalRun)+" st";document.getElementById("etExpectedLabel").textContent=etFmt(etPreviewNext());document.getElementById("etRunQtyDisplay").textContent=etFmt(etState.runQty)+" st";document.getElementById("etScrapLabel").textContent=etState.scrapLabel;document.getElementById("etScrapUnit").textContent=etState.scrapUnit;document.getElementById("etLabelsLeft").textContent=etFmt(etAddLabelsIfNeeded());document.getElementById("etLabelBalanceText").textContent=etState.rolls.length?"Etiketter på tillagda rullar.":"Ingen extra rulle tillagd ännu.";
  let h=document.getElementById("etHistory");h.innerHTML=etState.history.length?etState.history.slice(0,5).map((r,i)=>'<div class="etRunItem"><div class="etRunItemTop"><span>Körning '+(etState.history.length-i)+'</span><span>'+etFmt(r.qty)+' godkända enheter</span></div><div class="etRunItemMeta">Start '+etFmt(r.start)+' · nästa '+etFmt(r.next)+' · förbrukat '+etFmt(r.consumed)+' etiketter</div></div>').join(""): '<div class="etMuted">Inga körningar ännu.</div>';
 }
-function etFinishPrompt(){
- if(!etState.started){etToast("Ingen etikettering är startad");return;}
- let old=document.getElementById("etFinishPopup");if(old)old.remove();let m=document.createElement("div");m.id="etFinishPopup";m.className="etPopup";m.innerHTML='<div class="etPopupCard"><h3>Sammanfattning</h3><p>Kontrollera uppgifterna innan etiketteringen avslutas.</p><div class="etSummaryGrid"><div class="etSummaryItem"><span>Mottagna etiketter</span><strong>—</strong></div><div class="etSummaryItem"><span>Till redovisning</span><strong>—</strong></div><div class="etSummaryItem"><span>Kassa etiketter</span><strong>'+etState.history.reduce((a,r)=>a+r.scrapLabel,0)+'</strong></div><div class="etSummaryItem"><span>Hämtade enheter</span><strong>—</strong></div><div class="etSummaryItem"><span>Körda enheter</span><strong>'+etFmt(etState.totalRun)+'</strong></div><div class="etSummaryItem"><span>Kassa enheter</span><strong>'+etState.history.reduce((a,r)=>a+r.scrapUnit,0)+'</strong></div><div class="etSummaryItem"><span>Antal körningar</span><strong>'+etState.history.length+'</strong></div><div class="etSummaryItem"><span>Etiketter kvar</span><strong>'+etFmt(etAddLabelsIfNeeded())+'</strong></div></div><div class="etPopupActions"><button class="gray" onclick="document.getElementById(\'etFinishPopup\').remove()">Tillbaka</button><button class="red" onclick="etFinish()">Bekräfta & avsluta</button></div></div>';document.body.appendChild(m);
-}
-function etFinish(){let m=document.getElementById("etFinishPopup");if(m)m.remove();etState.finished=true;etState.started=false;document.getElementById("etWorkView").classList.add("etHidden");document.getElementById("etStartCard").classList.remove("etHidden");document.getElementById("etRunCounter").textContent="Kört 0 st";etToast("Etikettering avslutad");}
 
 function openProductionView(view){
 let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
