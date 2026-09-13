@@ -491,9 +491,9 @@ body.dagbokComposerOpen{overflow:hidden}
 #etStartCard .etStepLine{height:42px;position:relative;display:block;overflow:hidden}
 #etStartCard .etStepLine:before{content:"";position:absolute;left:0;right:0;top:20px;height:1.5px;background:#d8dee7}
 #etStartCard .etStepLine i{position:absolute;left:-28px;top:18px;width:28px;height:4px;border-radius:99px;background:linear-gradient(90deg,transparent,#2d6eea,#39b979,transparent);opacity:0}
-#etStartCard.etStarting .etStepLine:nth-of-type(1) i{animation:etV34Sweep 2.55s .15s cubic-bezier(.22,.61,.36,1) infinite}
-#etStartCard.etStarting .etStepLine:nth-of-type(2) i{animation:etV34Sweep 2.55s .78s cubic-bezier(.22,.61,.36,1) infinite}
-#etStartCard.etStarting .etStepLine:nth-of-type(3) i{animation:etV34Sweep 2.55s 1.41s cubic-bezier(.22,.61,.36,1) infinite}
+#etStartCard.etStarting .etStepLine:nth-of-type(1) i{animation:etV34Sweep 3.6s .15s cubic-bezier(.22,.61,.36,1) infinite}
+#etStartCard.etStarting .etStepLine:nth-of-type(2) i{animation:etV34Sweep 3.6s 1.20s cubic-bezier(.22,.61,.36,1) infinite}
+#etStartCard.etStarting .etStepLine:nth-of-type(3) i{animation:etV34Sweep 3.6s 2.25s cubic-bezier(.22,.61,.36,1) infinite}
 #etStartCard .etStartInfo{display:flex;align-items:center;gap:8px;margin-top:13px;padding:9px 11px;border-radius:12px;background:#edf5ff;color:#687386;font-size:10.5px;line-height:1.25}
 #etStartCard .etStartInfoIcon{width:26px;height:26px;flex:0 0 26px;border-radius:50%;background:#1459d9;color:#fff;display:flex;align-items:center;justify-content:center}
 #etStartCard .etStartInfoIcon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -550,6 +550,20 @@ body.etStartMode .footer{display:none!important}
 #etStartCard.etStarting .etStepLine:nth-of-type(2) i{animation-name:etV35Sweep;animation-delay:.92s}
 #etStartCard.etStarting .etStepLine:nth-of-type(3) i{animation-name:etV35Sweep;animation-delay:1.69s}
 @media(max-width:430px){#etStartCard .etStartIntroArea{height:140px;min-height:140px;padding:17px 14px 9px}#etStartCard .etStartIntroCopy{width:56%}#etStartCard .etStartIntroCopy h3{font-size:24px!important}#etStartCard .etStartIntroCopy p{font-size:10.5px!important;line-height:1.28!important}#etStartCard .etRollHero{right:-5px;bottom:-20px;width:145px;height:145px}#etStartCard .etRollHero img{width:145px;height:145px}#etStartCard .etStartMainCard{padding:11px 12px 10px!important}#etStartCard .etStartPair{gap:9px;margin-top:10px}#etStartCard .etStartDivider{height:53px}#etStartCard .etStartPair input{height:45px!important}#etStartCard .etStartButton{height:48px!important;min-height:48px!important;font-size:16.5px!important}#etStartCard .etStartStepIcon{width:36px;height:36px}#etStartCard .etStepLine{height:36px}#etStartCard .etStepLine:before{top:17px}#etStartCard .etStepLine i{top:15px}}
+
+/* V3.6: finjusteringar enligt mobilreferens */
+#etStartCard .etRollHero{right:2px!important;bottom:-8px!important;width:132px!important;height:132px!important;background:transparent!important;border:0!important;box-shadow:none!important}
+#etStartCard .etRollHero img{width:132px!important;height:132px!important;mix-blend-mode:normal!important;object-fit:contain!important}
+#etStartCard .etBatchWrap{position:relative;min-height:50px!important;height:50px!important;padding:0!important}
+#etStartCard .etBatchWrap input{height:48px!important;padding:10px 12px!important}
+#etStartCard .etScanMini{width:54px!important;min-width:54px!important;height:48px!important;min-height:48px!important;margin:0!important;border-left:1px solid #e1e6ee!important;border-radius:0 12px 12px 0!important}
+#etStartCard .etStartPair{margin-top:13px!important;gap:10px!important}
+#etStartCard .etStartPair input{height:48px!important;padding:10px 12px!important}
+#etStartCard .etStartDivider{height:58px!important}
+#etStartCard .etStartButton{height:50px!important;min-height:50px!important;margin-top:13px!important}
+#etStartCard .etStartProgress{margin-top:13px!important}
+#etStartCard .etStartInfo{margin-top:11px!important;padding:8px 10px!important}
+@media(max-width:430px){#etStartCard .etRollHero{right:0!important;bottom:-7px!important;width:122px!important;height:122px!important}#etStartCard .etRollHero img{width:122px!important;height:122px!important}#etStartCard .etBatchWrap{min-height:48px!important;height:48px!important}#etStartCard .etBatchWrap input{height:46px!important}#etStartCard .etScanMini{height:46px!important;min-height:46px!important;width:52px!important;min-width:52px!important}#etStartCard .etStartPair input{height:46px!important}#etStartCard .etStartDivider{height:55px!important}}
 </style>
 </head>
 <body>
@@ -611,7 +625,7 @@ body.etStartMode .footer{display:none!important}
       <div class="etStartPair">
         <div class="etStartField"><div class="etFieldHead"><span class="etStartFieldIcon"><svg viewBox="0 0 24 24"><path d="M5 20V9h4v11M15 20V5h4v15M9 20v-6h6v6"/><path d="M5 9h4"/></svg></span><div><label for="etRunQty">Körning</label><small>Ange antal enheter i denna körning.</small></div></div><input id="etRunQty" type="number" min="1" inputmode="numeric" value="0" class="etStartZero" aria-label="Körning"></div>
         <div class="etStartDivider"></div>
-        <div class="etStartField"><div class="etFieldHead"><span class="etStartFieldIcon"><svg viewBox="0 0 24 24"><path d="M20 13 13 20l-9-9V4h7l9 9z"/><circle cx="8" cy="8" r="1.4"/></svg></span><div><label for="etStartLabel">Etikett på rullen nu</label><small>Ange första etikett på rullen.</small></div></div><input id="etStartLabel" type="number" min="1" inputmode="numeric" value="0" class="etStartZero" aria-label="Etikett på rullen nu"></div>
+        <div class="etStartField"><div class="etFieldHead"><span class="etStartFieldIcon"><svg viewBox="0 0 24 24"><path d="M20 13 13 20l-9-9V4h7l9 9z"/><circle cx="8" cy="8" r="1.4"/></svg></span><div><label for="etStartLabel">Etikett</label><small>Ange första etikett på rullen.</small></div></div><input id="etStartLabel" type="number" min="1" inputmode="numeric" value="0" class="etStartZero" aria-label="Etikett"></div>
       </div>
       <button class="blue etStartButton" type="button" onclick="etStart()"><span class="etStartPlay">▶</span><span>Starta körning</span></button>
       <div class="etStartProgress" aria-live="polite">
@@ -802,6 +816,7 @@ function saveData(){localStorage.setItem("packvex_data",JSON.stringify(data));}
 const pages=["home","pack","packalkylator","print","pall","qr","dagbok","historik","oversikt","installningar","more","data","dataOlder","omAppen"];
 
 const PAGE_STATE_KEY="packvex_current_page";
+const PRODUCTION_VIEW_KEY="packvex_production_view";
 
 function showPage(page){
 localStorage.setItem(PAGE_STATE_KEY,page);
@@ -810,7 +825,7 @@ pages.forEach(p=>document.getElementById(p).classList.add("hidden"));
 document.getElementById(page).classList.remove("hidden");
 document.querySelectorAll("nav button").forEach(btn=>btn.classList.remove("active"));
 if(page==="home")document.getElementById("navHome").classList.add("active");
-if(page==="pack"){document.getElementById("navPack").classList.add("active");openProductionChooser();}
+if(page==="pack"){document.getElementById("navPack").classList.add("active");restoreProductionView();}
 if(page==="packalkylator")document.getElementById("navCalc").classList.add("active");
 if(page==="dagbok")document.getElementById("navDagbok").classList.add("active");
 if(page==="historik")document.getElementById("navHistorik").classList.add("active");
@@ -825,14 +840,21 @@ let etState={started:false,runQty:108,nextLabel:null,scrapLabel:0,scrapUnit:0,la
 function openProductionChooser(){
  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),et=document.getElementById("etiketteringView");
  if(!chooser||!main)return;
- chooser.classList.remove("hidden"); main.classList.add("hidden"); if(sub)sub.classList.add("hidden"); if(et)et.classList.add("hidden"); document.body.classList.remove("etStartMode"); window.scrollTo(0,0);
+ chooser.classList.remove("hidden"); main.classList.add("hidden"); if(sub)sub.classList.add("hidden"); if(et)et.classList.add("hidden"); document.body.classList.remove("etStartMode"); localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser"); window.scrollTo(0,0);
 }
 function chooseProductionMode(mode){
  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),et=document.getElementById("etiketteringView"),sub=document.getElementById("productionSubView");
  if(!chooser||!main||!et)return;
  chooser.classList.add("hidden"); if(sub)sub.classList.add("hidden");
- if(mode==="kolli"){main.classList.remove("hidden");window.scrollTo(0,0);return;}
- main.classList.add("hidden");et.classList.remove("hidden");document.body.classList.add("etStartMode");etRender();window.scrollTo(0,0);
+ if(mode==="kolli"){localStorage.setItem(PRODUCTION_VIEW_KEY,"kolli");main.classList.remove("hidden");window.scrollTo(0,0);return;}
+ localStorage.setItem(PRODUCTION_VIEW_KEY,"etikettering");main.classList.add("hidden");et.classList.remove("hidden");document.body.classList.add("etStartMode");etRender();window.scrollTo(0,0);
+}
+function restoreProductionView(){
+ let saved=localStorage.getItem(PRODUCTION_VIEW_KEY)||"chooser";
+ if(saved==="etikettering"){chooseProductionMode("etikettering");return;}
+ if(saved==="kolli"){chooseProductionMode("kolli");return;}
+ if(saved==="registered"||saved==="registrations"){openProductionView(saved);return;}
+ openProductionChooser();
 }
 function backToProductionChooser(){openProductionChooser();}
 function etFmt(n){n=Number(n)||0;return Math.max(0,n).toLocaleString("sv-SE");}
@@ -867,9 +889,9 @@ function etStart(){
  let status=document.getElementById("etStartProgressText");
  status.textContent="Validerar uppgifter...";
  let startedAt=Date.now();
- setTimeout(()=>{steps[0].classList.remove("active");steps[0].classList.add("done");steps[1].classList.add("active");status.textContent="Initierar etikettering...";},600);
- setTimeout(()=>{steps[1].classList.remove("active");steps[1].classList.add("done");steps[2].classList.add("active");status.textContent="Synkroniserar system...";},1250);
- setTimeout(()=>{steps[2].classList.remove("active");steps[2].classList.add("done");steps[3].classList.add("final");status.textContent="Klar! Produktion igång";},1900);
+ setTimeout(()=>{steps[0].classList.remove("active");steps[0].classList.add("done");steps[1].classList.add("active");status.textContent="Initierar etikettering...";},900);
+ setTimeout(()=>{steps[1].classList.remove("active");steps[1].classList.add("done");steps[2].classList.add("active");status.textContent="Synkroniserar system...";},1900);
+ setTimeout(()=>{steps[2].classList.remove("active");steps[2].classList.add("done");steps[3].classList.add("final");status.textContent="Klar! Produktion igång";},3000);
  setTimeout(()=>{
    etState={started:true,runQty:q,nextLabel:n,scrapLabel:0,scrapUnit:0,labelsAdded:0,labelsConsumed:0,approved:false,actual:null,totalRun:0,history:[],finished:false,rolls:[],activeRoll:0,batchId:batch};
    card.classList.remove("etStarting");
@@ -878,7 +900,7 @@ function etStart(){
    document.body.classList.remove("etStartMode");
    etRender();
    etToast("✓ Körning startad · "+etFmt(q)+" st · Nästa etikett "+etFmt(n));
- },2500);
+ },4000);
 }
 function etAdjust(type,delta){
  if(!etState.started||etState.finished)return;
@@ -954,6 +976,7 @@ function etRender(){
 function openProductionView(view){
 let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
 if(!main||!sub||!pack)return;
+localStorage.setItem(PRODUCTION_VIEW_KEY,view);
 main.classList.add("hidden");
 sub.classList.add("hidden");
 sub.classList.remove("navSubEnter","navSubLeave");
@@ -981,6 +1004,7 @@ if(view==="registered"||view==="registrations"){
 function closeProductionView(){
 let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
 if(!main||!sub||!pack)return;
+localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
 let wasSub=!sub.classList.contains("hidden");
 if(!wasSub){
  main.classList.remove("hidden");
