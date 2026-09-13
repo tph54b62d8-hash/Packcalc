@@ -335,6 +335,95 @@ body.dagbokComposerOpen{overflow:hidden}
 .etApprove{background:#35b878!important;color:#fff!important}
 .etApprove.isRegister{background:#1459d9!important;color:#fff!important}
 <style id="et_v19_tweaks">.etInnerCard{margin-top:18px!important;padding:10px 12px!important;background:#fafbfd!important;border-color:#edf0f4!important}.etInnerCard h3{font-size:13px!important;font-weight:750!important;color:#687386!important}.etInnerCard .etMuted{font-size:10px!important}.etNextValue{font-size:18px!important;font-weight:800!important;color:#687386!important}.etInnerCard input{margin-top:7px!important}.etInnerCard button.gray{font-size:12px!important;padding:7px!important;margin-top:6px!important}</style></body>
+
+<style id="et_v28_visual_only">
+/* v2.8 — Etikettering: endast visuellt skal, inga funktionsändringar */
+.etPage{padding-bottom:28px}
+.etTop{margin-bottom:14px;align-items:flex-end}
+.etBack{font-size:15px!important;font-weight:800!important}
+.etTitle{font-size:30px;letter-spacing:-.7px}
+.etSubtitle{font-size:15px;line-height:1.3;margin-top:5px;max-width:360px}
+.etRunCounter{background:#eef5ff;border-radius:18px;padding:11px 14px;font-size:13px}
+
+#etWorkView>.etCard:first-child{
+  border-radius:22px;padding:14px;margin-bottom:14px;
+  border:1px solid #e2e9f1;box-shadow:0 5px 20px rgba(30,48,82,.055)
+}
+.etStatusBar{display:flex;justify-content:space-between;align-items:center;padding:1px 8px 10px}
+.etReady{display:flex;align-items:center;gap:9px;color:#16834c;font-size:14px;font-weight:850}
+.etReadyDot{width:13px;height:13px;border-radius:50%;background:#35b878;box-shadow:0 0 0 5px #e5f8ed}
+.etStatusHint{font-size:12px;color:#687386;font-weight:750}
+.etStatusLine{height:6px;width:100px;background:#e9edf3;border-radius:99px;overflow:hidden;margin-top:5px}
+.etStatusLine span{display:block;height:100%;width:55%;background:#5fbd82;border-radius:99px}
+.etMainHero{background:#f3fbf6;border:1px solid #dfeee5;border-radius:19px;padding:16px 16px 15px;position:relative}
+.etMainHeroHead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.etHeroTag{width:52px;height:52px;border-radius:16px;background:#e5f8ec;color:#169051;display:flex;align-items:center;justify-content:center;flex:0 0 52px}
+.etHeroTag svg{width:31px;height:31px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.etHeroLabel{font-size:14px;font-weight:850;color:#172033;margin-bottom:0}
+.etExpected{font-size:58px;line-height:.98;font-weight:950;color:#0f2d69;letter-spacing:-2px;margin:3px 0 5px;text-align:left}
+.etExpectedText{font-size:13px;color:#17764a;font-weight:750;text-align:left}
+.etExpectedText:before{content:'✓';display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#28ad68;color:#fff;margin-right:7px;font-size:14px;font-weight:900}
+.etExpectedMeta{font-size:12px;color:#687386;margin-top:7px;padding-left:31px}
+.etExpectedMeta strong{color:#172033}
+.etPlusBtn{width:52px!important;height:52px!important;border-radius:16px!important;font-size:31px!important;background:#eaf2ff!important}
+
+.etWorkColumns{display:grid;grid-template-columns:1.05fr 1fr;gap:0;margin-top:13px;border-top:1px solid #e5eaf0;padding-top:13px}
+.etWorkColumns>.etRunPanel{padding:0 13px 0 8px;border-right:1px solid #e5eaf0}
+.etWorkColumns>.etScrapPanel{padding:0 8px 0 15px}
+.etPanelTitle{font-size:14px;font-weight:850;color:#172033;margin-bottom:7px}
+.etRunValueBox{height:48px;border:1px solid #dbe2eb;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 13px}
+.etRunValueBox .etNextValue{font-size:22px!important;color:#172033!important;font-weight:900!important}
+.etEditPencil{color:#1459d9;font-size:19px}
+.etRunEdit{margin-top:8px!important}
+.etRunUpdate{font-size:12px!important;padding:8px!important;margin-top:6px!important}
+.etScrapGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.etAdjust{background:#f8fafc;border:1px solid #e2e7ee;border-radius:12px;padding:6px;grid-template-columns:30px 1fr 30px}
+.etAdjustName{font-size:10px;font-weight:750;color:#687386}
+.etAdjustValue{font-size:18px}
+.etMinus,.etPlus{width:30px!important;height:30px!important;border-radius:8px!important;font-size:19px!important}
+.etAdjustNote{font-size:10px;line-height:1.3;margin-top:7px;color:#7a8595}
+
+.etControlStatus{margin-top:13px;border-top:1px solid #e5eaf0;padding-top:12px}
+.etControlStatusHead{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:850;color:#172033;margin-bottom:7px}
+.etControlStatusHead .ok{color:#17764a;font-weight:750;font-size:11px}
+.etControlGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:#f3fbf6;border-radius:14px;padding:10px}
+.etControlItem{min-width:0;position:relative;padding-left:25px;font-size:10px;color:#687386}
+.etControlItem:before{content:'✓';position:absolute;left:0;top:0;width:19px;height:19px;border-radius:50%;background:#35b878;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900}
+.etControlItem strong{display:block;color:#172033;font-size:11px;margin-top:2px}
+
+.etApprovalGrid{margin-top:12px;gap:8px}
+.etApprove{min-height:49px!important;border-radius:13px!important;background:#2db56c!important;font-size:15px!important;font-weight:900!important;box-shadow:0 4px 10px rgba(45,181,108,.14)}
+.etApprove.isRegister{background:#1459d9!important;box-shadow:0 4px 10px rgba(20,89,217,.14)}
+.etReject{min-height:38px!important;border-radius:12px!important;background:#fff1f2!important;border-color:#f2d4d8!important;color:#c13a4b!important;font-size:12px!important;font-weight:800!important}
+
+.etBottomCards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.etBottomCard{background:#fff;border:1px solid #e2e7ef;border-radius:18px;padding:14px;box-shadow:0 3px 12px rgba(30,48,82,.045)}
+.etBottomHead{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.etBottomIcon{width:34px;height:34px;border-radius:10px;background:#eef5ff;color:#1459d9;display:flex;align-items:center;justify-content:center}
+.etBottomIcon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.etBottomCard h3{font-size:14px!important}
+.etBottomBig{font-size:27px;font-weight:950;color:#172033;line-height:1.05}
+.etBottomMeta{font-size:10px;color:#687386;margin-top:5px}
+.etLabelBar{height:8px;background:#e7ebf1;border-radius:99px;overflow:hidden;margin-top:8px}
+.etLabelBar span{display:block;height:100%;width:0;background:#5f7fd8;border-radius:99px}
+.etAddRollBtn{margin-top:9px!important;font-size:11px!important;padding:8px!important;background:#eaf2ff!important;color:#1459d9!important}
+.etLatestMain{font-size:16px;font-weight:900;color:#172033;margin-top:4px}
+.etLatestSub{font-size:10px;color:#687386;margin-top:3px;line-height:1.35}
+.etFinish{margin-top:12px!important;border-radius:13px!important}
+
+/* Startläget får samma visuella språk, men behåller exakt samma inputs och funktion */
+#etStartCard{border-radius:22px;padding:18px;box-shadow:0 5px 20px rgba(30,48,82,.055)}
+#etStartCard h3{font-size:19px}
+#etStartCard .etMuted{font-size:13px;line-height:1.35}
+#etStartCard button{border-radius:13px!important;min-height:46px;font-weight:850}
+
+@media(max-width:430px){
+ .etTitle{font-size:28px}.etSubtitle{font-size:14px}.etExpected{font-size:52px}
+ .etWorkColumns{grid-template-columns:1fr}.etWorkColumns>.etRunPanel{border-right:0;border-bottom:1px solid #e5eaf0;padding:0 0 12px}.etWorkColumns>.etScrapPanel{padding:12px 0 0}
+ .etControlGrid{grid-template-columns:1fr 1fr}.etBottomCards{gap:8px}.etBottomCard{padding:12px}
+}
+</style>
+
 </head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
@@ -379,11 +468,26 @@ body.dagbokComposerOpen{overflow:hidden}
 <div class="etTop"><div><button class="etBack" onclick="backToProductionChooser()">‹ Produktion</button><div class="etTopTitle"><div><h2 class="etTitle">Etikettering</h2><div class="etSubtitle">Slipp den handskrivna lappen. PACKVEX håller reda på nästa etikett.</div></div></div></div><div class="etRunCounter" id="etRunCounter">Kört 0 st</div></div>
 <div id="etStartCard" class="etCard"><h3>Starta etikettering</h3><div class="etMuted" style="margin-top:3px">Ange vad som ska köras per omgång och etiketten som står på rullen nu.</div><div class="etStartGrid"><div><label>Körning</label><input id="etRunQty" type="number" min="1" placeholder="108"></div><div><label>Etikett på rullen nu</label><input id="etStartLabel" inputmode="numeric" placeholder="14 109"></div></div><button class="blue" onclick="etStart()">Starta körning</button></div>
 <div id="etWorkView" class="etHidden">
-<div class="etCard"><div class="etNextRow"><div><h3>Nästa etikett</h3><div class="etMuted">Kontrollera rullen innan körning.</div></div><button class="etPlusBtn" onclick="etAddLabels()" aria-label="Lägg till etiketter">+</button></div><div class="etRollHero"><div class="etRollLabel">DETTA SKA STÅ PÅ RULLEN</div><div id="etExpectedLabel" class="etExpected">—</div><div id="etExpectedText" class="etExpectedText">Väntar på kontroll.</div></div><div class="etCard etInnerCard"><div class="etNextRow"><div><h3>Körning</h3><div class="etMuted">Ändra mängden när som helst.</div></div><div id="etRunQtyDisplay" class="etNextValue">108 st</div></div><input id="etRunQtyEdit" type="number" min="1" style="margin-top:9px" placeholder="Ändra körning"><button class="gray" onclick="etChangeRunQty()">Uppdatera körning</button></div><div class="etAdjustGrid etAdjustGridInline"><div class="etAdjust"><button class="etMinus" onclick="etAdjust('label',-1)">−</button><div><div class="etAdjustName">Kassa etikett</div><div id="etScrapLabel" class="etAdjustValue">0</div></div><button class="etPlus" onclick="etAdjust('label',1)">+</button></div><div class="etAdjust"><button class="etMinus" onclick="etAdjust('unit',-1)">−</button><div><div class="etAdjustName">Kassa enhet</div><div id="etScrapUnit" class="etAdjustValue">0</div></div><button class="etPlus" onclick="etAdjust('unit',1)">+</button></div></div><div class="etMuted etAdjustNote">Kassa etikett förbrukar en extra etikett. Kassa enhet gör att en etikett mindre används i körningen.</div><div class="etApprovalGrid"><button id="etApproveBtn" class="etApprove" onclick="etApprove()">Godkänn</button><button class="etReject" onclick="etReject()">Icke godkänd</button></div><div id="etDeviation" class="etDeviation etHidden"></div></div>
-<div class="etCard"><div class="etNextRow"><div><h3>Etiketter kvar</h3><div class="etMuted" id="etLabelBalanceText">Lägg till etiketter vid behov.</div></div><strong id="etLabelsLeft" class="etNextValue">0</strong></div><div class="etMuted" style="margin-top:8px">Lägg till nya etiketter när som helst.</div></div>
+<div class="etCard etMainWorkCard">
+  <div class="etStatusBar"><div class="etReady"><span class="etReadyDot"></span>Redo för körning</div><div class="etStatusHint">Aktuell körning<div class="etStatusLine"><span></span></div></div></div>
+  <div class="etMainHero">
+    <div class="etMainHeroHead"><div><div class="etHeroLabel">Nästa etikett</div><div id="etExpectedLabel" class="etExpected">—</div><div id="etExpectedText" class="etExpectedText">Väntar på kontroll.</div><div class="etExpectedMeta">Förväntad: <strong id="etExpectedMetaValue">—</strong> &nbsp;|&nbsp; Faktisk: <strong id="etActualMetaValue">—</strong></div></div><button class="etPlusBtn" onclick="etAddLabels()" aria-label="Lägg till etiketter">+</button></div>
+  </div>
+  <div class="etWorkColumns">
+    <div class="etRunPanel"><div class="etPanelTitle">Körning</div><div class="etRunValueBox"><div id="etRunQtyDisplay" class="etNextValue">108 st</div><span class="etEditPencil">✎</span></div><input id="etRunQtyEdit" class="etRunEdit" type="number" min="1" placeholder="Ändra körning"><button class="gray etRunUpdate" onclick="etChangeRunQty()">Uppdatera körning</button></div>
+    <div class="etScrapPanel"><div class="etPanelTitle">Kassa</div><div class="etScrapGrid"><div class="etAdjust"><button class="etMinus" onclick="etAdjust('label',-1)">−</button><div><div class="etAdjustName">Kassa etikett</div><div id="etScrapLabel" class="etAdjustValue">0</div></div><button class="etPlus" onclick="etAdjust('label',1)">+</button></div><div class="etAdjust"><button class="etMinus" onclick="etAdjust('unit',-1)">−</button><div><div class="etAdjustName">Kassa enhet</div><div id="etScrapUnit" class="etAdjustValue">0</div></div><button class="etPlus" onclick="etAdjust('unit',1)">+</button></div></div><div class="etMuted etAdjustNote">Kassa etikett = extra etikett. Kassa enhet = en etikett mindre i körningen.</div></div>
+  </div>
+  <div class="etControlStatus"><div class="etControlStatusHead"><span>Kontrollstatus</span><span class="ok">Alla värden stämmer⌃</span></div><div class="etControlGrid"><div class="etControlItem">Körning<strong id="etStatusQty">108 st</strong></div><div class="etControlItem">Etikett<strong id="etStatusLabel">—</strong></div><div class="etControlItem">Kassa etikett<strong id="etStatusScrapLabel">0</strong></div><div class="etControlItem">Kassa enhet<strong id="etStatusScrapUnit">0</strong></div></div></div>
+  <div class="etApprovalGrid"><button id="etApproveBtn" class="etApprove" onclick="etApprove()">▶ &nbsp;Godkänn körning</button><button class="etReject" onclick="etReject()">⚠ &nbsp;Icke godkänd / Rapportera avvikelse</button></div>
+  <div id="etDeviation" class="etDeviation etHidden"></div>
+</div>
+<div class="etBottomCards">
+  <div class="etBottomCard"><div class="etBottomHead"><div class="etBottomIcon"><svg viewBox="0 0 24 24"><path d="M7 3h10l3 3v15H4V6z"/><path d="M8 3v5h8V3"/><path d="M8 13h8M8 17h5"/></svg></div><div><h3>Etiketter kvar</h3><div class="etMuted">Aktuell rulle</div></div></div><div id="etLabelsLeft" class="etBottomBig">0</div><div class="etLabelBar"><span id="etLabelBarFill"></span></div><div id="etLabelBalanceText" class="etBottomMeta">Ingen extra rulle tillagd ännu.</div><button class="etAddRollBtn" onclick="etAddLabels()">＋ &nbsp;Lägg till etiketter</button></div>
+  <div class="etBottomCard"><div class="etBottomHead"><div class="etBottomIcon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Senaste körning</h3></div></div><div id="etLatestRunMain" class="etLatestMain">Ingen körning ännu</div><div id="etLatestRunSub" class="etLatestSub">Nästa etikett: —</div></div>
+</div>
 <div class="etCard"><h3>Senaste körningar</h3><div id="etHistory" class="etRuns"><div class="etMuted">Inga körningar ännu.</div></div></div>
 <button class="etFinish" onclick="etFinishPrompt()">Avsluta etikettering</button>
-</div></div>
+</div>
 <div id="productionMainLayout" class="productionLayout">
 <div class="productionLeft">
 <div class="card productionHeaderCard"><div class="productionTop"><div class="productionHeaderMain"><div class="productionHeaderIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20V9h5v11M16 20V4h5v16M8 20v-5h8v5M3 9h5"/></svg></div><div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div></div><div id="productionActiveBatch" class="activeBatch"></div></div></div>
@@ -648,7 +752,7 @@ function etAddLabelsIfNeeded(){return etAvailableLabels();}
 function etRender(){
  if(!etState.started){document.getElementById("etRunCounter").textContent="Kört 0 st";return;}
  let displayedNext=etPreviewNext();
- document.getElementById("etRunCounter").textContent="Kört "+etFmt(etState.totalRun)+" st";document.getElementById("etExpectedLabel").textContent=etFmt(displayedNext);document.getElementById("etRunQtyDisplay").textContent=etFmt(etState.runQty)+" st";document.getElementById("etScrapLabel").textContent=etState.scrapLabel;document.getElementById("etScrapUnit").textContent=etState.scrapUnit;document.getElementById("etLabelsLeft").textContent=etFmt(etAvailableLabels());document.getElementById("etLabelBalanceText").textContent=etState.rolls.length?"Nya rullar finns i banken och används när aktuell rulle tar slut.":"Ingen extra rulle tillagd ännu.";
+ document.getElementById("etRunCounter").textContent="Kört "+etFmt(etState.totalRun)+" st";document.getElementById("etExpectedLabel").textContent=etFmt(displayedNext);document.getElementById("etRunQtyDisplay").textContent=etFmt(etState.runQty)+" st";document.getElementById("etScrapLabel").textContent=etState.scrapLabel;document.getElementById("etScrapUnit").textContent=etState.scrapUnit;document.getElementById("etLabelsLeft").textContent=etFmt(etAvailableLabels());document.getElementById("etLabelBalanceText").textContent=etState.rolls.length?"Nya rullar finns i banken och används när aktuell rulle tar slut.":"Ingen extra rulle tillagd ännu.";document.getElementById("etExpectedMetaValue").textContent=etFmt(displayedNext);document.getElementById("etActualMetaValue").textContent=etState.actual==null?"—":etFmt(etState.actual);document.getElementById("etStatusQty").textContent=etFmt(etState.runQty)+" st";document.getElementById("etStatusLabel").textContent=etFmt(displayedNext);document.getElementById("etStatusScrapLabel").textContent=etState.scrapLabel;document.getElementById("etStatusScrapUnit").textContent=etState.scrapUnit;let lb=document.getElementById("etLabelBarFill");if(lb){let total=Math.max(1,(Number(etState.nextLabel)||0)+etCurrentBank());lb.style.width=Math.min(100,Math.max(0,((Number(etState.nextLabel)||0)/total)*100))+"%";}let lr=document.getElementById("etLatestRunMain"),ls=document.getElementById("etLatestRunSub");if(lr&&ls){if(etState.history.length){let r=etState.history[0];lr.textContent=etFmt(r.qty)+" st";ls.textContent="Kassa etikett · "+etFmt(r.scrapLabel)+" · Kassa enhet · "+etFmt(r.scrapUnit)+" · Nästa etikett: "+etFmt(r.next);}else{lr.textContent="Ingen körning ännu";ls.textContent="Nästa etikett: —";}}
  let h=document.getElementById("etHistory");h.innerHTML=etState.history.length?etState.history.slice(0,5).map((r,i)=>'<div class="etRunItem"><div class="etRunItemTop"><span>Körning '+(etState.history.length-i)+'</span><span>'+etFmt(r.qty)+' godkända enheter</span></div><div class="etRunItemMeta">Start '+etFmt(r.start)+' · nästa '+etFmt(r.next)+' · förbrukat '+etFmt(r.consumed)+' etiketter</div></div>').join(""): '<div class="etMuted">Inga körningar ännu.</div>';
 }
 
