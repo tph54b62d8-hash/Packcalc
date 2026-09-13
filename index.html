@@ -662,7 +662,6 @@ body.etStartMode .footer{display:none!important}
 <div class="etCard"><h3>Senaste körningar</h3><div id="etHistory" class="etRuns"><div class="etMuted">Inga körningar ännu.</div></div></div>
 <button class="etFinish" onclick="etFinishPrompt()">Avsluta etikettering</button>
 </div>
-</div>
 <div id="productionMainLayout" class="productionLayout">
 <div class="productionLeft">
 <div class="card productionHeaderCard"><div class="productionTop"><div class="productionHeaderMain"><div class="productionHeaderIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20V9h5v11M16 20V4h5v16M8 20v-5h8v5M3 9h5"/></svg></div><div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div></div><div id="productionActiveBatch" class="activeBatch"></div></div></div>
@@ -827,7 +826,7 @@ pages.forEach(p=>document.getElementById(p).classList.add("hidden"));
 document.getElementById(page).classList.remove("hidden");
 document.querySelectorAll("nav button").forEach(btn=>btn.classList.remove("active"));
 if(page==="home")document.getElementById("navHome").classList.add("active");
-if(page==="pack"){document.getElementById("navPack").classList.add("active");restoreProductionView();}
+if(page==="pack"){document.getElementById("navPack").classList.add("active");openProductionChooser();}
 if(page==="packalkylator")document.getElementById("navCalc").classList.add("active");
 if(page==="dagbok")document.getElementById("navDagbok").classList.add("active");
 if(page==="historik")document.getElementById("navHistorik").classList.add("active");
@@ -2751,7 +2750,7 @@ etInitStartInputs();
 renderAll();
 (function(){
 let savedPage=localStorage.getItem(PAGE_STATE_KEY);
-if(savedPage&&pages.includes(savedPage))showPage(savedPage);
+if(savedPage&&pages.includes(savedPage)){showPage(savedPage);if(savedPage==="pack")restoreProductionView();}
 })();
 
 </script>
