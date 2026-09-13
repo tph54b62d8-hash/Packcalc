@@ -424,6 +424,20 @@ body.dagbokComposerOpen{overflow:hidden}
 }
 </style>
 
+
+<style id="etRunCardMove">
+.etKassaOnly{grid-template-columns:1fr!important;margin-top:13px!important;border-top:1px solid #e5eaf0!important;padding-top:13px!important}
+.etKassaOnly>.etScrapPanel{padding:0!important}
+.etRunCard{margin-top:0!important}
+.etRunCardHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.etRunCardHead .etPanelTitle{margin:0;font-size:16px}
+.etRunCardSub{font-size:11px;color:#687386;margin-top:2px}
+.etRunCardValue{font-size:22px;font-weight:900;color:#172033;white-space:nowrap}
+.etRunCard .etRunValueBox{height:42px;background:#f8fafc}
+.etRunCardLabel{font-size:12px;color:#687386;font-weight:750}
+.etRunCard .etRunEdit{margin-top:8px!important}
+.etRunCard .etRunUpdate{margin-top:6px!important}
+</style>
 </head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
@@ -473,14 +487,14 @@ body.dagbokComposerOpen{overflow:hidden}
   <div class="etMainHero">
     <div class="etMainHeroHead"><div><div class="etHeroLabel">Nästa etikett</div><div id="etExpectedLabel" class="etExpected">—</div><div id="etExpectedText" class="etExpectedText">Väntar på kontroll.</div><div class="etExpectedMeta">Förväntad: <strong id="etExpectedMetaValue">—</strong> &nbsp;|&nbsp; Faktisk: <strong id="etActualMetaValue">—</strong></div></div><button class="etPlusBtn" onclick="etAddLabels()" aria-label="Lägg till etiketter">+</button></div>
   </div>
-  <div class="etWorkColumns">
-    <div class="etRunPanel"><div class="etPanelTitle">Körning</div><div class="etRunValueBox"><div id="etRunQtyDisplay" class="etNextValue">108 st</div><span class="etEditPencil">✎</span></div><input id="etRunQtyEdit" class="etRunEdit" type="number" min="1" placeholder="Ändra körning"><button class="gray etRunUpdate" onclick="etChangeRunQty()">Uppdatera körning</button></div>
+  <div class="etWorkColumns etKassaOnly">
     <div class="etScrapPanel"><div class="etPanelTitle">Kassa</div><div class="etScrapGrid"><div class="etAdjust"><button class="etMinus" onclick="etAdjust('label',-1)">−</button><div><div class="etAdjustName">Kassa etikett</div><div id="etScrapLabel" class="etAdjustValue">0</div></div><button class="etPlus" onclick="etAdjust('label',1)">+</button></div><div class="etAdjust"><button class="etMinus" onclick="etAdjust('unit',-1)">−</button><div><div class="etAdjustName">Kassa enhet</div><div id="etScrapUnit" class="etAdjustValue">0</div></div><button class="etPlus" onclick="etAdjust('unit',1)">+</button></div></div><div class="etMuted etAdjustNote">Kassa etikett = extra etikett. Kassa enhet = en etikett mindre i körningen.</div></div>
   </div>
   <div class="etControlStatus"><div class="etControlStatusHead"><span>Kontrollstatus</span><span class="ok">Alla värden stämmer⌃</span></div><div class="etControlGrid"><div class="etControlItem">Körning<strong id="etStatusQty">108 st</strong></div><div class="etControlItem">Etikett<strong id="etStatusLabel">—</strong></div><div class="etControlItem">Kassa etikett<strong id="etStatusScrapLabel">0</strong></div><div class="etControlItem">Kassa enhet<strong id="etStatusScrapUnit">0</strong></div></div></div>
   <div class="etApprovalGrid"><button id="etApproveBtn" class="etApprove" onclick="etApprove()">▶ &nbsp;Godkänn körning</button><button class="etReject" onclick="etReject()">⚠ &nbsp;Icke godkänd / Rapportera avvikelse</button></div>
   <div id="etDeviation" class="etDeviation etHidden"></div>
 </div>
+<div class="etCard etRunCard"><div class="etRunCardHead"><div><div class="etPanelTitle">Körning</div><div class="etRunCardSub">Antal enheter per omgång.</div></div><div id="etRunQtyDisplay" class="etRunCardValue">108 st</div></div><div class="etRunValueBox"><span class="etRunCardLabel">Körning per omgång</span><span class="etEditPencil">✎</span></div><input id="etRunQtyEdit" class="etRunEdit" type="number" min="1" placeholder="Ändra körning"><button class="gray etRunUpdate" onclick="etChangeRunQty()">Uppdatera körning</button></div>
 <div class="etBottomCards">
   <div class="etBottomCard"><div class="etBottomHead"><div class="etBottomIcon"><svg viewBox="0 0 24 24"><path d="M7 3h10l3 3v15H4V6z"/><path d="M8 3v5h8V3"/><path d="M8 13h8M8 17h5"/></svg></div><div><h3>Etiketter kvar</h3><div class="etMuted">Aktuell rulle</div></div></div><div id="etLabelsLeft" class="etBottomBig">0</div><div class="etLabelBar"><span id="etLabelBarFill"></span></div><div id="etLabelBalanceText" class="etBottomMeta">Ingen extra rulle tillagd ännu.</div><button class="etAddRollBtn" onclick="etAddLabels()">＋ &nbsp;Lägg till etiketter</button></div>
   <div class="etBottomCard"><div class="etBottomHead"><div class="etBottomIcon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Senaste körning</h3></div></div><div id="etLatestRunMain" class="etLatestMain">Ingen körning ännu</div><div id="etLatestRunSub" class="etLatestSub">Nästa etikett: —</div></div>
