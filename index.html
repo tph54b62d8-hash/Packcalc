@@ -587,78 +587,65 @@ body.etStartMode .footer{display:none!important}
 @media(max-width:430px){#etStartCard .etRollHero{right:0!important;bottom:-7px!important;width:122px!important;height:122px!important}#etStartCard .etRollHero img{width:122px!important;height:122px!important}#etStartCard .etBatchWrap{min-height:48px!important;height:48px!important}#etStartCard .etBatchWrap input{height:46px!important}#etStartCard .etScanMini{height:46px!important;min-height:46px!important;width:52px!important;min-width:52px!important}#etStartCard .etStartPair input{height:46px!important}#etStartCard .etStartDivider{height:55px!important}}
 </style>
 <style>.kolliInputNotice{position:fixed;top:calc(env(safe-area-inset-top) + 14px);left:50%;width:min(88vw,360px);z-index:1600;transform:translate(-50%,-140%);opacity:0;border-radius:14px;padding:11px 13px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 26px rgba(20,32,51,.16);animation:kolliInputNoticeIn 5.8s cubic-bezier(.22,.8,.25,1) forwards;font-size:13px;font-weight:800}.kolliInputNoticeIcon{width:27px;height:27px;flex:0 0 27px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900}.kolliInputNoticeText{min-width:0;line-height:1.2}.kolliInputNotice.warning{background:#fff5d6;color:#8a5a00}.kolliInputNotice.warning .kolliInputNoticeIcon{background:#f6c85f;color:#fff}.kolliInputNotice.invalid{background:#ffe7e9;color:#b21f32}.kolliInputNotice.invalid .kolliInputNoticeIcon{background:#d92d20;color:#fff}.kolliInputNotice.leaving{animation:kolliInputNoticeOut .35s ease-in forwards}@keyframes kolliInputNoticeIn{0%{transform:translate(-50%,-140%);opacity:0}8%{transform:translate(-50%,0);opacity:1}88%{transform:translate(-50%,0);opacity:1}100%{transform:translate(-50%,-140%);opacity:0}}@keyframes kolliInputNoticeOut{from{transform:translate(-50%,0);opacity:1}to{transform:translate(-50%,-140%);opacity:0}}
-/* V1.9.15 — Packalkylator Tid: utan hero-bild */
-#calcTid{padding:0 1px}
-.timePageHero{position:relative;margin:0 -1px 14px;border-radius:20px;min-height:196px;overflow:hidden;background:linear-gradient(135deg,#f8fbff 0%,#eef5ff 58%,#fff 100%);border:1px solid #e4ebf5;box-shadow:0 5px 16px rgba(30,48,82,.06);display:flex;align-items:center;padding:18px 18px}
-.timeHeroCopy{position:relative;z-index:2;width:52%;padding:0 0 2px}
-.timeHeroKicker{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:800;letter-spacing:1.05px;text-transform:uppercase;color:#1459d9;margin-bottom:7px}
-.timeHeroKicker span{width:6px;height:6px;border-radius:50%;background:#1459d9;box-shadow:0 0 0 4px #1459d91a}
-.timeHeroCopy h2{font-size:30px;line-height:1;letter-spacing:-.9px;margin:0 0 7px;color:#172a55}
-.timeHeroCopy p{margin:0;color:#687386;font-size:12.5px;line-height:1.38;max-width:235px}
-.timeBack{display:inline-flex;align-items:center;gap:6px;width:auto;margin:0 0 9px;padding:8px 11px;background:#eaf2ff;color:#1459d9;border-radius:11px;font-size:12px;box-shadow:none}
-.timeCard,.midpointCard{padding:15px;margin-bottom:12px;border:1px solid #e2e8f1;box-shadow:0 3px 12px rgba(30,48,82,.045);border-radius:18px}
-.timeCardHead,.midpointHead{display:flex;align-items:center;gap:10px;margin-bottom:11px}
-.timeCardIcon,.midpointIcon{width:46px;height:46px;flex:0 0 46px;border-radius:14px;background:#eaf2ff;color:#1459d9;display:flex;align-items:center;justify-content:center}
-.timeCardIcon svg,.midpointIcon svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.timeCardHead h3,.midpointHead h3{margin:0;font-size:19px;line-height:1.08;letter-spacing:-.35px}
-.timeCardHead p,.midpointHead p{margin:3px 0 0;color:#687386;font-size:12px;line-height:1.25}
-.timeAddRow{display:grid;grid-template-columns:minmax(0,1fr) 50px;gap:8px;align-items:end}
-.timeFieldLabel{font-size:12px;margin:0 0 5px;color:#172033;font-weight:800}
-.timeWheelPair{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.timeWheelButton,.midpointTimeButton{width:100%;height:46px;padding:0 11px;border:1px solid #d4dbe6;border-radius:13px;background:#fff;color:#172033;font-size:16px;font-weight:800;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.timeWheelButton:after,.midpointTimeButton:after{content:'⌃⌄';font-size:13px;line-height:.8;color:#687386;letter-spacing:-5px;padding-right:2px}
-.timeAddBtn{height:46px;margin:0;width:50px;min-width:50px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:13px;background:#1459d9;color:#fff;box-shadow:0 4px 12px rgba(20,89,217,.15)}
-.timeAddBtn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.timeRowsHead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:15px 0 7px}
-.timeRowsHead strong{font-size:14px}
-.timeClearBtn{border:0;background:#eaf2ff;color:#1459d9;border-radius:10px;padding:7px 9px;font-size:11px;font-weight:800}
-.timeRowNew{display:grid;grid-template-columns:25px minmax(0,1fr) 32px;gap:7px;align-items:center;background:#f7f9fc;border:1px solid #e3e8f0;border-radius:13px;padding:7px 7px 7px 7px;margin-top:6px;animation:timeRowIn .28s cubic-bezier(.18,.8,.24,1) both}
-.timeRowIndex{font-size:13px;font-weight:800;color:#687386;text-align:center}
-.timeRowControls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;min-width:0}
-.timeRowControls .timeWheelButton{height:40px;font-size:14px;padding:0 8px;border-radius:11px}
-.timeRowControls .timeWheelButton:after{font-size:11px}
-.timeRemoveBtn{width:32px;height:32px;margin:0;padding:0;border:0;border-radius:50%;background:#ffe5e7;color:#d92d20;display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1}
-.timeTotalNew{margin-top:11px;padding:13px 14px;border-radius:14px;background:linear-gradient(135deg,#edf5ff,#f6f9ff);display:flex;align-items:center;justify-content:space-between;gap:10px}
-.timeTotalMeta{display:flex;align-items:center;gap:9px;min-width:0}
-.timeTotalIcon{width:40px;height:40px;flex:0 0 40px;border-radius:12px;background:#dceaff;color:#1459d9;display:flex;align-items:center;justify-content:center}
-.timeTotalIcon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.timeTotalMeta strong{display:block;font-size:14px}.timeTotalMeta span{display:block;margin-top:2px;color:#687386;font-size:11px}
-.timeTotalValue{font-size:25px;line-height:1;font-weight:900;color:#1459d9;white-space:nowrap;text-align:right}
-.midpointHead{margin-bottom:10px}
-.midpointInputs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.midpointField label{display:block;margin:0 0 5px;font-size:12px;font-weight:800;color:#172033}
-.midpointTimeButton{height:46px;font-size:16px;justify-content:center}
-.midpointTimeButton:after{display:none}
-.midpointResult{margin-top:10px;border-radius:14px;background:#edf8f1;padding:11px 12px;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center}
-.midpointResultIcon{width:43px;height:43px;border-radius:50%;background:#d9f2e3;color:#159447;display:flex;align-items:center;justify-content:center}
-.midpointResultIcon svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.midpointResultLabel{font-size:12px;font-weight:800;color:#172033}.midpointResultTime{font-size:27px;font-weight:900;line-height:1;color:#159447;margin-top:3px}
-.midpointExplanation{padding:8px 10px;margin-top:7px;border-radius:10px;background:#eef5ff;color:#3768b8;font-size:10.5px;line-height:1.35}
-.timePickerOverlay{position:fixed;inset:0;z-index:1800;background:rgba(17,28,49,.28);display:flex;align-items:flex-end;justify-content:center;padding:0}
-.timePickerSheet{width:min(100%,430px);background:#fff;border-radius:22px 22px 0 0;box-shadow:0 -12px 35px rgba(20,32,51,.2);padding:12px 14px calc(14px + env(safe-area-inset-bottom));animation:timePickerIn .24s cubic-bezier(.18,.8,.24,1) both}
-.timePickerTop{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
-.timePickerTitle{font-size:16px;font-weight:900;color:#172033}
-.timePickerCancel,.timePickerDone{border:0;background:#eaf2ff;color:#1459d9;border-radius:11px;padding:8px 11px;font-size:12px;font-weight:900}
-.timePickerDone{background:#1459d9;color:#fff}
-.timeWheelArea{position:relative;height:176px;display:grid;grid-template-columns:1fr 1fr;gap:10px;overflow:hidden;border-radius:16px;background:#f5f7fb}
-.timeWheelHighlight{position:absolute;left:8px;right:8px;top:66px;height:44px;border-radius:12px;background:#fff;box-shadow:0 1px 5px rgba(20,32,51,.07);pointer-events:none;z-index:1}
-.timeWheelColumn{position:relative;z-index:2;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:66px 0}
-.timeWheelColumn::-webkit-scrollbar{display:none}
-.timeWheelItem{height:44px;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;border:0;background:transparent;width:100%;padding:0;font-size:18px;font-weight:700;color:#9aa3b2}
-.timeWheelItem.selected{color:#172033;font-size:20px;font-weight:900}
-@keyframes timePickerIn{from{transform:translateY(18px);opacity:.5}to{transform:translateY(0);opacity:1}}
+/* V1.9.16 — Packalkylator Tid: native iPhone wheel */
+#calcTid{padding:0}
+.timePageHero{position:relative;margin:0 0 18px;border-radius:22px;min-height:150px;overflow:hidden;background:linear-gradient(135deg,#f7fbff 0%,#edf5ff 62%,#fff 100%);border:1px solid #e1e8f3;box-shadow:0 6px 18px rgba(30,48,82,.06);display:flex;align-items:center;padding:22px 22px}
+.timeHeroCopy{position:relative;z-index:2;width:100%;padding:0}
+.timeHeroKicker{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:800;letter-spacing:1.05px;text-transform:uppercase;color:#1459d9;margin-bottom:9px}
+.timeHeroKicker span{width:7px;height:7px;border-radius:50%;background:#1459d9;box-shadow:0 0 0 4px #1459d91a}
+.timeHeroCopy h2{font-size:34px;line-height:1;letter-spacing:-1px;margin:0 0 8px;color:#172a55}
+.timeHeroCopy p{margin:0;color:#687386;font-size:14px;line-height:1.4;max-width:360px}
+.timeBack{display:inline-flex;align-items:center;gap:7px;width:auto;margin:0 0 10px;padding:9px 12px;background:#eaf2ff;color:#1459d9;border-radius:12px;font-size:13px;box-shadow:none}
+.timeCard,.midpointCard{padding:20px;margin-bottom:16px;border:1px solid #dfe6f0;box-shadow:0 5px 18px rgba(30,48,82,.055);border-radius:22px;background:#fff}
+.timeCardHead,.midpointHead{display:flex;align-items:center;gap:13px;margin-bottom:17px}
+.timeCardIcon,.midpointIcon{width:52px;height:52px;flex:0 0 52px;border-radius:16px;background:#eaf2ff;color:#1459d9;display:flex;align-items:center;justify-content:center}
+.timeCardIcon svg,.midpointIcon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.timeCardHead h3,.midpointHead h3{margin:0;font-size:22px;line-height:1.08;letter-spacing:-.45px}
+.timeCardHead p,.midpointHead p{margin:4px 0 0;color:#687386;font-size:14px;line-height:1.25}
+.timeAddRow{display:grid;grid-template-columns:minmax(0,1fr) 58px;gap:11px;align-items:end}
+.timeFieldLabel{font-size:14px;margin:0 0 7px;color:#172033;font-weight:800}
+.timeWheelPair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.timeWheelSelect,.midpointTimeSelect{appearance:auto;-webkit-appearance:menulist;width:100%;height:58px;padding:0 12px;border:1px solid #d3dce8;border-radius:16px;background:#fff;color:#172033;font-size:18px;font-weight:800;text-align:center;text-align-last:center}
+.timeAddBtn{height:58px;margin:0;width:58px;min-width:58px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:16px;background:#1459d9;color:#fff;box-shadow:0 5px 14px rgba(20,89,217,.16)}
+.timeAddBtn svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.timeRowsHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:21px 0 9px}
+.timeRowsHead strong{font-size:18px}
+.timeClearBtn{border:0;background:#eaf2ff;color:#1459d9;border-radius:12px;padding:9px 12px;font-size:12px;font-weight:800}
+.timeRowNew{display:grid;grid-template-columns:30px minmax(0,1fr) 38px;gap:9px;align-items:center;background:#f7f9fc;border:1px solid #e1e7ef;border-radius:16px;padding:9px;margin-top:8px;animation:timeRowIn .28s cubic-bezier(.18,.8,.24,1) both}
+.timeRowIndex{font-size:15px;font-weight:800;color:#687386;text-align:center}.timeRowResult{font-size:15px;font-weight:900;color:#172033;margin-bottom:5px}.timeRowResult span{color:#1459d9}
+.timeRowControls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;min-width:0}
+.timeRowControls .timeWheelSelect{height:48px;font-size:16px;border-radius:13px;padding:0 8px}
+.timeRemoveBtn{width:36px;height:36px;margin:0;padding:0;border:0;border-radius:50%;background:#ffe5e7;color:#d92d20;display:flex;align-items:center;justify-content:center;font-size:21px;line-height:1}
+.timeTotalNew{margin-top:14px;padding:16px;border-radius:17px;background:linear-gradient(135deg,#edf5ff,#f6f9ff);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.timeTotalMeta{display:flex;align-items:center;gap:11px;min-width:0}
+.timeTotalIcon{width:46px;height:46px;flex:0 0 46px;border-radius:14px;background:#dceaff;color:#1459d9;display:flex;align-items:center;justify-content:center}
+.timeTotalIcon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.timeTotalMeta strong{display:block;font-size:16px}.timeTotalMeta span{display:block;margin-top:3px;color:#687386;font-size:12px}
+.timeNewResult{margin-top:6px;font-size:12px;color:#687386}.timeNewResult strong{color:#1459d9;font-size:13px}.timeTotalValue{font-size:29px;line-height:1;font-weight:900;color:#1459d9;white-space:nowrap;text-align:right}
+.midpointHead{margin-bottom:17px}
+.midpointInputs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.midpointField label{display:block;margin:0 0 7px;font-size:14px;font-weight:800;color:#172033}
+.midpointTimeSelect{height:58px;font-size:18px;border-radius:16px}
+.midpointResult{margin-top:14px;border-radius:17px;background:#edf8f1;padding:15px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}
+.midpointResultIcon{width:50px;height:50px;border-radius:50%;background:#d9f2e3;color:#159447;display:flex;align-items:center;justify-content:center}
+.midpointResultIcon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.midpointResultLabel{font-size:14px;font-weight:800;color:#172033}.midpointResultTime{font-size:32px;font-weight:900;line-height:1;color:#159447;margin-top:4px}
+.midpointExplanation{padding:10px 12px;margin-top:9px;border-radius:12px;background:#eef5ff;color:#3768b8;font-size:12px;line-height:1.4}
 @keyframes timeRowIn{0%{opacity:0;transform:translateY(-5px) scale(.985)}100%{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-width:600px){
  #calcTid{padding:0}
- .timePageHero{min-height:190px;padding:17px 15px;margin-bottom:12px}
- .timeHeroCopy{width:55%;padding-top:4px}.timeHeroCopy h2{font-size:29px}.timeHeroCopy p{font-size:12px;max-width:210px}
- .timeCard,.midpointCard{padding:14px;border-radius:17px}
- .timeCardIcon,.midpointIcon{width:44px;height:44px;flex-basis:44px}.timeCardHead h3,.midpointHead h3{font-size:18px}.timeCardHead p,.midpointHead p{font-size:11.5px}
+ .timePageHero{min-height:148px;padding:20px 18px;margin-bottom:14px}
+ .timeHeroCopy h2{font-size:32px}.timeHeroCopy p{font-size:13px;max-width:310px}
+ .timeCard,.midpointCard{padding:17px;border-radius:20px;margin-bottom:14px}
+ .timeCardIcon,.midpointIcon{width:50px;height:50px;flex-basis:50px}.timeCardHead h3,.midpointHead h3{font-size:21px}.timeCardHead p,.midpointHead p{font-size:13px}
+ .timeWheelSelect,.midpointTimeSelect{height:56px;font-size:17px}
+ .timeAddRow{grid-template-columns:minmax(0,1fr) 56px}.timeAddBtn{width:56px;min-width:56px;height:56px}
+ .timeTotalValue{font-size:27px}.midpointResultTime{font-size:30px}
 }
 @media(max-width:380px){
- .timeWheelPair,.timeRowControls,.midpointInputs{gap:5px}.timeRowNew{grid-template-columns:23px minmax(0,1fr) 31px;gap:5px;padding-left:5px}.timeRemoveBtn{width:31px;height:31px}.timeTotalValue{font-size:23px}.midpointResultTime{font-size:25px}
+ .timeWheelPair,.timeRowControls,.midpointInputs{gap:7px}.timeRowNew{grid-template-columns:26px minmax(0,1fr) 35px;gap:6px;padding:7px}.timeRowControls .timeWheelSelect{font-size:14px}.timeRemoveBtn{width:34px;height:34px}.timeTotalValue{font-size:24px}.midpointResultTime{font-size:27px}
 }
-@media(prefers-reduced-motion:reduce){.timeRowNew,.timePickerSheet{animation:none}}
+@media(prefers-reduced-motion:reduce){.timeRowNew{animation:none}}
 </style></head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
@@ -810,9 +797,10 @@ body.etStartMode .footer{display:none!important}
     <div>
       <div class="timeFieldLabel">Ny tidsperiod</div>
       <div class="timeWheelPair">
-        <button id="timeNewHours" class="timeWheelButton" type="button" onclick="openDurationPicker('new','hours')">0 h</button>
-        <button id="timeNewMinutes" class="timeWheelButton" type="button" onclick="openDurationPicker('new','minutes')">00 min</button>
+        <select id="timeNewHours" class="timeWheelSelect" aria-label="Timmar" onchange="syncNewTimeFromSelects()"></select>
+        <select id="timeNewMinutes" class="timeWheelSelect" aria-label="Minuter" onchange="syncNewTimeFromSelects()"></select>
       </div>
+      <div id="timeNewResult" class="timeNewResult">Vald tid: <strong>0 h 00 min</strong></div>
     </div>
     <button class="timeAddBtn" type="button" onclick="addTimeRow()" aria-label="Lägg till tid"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button>
   </div>
@@ -829,8 +817,8 @@ body.etStartMode .footer{display:none!important}
     <div><h3>Mitten tid</h3><p>Hitta tiden mitt emellan två klockslag.</p></div>
   </div>
   <div class="midpointInputs">
-    <div class="midpointField"><label>Från</label><button id="midFromButton" class="midpointTimeButton" type="button" onclick="openMidpointPicker('from')">00:00</button><input id="midFrom" type="hidden" value="00:00"></div>
-    <div class="midpointField"><label>Till</label><button id="midToButton" class="midpointTimeButton" type="button" onclick="openMidpointPicker('to')">00:00</button><input id="midTo" type="hidden" value="00:00"></div>
+    <div class="midpointField"><label>Från</label><div class="timeWheelPair"><select id="midFromH" class="midpointTimeSelect" aria-label="Från timmar" onchange="syncMidpointSelects('from')"></select><select id="midFromM" class="midpointTimeSelect" aria-label="Från minuter" onchange="syncMidpointSelects('from')"></select></div><input id="midFrom" type="hidden" value="00:00"></div>
+    <div class="midpointField"><label>Till</label><div class="timeWheelPair"><select id="midToH" class="midpointTimeSelect" aria-label="Till timmar" onchange="syncMidpointSelects('to')"></select><select id="midToM" class="midpointTimeSelect" aria-label="Till minuter" onchange="syncMidpointSelects('to')"></select></div><input id="midTo" type="hidden" value="00:00"></div>
   </div>
   <div class="midpointResult" aria-live="polite">
     <div class="midpointResultIcon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7v5l3 2"></path><path d="M12 3.5v1.5M20.5 12H19M12 20.5V19M5 12H3.5"></path></svg></div>
@@ -839,12 +827,7 @@ body.etStartMode .footer{display:none!important}
   <div class="midpointExplanation" id="midpointExplanation">Tiden mitt mellan 00:00 och 00:00 är 00:00.</div>
 </div>
 </div>
-<div id="timePickerOverlay" class="timePickerOverlay hidden" aria-hidden="true">
-  <div class="timePickerSheet" role="dialog" aria-modal="true" aria-label="Välj tid">
-    <div class="timePickerTop"><button class="timePickerCancel" type="button" onclick="closeTimePicker()">Avbryt</button><div id="timePickerTitle" class="timePickerTitle">Välj tid</div><button class="timePickerDone" type="button" onclick="confirmTimePicker()">Klar</button></div>
-    <div class="timeWheelArea"><div class="timeWheelHighlight"></div><div id="timePickerHours" class="timeWheelColumn"></div><div id="timePickerMinutes" class="timeWheelColumn"></div></div>
-  </div>
-</div>
+</section>
 <section id="print" class="hidden"><div class="sectionTitle"><h2>🖨️ Print</h2><p>Beräkna hur många enheter som återstår och vad som hamnar i sista well.</p></div><div class="card"><h2>Order → sista well</h2><label>FPK-nummer</label><input id="printFpk" placeholder="t.ex. 2410"><label>Totalt antal enheter</label><input id="ordertotal" type="number" value="0" oninput="raknaPrint()"><label>Redan packat / printat</label><input id="packat" type="number" value="0" oninput="raknaPrint()"><label>Antal per well</label><input id="well" type="number" value="0" oninput="raknaPrint()"><div class="result"><div class="box">Kvar<span class="number" id="kvar">0</span></div><div class="box">Sista well<span class="number" id="sistawell">0</span></div></div><div class="card" style="background:#eef6ff;margin-top:15px"><strong id="fullawells">0 fulla wells</strong><div id="totalWells" style="margin-top:5px;color:#687386">Totalt 0 wells behövs.</div></div><button class="blue" onclick="sparaPrint()">Spara Print-beräkning</button></div></section>
 
 <section id="pall" class="hidden"><div class="sectionTitle"><h2>🏗️ Pall</h2><p>Beräkna hur många wells och pallar hela ordern blir.</p></div><div class="card"><label>Total order, enheter</label><input id="pallTotal" type="number" value="0" oninput="raknaPall()"><label>Enheter per well</label><input id="pallWell" type="number" value="0" oninput="raknaPall()"><label>Enheter per pall</label><input id="pallCap" type="number" value="0" oninput="raknaPall()"><label>Well per pall</label><input id="pallWellCap" type="number" value="0" oninput="raknaPall()"></div><div class="card" id="pallResult"></div></section>
@@ -1247,21 +1230,21 @@ requestAnimationFrame(function(){
 });
 }
 function saveCalculatorState(view){
- let ids=["sprutorAntal","sprutorPer","kapslarAntal","kapslarPer","pallCalcAntal","pallCalcPer","etikettMottagna","etikettTillOrder","etikettTillRapportering","etikettKassation","etikettAterlamnade","etikettForsta","etikettSista","etikettStart","etikettProducerade","etikettVerklig","midFrom","midTo"];
+ let ids=["sprutorAntal","sprutorPer","kapslarAntal","kapslarPer","pallCalcAntal","pallCalcPer","etikettMottagna","etikettTillOrder","etikettTillRapportering","etikettKassation","etikettAterlamnade","etikettForsta","etikettSista","etikettStart","etikettProducerade","etikettVerklig","midFrom","midTo","midFromH","midFromM","midToH","midToM"];
  let values={};
  ids.forEach(id=>{let el=document.getElementById(id);if(el)values[id]=el.value;});
  let time=Array.isArray(timeValues)?timeValues.slice():[];
- localStorage.setItem(CALC_STATE_KEY,JSON.stringify({view:view||"choice",values:values,time:time,timeInitialized:view==="tid"?true:undefined}));
+ localStorage.setItem(CALC_STATE_KEY,JSON.stringify({view:view||"choice",values:values,time:time,timeInitialized:view==="tid"?true:undefined,timeSchema:view==="tid"?TIME_STATE_SCHEMA:undefined}));
 }
 function restoreCalculatorState(){
  try{
   let raw=localStorage.getItem(CALC_STATE_KEY);if(!raw)return;
   let saved=JSON.parse(raw);if(!saved||!saved.view||saved.view==="choice")return;
-  if(saved.view==="tid"&&!saved.timeInitialized){saved.time=[];saved.values=saved.values||{};saved.values.midFrom="00:00";saved.values.midTo="00:00";saved.timeInitialized=true;localStorage.setItem(CALC_STATE_KEY,JSON.stringify(saved));}
+  if(saved.view==="tid"&&saved.timeSchema!==TIME_STATE_SCHEMA){saved.time=[];saved.values=saved.values||{};saved.values.midFrom="00:00";saved.values.midTo="00:00";saved.values.midFromH="0";saved.values.midFromM="0";saved.values.midToH="0";saved.values.midToM="0";saved.timeInitialized=true;saved.timeSchema=TIME_STATE_SCHEMA;localStorage.setItem(CALC_STATE_KEY,JSON.stringify(saved));}
   let ids=Object.keys(saved.values||{});
   ids.forEach(id=>{let el=document.getElementById(id);if(el&&typeof saved.values[id]==="string")el.value=saved.values[id];});
   if(Array.isArray(saved.time))timeValues=saved.time.slice();
-  if(saved.view==="tid"){timeNewSelection={h:0,m:0};setTimeButton("midFromButton",saved.values&&saved.values.midFrom?saved.values.midFrom:"00:00");setTimeButton("midToButton",saved.values&&saved.values.midTo?saved.values.midTo:"00:00");}
+  if(saved.view==="tid"){timeNewSelection={h:0,m:0};initTimeSelects();setMidpointSelects("from",saved.values&&saved.values.midFrom?saved.values.midFrom:"00:00");setMidpointSelects("to",saved.values&&saved.values.midTo?saved.values.midTo:"00:00");calculateMidpoint();}
   if(["sprutor","kapslar","pallcalc","etiketter","etiketterMain","tillagg","tid"].includes(saved.view)){
    if(saved.view==="sprutor")openCalculator("sprutor",true);
    else if(saved.view==="kapslar")openCalculator("kapslar",true);
@@ -1291,7 +1274,7 @@ function openCalculator(type,restoring=false){
  if(type==="kapslar"){target="calcKapslar";document.getElementById(target).classList.remove("hidden");raknaKapslar();}
  if(type==="pallcalc"){target="calcPall";document.getElementById(target).classList.remove("hidden");raknaPallCalc();}
  if(type==="etiketter"){target="calcEtiketter";document.getElementById(target).classList.remove("hidden");}
- if(type==="tid"){target="calcTid";document.getElementById(target).classList.remove("hidden");timeNewSelection={h:0,m:0};syncNewTimeButtons();renderTimeRows();calculateMidpoint();}
+ if(type==="tid"){target="calcTid";document.getElementById(target).classList.remove("hidden");timeNewSelection={h:0,m:0};initTimeSelects();syncNewTimeButtons();renderTimeRows();if(document.getElementById("midFrom")?.value)setMidpointSelects("from",document.getElementById("midFrom").value);if(document.getElementById("midTo")?.value)setMidpointSelects("to",document.getElementById("midTo").value);calculateMidpoint();}
  if(!restoring){saveCalculatorState(type);animateCalculatorChoice();}
  if(target&&!restoring)animateCalculatorTarget(target);
 }
@@ -1383,66 +1366,50 @@ else{let m=Math.abs(d);r.innerHTML='<div class="calcNegative">−'+m+' etikett'+
 
 let timeValues=[];
 let timeNewSelection={h:0,m:0};
-let timePickerState={mode:null,target:null,h:0,m:0};
+const TIME_STATE_SCHEMA=2;
 function pad2(n){return String(Number(n)||0).padStart(2,"0");}
-function setTimeButton(id,value){let el=document.getElementById(id);if(el)el.innerText=value;}
-function syncNewTimeButtons(){setTimeButton("timeNewHours",Number(timeNewSelection.h)+" h");setTimeButton("timeNewMinutes",pad2(timeNewSelection.m)+" min");}
-function openDurationPicker(mode,target,index){
- let h=0,m=0;
- if(mode==="new"){h=timeNewSelection.h;m=timeNewSelection.m;}
- else{let p=parseTimeValue(timeValues[index])||{h:0,m:0};h=p.h;m=p.m;}
- timePickerState={mode:mode,target:target||null,index:index,h:h,m:m};
- renderTimePicker(99,59,h,m);
- document.getElementById("timePickerTitle").innerText=mode==="new"?"Ny tidsperiod":"Ändra tidsperiod "+(Number(index)+1);
- showTimePicker();
+function fillTimeSelect(id,max,value,kind,step){
+ let el=document.getElementById(id);if(!el)return;
+ let suffix=kind==="h"?" h":" min",st=Math.max(1,Number(step)||1);
+ let nums=[];for(let n=0;n<=max;n+=st)nums.push(n);
+ el.innerHTML=nums.map(n=>'<option value="'+n+'">'+(kind==="h"?n:n===0?"00":pad2(n))+suffix+'</option>').join("");
+ let raw=Number(value)||0,nearest=kind==="m"?Math.round(raw/5)*5:raw;
+ nearest=Math.max(0,Math.min(max,nearest));
+ if(kind==="m"&&nearest%5!==0)nearest=Math.round(nearest/5)*5;
+ el.value=String(nearest);
 }
-function openMidpointPicker(target){
- let id=target==="from"?"midFrom":"midTo",v=document.getElementById(id).value||"00:00",p=v.split(":");
- timePickerState={mode:"midpoint",target:target,h:Number(p[0])||0,m:Number(p[1])||0};
- renderTimePicker(23,59,timePickerState.h,timePickerState.m);
- document.getElementById("timePickerTitle").innerText=target==="from"?"Från":"Till";
- showTimePicker();
+function initTimeSelects(){
+ fillTimeSelect("timeNewHours",99,timeNewSelection.h,"h",1);fillTimeSelect("timeNewMinutes",59,timeNewSelection.m,"m",5);
+ ["midFromH","midToH"].forEach(id=>fillTimeSelect(id,23,0,"h",1));
+ ["midFromM","midToM"].forEach(id=>fillTimeSelect(id,59,0,"m",5));
 }
-function showTimePicker(){let o=document.getElementById("timePickerOverlay");if(o){o.classList.remove("hidden");o.setAttribute("aria-hidden","false");}}
-function closeTimePicker(){let o=document.getElementById("timePickerOverlay");if(o){o.classList.add("hidden");o.setAttribute("aria-hidden","true");}}
-function renderTimePicker(maxH,maxM,h,m){
- let hc=document.getElementById("timePickerHours"),mc=document.getElementById("timePickerMinutes");if(!hc||!mc)return;
- hc.innerHTML=Array.from({length:maxH+1},(_,n)=>'<button type="button" class="timeWheelItem'+(n===Number(h)?" selected":"")+'" data-value="'+n+'">'+n+' h</button>').join("");
- mc.innerHTML=Array.from({length:maxM+1},(_,n)=>'<button type="button" class="timeWheelItem'+(n===Number(m)?" selected":"")+'" data-value="'+n+'">'+pad2(n)+' min</button>').join("");
- bindTimeWheelColumn(hc,"h");bindTimeWheelColumn(mc,"m");
- requestAnimationFrame(()=>{scrollWheelTo(hc,Number(h)||0,false);scrollWheelTo(mc,Number(m)||0,false);});
+function syncNewTimeButtons(){
+ fillTimeSelect("timeNewHours",99,timeNewSelection.h,"h",1);fillTimeSelect("timeNewMinutes",59,timeNewSelection.m,"m",5);syncNewTimeFromSelects();
 }
-function bindTimeWheelColumn(col,key){
- col.onscroll=null;
- col.onscroll=function(){let item=Math.round(col.scrollTop/44);let max=col.children.length-1;item=Math.max(0,Math.min(max,item));Array.from(col.children).forEach((x,i)=>x.classList.toggle("selected",i===item));timePickerState[key]=item;};
- Array.from(col.children).forEach(btn=>btn.onclick=function(){scrollWheelTo(col,Number(btn.dataset.value)||0,true);});
+function syncNewTimeFromSelects(){
+ let h=Number(document.getElementById("timeNewHours")?.value)||0,m=Number(document.getElementById("timeNewMinutes")?.value)||0;m=Math.round(m/5)*5;timeNewSelection={h:h,m:m};let out=document.getElementById("timeNewResult");if(out)out.innerHTML="Vald tid: <strong>"+h+" h "+pad2(m)+" min</strong>";
 }
-function scrollWheelTo(col,index,smooth){col.scrollTo({top:Math.max(0,index*44),behavior:smooth?"smooth":"auto"});let key=col.id==="timePickerHours"?"h":"m";timePickerState[key]=index;Array.from(col.children).forEach((x,i)=>x.classList.toggle("selected",i===index));}
-function confirmTimePicker(){
- let hc=document.getElementById("timePickerHours"),mc=document.getElementById("timePickerMinutes");
- if(hc)timePickerState.h=Math.max(0,Math.min(hc.children.length-1,Math.round(hc.scrollTop/44)));
- if(mc)timePickerState.m=Math.max(0,Math.min(mc.children.length-1,Math.round(mc.scrollTop/44)));
- let h=Math.max(0,Number(timePickerState.h)||0),m=Math.max(0,Math.min(59,Number(timePickerState.m)||0));
- if(timePickerState.mode==="new"){timeNewSelection={h:h,m:m};syncNewTimeButtons();}
- else if(timePickerState.mode==="row"){timeValues[timePickerState.index]=h+":"+m;renderTimeRows();saveCalculatorState("tid");}
- else if(timePickerState.mode==="midpoint"){
-  let v=pad2(h)+":"+pad2(m),id=timePickerState.target==="from"?"midFrom":"midTo",bid=timePickerState.target==="from"?"midFromButton":"midToButton";
-  document.getElementById(id).value=v;setTimeButton(bid,v);calculateMidpoint();saveCalculatorState("tid");
- }
- closeTimePicker();
+function syncMidpointSelects(target){
+ let h=Number(document.getElementById(target==="from"?"midFromH":"midToH")?.value)||0,m=Number(document.getElementById(target==="from"?"midFromM":"midToM")?.value)||0;m=Math.round(m/5)*5;
+ let value=pad2(h)+":"+pad2(m),id=target==="from"?"midFrom":"midTo";let el=document.getElementById(id);if(el)el.value=value;calculateMidpoint();saveCalculatorState("tid");
 }
-function addTimeRow(){let h=Number(timeNewSelection.h)||0,m=Number(timeNewSelection.m)||0;timeValues.push(h+":"+m);renderTimeRows();saveCalculatorState("tid");timeNewSelection={h:0,m:0};syncNewTimeButtons();}
+function setMidpointSelects(target,value){
+ let p=String(value||"00:00").split(":");let h=Number(p[0])||0,m=Number(p[1])||0;
+ fillTimeSelect(target==="from"?"midFromH":"midToH",23,h,"h",1);fillTimeSelect(target==="from"?"midFromM":"midToM",59,m,"m",5);
+ syncMidpointSelects(target);
+}
+function addTimeRow(){syncNewTimeFromSelects();let h=Number(timeNewSelection.h)||0,m=Number(timeNewSelection.m)||0;timeValues.push(h+":"+m);renderTimeRows();timeNewSelection={h:0,m:0};syncNewTimeButtons();saveCalculatorState("tid");}
 function clearAllTimeRows(){timeValues=[];renderTimeRows();saveCalculatorState("tid");}
 function removeTimeRow(i){timeValues.splice(i,1);renderTimeRows();saveCalculatorState("tid");}
-function updateTime(i,h,m){timeValues[i]=Number(h)+":"+Number(m);calculateTime();saveCalculatorState("tid");}
-function openRowTimePicker(i){let p=parseTimeValue(timeValues[i])||{h:0,m:0};timePickerState={mode:"row",target:null,index:i,h:p.h,m:p.m};renderTimePicker(99,59,p.h,p.m);document.getElementById("timePickerTitle").innerText="Ändra tidsperiod "+(i+1);showTimePicker();}
+function updateTime(i,h,m){let hh=Number(h)||0,mm=Math.round((Number(m)||0)/5)*5;timeValues[i]=hh+":"+mm;let row=document.querySelectorAll(".timeRowNew")[i];let out=row&&row.querySelector(".timeRowResult span");if(out)out.innerText=hh+" h "+pad2(mm)+" min";calculateTime();saveCalculatorState("tid");}
+function durationSelect(id,max,value,kind,onchange){let step=kind==="m"?5:1,opts=[];for(let n=0;n<=max;n+=step)opts.push('<option value="'+n+'">'+(kind==="h"?n:n===0?"00":pad2(n))+ (kind==="h"?" h":" min")+'</option>');return '<select id="'+id+'" class="timeWheelSelect" onchange="'+onchange+'">'+opts.join("")+'</select>'}
 function renderTimeRows(){
  let b=document.getElementById("timeRows");if(!b)return;
  let title=document.getElementById("timeRowsTitle");if(title)title.innerText="Tidsperioder ("+timeValues.length+")";
  b.innerHTML="";
  timeValues.forEach((v,i)=>{let p=parseTimeValue(v)||{h:0,m:0},row=document.createElement("div");row.className="timeRowNew";
-  row.innerHTML='<div class="timeRowIndex">'+(i+1)+'.</div><div class="timeRowControls"><button type="button" class="timeWheelButton" onclick="openRowTimePicker('+i+')">'+p.h+' h</button><button type="button" class="timeWheelButton" onclick="openRowTimePicker('+i+')">'+pad2(p.m)+' min</button></div><button class="timeRemoveBtn" type="button" aria-label="Ta bort tid '+(i+1)+'" onclick="removeTimeRow('+i+')">×</button>';
-  b.appendChild(row);
+  row.innerHTML='<div class="timeRowIndex">'+(i+1)+'.</div><div><div class="timeRowResult">Resultat: <span>'+p.h+' h '+pad2(p.m)+' min</span></div><div class="timeRowControls">'+durationSelect("timeRowH"+i,99,p.h,"h","updateTime("+i+",this.value,document.getElementById(\'timeRowM"+i+"\').value)")+durationSelect("timeRowM"+i,59,p.m,"m","updateTime("+i+",document.getElementById(\'timeRowH"+i+"\').value,this.value)")+'</div></div><button class="timeRemoveBtn" type="button" aria-label="Ta bort tid '+(i+1)+'" onclick="removeTimeRow('+i+')">×</button>';
+  b.appendChild(row);document.getElementById("timeRowH"+i).value=String(p.h);document.getElementById("timeRowM"+i).value=String(p.m);
  });
  calculateTime();
 }
@@ -1451,7 +1418,7 @@ function calculateMidpoint(){
  let from=document.getElementById("midFrom"),to=document.getElementById("midTo"),out=document.getElementById("midpointResult"),exp=document.getElementById("midpointExplanation");if(!from||!to||!out)return;
  let f=from.value.split(":"),t=to.value.split(":");if(f.length!==2||t.length!==2){out.innerText="—";return;}
  let a=Number(f[0])*60+Number(f[1]),b=Number(t[0])*60+Number(t[1]);if(!Number.isFinite(a)||!Number.isFinite(b)){out.innerText="—";return;}if(b<a)b+=1440;
- let mid=(a+(b-a)/2)%1440,h=Math.floor(mid/60),m=Math.round(mid%60);if(m===60){m=0;h=(h+1)%24;}let result=pad2(h)+":"+pad2(m);out.innerText=result;if(exp)exp.innerText="Tiden mitt mellan "+from.value+" och "+to.value+" är "+result+".";
+ let mid=(a+(b-a)/2)%1440,h=Math.floor(mid/60),m=Math.round((mid%60)/5)*5;if(m===60){m=0;h=(h+1)%24;}let result=pad2(h)+":"+pad2(m);out.innerText=result;if(exp)exp.innerText="Tiden mitt mellan "+from.value+" och "+to.value+" är "+result+".";
 }
 
 function clearBatchId(){
