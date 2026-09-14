@@ -818,7 +818,28 @@ const pages=["home","pack","packalkylator","print","pall","qr","dagbok","histori
 
 const PAGE_STATE_KEY="packvex_current_page";
 const PRODUCTION_VIEW_KEY="packvex_production_view";
+const KOLLI_INPUT_STATE_KEY="packvex_kolli_input_state";
 const ET_STATE_KEY="packvex_etikettering_state";
+
+function saveKolliInputState(){
+ let produkt=document.getElementById("produkt"),nummer=document.getElementById("kollinummer"),antal=document.getElementById("antal"),per=document.getElementById("per");
+ if(!produkt||!nummer||!antal||!per)return;
+ localStorage.setItem(KOLLI_INPUT_STATE_KEY,JSON.stringify({produkt:produkt.value,kollinummer:nummer.value,antal:antal.value,per:per.value}));
+}
+function restoreKolliInputState(){
+ if(!data.fpk)return;
+ try{
+  let raw=localStorage.getItem(KOLLI_INPUT_STATE_KEY);
+  if(!raw)return;
+  let saved=JSON.parse(raw);
+  let produkt=document.getElementById("produkt"),nummer=document.getElementById("kollinummer"),antal=document.getElementById("antal"),per=document.getElementById("per");
+  if(produkt&&saved.produkt)produkt.value=saved.produkt;
+  if(nummer&&typeof saved.kollinummer==="string")nummer.value=saved.kollinummer;
+  if(antal&&typeof saved.antal==="string")antal.value=saved.antal;
+  if(per&&typeof saved.per==="string")per.value=saved.per;
+ }catch(e){localStorage.removeItem(KOLLI_INPUT_STATE_KEY);}
+}
+function clearKolliInputState(){localStorage.removeItem(KOLLI_INPUT_STATE_KEY);}
 
 function showPage(page,fromNav=false){
 localStorage.setItem(PAGE_STATE_KEY,page);
@@ -873,7 +894,7 @@ function restoreProductionView(){
  }
  if(saved==="etikettering-active")localStorage.removeItem(ET_STATE_KEY);
  if(saved==="etikettering"){chooseProductionMode("etikettering");return;}
- if(saved==="kolli"){chooseProductionMode("kolli");return;}
+ if(saved==="kolli" || (!saved&&data.fpk) || (saved==="chooser"&&data.fpk)){chooseProductionMode("kolli");return;}
  if(saved==="registered"||saved==="registrations"){openProductionView(saved);return;}
  openProductionChooser();
 }
@@ -1267,7 +1288,7 @@ products=[...new Set(kollin.map(k=>k.produkt).filter(Boolean))];
 data.produktioner.push({productionId,batchId:data.fpk,start:data.activeProductionStart||null,end,products,kollin,total,kolliCount:totalFysiskaKollin(kollin),registrationCount:kollin.length,kassation,diffCount});
 addHistory("SLUT","-","","","Avslutade produktion","","","Batch avslutad");
 let finishInfo={batchId:data.fpk,products,start:data.activeProductionStart?new Date(data.activeProductionStart).toLocaleString("sv-SE"):"—",end:new Date(end).toLocaleString("sv-SE"),total,kolliCount:totalFysiskaKollin(kollin),registrationCount:kollin.length,kassation,diffCount};
-data.fpk="";data.activeProductionId="";data.activeProductionStart="";data.kollin=[];saveData();renderAll();showBatchFinishFeedback(finishInfo);
+data.fpk="";data.activeProductionId="";data.activeProductionStart="";data.kollin=[];clearKolliInputState();saveData();renderAll();showBatchFinishFeedback(finishInfo);
 }
 
 function skannaKolli(){alert("QR-skanning kopplas på här. Kamerafunktionen kan läggas till senare.");}
@@ -1472,6 +1493,7 @@ addHistory("KOLLI",nummer,produkt,"+"+antal,"La till kolli",totalKolli(),totalKo
 saveData();
 document.getElementById("kollinummer").value="";
 document.getElementById("per").value=String(per);
+saveKolliInputState();
 if(parsed.duplicates.length){showKolliInputNotice("Kontrollera kollinummer – "+parsed.duplicates.join(", ")+" förekommer två gånger.","warning");}
 renderAll();
 showKolliAddedToast(nummer,antal);
@@ -2765,6 +2787,8 @@ else if(!document.getElementById("historyClearView").classList.contains("hidden"
 
 document.getElementById("navHome").classList.add("active");
 etInitStartInputs();
+["produkt","kollinummer","antal","per"].forEach(id=>{let el=document.getElementById(id);if(!el)return;el.addEventListener("input",saveKolliInputState);el.addEventListener("change",saveKolliInputState);});
+restoreKolliInputState();
 renderAll();
 (function(){
 let savedPage=localStorage.getItem(PAGE_STATE_KEY);
