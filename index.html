@@ -709,7 +709,63 @@ body.etStartMode .footer{display:none!important}
  .timeTotalValue{font-size:23px}
  .midpointResultTime{font-size:27px}
 }
-</style></head>
+</style>
+<style>
+/* V1.9.23 — compact Tid layout, no images */
+@media(max-width:600px){
+  #calcTid{padding:0}
+  .timePageHero{min-height:64px;height:auto;padding:11px 14px;margin-bottom:10px;border-radius:16px}
+  .timeHeroTop{gap:9px;align-items:center;flex-wrap:nowrap}
+  .timeHeroCopy h2{font-size:29px;line-height:1;letter-spacing:-.8px}
+  .timeHeroKicker{font-size:8px;letter-spacing:.65px;margin:0;white-space:nowrap;gap:5px}
+  .timeHeroKicker span{width:6px;height:6px}
+  .timeHeroCopy p{display:none}
+  .timeBack{margin-bottom:8px;padding:8px 11px;border-radius:11px;font-size:12px}
+
+  .timeCard,.midpointCard{padding:12px;border-radius:17px;margin-bottom:10px}
+  .timeCardHead,.midpointHead{gap:8px;margin-bottom:9px}
+  .timeCardIcon,.midpointIcon{width:40px;height:40px;flex-basis:40px;border-radius:12px}
+  .timeCardIcon svg,.midpointIcon svg{width:24px;height:24px}
+  .timeCardHead h3,.midpointHead h3{font-size:18px;letter-spacing:-.3px}
+  .timeCardHead p,.midpointHead p{font-size:10.5px;margin-top:2px}
+
+  .timeAddRow{grid-template-columns:minmax(0,1fr) 48px;gap:7px}
+  .timeFieldLabel{font-size:12px;margin-bottom:4px}
+  .timeWheelPair{gap:0}
+  .timeWheelSelect,.midpointTimeSelect,.midpointTimeNative{height:48px;font-size:16px;border-radius:13px;padding:0 10px}
+  .timeAddBtn{width:48px;min-width:48px;height:48px;border-radius:13px}
+  .timeAddBtn svg{width:21px;height:21px}
+  .timeNewResult,.timeRowResult{display:none!important}
+
+  .timeRowsHead{margin:11px 0 5px;gap:7px}
+  .timeRowsHead strong{font-size:15px;line-height:1.05}
+  .timeClearBtn{padding:7px 10px;border-radius:10px;font-size:10.5px}
+  .timeRowNew{grid-template-columns:20px minmax(0,1fr) 30px;gap:6px;padding:5px 6px;margin-top:5px;border-radius:13px}
+  .timeRowIndex{font-size:13px}
+  .timeRowControls{grid-template-columns:minmax(0,1fr)!important;gap:0}
+  .timeRowControls .midpointTimeNative{height:42px;font-size:15px;border-radius:11px}
+  .timeRemoveBtn{width:29px;height:29px;font-size:18px}
+
+  .timeTotalNew{margin-top:8px;padding:10px 11px;border-radius:14px;gap:7px}
+  .timeTotalIcon{width:39px;height:39px;flex-basis:39px;border-radius:11px}
+  .timeTotalIcon svg{width:23px;height:23px}
+  .timeTotalMeta{gap:8px}
+  .timeTotalMeta strong{font-size:14px}
+  .timeTotalMeta span{font-size:10.5px;margin-top:2px}
+  .timeTotalValue{font-size:22px}
+
+  .midpointInputs{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px}
+  .midpointField label{font-size:12px;margin-bottom:4px}
+  .midpointTimeNative{height:48px;font-size:16px}
+  .midpointResult{margin-top:9px;padding:10px;border-radius:13px;gap:8px}
+  .midpointResultIcon{width:40px;height:40px}
+  .midpointResultIcon svg{width:24px;height:24px}
+  .midpointResultLabel{font-size:12px}
+  .midpointResultTime{font-size:26px;margin-top:2px}
+  .midpointExplanation{padding:7px 9px;margin-top:6px;border-radius:10px;font-size:10.5px}
+}
+</style>
+</head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
 <main>
