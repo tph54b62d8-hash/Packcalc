@@ -154,8 +154,8 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .registrationCountPlus{color:#1eaa68;font-weight:800}
 .registrationCountMinus{color:#b21f32;font-weight:800}
 .registrationCountDiff{color:#8a5a00;font-weight:800}
-.kolliProductionBackWrap{position:absolute;top:-2px;left:0;z-index:5;margin:0}
-.kolliProductionBack{font-size:12px!important;padding:3px 4px!important;background:transparent!important;border:0!important;box-shadow:none!important;color:#8a94a6!important;font-weight:600!important;opacity:.78}
+.kolliProductionBackWrap{position:absolute;top:-30px;left:0;z-index:5;margin:0}
+.kolliProductionBack{font-size:11px!important;padding:2px 3px!important;background:transparent!important;border:0!important;box-shadow:none!important;color:#8a94a6!important;font-weight:600!important;opacity:.72}
 .kolliProductionBack:hover{opacity:1;background:transparent!important}
 #pack.chooserNavTransition{overflow:hidden;position:relative}
 #pack.chooserNavTransition #productionChooser,#pack.chooserNavTransition #productionMainLayout{will-change:transform}
@@ -673,7 +673,7 @@ body.etStartMode .footer{display:none!important}
 </div>
 </div>
 <div id="productionMainLayout" class="productionLayout">
-<div class="kolliProductionBackWrap"><button class="gray kolliProductionBack" onclick="backFromKolliProduction()">← Tillbaka till Produktion</button></div>
+<div class="kolliProductionBackWrap"><button class="gray kolliProductionBack" onclick="backFromKolliProduction()">← Tillbaka</button></div>
 <div class="productionLeft">
 <div class="card productionHeaderCard"><div class="productionTop"><div class="productionHeaderMain"><div class="productionHeaderIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20V9h5v11M16 20V4h5v16M8 20v-5h8v5M3 9h5"/></svg></div><div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div></div><div id="productionActiveBatch" class="activeBatch"></div></div></div>
 <div class="card batchIdCard"><h2>Batch ID</h2><div class="batchIdInputWrap"><input id="fpkNumber" placeholder="" autocomplete="off"><button id="fpkClear" class="batchIdClear" type="button" onclick="clearBatchId()" aria-label="Rensa Batch ID">×</button></div><div class="batchButtons"><button id="startBatchBtn" class="blue" onclick="startFpk()"><span class="batchPlayIcon">▶</span><span>Starta batch</span></button><button id="finishBatchBtn" class="red" onclick="finishFpk()"><span class="batchStopIcon">■</span><span>Avsluta batch</span></button></div></div>
