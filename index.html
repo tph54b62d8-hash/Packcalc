@@ -626,7 +626,7 @@ body.etStartMode .footer{display:none!important}
 .midpointInputs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .midpointField label{display:block;margin:0 0 7px;font-size:14px;font-weight:800;color:#172033}
 .midpointTimeSelect{height:58px;font-size:18px;border-radius:16px}
-.midpointTimeNative{appearance:auto;-webkit-appearance:auto;width:100%;height:58px;padding:0 12px;border:1px solid #d3dce8;border-radius:16px;background:#fff;color:#172033;font-size:18px;font-weight:800;text-align:center;box-sizing:border-box}
+.midpointTimeNative{appearance:auto;-webkit-appearance:auto;width:100%;height:58px;padding:0 12px;border:1px solid #d3dce8;border-radius:16px;background:#fff;color:#172033;font-size:18px;font-weight:800;text-align:center;box-sizing:border-box}.durationTimeNative{font-variant-numeric:tabular-nums}
 .midpointResult{margin-top:14px;border-radius:17px;background:#edf8f1;padding:15px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}
 .midpointResultIcon{width:50px;height:50px;border-radius:50%;background:#d9f2e3;color:#159447;display:flex;align-items:center;justify-content:center}
 .midpointResultIcon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
@@ -798,8 +798,7 @@ body.etStartMode .footer{display:none!important}
     <div>
       <div class="timeFieldLabel">Ny tidsperiod</div>
       <div class="timeWheelPair">
-        <select id="timeNewHours" class="timeWheelSelect" aria-label="Timmar" onchange="syncNewTimeFromSelects()"></select>
-        <select id="timeNewMinutes" class="timeWheelSelect" aria-label="Minuter" onchange="syncNewTimeFromSelects()"></select>
+        <input id="timeNewPicker" class="midpointTimeNative durationTimeNative" type="time" step="300" value="00:00" aria-label="Tidsperiod" onchange="syncNewTimeNative()">
       </div>
       <div id="timeNewResult" class="timeNewResult">Vald tid: <strong>0 h 00 min</strong></div>
     </div>
@@ -1379,14 +1378,18 @@ function fillTimeSelect(id,max,value,kind,step){
  el.value=String(nearest);
 }
 function initTimeSelects(){
- fillTimeSelect("timeNewHours",99,timeNewSelection.h,"h",1);fillTimeSelect("timeNewMinutes",59,timeNewSelection.m,"m",5);
+ let picker=document.getElementById("timeNewPicker");
+ if(picker){let h=Math.max(0,Math.min(23,Number(timeNewSelection.h)||0)),m=Math.max(0,Math.min(55,Math.round((Number(timeNewSelection.m)||0)/5)*5));picker.value=pad2(h)+":"+pad2(m);}
 }
-function syncNewTimeButtons(){
- fillTimeSelect("timeNewHours",99,timeNewSelection.h,"h",1);fillTimeSelect("timeNewMinutes",59,timeNewSelection.m,"m",5);syncNewTimeFromSelects();
+function syncNewTimeButtons(){initTimeSelects();syncNewTimeNative();}
+function syncNewTimeNative(){
+ let value=document.getElementById("timeNewPicker")?.value||"00:00",p=value.split(":");
+ let h=Math.max(0,Math.min(23,Number(p[0])||0)),m=Math.max(0,Math.min(55,Math.round((Number(p[1])||0)/5)*5));
+ if(m===60){m=0;h=Math.min(23,h+1);}
+ value=pad2(h)+":"+pad2(m);let picker=document.getElementById("timeNewPicker");if(picker)picker.value=value;
+ timeNewSelection={h:h,m:m};let out=document.getElementById("timeNewResult");if(out)out.innerHTML="Vald tid: <strong>"+h+" h "+pad2(m)+" min</strong>";
 }
-function syncNewTimeFromSelects(){
- let h=Number(document.getElementById("timeNewHours")?.value)||0,m=Number(document.getElementById("timeNewMinutes")?.value)||0;m=Math.round(m/5)*5;timeNewSelection={h:h,m:m};let out=document.getElementById("timeNewResult");if(out)out.innerHTML="Vald tid: <strong>"+h+" h "+pad2(m)+" min</strong>";
-}
+function syncNewTimeFromSelects(){syncNewTimeNative();}
 function syncMidpointNative(target){
  let id=target==="from"?"midFromPicker":"midToPicker",hidden=target==="from"?"midFrom":"midTo";
  let value=document.getElementById(id)?.value||"00:00";
@@ -1411,18 +1414,18 @@ function parseTimeValue(v){
  if(!Number.isFinite(h)||!Number.isFinite(m)||h<0||m<0||m>=60)return null;
  return {h:Math.floor(h),m:Math.floor(m)};
 }
-function addTimeRow(){syncNewTimeFromSelects();let h=Number(timeNewSelection.h)||0,m=Number(timeNewSelection.m)||0;timeValues.push(h+":"+m);renderTimeRows();timeNewSelection={h:0,m:0};syncNewTimeButtons();saveCalculatorState("tid");}
+function addTimeRow(){syncNewTimeNative();let h=Number(timeNewSelection.h)||0,m=Number(timeNewSelection.m)||0;timeValues.push(h+":"+m);renderTimeRows();timeNewSelection={h:0,m:0};syncNewTimeButtons();saveCalculatorState("tid");}
 function clearAllTimeRows(){timeValues=[];renderTimeRows();saveCalculatorState("tid");}
 function removeTimeRow(i){timeValues.splice(i,1);renderTimeRows();saveCalculatorState("tid");}
-function updateTime(i,h,m){let hh=Number(h)||0,mm=Math.round((Number(m)||0)/5)*5;timeValues[i]=hh+":"+mm;let row=document.querySelectorAll(".timeRowNew")[i];let out=row&&row.querySelector(".timeRowResult span");if(out)out.innerText=hh+" h "+pad2(mm)+" min";calculateTime();saveCalculatorState("tid");}
-function durationSelect(id,max,value,kind,onchange){let step=kind==="m"?5:1,opts=[];for(let n=0;n<=max;n+=step)opts.push('<option value="'+n+'">'+(kind==="h"?n:n===0?"00":pad2(n))+ (kind==="h"?" h":" min")+'</option>');return '<select id="'+id+'" class="timeWheelSelect" onchange="'+onchange+'">'+opts.join("")+'</select>'}
+function updateTime(i,value){let p=parseTimeValue(value)||{h:0,m:0};let hh=Math.max(0,Math.min(23,p.h)),mm=Math.max(0,Math.min(55,Math.round(p.m/5)*5));timeValues[i]=hh+":"+mm;let row=document.querySelectorAll(".timeRowNew")[i];let out=row&&row.querySelector(".timeRowResult span");if(out)out.innerText=hh+" h "+pad2(mm)+" min";let picker=row&&row.querySelector(".durationTimeNative");if(picker)picker.value=pad2(hh)+":"+pad2(mm);calculateTime();saveCalculatorState("tid");}
+function durationSelect(id,value,onchange){let p=parseTimeValue(value)||{h:0,m:0};return '<input id="'+id+'" class="midpointTimeNative durationTimeNative" type="time" step="300" value="'+pad2(Math.max(0,Math.min(23,p.h)))+':'+pad2(Math.max(0,Math.min(55,Math.round(p.m/5)*5)))+'" aria-label="Tidsperiod" onchange="'+onchange+'">'}
 function renderTimeRows(){
  let b=document.getElementById("timeRows");if(!b)return;
  let title=document.getElementById("timeRowsTitle");if(title)title.innerText="Tidsperioder ("+timeValues.length+")";
  b.innerHTML="";
  timeValues.forEach((v,i)=>{let p=parseTimeValue(v)||{h:0,m:0},row=document.createElement("div");row.className="timeRowNew";
-  row.innerHTML='<div class="timeRowIndex">'+(i+1)+'.</div><div><div class="timeRowResult">Resultat: <span>'+p.h+' h '+pad2(p.m)+' min</span></div><div class="timeRowControls">'+durationSelect("timeRowH"+i,99,p.h,"h","updateTime("+i+",this.value,document.getElementById(\'timeRowM"+i+"\').value)")+durationSelect("timeRowM"+i,59,p.m,"m","updateTime("+i+",document.getElementById(\'timeRowH"+i+"\').value,this.value)")+'</div></div><button class="timeRemoveBtn" type="button" aria-label="Ta bort tid '+(i+1)+'" onclick="removeTimeRow('+i+')">×</button>';
-  b.appendChild(row);document.getElementById("timeRowH"+i).value=String(p.h);document.getElementById("timeRowM"+i).value=String(p.m);
+  row.innerHTML='<div class="timeRowIndex">'+(i+1)+'.</div><div><div class="timeRowResult">Resultat: <span>'+p.h+' h '+pad2(p.m)+' min</span></div><div class="timeRowControls">'+durationSelect("timeRowPicker"+i,p.h+":"+p.m,"updateTime("+i+",this.value)")+'</div></div><button class="timeRemoveBtn" type="button" aria-label="Ta bort tid '+(i+1)+'" onclick="removeTimeRow('+i+')">×</button>';
+  b.appendChild(row);
  });
  calculateTime();
 }
