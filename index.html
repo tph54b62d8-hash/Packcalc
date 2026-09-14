@@ -647,6 +647,68 @@ body.etStartMode .footer{display:none!important}
  .timeWheelPair,.timeRowControls,.midpointInputs{gap:7px}.timeRowNew{grid-template-columns:26px minmax(0,1fr) 35px;gap:6px;padding:7px}.timeRowControls .timeWheelSelect{font-size:14px}.timeRemoveBtn{width:34px;height:34px}.timeTotalValue{font-size:24px}.midpointResultTime{font-size:27px}
 }
 @media(prefers-reduced-motion:reduce){.timeRowNew{animation:none}}
+/* V1.9.22 — compact Tid layout */
+.timePageHero{min-height:92px;padding:16px 20px;margin-bottom:14px}
+.timeHeroCopy{display:block}
+.timeHeroTop{display:flex;align-items:center;gap:16px;min-width:0}
+.timeHeroCopy h2{font-size:36px;line-height:1;letter-spacing:-1.1px;margin:0;flex:0 0 auto}
+.timeHeroKicker{margin:0;font-size:10px;letter-spacing:1px;white-space:nowrap}
+.timeHeroCopy p{margin:7px 0 0;font-size:13px;line-height:1.3;max-width:520px}
+.timeCard,.midpointCard{padding:15px;margin-bottom:12px;border-radius:19px}
+.timeCardHead,.midpointHead{gap:10px;margin-bottom:12px}
+.timeCardIcon,.midpointIcon{width:46px;height:46px;flex-basis:46px;border-radius:14px}
+.timeCardIcon svg,.midpointIcon svg{width:27px;height:27px}
+.timeCardHead h3,.midpointHead h3{font-size:20px}
+.timeCardHead p,.midpointHead p{font-size:12px;margin-top:3px}
+.timeAddRow{grid-template-columns:minmax(0,1fr) 52px;gap:9px}
+.timeFieldLabel{font-size:13px;margin-bottom:5px}
+.timeWheelPair{gap:8px}
+.timeWheelSelect,.midpointTimeSelect,.midpointTimeNative{height:52px;border-radius:14px;font-size:17px;padding:0 9px}
+.timeAddBtn{width:52px;min-width:52px;height:52px;border-radius:14px}
+.timeAddBtn svg{width:21px;height:21px}
+.timeRowsHead{margin:14px 0 7px;gap:8px}
+.timeRowsHead strong{font-size:17px;line-height:1.1}
+.timeClearBtn{padding:8px 11px;font-size:11px;border-radius:11px}
+.timeRowNew{grid-template-columns:24px minmax(0,1fr) 34px;gap:7px;padding:7px;margin-top:6px;border-radius:14px}
+.timeRowIndex{font-size:14px}
+.timeRowControls{display:block;min-width:0}
+.timeRowControls .midpointTimeNative{height:46px;font-size:16px;border-radius:12px}
+.timeRemoveBtn{width:32px;height:32px;font-size:19px}
+.timeTotalNew{margin-top:10px;padding:12px 13px;border-radius:15px;gap:8px}
+.timeTotalIcon{width:42px;height:42px;flex-basis:42px;border-radius:12px}
+.timeTotalIcon svg{width:24px;height:24px}
+.timeTotalMeta{gap:9px}
+.timeTotalMeta strong{font-size:15px}.timeTotalMeta span{font-size:11px;margin-top:2px}
+.timeTotalValue{font-size:25px}
+.midpointInputs{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.midpointField{min-width:0}
+.midpointField label{font-size:13px;margin-bottom:5px}
+.midpointTimeNative{width:100%;box-sizing:border-box}
+.midpointResult{margin-top:11px;padding:12px;border-radius:15px;gap:9px}
+.midpointResultIcon{width:44px;height:44px}.midpointResultIcon svg{width:27px;height:27px}
+.midpointResultLabel{font-size:13px}.midpointResultTime{font-size:29px;margin-top:3px}
+.midpointExplanation{padding:8px 10px;margin-top:7px;border-radius:11px;font-size:11px}
+.timeNewResult,.timeRowResult{display:none!important}
+@media(max-width:600px){
+ .timePageHero{min-height:86px;padding:14px 16px}
+ .timeHeroTop{gap:11px;align-items:center}
+ .timeHeroCopy h2{font-size:32px}
+ .timeHeroKicker{font-size:8.5px;letter-spacing:.75px}
+ .timeHeroCopy p{font-size:12px;margin-top:6px;max-width:100%}
+ .timeCard,.midpointCard{padding:14px;border-radius:18px}
+ .timeCardHead,.midpointHead{margin-bottom:11px}
+ .timeCardIcon,.midpointIcon{width:44px;height:44px;flex-basis:44px}
+ .timeCardHead h3,.midpointHead h3{font-size:19px}
+ .timeCardHead p,.midpointHead p{font-size:11.5px}
+ .timeAddRow{grid-template-columns:minmax(0,1fr) 50px;gap:8px}
+ .timeWheelSelect,.midpointTimeSelect,.midpointTimeNative{height:50px;font-size:16px}
+ .timeAddBtn{width:50px;min-width:50px;height:50px}
+ .timeRowNew{grid-template-columns:22px minmax(0,1fr) 32px;gap:6px;padding:6px}
+ .timeRowControls .midpointTimeNative{height:44px;font-size:15px}
+ .timeRemoveBtn{width:30px;height:30px;font-size:18px}
+ .timeTotalValue{font-size:23px}
+ .midpointResultTime{font-size:27px}
+}
 </style></head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
@@ -784,8 +846,7 @@ body.etStartMode .footer{display:none!important}
 <button class="timeBack" onclick="backToCalculators()">← Till kalkylatorer</button>
 <div class="timePageHero">
   <div class="timeHeroCopy">
-    <div class="timeHeroKicker"><span></span> Tid · planering · resultat</div>
-    <h2>Tid</h2>
+    <div class="timeHeroTop"><h2>Tid</h2><div class="timeHeroKicker"><span></span> Tid · planering · resultat</div></div>
     <p>Verktyg för enkla tidsberäkningar – från flera perioder till exakt mittpunkt.</p>
   </div>
 </div>
@@ -800,7 +861,6 @@ body.etStartMode .footer{display:none!important}
       <div class="timeWheelPair">
         <input id="timeNewPicker" class="midpointTimeNative durationTimeNative" type="time" step="300" min="00:00" max="23:55" value="00:00" aria-label="Tidsperiod" onchange="syncNewTimeNative()">
       </div>
-      <div id="timeNewResult" class="timeNewResult">Vald tid: <strong>0 h 00 min</strong></div>
     </div>
     <button class="timeAddBtn" type="button" onclick="addTimeRow()" aria-label="Lägg till tid"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button>
   </div>
