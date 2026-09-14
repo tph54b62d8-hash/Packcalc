@@ -127,7 +127,19 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .latestEvent{display:grid;grid-template-columns:35px 1fr auto;gap:10px;align-items:center}.latestEventIcon{font-size:26px;color:#1459d9}.latestEventTitle{font-weight:bold}.latestEventText{color:#687386;font-size:13px;margin-top:3px}.latestEventChange{color:#1eaa68;font-weight:800;font-size:17px}
 .productionLink{background:#eef6ff;border:2px solid white;box-shadow:0 2px 8px #0001;text-align:left;margin-top:10px;color:#172033}.productionLink:first-child{margin-top:0}.productionHistoryHeader{display:flex;justify-content:space-between;align-items:center;gap:10px}.historyFilter{width:auto;min-width:145px;padding:9px 11px;font-size:13px}.historyTable th{font-weight:700}.historyDiff{color:#d92d20;font-weight:bold}
 .diffOption{background:#edf0f5;border-radius:9px;padding:10px;margin-top:7px;display:flex;justify-content:space-between;align-items:center;font-size:13px;border:2px solid transparent;cursor:pointer}.diffOption.selectedDiff{background:#dbe9ff;border:2px solid #1459d9}.diffOption .positive{color:#1eaa68;font-weight:bold}.diffOption .negative{color:#d92d20;font-weight:bold}.quickButton{margin-top:10px}.closeX{float:right;font-size:20px;color:#8b95a5;cursor:pointer}.productionBottomLinks{margin-top:0}
-.calculatorGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.calculatorCard{background:white;border:0;border-radius:16px;padding:18px;text-align:left;box-shadow:0 2px 10px #0001;min-height:120px;margin:0}.calculatorCard .calcIcon{font-size:29px;margin-bottom:10px}.calculatorCard strong{display:block;font-size:18px;margin-bottom:5px}.calculatorCard span{display:block;color:#687386;font-size:13px;line-height:1.3}.calcBack{margin-bottom:15px}.calcResult{margin-top:15px}.calcExplanation{background:#fff4df;color:#8a5a00;border-radius:10px;padding:12px;margin-top:15px;line-height:1.4}.calcPositive{background:#eaf8f1;color:#17764a;border-radius:10px;padding:14px;margin-top:15px;font-weight:bold}.calcNegative{background:#ffe1e4;color:#b21f32;border-radius:10px;padding:14px;margin-top:15px;font-weight:bold}
+.calculatorGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.calculatorCard{background:white;border:0;border-radius:16px;padding:18px;text-align:left;box-shadow:0 2px 10px #0001;min-height:120px;margin:0}.calculatorCard .calcIcon{font-size:29px;margin-bottom:10px}.calculatorCard strong{display:block;font-size:18px;margin-bottom:5px}.calculatorCard span{display:block;color:#687386;font-size:13px;line-height:1.3}/* V1.9.10 — Packalkylator: spara vald kalkyl + lekfull övergång */
+.calcViewEnter{animation:calcViewEnter .46s cubic-bezier(.18,.8,.24,1) both;transform-origin:center top}
+.calcViewLeave{animation:calcViewLeave .26s ease-in both}
+.calculatorChoiceLeaving .calculatorCard{animation:calcCardLift .32s cubic-bezier(.18,.8,.24,1) both}
+.calculatorChoiceLeaving .calculatorCard:nth-child(2){animation-delay:.025s}
+.calculatorChoiceLeaving .calculatorCard:nth-child(3){animation-delay:.05s}
+.calculatorChoiceLeaving .calculatorCard:nth-child(4){animation-delay:.075s}
+.calculatorChoiceLeaving .calculatorCard:nth-child(5){animation-delay:.1s}
+.calculatorChoiceLeaving .calculatorCard:nth-child(6){animation-delay:.125s}
+@keyframes calcViewEnter{0%{opacity:0;transform:translateY(18px) scale(.965) rotateX(-2deg);filter:blur(2px)}55%{opacity:1;transform:translateY(-3px) scale(1.008) rotateX(0);filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1) rotateX(0);filter:blur(0)}}
+@keyframes calcViewLeave{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(10px) scale(.985)}}
+@keyframes calcCardLift{0%{transform:translateY(0) scale(1)}45%{transform:translateY(-5px) scale(1.018) rotate(-.35deg)}100%{transform:translateY(-1px) scale(.99)}}
+.calcBack{margin-bottom:15px}.calcResult{margin-top:15px}.calcExplanation{background:#fff4df;color:#8a5a00;border-radius:10px;padding:12px;margin-top:15px;line-height:1.4}.calcPositive{background:#eaf8f1;color:#17764a;border-radius:10px;padding:14px;margin-top:15px;font-weight:bold}.calcNegative{background:#ffe1e4;color:#b21f32;border-radius:10px;padding:14px;margin-top:15px;font-weight:bold}
 .timeRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-top:10px}.timeRow input{margin:0}.removeTime{width:auto;margin:0;padding:13px 15px}.timeTotal{background:#eef6ff;border-radius:12px;padding:18px;text-align:center;margin-top:15px}.timeTotal .number{font-size:30px}
 .productionModal{position:fixed;inset:0;background:#0006;z-index:1000;padding:15px;overflow:auto}.productionModalCard{max-width:600px;margin:40px auto}
 /* V1.6.2 — Registreringar UI + production subview transition only */
@@ -830,6 +842,7 @@ const PAGE_STATE_KEY="packvex_current_page";
 const PRODUCTION_VIEW_KEY="packvex_production_view";
 const KOLLI_INPUT_STATE_KEY="packvex_kolli_input_state";
 const ET_STATE_KEY="packvex_etikettering_state";
+const CALC_STATE_KEY="packvex_calculator_state";
 
 function saveKolliInputState(){
  let produkt=document.getElementById("produkt"),nummer=document.getElementById("kollinummer"),antal=document.getElementById("antal"),per=document.getElementById("per");
@@ -859,7 +872,7 @@ document.getElementById(page).classList.remove("hidden");
 document.querySelectorAll("nav button").forEach(btn=>btn.classList.remove("active"));
 if(page==="home")document.getElementById("navHome").classList.add("active");
 if(page==="pack"){document.getElementById("navPack").classList.add("active");if(fromNav)openProductionChooser();else restoreProductionView();}
-if(page==="packalkylator")document.getElementById("navCalc").classList.add("active");
+if(page==="packalkylator"){document.getElementById("navCalc").classList.add("active");restoreCalculatorState();}
 if(page==="dagbok")document.getElementById("navDagbok").classList.add("active");
 if(page==="historik")document.getElementById("navHistorik").classList.add("active");
 if(["more","print","pall","qr","oversikt","installningar","data","dataOlder","omAppen"].includes(page))document.getElementById("navMore").classList.add("active");
@@ -1110,29 +1123,76 @@ requestAnimationFrame(function(){
  },320);
 });
 }
-function openCalculator(type){
-["calculatorChoice","calcSprutor","calcKapslar","calcPall","calcEtiketter","calcEtiketterMain","calcTillaggsetiketter","calcTid"].forEach(id=>{let el=document.getElementById(id);if(el)el.classList.add("hidden")});
-if(type==="sprutor"){document.getElementById("calcSprutor").classList.remove("hidden");raknaSprutor();}
-if(type==="kapslar"){document.getElementById("calcKapslar").classList.remove("hidden");raknaKapslar();}
-if(type==="pallcalc"){document.getElementById("calcPall").classList.remove("hidden");raknaPallCalc();}
-if(type==="etiketter"){document.getElementById("calcEtiketter").classList.remove("hidden");}
-if(type==="tid"){document.getElementById("calcTid").classList.remove("hidden");renderTimeRows();}
+function saveCalculatorState(view){
+ let ids=["sprutorAntal","sprutorPer","kapslarAntal","kapslarPer","pallCalcAntal","pallCalcPer","etikettMottagna","etikettTillOrder","etikettTillRapportering","etikettKassation","etikettAterlamnade","etikettForsta","etikettSista","etikettStart","etikettProducerade","etikettVerklig"];
+ let values={};
+ ids.forEach(id=>{let el=document.getElementById(id);if(el)values[id]=el.value;});
+ let time=Array.isArray(timeValues)?timeValues.slice():[];
+ localStorage.setItem(CALC_STATE_KEY,JSON.stringify({view:view||"choice",values:values,time:time}));
+}
+function restoreCalculatorState(){
+ try{
+  let raw=localStorage.getItem(CALC_STATE_KEY);if(!raw)return;
+  let saved=JSON.parse(raw);if(!saved||!saved.view||saved.view==="choice")return;
+  let ids=Object.keys(saved.values||{});
+  ids.forEach(id=>{let el=document.getElementById(id);if(el&&typeof saved.values[id]==="string")el.value=saved.values[id];});
+  if(Array.isArray(saved.time))timeValues=saved.time.slice();
+  if(["sprutor","kapslar","pallcalc","etiketter","etiketterMain","tillagg","tid"].includes(saved.view)){
+   if(saved.view==="sprutor")openCalculator("sprutor",true);
+   else if(saved.view==="kapslar")openCalculator("kapslar",true);
+   else if(saved.view==="pallcalc")openCalculator("pallcalc",true);
+   else if(saved.view==="etiketter")openCalculator("etiketter",true);
+   else if(saved.view==="etiketterMain")openEtikettCalculator("etiketter",true);
+   else if(saved.view==="tillagg")openEtikettCalculator("tillagg",true);
+   else if(saved.view==="tid")openCalculator("tid",true);
+  }
+ }catch(e){localStorage.removeItem(CALC_STATE_KEY);}
+}
+function animateCalculatorTarget(id){
+ let el=document.getElementById(id);if(!el)return;
+ el.classList.remove("calcViewEnter","calcViewLeave");void el.offsetWidth;el.classList.add("calcViewEnter");
+ setTimeout(()=>el.classList.remove("calcViewEnter"),500);
+}
+function animateCalculatorChoice(){
+ let el=document.getElementById("calculatorChoice");if(!el)return;
+ el.classList.remove("calculatorChoiceLeaving");void el.offsetWidth;el.classList.add("calculatorChoiceLeaving");
+ setTimeout(()=>el.classList.remove("calculatorChoiceLeaving"),340);
 }
 
-function openEtikettCalculator(type){
-["calcEtiketter","calcEtiketterMain","calcTillaggsetiketter"].forEach(id=>{let el=document.getElementById(id);if(el)el.classList.add("hidden")});
-if(type==="etiketter"){document.getElementById("calcEtiketterMain").classList.remove("hidden");raknaEtikettAvstamning();}
-if(type==="tillagg"){document.getElementById("calcTillaggsetiketter").classList.remove("hidden");raknaEtiketter();kontrolleraEtiketter();}
+function openCalculator(type,restoring=false){
+ ["calculatorChoice","calcSprutor","calcKapslar","calcPall","calcEtiketter","calcEtiketterMain","calcTillaggsetiketter","calcTid"].forEach(id=>{let el=document.getElementById(id);if(el)el.classList.add("hidden")});
+ let target=null;
+ if(type==="sprutor"){target="calcSprutor";document.getElementById(target).classList.remove("hidden");raknaSprutor();}
+ if(type==="kapslar"){target="calcKapslar";document.getElementById(target).classList.remove("hidden");raknaKapslar();}
+ if(type==="pallcalc"){target="calcPall";document.getElementById(target).classList.remove("hidden");raknaPallCalc();}
+ if(type==="etiketter"){target="calcEtiketter";document.getElementById(target).classList.remove("hidden");}
+ if(type==="tid"){target="calcTid";document.getElementById(target).classList.remove("hidden");renderTimeRows();}
+ if(!restoring){saveCalculatorState(type);animateCalculatorChoice();}
+ if(target&&!restoring)animateCalculatorTarget(target);
+}
+
+function openEtikettCalculator(type,restoring=false){
+ ["calcEtiketter","calcEtiketterMain","calcTillaggsetiketter"].forEach(id=>{let el=document.getElementById(id);if(el)el.classList.add("hidden")});
+ let target=null;
+ if(type==="etiketter"){target="calcEtiketterMain";document.getElementById(target).classList.remove("hidden");raknaEtikettAvstamning();}
+ if(type==="tillagg"){target="calcTillaggsetiketter";document.getElementById(target).classList.remove("hidden");raknaEtiketter();kontrolleraEtiketter();}
+ if(!restoring){saveCalculatorState(type==="etiketter"?"etiketterMain":"tillagg");}
+ if(target&&!restoring)animateCalculatorTarget(target);
 }
 
 function backToEtikettChoice(){
-["calcEtiketterMain","calcTillaggsetiketter"].forEach(id=>{let el=document.getElementById(id);if(el)el.classList.add("hidden")});
-document.getElementById("calcEtiketter").classList.remove("hidden");
+ let targets=["calcEtiketterMain","calcTillaggsetiketter"];
+ targets.forEach(id=>{let el=document.getElementById(id);if(el)el.classList.remove("calcViewEnter")});
+ let active=targets.map(id=>document.getElementById(id)).find(el=>el&&!el.classList.contains("hidden"));
+ if(active){active.classList.add("calcViewLeave");setTimeout(()=>{active.classList.add("hidden");active.classList.remove("calcViewLeave");let choice=document.getElementById("calcEtiketter");choice.classList.remove("hidden");animateCalculatorTarget("calcEtiketter");saveCalculatorState("etiketter");},250);}
+ else{document.getElementById("calcEtiketter").classList.remove("hidden");saveCalculatorState("etiketter");}
 }
 
 function backToCalculators(){
-["calcSprutor","calcKapslar","calcPall","calcEtiketter","calcEtiketterMain","calcTillaggsetiketter","calcTid"].forEach(id=>{let el=document.getElementById(id);if(el)el.classList.add("hidden")});
-document.getElementById("calculatorChoice").classList.remove("hidden");
+ let targets=["calcSprutor","calcKapslar","calcPall","calcEtiketter","calcEtiketterMain","calcTillaggsetiketter","calcTid"];
+ let active=targets.map(id=>document.getElementById(id)).find(el=>el&&!el.classList.contains("hidden"));
+ if(active){active.classList.add("calcViewLeave");setTimeout(()=>{active.classList.add("hidden");active.classList.remove("calcViewLeave");let choice=document.getElementById("calculatorChoice");choice.classList.remove("hidden");animateCalculatorTarget("calculatorChoice");saveCalculatorState("choice");},250);}
+ else{document.getElementById("calculatorChoice").classList.remove("hidden");saveCalculatorState("choice");}
 }
 
 function raknaSprutor(){
@@ -1197,9 +1257,9 @@ else{let m=Math.abs(d);r.innerHTML='<div class="calcNegative">−'+m+' etikett'+
 }
 
 let timeValues=[];
-function addTimeRow(){timeValues.push("");renderTimeRows();}
-function removeTimeRow(i){timeValues.splice(i,1);renderTimeRows();}
-function updateTime(i,v){timeValues[i]=v;calculateTime();}
+function addTimeRow(){timeValues.push("");renderTimeRows();saveCalculatorState("tid");}
+function removeTimeRow(i){timeValues.splice(i,1);renderTimeRows();saveCalculatorState("tid");}
+function updateTime(i,v){timeValues[i]=v;calculateTime();saveCalculatorState("tid");}
 function renderTimeRows(){
 let b=document.getElementById("timeRows");
 if(!timeValues.length)timeValues.push("");
@@ -2794,6 +2854,14 @@ let csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(";")).jo
 let blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8;"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="packvex-historik.csv";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
 }
 
+function installCalculatorStateListeners(){
+ ["sprutorAntal","sprutorPer","kapslarAntal","kapslarPer","pallCalcAntal","pallCalcPer","etikettMottagna","etikettTillOrder","etikettTillRapportering","etikettKassation","etikettAterlamnade","etikettForsta","etikettSista","etikettStart","etikettProducerade","etikettVerklig"].forEach(id=>{
+  let el=document.getElementById(id);if(!el)return;
+  el.addEventListener("input",function(){let raw=localStorage.getItem(CALC_STATE_KEY);let view="choice";try{view=JSON.parse(raw||"{}").view||"choice";}catch(e){}saveCalculatorState(view);});
+  el.addEventListener("change",function(){let raw=localStorage.getItem(CALC_STATE_KEY);let view="choice";try{view=JSON.parse(raw||"{}").view||"choice";}catch(e){}saveCalculatorState(view);});
+ });
+}
+
 function renderAll(){
 renderFpk();
 renderKolli();
@@ -2813,6 +2881,7 @@ else if(!document.getElementById("historyClearView").classList.contains("hidden"
 
 document.getElementById("navHome").classList.add("active");
 etInitStartInputs();
+installCalculatorStateListeners();
 ["produkt","kollinummer","antal","per"].forEach(id=>{let el=document.getElementById(id);if(!el)return;el.addEventListener("input",saveKolliInputState);el.addEventListener("change",saveKolliInputState);});
 restoreKolliInputState();
 renderAll();
