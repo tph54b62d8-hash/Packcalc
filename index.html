@@ -626,6 +626,7 @@ body.etStartMode .footer{display:none!important}
 .midpointInputs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .midpointField label{display:block;margin:0 0 7px;font-size:14px;font-weight:800;color:#172033}
 .midpointTimeSelect{height:58px;font-size:18px;border-radius:16px}
+.midpointTimeNative{appearance:auto;-webkit-appearance:auto;width:100%;height:58px;padding:0 12px;border:1px solid #d3dce8;border-radius:16px;background:#fff;color:#172033;font-size:18px;font-weight:800;text-align:center;box-sizing:border-box}
 .midpointResult{margin-top:14px;border-radius:17px;background:#edf8f1;padding:15px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}
 .midpointResultIcon{width:50px;height:50px;border-radius:50%;background:#d9f2e3;color:#159447;display:flex;align-items:center;justify-content:center}
 .midpointResultIcon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
@@ -817,8 +818,8 @@ body.etStartMode .footer{display:none!important}
     <div><h3>Mitten tid</h3><p>Hitta tiden mitt emellan två klockslag.</p></div>
   </div>
   <div class="midpointInputs">
-    <div class="midpointField"><label>Från</label><div class="timeWheelPair"><select id="midFromH" class="midpointTimeSelect" aria-label="Från timmar" onchange="syncMidpointSelects('from')"></select><select id="midFromM" class="midpointTimeSelect" aria-label="Från minuter" onchange="syncMidpointSelects('from')"></select></div><input id="midFrom" type="hidden" value="00:00"></div>
-    <div class="midpointField"><label>Till</label><div class="timeWheelPair"><select id="midToH" class="midpointTimeSelect" aria-label="Till timmar" onchange="syncMidpointSelects('to')"></select><select id="midToM" class="midpointTimeSelect" aria-label="Till minuter" onchange="syncMidpointSelects('to')"></select></div><input id="midTo" type="hidden" value="00:00"></div>
+    <div class="midpointField"><label>Från</label><input id="midFromPicker" class="midpointTimeNative" type="time" step="300" value="00:00" aria-label="Från" onchange="syncMidpointNative('from')"><input id="midFrom" type="hidden" value="00:00"></div>
+    <div class="midpointField"><label>Till</label><input id="midToPicker" class="midpointTimeNative" type="time" step="300" value="00:00" aria-label="Till" onchange="syncMidpointNative('to')"><input id="midTo" type="hidden" value="00:00"></div>
   </div>
   <div class="midpointResult" aria-live="polite">
     <div class="midpointResultIcon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7v5l3 2"></path><path d="M12 3.5v1.5M20.5 12H19M12 20.5V19M5 12H3.5"></path></svg></div>
@@ -1230,7 +1231,7 @@ requestAnimationFrame(function(){
 });
 }
 function saveCalculatorState(view){
- let ids=["sprutorAntal","sprutorPer","kapslarAntal","kapslarPer","pallCalcAntal","pallCalcPer","etikettMottagna","etikettTillOrder","etikettTillRapportering","etikettKassation","etikettAterlamnade","etikettForsta","etikettSista","etikettStart","etikettProducerade","etikettVerklig","midFrom","midTo","midFromH","midFromM","midToH","midToM"];
+ let ids=["sprutorAntal","sprutorPer","kapslarAntal","kapslarPer","pallCalcAntal","pallCalcPer","etikettMottagna","etikettTillOrder","etikettTillRapportering","etikettKassation","etikettAterlamnade","etikettForsta","etikettSista","etikettStart","etikettProducerade","etikettVerklig","midFrom","midTo","midFromPicker","midToPicker"];
  let values={};
  ids.forEach(id=>{let el=document.getElementById(id);if(el)values[id]=el.value;});
  let time=Array.isArray(timeValues)?timeValues.slice():[];
@@ -1240,7 +1241,7 @@ function restoreCalculatorState(){
  try{
   let raw=localStorage.getItem(CALC_STATE_KEY);if(!raw)return;
   let saved=JSON.parse(raw);if(!saved||!saved.view||saved.view==="choice")return;
-  if(saved.view==="tid"&&saved.timeSchema!==TIME_STATE_SCHEMA){saved.time=[];saved.values=saved.values||{};saved.values.midFrom="00:00";saved.values.midTo="00:00";saved.values.midFromH="0";saved.values.midFromM="0";saved.values.midToH="0";saved.values.midToM="0";saved.timeInitialized=true;saved.timeSchema=TIME_STATE_SCHEMA;localStorage.setItem(CALC_STATE_KEY,JSON.stringify(saved));}
+  if(saved.view==="tid"&&saved.timeSchema!==TIME_STATE_SCHEMA){saved.time=[];saved.values=saved.values||{};saved.values.midFrom="00:00";saved.values.midTo="00:00";saved.values.midFromPicker="00:00";saved.values.midToPicker="00:00";saved.timeInitialized=true;saved.timeSchema=TIME_STATE_SCHEMA;localStorage.setItem(CALC_STATE_KEY,JSON.stringify(saved));}
   let ids=Object.keys(saved.values||{});
   ids.forEach(id=>{let el=document.getElementById(id);if(el&&typeof saved.values[id]==="string")el.value=saved.values[id];});
   if(Array.isArray(saved.time))timeValues=saved.time.slice();
@@ -1375,13 +1376,10 @@ function fillTimeSelect(id,max,value,kind,step){
  el.innerHTML=nums.map(n=>'<option value="'+n+'">'+(kind==="h"?n:n===0?"00":pad2(n))+suffix+'</option>').join("");
  let raw=Number(value)||0,nearest=kind==="m"?Math.round(raw/5)*5:raw;
  nearest=Math.max(0,Math.min(max,nearest));
- if(kind==="m"&&nearest%5!==0)nearest=Math.round(nearest/5)*5;
  el.value=String(nearest);
 }
 function initTimeSelects(){
  fillTimeSelect("timeNewHours",99,timeNewSelection.h,"h",1);fillTimeSelect("timeNewMinutes",59,timeNewSelection.m,"m",5);
- ["midFromH","midToH"].forEach(id=>fillTimeSelect(id,23,0,"h",1));
- ["midFromM","midToM"].forEach(id=>fillTimeSelect(id,59,0,"m",5));
 }
 function syncNewTimeButtons(){
  fillTimeSelect("timeNewHours",99,timeNewSelection.h,"h",1);fillTimeSelect("timeNewMinutes",59,timeNewSelection.m,"m",5);syncNewTimeFromSelects();
@@ -1389,14 +1387,29 @@ function syncNewTimeButtons(){
 function syncNewTimeFromSelects(){
  let h=Number(document.getElementById("timeNewHours")?.value)||0,m=Number(document.getElementById("timeNewMinutes")?.value)||0;m=Math.round(m/5)*5;timeNewSelection={h:h,m:m};let out=document.getElementById("timeNewResult");if(out)out.innerHTML="Vald tid: <strong>"+h+" h "+pad2(m)+" min</strong>";
 }
-function syncMidpointSelects(target){
- let h=Number(document.getElementById(target==="from"?"midFromH":"midToH")?.value)||0,m=Number(document.getElementById(target==="from"?"midFromM":"midToM")?.value)||0;m=Math.round(m/5)*5;
- let value=pad2(h)+":"+pad2(m),id=target==="from"?"midFrom":"midTo";let el=document.getElementById(id);if(el)el.value=value;calculateMidpoint();saveCalculatorState("tid");
+function syncMidpointNative(target){
+ let id=target==="from"?"midFromPicker":"midToPicker",hidden=target==="from"?"midFrom":"midTo";
+ let value=document.getElementById(id)?.value||"00:00";
+ let p=value.split(":");let h=Number(p[0])||0,m=Math.round((Number(p[1])||0)/5)*5;if(m===60){m=0;h=(h+1)%24;}
+ value=pad2(h)+":"+pad2(m);
+ let picker=document.getElementById(id);if(picker)picker.value=value;
+ let el=document.getElementById(hidden);if(el)el.value=value;
+ calculateMidpoint();saveCalculatorState("tid");
 }
+function syncMidpointSelects(target){syncMidpointNative(target);}
 function setMidpointSelects(target,value){
- let p=String(value||"00:00").split(":");let h=Number(p[0])||0,m=Number(p[1])||0;
- fillTimeSelect(target==="from"?"midFromH":"midToH",23,h,"h",1);fillTimeSelect(target==="from"?"midFromM":"midToM",59,m,"m",5);
- syncMidpointSelects(target);
+ let id=target==="from"?"midFromPicker":"midToPicker",hidden=target==="from"?"midFrom":"midTo";
+ let p=String(value||"00:00").split(":");let h=Number(p[0])||0,m=Math.round((Number(p[1])||0)/5)*5;if(m===60){m=0;h=(h+1)%24;}
+ let normalized=pad2(h)+":"+pad2(m);
+ let picker=document.getElementById(id);if(picker)picker.value=normalized;
+ let el=document.getElementById(hidden);if(el)el.value=normalized;
+}
+function parseTimeValue(v){
+ let p=String(v??"").split(":");
+ if(p.length!==2)return null;
+ let h=Number(p[0]),m=Number(p[1]);
+ if(!Number.isFinite(h)||!Number.isFinite(m)||h<0||m<0||m>=60)return null;
+ return {h:Math.floor(h),m:Math.floor(m)};
 }
 function addTimeRow(){syncNewTimeFromSelects();let h=Number(timeNewSelection.h)||0,m=Number(timeNewSelection.m)||0;timeValues.push(h+":"+m);renderTimeRows();timeNewSelection={h:0,m:0};syncNewTimeButtons();saveCalculatorState("tid");}
 function clearAllTimeRows(){timeValues=[];renderTimeRows();saveCalculatorState("tid");}
