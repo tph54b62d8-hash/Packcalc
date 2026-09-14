@@ -565,7 +565,7 @@ body.etStartMode .footer{display:none!important}
 #etStartCard .etStartInfo{margin-top:11px!important;padding:8px 10px!important}
 @media(max-width:430px){#etStartCard .etRollHero{right:0!important;bottom:-7px!important;width:122px!important;height:122px!important}#etStartCard .etRollHero img{width:122px!important;height:122px!important}#etStartCard .etBatchWrap{min-height:48px!important;height:48px!important}#etStartCard .etBatchWrap input{height:46px!important}#etStartCard .etScanMini{height:46px!important;min-height:46px!important;width:52px!important;min-width:52px!important}#etStartCard .etStartPair input{height:46px!important}#etStartCard .etStartDivider{height:55px!important}}
 </style>
-<style>.kolliNumberStatus{font-size:11px;margin-top:4px}.kolliNumberStatus.ok{color:#17764a}.kolliNumberStatus.warning{color:#8a5a00}.kolliNumberStatus.invalid{color:#b21f32}.kolliNumberStatus.hidden{display:none}</style></head>
+<style>.kolliNumberStatus{display:block;font-size:11px;margin-top:4px;line-height:14px;height:14px;min-height:14px;overflow:visible;white-space:nowrap;background:none!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important}.kolliNumberStatus.ok{color:#17764a}.kolliNumberStatus.warning{color:#8a5a00}.kolliNumberStatus.invalid{color:#b21f32}.kolliNumberStatus.hidden{visibility:hidden}</style></head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
 <main>
@@ -1464,7 +1464,6 @@ per=Number(document.getElementById("per").value),
 parsed=tolkaKollinummer(nummer);
 if(!nummer){alert("Skriv kollinumret.");return;}
 if(!parsed.valid){alert("Kontrollera kollinummer\nKollinumret kunde inte tolkas.");return;}
-if(parsed.duplicates.length){alert("Kontrollera kollinummer – "+parsed.duplicates.join(", ")+" förekommer två gånger.");return;}
 if(antal<=0){alert("Antalet måste vara större än 0.");return;}
 if(per<=0){alert("Antal per kapsel/well måste vara större än 0.");return;}
 let kolli={nummer,produkt,original:antal,used:antal,per,physicalCount:parsed.count,diff:false,kassation:0,datum:new Date().toLocaleString("sv-SE")};
@@ -1486,7 +1485,7 @@ function tolkaKollinummer(input){
 }
 function fysiskKolliAntal(k){let n=Number(k&&k.physicalCount);if(Number.isSafeInteger(n)&&n>0)return n;let r=tolkaKollinummer(k&&k.nummer);return r.valid&&r.count>0?r.count:1;}
 function totalFysiskaKollin(list){return (list||data.kollin||[]).reduce((s,k)=>s+fysiskKolliAntal(k),0);}
-function visaKollinummerStatus(){let el=document.getElementById("kollinummer"),box=document.getElementById("kolliNumberStatus");if(!el||!box)return;let raw=el.value.trim();if(!raw){box.className="kolliNumberStatus hidden";box.textContent="";return;}let r=tolkaKollinummer(raw);if(!r.valid){box.className="kolliNumberStatus invalid";box.textContent="Kontrollera kollinummer – Kollinumret kunde inte tolkas.";}else if(r.duplicates.length){box.className="kolliNumberStatus warning";box.textContent="Kontrollera kollinummer – "+r.duplicates.join(", ")+" förekommer två gånger.";}else{box.className="kolliNumberStatus ok";box.textContent=r.count+" kolli";}}
+function visaKollinummerStatus(){let el=document.getElementById("kollinummer"),box=document.getElementById("kolliNumberStatus");if(!el||!box)return;let raw=el.value.trim();if(!raw){box.className="kolliNumberStatus hidden";box.textContent="";return;}let r=tolkaKollinummer(raw);if(!r.valid){box.className="kolliNumberStatus invalid";box.textContent="Kontrollera kollinummer – Kollinumret kunde inte tolkas.";}else if(r.duplicates.length){box.className="kolliNumberStatus warning";box.textContent="Kontrollera kollinummer – "+r.duplicates.join(", ")+" förekommer två gånger.";}else{box.className="kolliNumberStatus ok";box.textContent=r.count+" "+(r.count===1?"kolli":"kollin");}}
 function totalKolli(){return data.kollin.reduce((s,k)=>s+Number(k.used||0),0);}
 
 function taBort(){
@@ -1760,7 +1759,7 @@ tk=Number(a.kassation)||0;
 
 title.innerHTML='<span class="activeKolliDot" aria-hidden="true"></span><span>Aktivt kolli ('+String(a.nummer).replace(/</g,"&lt;").replace(/>/g,"&gt;")+')</span>';
 produkt.innerText=a.produkt;
-antal.innerText=fysiskKolliAntal(a)+" kolli · "+a.used+" st";
+antal.innerText=a.used+" st";
 kass.innerText=tk;
 
 if(a.diff){
