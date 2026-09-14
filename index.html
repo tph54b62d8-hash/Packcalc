@@ -933,7 +933,7 @@ function restoreProductionView(){
  }
  if(saved==="etikettering-active")localStorage.removeItem(ET_STATE_KEY);
  if(saved==="etikettering"){chooseProductionMode("etikettering");return;}
- if(saved==="kolli" || (!saved&&data.fpk) || (saved==="chooser"&&data.fpk)){chooseProductionMode("kolli");return;}
+ if(saved==="kolli"){chooseProductionMode("kolli");return;}
  if(saved==="registered"||saved==="registrations"){openProductionView(saved);return;}
  openProductionChooser();
 }
