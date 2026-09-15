@@ -356,7 +356,7 @@ body.dagbokComposerOpen{overflow:hidden}
 <style id="et_v19_tweaks">.etInnerCard{margin-top:18px!important;padding:10px 12px!important;background:#fafbfd!important;border-color:#edf0f4!important}.etInnerCard h3{font-size:13px!important;font-weight:750!important;color:#687386!important}.etInnerCard .etMuted{font-size:10px!important}.etNextValue{font-size:18px!important;font-weight:800!important;color:#687386!important}.etInnerCard input{margin-top:7px!important}.etInnerCard button.gray{font-size:12px!important;padding:7px!important;margin-top:6px!important}
 /* EK-prov — scoped production addition */
 .activeKolliHeaderActions{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-shrink:0}
-.ekFlag{width:auto!important;margin:0!important;padding:8px 10px!important;background:#eef6ff!important;color:#1459d9!important;border:1px solid #d8e7ff!important;border-radius:8px!important;font-size:13px!important;font-weight:900!important;line-height:1!important;min-height:34px;cursor:pointer;transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+.ekFlag{width:auto!important;margin:0!important;padding:5px 7px!important;min-height:28px!important;background:#eef6ff!important;color:#1459d9!important;border:1px solid #d8e7ff!important;border-radius:8px!important;font-size:13px!important;font-weight:900!important;line-height:1!important;min-height:34px;cursor:pointer;transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
 .ekFlag:active{transform:scale(.95);background:#e4f0ff!important}
 .ekFlag:focus-visible{outline:2px solid #1459d9;outline-offset:2px}
 .productionModal.ekModal{z-index:1010;background:#10182866;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
@@ -375,9 +375,10 @@ body.dagbokComposerOpen{overflow:hidden}
 .ekModalStatement strong{color:#1459d9}
 .ekModalButtons{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}
 .ekModalButtons button{margin-top:0!important}
-.ekToast{border-color:#d7e8ff!important;background:#fff!important;box-shadow:0 12px 32px #0b2a4a1c!important}
-.ekToast .kolliAddedToastIcon{background:#1459d9!important;box-shadow:0 0 0 5px #e5f0ff}
-.ekToast .kolliAddedToastTitle{color:#1459d9!important}
+.ekToast{background:#1459d9!important;box-shadow:0 7px 18px rgba(20,89,217,.16)!important}
+.ekToast .kolliAddedToastIcon{background:#fff!important;color:#1459d9!important;box-shadow:none}
+.ekToast .kolliAddedToastTitle{color:#fff!important}
+.ekToast .kolliAddedToastSub{color:#fff!important;opacity:.92}
 .registrationType.ek .registrationTypeIcon{background:#1459d9}
 .historyEkBadge{display:inline-block;background:#eef6ff;color:#1459d9;border-radius:999px;padding:6px 9px;font-weight:800}
 .historyKolliCard.ek{border:2px solid #cfe2ff;background:#f8fbff}
@@ -387,7 +388,7 @@ body.dagbokComposerOpen{overflow:hidden}
 @keyframes ekModalOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(8px) scale(.98)}}
 @keyframes ekBalanceFlash{0%{box-shadow:0 0 0 0 #1459d966}100%{box-shadow:0 0 0 9px #1459d900}}
 .ekBalanceFlash{animation:ekBalanceFlash .45s ease-out both}
-@media(max-width:430px){.activeKolliHeaderActions{gap:5px}.ekFlag{padding:8px 9px!important}.diffFlag{padding:7px 8px!important}.ekModal .productionModalCard{margin:24px auto}.ekModalFact{padding:10px 2px;font-size:12px}}
+@media(max-width:430px){.activeKolliHeaderActions{gap:5px}.ekFlag{padding:5px 7px!important;min-height:28px!important}.diffFlag{padding:7px 8px!important}.ekModal .productionModalCard{margin:24px auto}.ekModalFact{padding:10px 2px;font-size:12px}}
 @media(prefers-reduced-motion:reduce){.ekFlag,.ekModal .productionModalCard{animation:none!important;transition:none!important}.ekBalanceFlash{animation:none!important}}
 </style>
 
@@ -2366,8 +2367,10 @@ function ekActiveKolli(){
  return k||null;
 }
 function ekAmountForKolli(k){
+ let product=String(k&&k.produkt||"").trim().toLowerCase();
+ let isVial=product.includes("vial");
  let per=Math.max(0,Number(k&&k.per)||0);
- return {capsules:1,units:per};
+ return {capsules:isVial?0:1,units:isVial?1:per,isVial};
 }
 function visaEkProv(){
  if(!data.fpk){alert("Starta en batch först.");return;}
@@ -2379,8 +2382,9 @@ function visaEkProv(){
   alert("Antal per kapsel/well måste vara större än 0 för att registrera ett EK-prov.");
   return;
  }
- facts.innerHTML='<div class="ekModalFact"><span>Produkt</span><strong>'+String(k.produkt||"-").replace(/</g,"&lt;").replace(/>/g,"&gt;")+'</strong></div><div class="ekModalFact"><span>Antal per kapsel</span><strong>'+calc.units.toLocaleString("sv-SE")+'</strong></div><div class="ekModalFact"><span>Aktuellt i kollit</span><strong>'+Number(k.used||0).toLocaleString("sv-SE")+' st</strong></div>';
- statement.innerHTML='Detta drar <strong>1 kapsel ('+calc.units.toLocaleString("sv-SE")+' enheter)</strong> från produktionen.';
+ facts.innerHTML='<div class="ekModalFact"><span>Produkt</span><strong>'+String(k.produkt||"-").replace(/</g,"&lt;").replace(/>/g,"&gt;")+'</strong></div><div class="ekModalFact"><span>Antal per '+(calc.isVial?'enhet':'kapsel')+'</span><strong>'+calc.units.toLocaleString("sv-SE")+'</strong></div><div class="ekModalFact"><span>Aktuellt i kollit</span><strong>'+Number(k.used||0).toLocaleString("sv-SE")+' st</strong></div>';
+ let ekUnitLabel=calc.isVial?'enhet':'kapsel';
+ statement.innerHTML='Detta drar <strong>1 '+ekUnitLabel+' ('+calc.units.toLocaleString("sv-SE")+' enhet'+(calc.units===1?'':'er')+')</strong> från produktionen.';
  btn.disabled=false;
  btn.style.opacity="1";
  modal.classList.remove("hidden","closing");modal.setAttribute("aria-hidden","false");
@@ -2406,15 +2410,15 @@ function godkannEkProv(){
  k.used=after;
  k.ekCount=Math.max(0,Number(k.ekCount)||0)+1;
  k.ekUnits=Math.max(0,Number(k.ekUnits)||0)+calc.units;
- addHistory("EK",k.nummer,k.produkt,"-"+calc.units,"EK-prov",totalKolli(),k.per>0?totalKolli()%k.per:0,"EK-prov · 1 kapsel", "EK-prov", String(before), String(after));
+ addHistory("EK",k.nummer,k.produkt,"-"+calc.units,"EK-prov",totalKolli(),k.per>0?totalKolli()%k.per:0,"EK-prov · 1 "+(calc.isVial?"enhet":"kapsel"), "EK-prov", String(before), String(after));
  let ev=data.historik[data.historik.length-1];
- if(ev){ev.ekCount=1;ev.ekUnits=calc.units;ev.ekCapsules=1;ev.ekBefore=before;ev.ekAfter=after;ev.datum=now;}
+ if(ev){ev.ekCount=1;ev.ekUnits=calc.units;ev.ekCapsules=calc.isVial?0:1;ev.ekVials=calc.isVial?1:0;ev.ekBefore=before;ev.ekAfter=after;ev.datum=now;}
  saveData();
  stangEkPanel();
  renderAll();
  let activeAntal=document.getElementById("activeAntal");
  if(activeAntal){activeAntal.classList.remove("ekBalanceFlash");void activeAntal.offsetWidth;activeAntal.classList.add("ekBalanceFlash");}
- showProductionToast("EK-prov registrerat","1 kapsel · "+calc.units.toLocaleString("sv-SE")+" enheter har dragits","ekToast");
+ showProductionToast("EK-prov registrerat","1 "+(calc.isVial?"enhet":"kapsel")+" · "+calc.units.toLocaleString("sv-SE")+" enhet"+(calc.units===1?"":"er")+" har dragits","ekToast");
 }
 
 function taBort(){
