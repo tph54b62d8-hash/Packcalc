@@ -980,6 +980,40 @@ body.etStartMode .footer{display:none!important}
   text-align:center!important;
 }
 </style>
+
+<style>
+/* V1.9.30 — Tid: vertikal centrering av iOS time-värdet */
+#calcTid input[type="time"].midpointTimeNative,
+#calcTid input[type="time"].durationTimeNative{
+  height:48px!important;
+  padding:0!important;
+  line-height:normal!important;
+  text-align:center!important;
+  text-align-last:center!important;
+}
+#calcTid input[type="time"].midpointTimeNative::-webkit-date-and-time-value,
+#calcTid input[type="time"].durationTimeNative::-webkit-date-and-time-value{
+  height:100%!important;
+  min-height:100%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  line-height:normal!important;
+  margin:0!important;
+  padding:0!important;
+}
+#calcTid input[type="time"].midpointTimeNative::-webkit-datetime-edit,
+#calcTid input[type="time"].durationTimeNative::-webkit-datetime-edit{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  height:100%!important;
+  line-height:normal!important;
+  padding:0!important;
+  margin:0!important;
+}
+</style>
 </head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
