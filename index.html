@@ -1341,7 +1341,7 @@ localStorage.setItem(PAGE_STATE_KEY,page);
 pages.forEach(p=>document.getElementById(p).classList.add("hidden"));
 document.getElementById(page).classList.remove("hidden");
 document.querySelectorAll("nav button").forEach(btn=>btn.classList.remove("active"));
-document.getElementById("navHome").classList.add("active");
+if(page==="home")document.getElementById("navHome").classList.add("active");
 if(page==="pack"){document.getElementById("navPack").classList.add("active");if(fromNav)openProductionChooser();else restoreProductionView();}
 if(page==="packalkylator"){document.getElementById("navCalc").classList.add("active");restoreCalculatorState();}
 if(page==="dagbok")document.getElementById("navDagbok").classList.add("active");
