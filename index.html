@@ -876,6 +876,71 @@ body.etStartMode .footer{display:none!important}
   #calcTid .timeCard,#calcTid .midpointCard{min-height:0!important;height:auto!important;box-sizing:border-box!important}
 }
 </style>
+
+<style>
+/* V1.9.28 — Tid: mer balanserade tidsfält på mobil */
+@media (max-width:600px){
+  /* Ny tidsperiod: kortare fält, centrerat tillsammans med plusknappen */
+  #calcTid .timeAddRow{
+    grid-template-columns: minmax(0,250px) 48px!important;
+    width:100%!important;
+    justify-content:center!important;
+    gap:8px!important;
+  }
+  #calcTid .timeAddRow input[type="time"]{
+    width:250px!important;
+    max-width:250px!important;
+    margin:0 auto!important;
+    text-align:center!important;
+    text-align-last:center!important;
+  }
+
+  /* Tidsperiod-raden: själva tidsrutan ska vara mindre och visuellt centrerad */
+  #calcTid .timeRowNew{
+    grid-template-columns:22px minmax(0,230px) 34px!important;
+    width:100%!important;
+    justify-content:center!important;
+    gap:7px!important;
+  }
+  #calcTid .timeRowControls{
+    display:flex!important;
+    justify-content:center!important;
+    min-width:0!important;
+  }
+  #calcTid .timeRowControls .durationTimeNative{
+    width:230px!important;
+    max-width:230px!important;
+    margin:0 auto!important;
+    text-align:center!important;
+    text-align-last:center!important;
+  }
+
+  /* Från/Till: två mindre, lika stora fält med luft mellan */
+  #calcTid .midpointInputs{
+    grid-template-columns: minmax(0,145px) minmax(0,145px)!important;
+    justify-content:center!important;
+    gap:12px!important;
+  }
+  #calcTid .midpointField{
+    width:145px!important;
+    max-width:145px!important;
+    overflow:visible!important;
+  }
+  #calcTid .midpointTimeNative{
+    width:145px!important;
+    max-width:145px!important;
+    margin:0 auto!important;
+    text-align:center!important;
+    text-align-last:center!important;
+  }
+
+  /* Säkerställ centrerad text i alla tidsfält även i WebKit/iOS */
+  #calcTid input[type="time"]{
+    font-variant-numeric:tabular-nums!important;
+    -webkit-text-align-last:center!important;
+  }
+}
+</style>
 </head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
