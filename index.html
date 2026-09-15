@@ -1638,111 +1638,12 @@ requestAnimationFrame(function(){
 });
 }
 function saveCalculatorState(view){
- const CALC_MAIN_STATE_KEY="packvex_main_calculator_state";
-let kolliCalcRows=[{count:0,units:0}];
-let mainCalcDirections={unitCaps:"forward",capsWell:"forward",unitWell:"forward"};
-
-function markCalcZeros(root=document){
- root.querySelectorAll('#packalkylator input[type="number"]').forEach(el=>{
-  let v=String(el.value??"").trim();
-  el.classList.toggle("isZero",v===""||Number(v)===0);
- });
-}
-function saveMainCalcState(){
- localStorage.setItem(CALC_MAIN_STATE_KEY,JSON.stringify({rows:kolliCalcRows,directions:mainCalcDirections}));
-}
-function restoreMainCalcState(){
- try{
-  let raw=localStorage.getItem(CALC_MAIN_STATE_KEY);if(!raw)return;
-  let saved=JSON.parse(raw)||{};
-  if(Array.isArray(saved.rows)&&saved.rows.length)kolliCalcRows=saved.rows.map(r=>({count:Math.max(0,Number(r.count)||0),units:Math.max(0,Number(r.units)||0)}));
-  if(saved.directions)mainCalcDirections={...mainCalcDirections,...saved.directions};
- }catch(e){kolliCalcRows=[{count:0,units:0}];}
-}
-function setCalcDirection(group,direction){
- mainCalcDirections[group]=direction;saveMainCalcState();
- if(group==="unitCaps"){
-  document.getElementById("unitCapsForward")?.classList.toggle("hidden",direction!=="forward");document.getElementById("unitCapsReverse")?.classList.toggle("hidden",direction!=="reverse");
-  document.getElementById("unitToCapsBtn")?.classList.toggle("active",direction==="forward");document.getElementById("capsToUnitBtn")?.classList.toggle("active",direction==="reverse");
-  if(direction==="forward")raknaSprutor();else raknaUnitCapsReverse();
- }
- if(group==="capsWell"){
-  document.getElementById("capsWellForward")?.classList.toggle("hidden",direction!=="forward");document.getElementById("capsWellReverse")?.classList.toggle("hidden",direction!=="reverse");
-  document.getElementById("capsToWellBtn")?.classList.toggle("active",direction==="forward");document.getElementById("wellToCapsBtn")?.classList.toggle("active",direction==="reverse");
-  if(direction==="forward")raknaKapslar();else raknaCapsWellReverse();
- }
- if(group==="unitWell"){
-  document.getElementById("unitWellForward")?.classList.toggle("hidden",direction!=="forward");document.getElementById("unitWellReverse")?.classList.toggle("hidden",direction!=="reverse");
-  document.getElementById("unitToWellBtn")?.classList.toggle("active",direction==="forward");document.getElementById("wellToUnitBtn")?.classList.toggle("active",direction==="reverse");
-  if(direction==="forward")raknaUnitWell();else raknaUnitWellReverse();
- }
- markCalcZeros(document.getElementById("packalkylator")||document);
-}
-function applyCalcDirections(){Object.entries(mainCalcDirections).forEach(([g,d])=>setCalcDirection(g,d));}
-function backToHuvudraknare(){
- ["calcSprutor","calcKapslar","calcEnheterWell","calcKolliCalc","calcKörtKvar"].forEach(id=>document.getElementById(id)?.classList.add("hidden"));
- document.getElementById("calcHuvudraknare")?.classList.remove("hidden");
- saveCalculatorState("huvud");
- markCalcZeros(document.getElementById("calcHuvudraknare")||document);
- window.scrollTo(0,0);
-}
-function addKolliCalcRow(){if(kolliCalcRows.length>=12)return;kolliCalcRows.push({count:0,units:0});renderKolliCalcRows();saveMainCalcState();}
-function removeKolliCalcRow(i){if(kolliCalcRows.length===1){kolliCalcRows[0]={count:0,units:0};}else{kolliCalcRows.splice(i,1);}renderKolliCalcRows();saveMainCalcState();}
-function renderKolliCalcRows(){
- let wrap=document.getElementById("kolliCalcRows");if(!wrap)return;
- wrap.innerHTML=kolliCalcRows.map((r,i)=>'<div class="kolliCalcRow"><input class="calcMainInput" type="number" inputmode="numeric" pattern="[0-9]*" min="0" value="'+(Number(r.count)||0)+'" aria-label="Antal kollin '+(i+1)+'" oninput="updateKolliCalcRow('+i+',\'count\',this.value)"><input class="calcMainInput" type="number" inputmode="numeric" pattern="[0-9]*" min="0" value="'+(Number(r.units)||0)+'" aria-label="Enheter per kolli '+(i+1)+'" oninput="updateKolliCalcRow('+i+',\'units\',this.value)"><button class="kolliCalcRemove" type="button" onclick="removeKolliCalcRow('+i+')" aria-label="Ta bort kollityp">×</button></div>').join('');
- let total=kolliCalcRows.reduce((sum,r)=>sum+(Number(r.count)||0)*(Number(r.units)||0),0);
- let out=document.getElementById("kolliCalcTotal");if(out)out.innerText=total;
- markCalcZeros(wrap);
-}
-function updateKolliCalcRow(i,key,value){if(!kolliCalcRows[i])return;kolliCalcRows[i][key]=Math.max(0,Number(value)||0);let total=kolliCalcRows.reduce((sum,r)=>sum+(Number(r.count)||0)*(Number(r.units)||0),0);let out=document.getElementById("kolliCalcTotal");if(out)out.innerText=total;saveMainCalcState();markCalcZeros(document.getElementById("kolliCalcRows")||document);}
-function raknaUnitCapsReverse(){let a=Number(document.getElementById("unitCapsReverseCount")?.value)||0,p=Number(document.getElementById("unitCapsReversePer")?.value)||0;let out=document.getElementById("unitCapsReverseResult");if(out)out.innerText=a*p;markCalcZeros(document.getElementById("unitCapsReverse")||document);}
-function raknaCapsWellReverse(){let a=Number(document.getElementById("capsWellReverseCount")?.value)||0,p=Number(document.getElementById("capsWellReversePer")?.value)||0;let out=document.getElementById("capsWellReverseResult");if(out)out.innerText=a*p;markCalcZeros(document.getElementById("capsWellReverse")||document);}
-function raknaUnitWell(){let units=Number(document.getElementById("unitWellUnits")?.value)||0,perCap=Number(document.getElementById("unitWellPerCapsule")?.value)||0,perWell=Number(document.getElementById("unitWellPerWell")?.value)||0,full=0,rem=0;if(perCap>0&&perWell>0){let wells=Math.floor(units/(perCap*perWell));let remUnits=units%(perCap*perWell);full=wells;rem=remUnits;}let f=document.getElementById("unitWellFull"),r=document.getElementById("unitWellRemainder");if(f)f.innerText=full;if(r)r.innerText=rem;markCalcZeros(document.getElementById("unitWellForward")||document);}
-function raknaUnitWellReverse(){let wells=Number(document.getElementById("unitWellReverseWells")?.value)||0,perWell=Number(document.getElementById("unitWellReversePerWell")?.value)||0,perCap=Number(document.getElementById("unitWellReversePerCapsule")?.value)||0;let out=document.getElementById("unitWellReverseResult");if(out)out.innerText=wells*perWell*perCap;markCalcZeros(document.getElementById("unitWellReverse")||document);}
-function raknaKörtKvar(){let total=Math.max(0,Number(document.getElementById("kvarTotalInput")?.value)||0),kört=Math.max(0,Number(document.getElementById("kvarKörtInput")?.value)||0);kört=Math.min(kört,total);let kvar=Math.max(0,total-kört),pct=total>0?Math.round(kört/total*100):0;document.getElementById("kvarResult")&&(document.getElementById("kvarResult").innerText=kvar);document.getElementById("körtResult")&&(document.getElementById("körtResult").innerText=kört);document.getElementById("kvarPercent")&&(document.getElementById("kvarPercent").innerText=pct+"%");document.getElementById("kvarProgressFill")&&(document.getElementById("kvarProgressFill").style.width=pct+"%");markCalcZeros(document.getElementById("calcKörtKvar")||document);}
-
-
+ let ids=["sprutorAntal","sprutorPer","kapslarAntal","kapslarPer","pallCalcAntal","pallCalcPer","etikettMottagna","etikettTillOrder","etikettTillRapportering","etikettKassation","etikettAterlamnade","etikettForsta","etikettSista","etikettStart","etikettProducerade","etikettVerklig","midFrom","midTo","midFromPicker","midToPicker","unitCapsReverseCount","unitCapsReversePer","capsWellReverseCount","capsWellReversePer","unitWellUnits","unitWellPerCapsule","unitWellPerWell","unitWellReverseWells","unitWellReversePerWell","unitWellReversePerCapsule","kvarTotalInput","kvarKörtInput"];
  let values={};
  ids.forEach(id=>{let el=document.getElementById(id);if(el)values[id]=el.value;});
  let time=Array.isArray(timeValues)?timeValues.slice():[];
  localStorage.setItem(CALC_STATE_KEY,JSON.stringify({view:view||"choice",values:values,time:time,timeInitialized:view==="tid"?true:undefined,timeSchema:view==="tid"?TIME_STATE_SCHEMA:undefined,directions:mainCalcDirections}));
 }
-function restoreCalculatorState(){
- try{
-  let raw=localStorage.getItem(CALC_STATE_KEY);if(!raw)return;
-  let saved=JSON.parse(raw);if(!saved||!saved.view||saved.view==="choice")return;if(saved.directions)mainCalcDirections={...mainCalcDirections,...saved.directions};
-  if(saved.view==="tid"&&saved.timeSchema!==TIME_STATE_SCHEMA){saved.time=[];saved.values=saved.values||{};saved.values.midFrom="00:00";saved.values.midTo="00:00";saved.values.midFromPicker="00:00";saved.values.midToPicker="00:00";saved.timeInitialized=true;saved.timeSchema=TIME_STATE_SCHEMA;localStorage.setItem(CALC_STATE_KEY,JSON.stringify(saved));}
-  let ids=Object.keys(saved.values||{});
-  ids.forEach(id=>{let el=document.getElementById(id);if(el&&typeof saved.values[id]==="string")el.value=saved.values[id];});
-  if(Array.isArray(saved.time))timeValues=saved.time.slice();
-  if(saved.view==="tid"){timeNewSelection={h:0,m:0};initTimeSelects();setMidpointSelects("from",saved.values&&saved.values.midFrom?saved.values.midFrom:"00:00");setMidpointSelects("to",saved.values&&saved.values.midTo?saved.values.midTo:"00:00");calculateMidpoint();}
-  if(["huvud","sprutor","kapslar","enheterKapslar","kapslarWell","enheterWell","kolliCalc","körtKvar","pallcalc","etiketter","etiketterMain","tillagg","tid"].includes(saved.view)){
-   if(saved.view==="huvud")openCalculator("huvud",true);
-   else if(saved.view==="sprutor"||saved.view==="enheterKapslar")openCalculator("enheterKapslar",true);
-   else if(saved.view==="kapslar"||saved.view==="kapslarWell")openCalculator("kapslarWell",true);
-   else if(saved.view==="enheterWell")openCalculator("enheterWell",true);
-   else if(saved.view==="kolliCalc")openCalculator("kolliCalc",true);
-   else if(saved.view==="körtKvar")openCalculator("körtKvar",true);
-   else if(saved.view==="pallcalc")openCalculator("pallcalc",true);
-   else if(saved.view==="etiketter")openCalculator("etiketter",true);
-   else if(saved.view==="etiketterMain")openEtikettCalculator("etiketter",true);
-   else if(saved.view==="tillagg")openEtikettCalculator("tillagg",true);
-   else if(saved.view==="tid")openCalculator("tid",true);
-  }
- }catch(e){localStorage.removeItem(CALC_STATE_KEY);}
-}
-function animateCalculatorTarget(id){
- let el=document.getElementById(id);if(!el)return;
- el.classList.remove("calcViewEnter","calcViewLeave");void el.offsetWidth;el.classList.add("calcViewEnter");
- setTimeout(()=>el.classList.remove("calcViewEnter"),500);
-}
-function animateCalculatorChoice(){
- let el=document.getElementById("calculatorChoice");if(!el)return;
- el.classList.remove("calculatorChoiceLeaving");void el.offsetWidth;el.classList.add("calculatorChoiceLeaving");
- setTimeout(()=>el.classList.remove("calculatorChoiceLeaving"),340);
-}
-
 const CALC_MAIN_STATE_KEY="packvex_main_calculator_state";
 let kolliCalcRows=[{count:0,units:0}];
 let mainCalcDirections={unitCaps:"forward",capsWell:"forward",unitWell:"forward"};
@@ -1783,6 +1684,42 @@ function setCalcDirection(group,direction){
  }
  markCalcZeros(document.getElementById("packalkylator")||document);
 }
+function applyCalcDirections(){Object.entries(mainCalcDirections).forEach(([g,d])=>setCalcDirection(g,d));}
+function restoreCalculatorState(){
+ try{
+  let raw=localStorage.getItem(CALC_STATE_KEY);if(!raw)return;
+  let saved=JSON.parse(raw);if(!saved||!saved.view||saved.view==="choice")return;if(saved.directions)mainCalcDirections={...mainCalcDirections,...saved.directions};
+  if(saved.view==="tid"&&saved.timeSchema!==TIME_STATE_SCHEMA){saved.time=[];saved.values=saved.values||{};saved.values.midFrom="00:00";saved.values.midTo="00:00";saved.values.midFromPicker="00:00";saved.values.midToPicker="00:00";saved.timeInitialized=true;saved.timeSchema=TIME_STATE_SCHEMA;localStorage.setItem(CALC_STATE_KEY,JSON.stringify(saved));}
+  let ids=Object.keys(saved.values||{});
+  ids.forEach(id=>{let el=document.getElementById(id);if(el&&typeof saved.values[id]==="string")el.value=saved.values[id];});
+  if(Array.isArray(saved.time))timeValues=saved.time.slice();
+  if(saved.view==="tid"){timeNewSelection={h:0,m:0};initTimeSelects();setMidpointSelects("from",saved.values&&saved.values.midFrom?saved.values.midFrom:"00:00");setMidpointSelects("to",saved.values&&saved.values.midTo?saved.values.midTo:"00:00");calculateMidpoint();}
+  if(["huvud","sprutor","kapslar","enheterKapslar","kapslarWell","enheterWell","kolliCalc","körtKvar","pallcalc","etiketter","etiketterMain","tillagg","tid"].includes(saved.view)){
+   if(saved.view==="huvud")openCalculator("huvud",true);
+   else if(saved.view==="sprutor"||saved.view==="enheterKapslar")openCalculator("enheterKapslar",true);
+   else if(saved.view==="kapslar"||saved.view==="kapslarWell")openCalculator("kapslarWell",true);
+   else if(saved.view==="enheterWell")openCalculator("enheterWell",true);
+   else if(saved.view==="kolliCalc")openCalculator("kolliCalc",true);
+   else if(saved.view==="körtKvar")openCalculator("körtKvar",true);
+   else if(saved.view==="pallcalc")openCalculator("pallcalc",true);
+   else if(saved.view==="etiketter")openCalculator("etiketter",true);
+   else if(saved.view==="etiketterMain")openEtikettCalculator("etiketter",true);
+   else if(saved.view==="tillagg")openEtikettCalculator("tillagg",true);
+   else if(saved.view==="tid")openCalculator("tid",true);
+  }
+ }catch(e){localStorage.removeItem(CALC_STATE_KEY);}
+}
+function animateCalculatorTarget(id){
+ let el=document.getElementById(id);if(!el)return;
+ el.classList.remove("calcViewEnter","calcViewLeave");void el.offsetWidth;el.classList.add("calcViewEnter");
+ setTimeout(()=>el.classList.remove("calcViewEnter"),500);
+}
+function animateCalculatorChoice(){
+ let el=document.getElementById("calculatorChoice");if(!el)return;
+ el.classList.remove("calculatorChoiceLeaving");void el.offsetWidth;el.classList.add("calculatorChoiceLeaving");
+ setTimeout(()=>el.classList.remove("calculatorChoiceLeaving"),340);
+}
+
 function applyCalcDirections(){Object.entries(mainCalcDirections).forEach(([g,d])=>setCalcDirection(g,d));}
 function backToHuvudraknare(){
  ["calcSprutor","calcKapslar","calcEnheterWell","calcKolliCalc","calcKörtKvar"].forEach(id=>document.getElementById(id)?.classList.add("hidden"));
@@ -3547,6 +3484,24 @@ let csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(";")).jo
 let blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8;"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="packvex-historik.csv";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
 }
 
+function installCalculatorZeroInputBehavior(){
+ const root=document.getElementById("packalkylator");
+ if(!root||root.dataset.zeroInputReady==="1")return;
+ root.dataset.zeroInputReady="1";
+ root.addEventListener("focusin",function(e){
+  const el=e.target;
+  if(el&&el.matches('input[type="number"], input[inputmode="numeric"]')&&String(el.value)==="0"){
+   try{el.select();}catch(err){try{el.setSelectionRange(0,String(el.value).length);}catch(err2){}}
+  }
+ });
+ root.addEventListener("input",function(e){
+  const el=e.target;
+  if(el&&el.matches('input[type="number"], input[inputmode="numeric"]')){
+   el.classList.toggle("isZero",String(el.value??"").trim()===""||Number(el.value)===0);
+  }
+ });
+}
+
 function installCalculatorStateListeners(){
  ["sprutorAntal","sprutorPer","unitCapsReverseCount","unitCapsReversePer","kapslarAntal","kapslarPer","capsWellReverseCount","capsWellReversePer","unitWellUnits","unitWellPerCapsule","unitWellPerWell","unitWellReverseWells","unitWellReversePerWell","unitWellReversePerCapsule","kvarTotalInput","kvarKörtInput","pallCalcAntal","pallCalcPer","etikettMottagna","etikettTillOrder","etikettTillRapportering","etikettKassation","etikettAterlamnade","etikettForsta","etikettSista","etikettStart","etikettProducerade","etikettVerklig"].forEach(id=>{
   let el=document.getElementById(id);if(!el)return;
@@ -3575,6 +3530,7 @@ else if(!document.getElementById("historyClearView").classList.contains("hidden"
 document.getElementById("navHome").classList.add("active");
 etInitStartInputs();
 restoreMainCalcState();
+installCalculatorZeroInputBehavior();
 installCalculatorStateListeners();
 ["produkt","kollinummer","antal","per"].forEach(id=>{let el=document.getElementById(id);if(!el)return;el.addEventListener("input",saveKolliInputState);el.addEventListener("change",saveKolliInputState);});
 restoreKolliInputState();
