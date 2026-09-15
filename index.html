@@ -825,29 +825,20 @@ body.etStartMode .footer{display:none!important}
 #calcTid .midpointField label{font-size:12px!important;margin-bottom:4px!important}
 #calcTid .midpointTimeNative{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
 
-/* V1.9.25 — Tid: jämn kortstorlek, renare ta-bort-knapp och stabila Från/Till-fält */
-#calcTid .timeCard,#calcTid .midpointCard{height:auto!important}
-#calcTid .timeRemoveBtn{width:28px!important;height:28px!important;min-width:28px!important;padding:0!important;border-radius:50%!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:0!important;line-height:0!important}
-#calcTid .timeRemoveBtn svg{width:15px!important;height:15px!important;fill:none!important;stroke:currentColor!important;stroke-width:2.4!important;stroke-linecap:round!important;stroke-linejoin:round!important}
-@media(max-width:380px){#calcTid .timeRemoveBtn{width:27px!important;height:27px!important;min-width:27px!important}#calcTid .timeRemoveBtn svg{width:14px!important;height:14px!important}}
-#calcTid .midpointResult{margin-top:9px!important;padding:10px!important;border-radius:13px!important;gap:8px!important}
-#calcTid .midpointResultIcon{width:38px!important;height:38px!important}
-#calcTid .midpointResultIcon svg{width:23px!important;height:23px!important}
-#calcTid .midpointResultLabel{font-size:12px!important}
-#calcTid .midpointResultTime{font-size:26px!important;margin-top:2px!important}
-#calcTid .midpointExplanation{padding:7px 9px!important;margin-top:6px!important;border-radius:10px!important;font-size:10.5px!important}
-
-@media(max-width:380px){
-  #calcTid .timeHeroTop{gap:8px!important}
-  #calcTid .timeHeroCopy h2{font-size:31px!important}
-  #calcTid .timeHeroKicker{font-size:8px!important;letter-spacing:.7px!important}
-  #calcTid .timeCard,#calcTid .midpointCard{padding:11px!important}
-  #calcTid .timeCardHead h3,#calcTid .midpointHead h3{font-size:18px!important}
-  #calcTid .timeCardHead p,#calcTid .midpointHead p{font-size:10px!important}
-  #calcTid .timeWheelSelect,#calcTid .midpointTimeNative,#calcTid .durationTimeNative{font-size:15px!important}
-  #calcTid .timeTotalValue{font-size:21px!important}
-}
-
+/* V1.9.26 — Tid: stabil mobil-layout */
+#calcTid .timeCard,#calcTid .midpointCard{box-sizing:border-box;overflow:hidden}
+#calcTid .timeAddRow{grid-template-columns:minmax(0,1fr) 48px!important;gap:8px!important;width:100%!important}
+#calcTid .timeAddRow>div{min-width:0!important}
+#calcTid .timeAddRow .midpointTimeNative,#calcTid .timeAddRow .durationTimeNative{width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
+#calcTid .timeAddBtn{position:relative!important;z-index:1!important;align-self:end!important;flex:0 0 48px!important}
+#calcTid .timeRowNew{grid-template-columns:22px minmax(0,1fr) 34px!important;gap:7px!important;box-sizing:border-box!important;width:100%!important}
+#calcTid .timeRowNew>div{min-width:0!important}
+#calcTid .timeRemoveBtn{width:30px!important;height:30px!important;min-width:30px!important;max-width:30px!important;padding:0!important;margin:0!important;border:0!important;border-radius:50%!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:0!important;line-height:0!important;box-sizing:border-box!important}
+#calcTid .timeRemoveBtn svg{width:14px!important;height:14px!important;fill:none!important;stroke:currentColor!important;stroke-width:2.5!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+#calcTid .midpointInputs{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important;width:100%!important;box-sizing:border-box!important}
+#calcTid .midpointField{min-width:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+#calcTid .midpointTimeNative{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
+#calcTid .timeCard,#calcTid .midpointCard{min-height:0!important}
 </style>
 </head>
 <body>
@@ -1631,7 +1622,7 @@ function renderTimeRows(){
  requestAnimationFrame(syncTimeCardHeights);
 }
 function calculateTime(){let t=0;timeValues.forEach(v=>{let p=parseTimeValue(v);if(p)t+=p.h*60+p.m;});let el=document.getElementById("timeTotal");if(el)el.innerText=Math.floor(t/60)+" h "+(t%60)+" min";let sub=document.getElementById("timeTotalSub");if(sub)sub.innerText=timeValues.length+" tidsperiod"+(timeValues.length===1?"":"er");}
-function syncTimeCardHeights(){let a=document.querySelector("#calcTid .timeCard"),b=document.querySelector("#calcTid .midpointCard");if(!a||!b)return;a.style.minHeight="";b.style.minHeight="";let h=Math.max(a.offsetHeight,b.offsetHeight);a.style.minHeight=h+"px";b.style.minHeight=h+"px";}
+function syncTimeCardHeights(){let root=document.getElementById("calcTid"),a=root&&root.querySelector(".timeCard"),b=root&&root.querySelector(".midpointCard");if(!a||!b||root.classList.contains("hidden"))return;a.style.height="";b.style.height="";requestAnimationFrame(function(){let h=Math.max(a.getBoundingClientRect().height,b.getBoundingClientRect().height);if(h>0){a.style.height=Math.ceil(h)+"px";b.style.height=Math.ceil(h)+"px";}});}
 function calculateMidpoint(){
  let from=document.getElementById("midFrom"),to=document.getElementById("midTo"),out=document.getElementById("midpointResult"),exp=document.getElementById("midpointExplanation");if(!from||!to||!out)return;
  let f=from.value.split(":"),t=to.value.split(":");if(f.length!==2||t.length!==2){out.innerText="—";return;}
@@ -3243,6 +3234,7 @@ restoreKolliInputState();
 renderAll();
 requestAnimationFrame(syncTimeCardHeights);
 window.addEventListener("resize",()=>requestAnimationFrame(syncTimeCardHeights));
+new MutationObserver(()=>requestAnimationFrame(syncTimeCardHeights)).observe(document.getElementById("calcTid"),{attributes:true,attributeFilter:["class"]});
 (function(){
 let savedPage=localStorage.getItem(PAGE_STATE_KEY);
 if(savedPage&&pages.includes(savedPage))showPage(savedPage);
