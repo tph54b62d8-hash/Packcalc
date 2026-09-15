@@ -840,6 +840,42 @@ body.etStartMode .footer{display:none!important}
 #calcTid .midpointTimeNative{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
 #calcTid .timeCard,#calcTid .midpointCard{min-height:0!important}
 </style>
+
+<style>
+/* V1.9.27 — Tid: fix native iPhone time-field overflow */
+#calcTid input[type="time"].midpointTimeNative,
+#calcTid input[type="time"].durationTimeNative{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  inline-size:100%!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  overflow:hidden!important;
+}
+#calcTid .timeAddRow{
+  grid-template-columns:minmax(0,1fr) 48px!important;
+  width:100%!important;
+  min-width:0!important;
+}
+#calcTid .timeAddRow>div{min-width:0!important;width:100%!important;overflow:hidden!important}
+#calcTid .timeWheelPair{display:block!important;width:100%!important;min-width:0!important}
+#calcTid .timeAddRow input[type="time"]{width:100%!important;min-width:0!important;max-width:100%!important}
+#calcTid .timeAddBtn{width:48px!important;min-width:48px!important;max-width:48px!important;position:relative!important;z-index:2!important}
+#calcTid .timeRowNew{grid-template-columns:22px minmax(0,1fr) 34px!important;width:100%!important;min-width:0!important}
+#calcTid .timeRowNew>div:nth-child(2){min-width:0!important;width:100%!important;overflow:hidden!important}
+#calcTid .timeRemoveBtn{width:30px!important;min-width:30px!important;max-width:30px!important;height:30px!important;min-height:30px!important}
+#calcTid .midpointInputs{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important;width:100%!important;min-width:0!important}
+#calcTid .midpointField{min-width:0!important;width:100%!important;max-width:100%!important;overflow:hidden!important}
+#calcTid .midpointTimeNative{width:100%!important;min-width:0!important;max-width:100%!important}
+/* Keep both calculator cards visually matched in the mobile view. */
+@media(max-width:600px){
+  #calcTid .timeCard,#calcTid .midpointCard{min-height:0!important;height:auto!important;box-sizing:border-box!important}
+}
+</style>
 </head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
