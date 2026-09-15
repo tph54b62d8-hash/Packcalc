@@ -940,6 +940,45 @@ body.etStartMode .footer{display:none!important}
     -webkit-text-align-last:center!important;
   }
 }
+
+/* V1.9.29 — Tid: centrera tidsvärdet exakt i alla tidsfält */
+#calcTid .midpointTimeNative,
+#calcTid .durationTimeNative,
+#calcTid input[type="time"]{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  text-align:center!important;
+  text-align-last:center!important;
+  padding:0!important;
+  line-height:1!important;
+  vertical-align:middle!important;
+}
+#calcTid .midpointTimeNative::-webkit-date-and-time-value{
+  text-align:center!important;
+  margin:0!important;
+  padding:0!important;
+}
+#calcTid .midpointTimeNative::-webkit-datetime-edit,
+#calcTid .midpointTimeNative::-webkit-datetime-edit-fields-wrapper,
+#calcTid .durationTimeNative::-webkit-datetime-edit,
+#calcTid .durationTimeNative::-webkit-datetime-edit-fields-wrapper{
+  text-align:center!important;
+  padding:0!important;
+  margin:0!important;
+}
+#calcTid .midpointTimeNative::-webkit-datetime-edit-hour-field,
+#calcTid .midpointTimeNative::-webkit-datetime-edit-minute-field,
+#calcTid .midpointTimeNative::-webkit-datetime-edit-ampm-field,
+#calcTid .durationTimeNative::-webkit-datetime-edit-hour-field,
+#calcTid .durationTimeNative::-webkit-datetime-edit-minute-field,
+#calcTid .durationTimeNative::-webkit-datetime-edit-ampm-field{
+  text-align:center!important;
+}
 </style>
 </head>
 <body>
