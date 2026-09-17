@@ -223,6 +223,135 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .historyClearItem:has(input:checked){border-color:#1459d9;background:#f4f8ff}
 @media(max-width:430px){.historyDetailHead h2{font-size:19px}.historyInfoRow{font-size:11px}}
 
+
+/* V1.9.46 — Packalkylator startsida: visuell redesign only */
+#calculatorChoice{
+  padding:0 0 8px;
+}
+#calculatorChoice .calculatorHero{
+  display:flex;align-items:center;gap:15px;margin:2px 4px 18px;padding:0;
+}
+#calculatorChoice .calculatorHeroIcon{
+  width:58px;height:58px;flex:0 0 58px;border-radius:18px;
+  background:linear-gradient(145deg,#eaf3ff,#dceaff);display:flex;align-items:center;justify-content:center;
+  color:#1459d9;box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+#calculatorChoice .calculatorHeroIcon svg{
+  width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+#calculatorChoice .calculatorHero h2{
+  margin:0 0 3px;font-size:30px;line-height:1.04;letter-spacing:-.8px;color:#10245a;font-weight:900;
+}
+#calculatorChoice .calculatorHero p{
+  margin:0;color:#68758d;font-size:15px;line-height:1.2;
+}
+#calculatorChoice .calcCategoryGrid{
+  display:grid;grid-template-columns:1fr 1fr;grid-template-areas:
+    "hero hero"
+    "time labels"
+    "pall pall";
+  gap:12px;margin:0;
+}
+#calculatorChoice .calcCategoryCard{
+  position:relative;overflow:hidden;isolation:isolate;width:100%;min-width:0;margin:0;padding:17px 17px 16px;
+  border:1px solid rgba(218,227,240,.9);border-radius:26px;text-align:left;color:#10245a;
+  box-shadow:0 10px 28px rgba(30,60,100,.08),inset 0 1px 0 rgba(255,255,255,.75);
+  cursor:pointer;display:flex;align-items:flex-start;gap:0;transition:transform .18s ease,box-shadow .18s ease;
+}
+#calculatorChoice .calcCategoryCard:active{transform:scale(.992);box-shadow:0 6px 18px rgba(30,60,100,.07)}
+#calculatorChoice .calcCategoryCard::before{
+  content:"";position:absolute;z-index:-1;width:260px;height:260px;border-radius:50%;right:-105px;top:-100px;
+  background:rgba(255,255,255,.28);filter:blur(1px);pointer-events:none;
+}
+#calculatorChoice .calcCategoryCard::after{
+  content:"";position:absolute;z-index:0;right:-28px;bottom:-86px;width:245px;height:150px;border-radius:50%;
+  background:rgba(255,255,255,.18);transform:rotate(-18deg);pointer-events:none;
+}
+#calculatorChoice .calcCategoryHeroCard{grid-area:hero;min-height:248px;background:linear-gradient(135deg,#f5faff 0%,#dcecff 52%,#59aaf7 100%)}
+#calculatorChoice .calcCategoryCard:nth-child(2){grid-area:time;min-height:190px;background:linear-gradient(135deg,#f8fbff 0%,#e5e9ff 100%)}
+#calculatorChoice .calcCategoryCard:nth-child(3){grid-area:labels;min-height:190px;background:linear-gradient(135deg,#f5fffb 0%,#d8f7ee 100%)}
+#calculatorChoice .calcCategoryCard:nth-child(4){grid-area:pall;min-height:184px;background:linear-gradient(135deg,#fffaf1 0%,#f7e4c6 100%)}
+#calculatorChoice .calcCategoryCard > div:not(.calcCategoryIcon):not(.calcChevron):not(.calcIllustration){position:relative;z-index:3;max-width:58%;}
+#calculatorChoice .calcCategoryHeroCard > div:not(.calcCategoryIcon):not(.calcChevron):not(.calcIllustration){max-width:47%;padding-top:26px}
+#calculatorChoice .calcCategoryIcon{
+  position:relative;z-index:4;width:54px;height:54px;flex:0 0 54px;margin:0;border-radius:17px;
+  background:rgba(255,255,255,.42);display:grid;place-items:center;color:#1459d9;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+}
+#calculatorChoice .calcCategoryIcon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#calculatorChoice .calcCategoryHeroCard .calcCategoryIcon{position:absolute;left:18px;top:18px;width:58px;height:58px;border-radius:18px}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCategoryIcon{color:#1459d9;background:rgba(232,238,255,.66)}
+#calculatorChoice .calcCategoryCard:nth-child(3) .calcCategoryIcon{color:#129c75;background:rgba(213,249,237,.72)}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCategoryIcon{color:#ed8b09;background:rgba(255,239,210,.78)}
+#calculatorChoice .calcCategoryCard strong{
+  display:block;margin:0 0 5px;font-size:25px;line-height:1.02;letter-spacing:-.7px;color:#10245a;font-weight:900;
+}
+#calculatorChoice .calcCategoryCard span{
+  display:block;margin:0;color:#64728b;font-size:15px;line-height:1.28;max-width:250px;
+}
+#calculatorChoice .calcCategoryHeroCard strong{font-size:30px}
+#calculatorChoice .calcCategoryHeroCard span{font-size:17px;line-height:1.3}
+#calculatorChoice .calcChevron{
+  position:absolute;z-index:5;right:22px;top:50%;transform:translateY(-50%);width:58px;height:58px;
+  margin:0;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:46px;font-weight:300;line-height:1;color:#1769e8;background:rgba(255,255,255,.82);
+  box-shadow:0 6px 18px rgba(32,72,130,.10),inset 0 1px 0 rgba(255,255,255,.9);
+}
+#calculatorChoice .calcCategoryHeroCard .calcChevron{right:34px;width:62px;height:62px;font-size:49px}
+#calculatorChoice .calcCategoryCard:nth-child(3) .calcChevron{color:#159a73}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcChevron{color:#ec8b0a}
+#calculatorChoice .calcIllustration{position:absolute;z-index:2;pointer-events:none;display:block}
+#calculatorChoice .calcIllustration svg{display:block;width:100%;height:100%;overflow:visible}
+#calculatorChoice .heroBoxesIllustration{right:112px;bottom:7px;width:285px;height:170px;color:#2c78dc}
+#calculatorChoice .clockIllustration{right:45px;bottom:15px;width:132px;height:132px;color:#4679dc;opacity:.95}
+#calculatorChoice .labelsIllustration{right:17px;bottom:4px;width:154px;height:136px;color:#16a982;opacity:.96}
+#calculatorChoice .palletIllustration{right:104px;bottom:5px;width:260px;height:150px;color:#c88738}
+#calculatorChoice .techLabel{position:absolute;z-index:4;right:27px;top:28px;color:rgba(255,255,255,.92);font-size:10px;line-height:1.5;letter-spacing:3px;text-align:left;font-weight:700}
+#calculatorChoice .cardIndex{position:absolute;z-index:4;left:18px;bottom:17px;color:rgba(44,91,164,.62);font-size:13px;letter-spacing:1.5px;font-weight:500}
+#calculatorChoice .calcCategoryHeroCard .cardIndex{left:18px;bottom:18px;color:rgba(36,102,191,.6);font-size:15px}
+#calculatorChoice .cardMicroLabel{position:absolute;z-index:4;right:18px;bottom:18px;color:rgba(72,102,148,.58);font-size:10px;line-height:1.45;letter-spacing:2.3px;text-transform:uppercase;text-align:right;font-weight:700}
+#calculatorChoice .calcCategoryCard:nth-child(3) .cardMicroLabel{color:rgba(18,132,101,.58)}
+#calculatorChoice .calcCategoryCard:nth-child(4) .cardMicroLabel{color:rgba(157,104,37,.62)}
+@media(max-width:700px){
+  #calculatorChoice .calcCategoryGrid{gap:10px}
+  #calculatorChoice .calcCategoryHeroCard{min-height:218px;padding:15px}
+  #calculatorChoice .calcCategoryHeroCard > div:not(.calcCategoryIcon):not(.calcChevron):not(.calcIllustration){max-width:48%;padding-top:63px}
+  #calculatorChoice .calcCategoryHeroCard strong{font-size:26px}
+  #calculatorChoice .calcCategoryHeroCard span{font-size:14px}
+  #calculatorChoice .heroBoxesIllustration{right:56px;bottom:7px;width:230px;height:145px}
+  #calculatorChoice .calcCategoryHeroCard .calcChevron{right:14px;width:48px;height:48px;font-size:38px}
+  #calculatorChoice .techLabel{right:16px;top:17px;font-size:8px;letter-spacing:2px}
+  #calculatorChoice .calcCategoryCard:nth-child(2),#calculatorChoice .calcCategoryCard:nth-child(3){min-height:174px;padding:14px}
+  #calculatorChoice .calcCategoryCard:nth-child(4){min-height:170px;padding:14px}
+  #calculatorChoice .calcCategoryCard > div:not(.calcCategoryIcon):not(.calcChevron):not(.calcIllustration){max-width:67%}
+  #calculatorChoice .calcCategoryCard strong{font-size:20px}
+  #calculatorChoice .calcCategoryCard span{font-size:12px;max-width:150px}
+  #calculatorChoice .calcCategoryIcon{width:46px;height:46px;flex-basis:46px;border-radius:14px}
+  #calculatorChoice .calcCategoryIcon svg{width:26px;height:26px}
+  #calculatorChoice .clockIllustration{right:8px;bottom:8px;width:108px;height:108px}
+  #calculatorChoice .labelsIllustration{right:2px;bottom:2px;width:126px;height:112px}
+  #calculatorChoice .palletIllustration{right:53px;bottom:0;width:220px;height:128px}
+  #calculatorChoice .calcChevron{right:10px;width:44px;height:44px;font-size:35px}
+  #calculatorChoice .cardIndex{left:13px;bottom:12px;font-size:11px}
+  #calculatorChoice .cardMicroLabel{right:12px;bottom:12px;font-size:8px;letter-spacing:1.6px}
+}
+@media(max-width:380px){
+  #calculatorChoice .calculatorHero{margin-bottom:14px}
+  #calculatorChoice .calculatorHeroIcon{width:52px;height:52px;flex-basis:52px}
+  #calculatorChoice .calculatorHero h2{font-size:27px}
+  #calculatorChoice .calculatorHero p{font-size:14px}
+  #calculatorChoice .calcCategoryHeroCard{min-height:205px}
+  #calculatorChoice .calcCategoryHeroCard strong{font-size:24px}
+  #calculatorChoice .heroBoxesIllustration{right:42px;width:210px;height:132px}
+  #calculatorChoice .calcCategoryCard:nth-child(2),#calculatorChoice .calcCategoryCard:nth-child(3){min-height:164px}
+  #calculatorChoice .calcCategoryCard:nth-child(4){min-height:158px}
+  #calculatorChoice .clockIllustration{width:98px;height:98px}
+  #calculatorChoice .labelsIllustration{width:114px;height:102px}
+  #calculatorChoice .palletIllustration{right:43px;width:202px;height:118px}
+}
+@media(prefers-reduced-motion:reduce){#calculatorChoice .calcCategoryCard{transition:none}}
+
 /* V1.6.3 TEST — Packalkylator start page only */
 #calculatorChoice .calculatorHero{
   display:flex;align-items:center;gap:14px;margin:0 0 14px;
@@ -1337,14 +1466,45 @@ body.etStartMode .footer{display:none!important}
 <section id="packalkylator" class="hidden">
 <div id="calculatorChoice">
 <div class="calculatorHero">
-  <div class="calculatorHeroIcon"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg></div>
+  <div class="calculatorHeroIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg></div>
   <div><h2>Packalkylator</h2><p>Välj vad du vill göra.</p></div>
 </div>
 <div class="calcCategoryGrid">
-  <button class="calcCategoryCard calcCategoryHeroCard" onclick="openCalculator('huvud')"><div class="calcCategoryIcon"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 4l9 6.5V20H3z"/><path d="M7 20v-5h10v5M9 12h6"/></svg></div><div><strong>Huvudräknare</strong><span>Kapslar, enheter, well och kolli.</span></div><div class="calcChevron">›</div></button>
-  <button class="calcCategoryCard" onclick="openCalculator('tid')"><div class="calcCategoryIcon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg></div><div><strong>Tid</strong><span>Lägg ihop tid och hitta mitten.</span></div><div class="calcChevron">›</div></button>
-  <button class="calcCategoryCard" onclick="openCalculator('etiketter')"><div class="calcCategoryIcon"><svg viewBox="0 0 24 24"><path d="m14 4 6 6-8.5 8.5a2.1 2.1 0 0 1-3 0l-3-3a2.1 2.1 0 0 1 0-3z"/><circle cx="15.5" cy="8.5" r="1"/></svg></div><div><strong>Etiketter</strong><span>Etiketter och tilläggsetiketter.</span></div><div class="calcChevron">›</div></button>
-  <button class="calcCategoryCard" onclick="openCalculator('pallcalc')"><div class="calcCategoryIcon"><svg viewBox="0 0 24 24"><path d="M4 17h16M5 17v3M19 17v3M6 14h12l-1-7H7z"/><path d="M8 7V4h8v3M9 14v3M15 14v3"/></svg></div><div><strong>Pall</strong><span>Pallberäkning och well per pall.</span></div><div class="calcChevron">›</div></button>
+  <button class="calcCategoryCard calcCategoryHeroCard" onclick="openCalculator('huvud')">
+    <div class="calcCategoryIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5V20H3z"/><path d="M7 20v-5h10v5M9 12h6"/></svg></div>
+    <div><strong>Huvudräknare</strong><span>Kapslar, enheter, well och kolli.</span></div>
+    <div class="techLabel">COUNT<br>CALCULATE<br>PRODUCE</div>
+    <div class="cardIndex">01</div>
+    <div class="calcChevron" aria-hidden="true">›</div>
+    <div class="calcIllustration heroBoxesIllustration" aria-hidden="true">
+      <svg viewBox="0 0 300 180">
+        <path d="M48 139h195l25 13H73z" fill="currentColor" opacity=".16"/>
+        <path d="M67 132h184l20 11H87z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M76 143v11m168-11v11M92 148v8m135-8v8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <g transform="translate(150 38)"><path d="m0 13 42-17 42 17-42 19z" fill="#f8fbff" stroke="currentColor" stroke-width="2"/><path d="M0 13v42l42 21V32z" fill="#dbeafe" stroke="currentColor" stroke-width="2"/><path d="M84 13v42L42 76V32z" fill="#b8d6fb" stroke="currentColor" stroke-width="2"/><path d="M39 34h6v18h-6z" fill="#fff" opacity=".65"/></g>
+        <g transform="translate(79 79)"><path d="m0 12 39-16 39 16-39 18z" fill="#f8fbff" stroke="currentColor" stroke-width="2"/><path d="M0 12v36l39 20V30z" fill="#e4efff" stroke="currentColor" stroke-width="2"/><path d="M78 12v36L39 68V30z" fill="#c6dcf7" stroke="currentColor" stroke-width="2"/><path d="M35 31h8v16h-8z" fill="#fff" opacity=".6"/></g>
+        <g transform="translate(172 87)"><path d="m0 12 35-14 35 14-35 17z" fill="#f8fbff" stroke="currentColor" stroke-width="2"/><path d="M0 12v33l35 18V29z" fill="#e4efff" stroke="currentColor" stroke-width="2"/><path d="M70 12v33L35 63V29z" fill="#bfd8f8" stroke="currentColor" stroke-width="2"/></g>
+      </svg>
+    </div>
+  </button>
+  <button class="calcCategoryCard" onclick="openCalculator('tid')">
+    <div class="calcCategoryIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg></div>
+    <div><strong>Tid</strong><span>Lägg ihop tid och hitta mitten.</span></div>
+    <div class="cardIndex">02</div><div class="cardMicroLabel">TIME<br>CONTROL</div><div class="calcChevron" aria-hidden="true">›</div>
+    <div class="calcIllustration clockIllustration" aria-hidden="true"><svg viewBox="0 0 140 140"><circle cx="70" cy="75" r="45" fill="rgba(255,255,255,.45)" stroke="currentColor" stroke-width="3"/><circle cx="70" cy="75" r="39" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".5"/><path d="M70 75 70 45M70 75l20 12" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="70" cy="75" r="4" fill="currentColor"/><path d="M70 24v8M70 118v8M19 75h8M113 75h8" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".65"/><path d="M48 29 53 36M92 29 87 36" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg></div>
+  </button>
+  <button class="calcCategoryCard" onclick="openCalculator('etiketter')">
+    <div class="calcCategoryIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 4 6 6-8.5 8.5a2.1 2.1 0 0 1-3 0l-3-3a2.1 2.1 0 0 1 0-3z"/><circle cx="15.5" cy="8.5" r="1"/></svg></div>
+    <div><strong>Etiketter</strong><span>Etiketter och tilläggsetiketter.</span></div>
+    <div class="cardIndex">03</div><div class="cardMicroLabel">LABEL<br>MANAGE</div><div class="calcChevron" aria-hidden="true">›</div>
+    <div class="calcIllustration labelsIllustration" aria-hidden="true"><svg viewBox="0 0 170 145"><ellipse cx="74" cy="33" rx="45" ry="18" fill="#dff8ef" stroke="currentColor" stroke-width="2"/><path d="M29 33v22c0 10 20 18 45 18s45-8 45-18V33" fill="#bdeee0" stroke="currentColor" stroke-width="2"/><ellipse cx="74" cy="55" rx="45" ry="18" fill="#c9f3e5" stroke="currentColor" stroke-width="2"/><path d="M115 55c4 8 10 15 18 21l29 23c6 5 6 13 1 18-5 5-13 5-18 0l-30-29c-7-7-12-14-14-22" fill="#f7fffc" stroke="currentColor" stroke-width="2"/><path d="m123 71 29 25-13 13-29-28z" fill="#d5f4e9" stroke="currentColor" stroke-width="1.5"/><path d="M133 86h10M140 93h10M146 100h9" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".65"/></svg></div>
+  </button>
+  <button class="calcCategoryCard" onclick="openCalculator('pallcalc')">
+    <div class="calcCategoryIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17h16M5 17v3M19 17v3M6 14h12l-1-7H7z"/><path d="M8 7V4h8v3M9 14v3M15 14v3"/></svg></div>
+    <div><strong>Pall</strong><span>Pallberäkning och well per pall.</span></div>
+    <div class="cardIndex">04</div><div class="cardMicroLabel">OPTIMIZE<br>LOAD</div><div class="calcChevron" aria-hidden="true">›</div>
+    <div class="calcIllustration palletIllustration" aria-hidden="true"><svg viewBox="0 0 280 160"><path d="M32 119h202l22 12H55z" fill="#d9a967" opacity=".6"/><path d="M42 105h194v18H42z" fill="#c88d45" stroke="currentColor" stroke-width="2"/><path d="M54 123v17m170-17v17M80 123v17m118-17v17" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><g transform="translate(70 59)"><path d="m0 12 38-16 38 16-38 17z" fill="#fffaf1" stroke="currentColor" stroke-width="2"/><path d="M0 12v35l38 19V29z" fill="#efd1a8" stroke="currentColor" stroke-width="2"/><path d="M76 12v35L38 66V29z" fill="#ddb47b" stroke="currentColor" stroke-width="2"/></g><g transform="translate(136 55)"><path d="m0 11 36-15 36 15-36 16z" fill="#fffaf1" stroke="currentColor" stroke-width="2"/><path d="M0 11v34l36 18V27z" fill="#efd1a8" stroke="currentColor" stroke-width="2"/><path d="M72 11v34L36 63V27z" fill="#ddb47b" stroke="currentColor" stroke-width="2"/></g><g transform="translate(103 28)"><path d="m0 10 33-14 33 14-33 15z" fill="#fffaf1" stroke="currentColor" stroke-width="2"/><path d="M0 10v29l33 17V25z" fill="#f1d6ae" stroke="currentColor" stroke-width="2"/><path d="M66 10v29L33 56V25z" fill="#dfba83" stroke="currentColor" stroke-width="2"/></g></svg></div>
+  </button>
 </div>
 </div>
 <div id="calcHuvudraknare" class="hidden">
