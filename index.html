@@ -2055,6 +2055,59 @@ body.etStartMode .footer{display:none!important}
 #calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(2) .calcChevron,#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(3) .calcChevron{right:7.5%!important;top:44%!important;width:21.5%!important;height:auto!important;}
 #calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(4) .palletIllustration{right:10%!important;bottom:1%!important;width:27%!important;}
 </style>
+
+<style id="packvexCssAmbientBackgroundV1971">
+/* v1.9.71 — Referensnär CSS-bakgrund: minimalt prickmönster, mjuka diagonaler. */
+html{background:#f8fbff;}
+body{
+  position:relative;
+  isolation:isolate;
+  overflow-x:hidden;
+  background:
+    radial-gradient(620px 520px at -12% 4%,rgba(55,125,235,.055),transparent 66%),
+    radial-gradient(560px 500px at 112% 92%,rgba(55,135,235,.05),transparent 68%),
+    linear-gradient(180deg,#f8fbff 0%,#fff 50%,#f6faff 100%);
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:-10%;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    linear-gradient(135deg,transparent 0 23%,rgba(55,125,235,.055) 23.5% 28%,transparent 28.5% 44%,rgba(55,125,235,.042) 44.5% 47.2%,transparent 47.7%),
+    linear-gradient(135deg,transparent 51%,rgba(255,255,255,.9) 51.5% 55%,transparent 55.5% 67%,rgba(62,205,170,.055) 67.5% 69.2%,transparent 69.7%);
+  opacity:.82;
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 5% 3%,rgba(48,108,215,.14) 0 1.05px,transparent 1.45px) 0 0/9px 9px,
+    radial-gradient(circle at 96% 94%,rgba(48,108,215,.085) 0 .95px,transparent 1.35px) 0 0/10px 10px,
+    radial-gradient(300px 250px at -10% 94%,rgba(50,130,245,.08),transparent 73%),
+    radial-gradient(280px 240px at 110% 4%,rgba(72,210,175,.06),transparent 72%);
+  -webkit-mask-image:
+    radial-gradient(ellipse 17% 18% at 2% 3%,#000 0 46%,transparent 78%),
+    radial-gradient(ellipse 18% 19% at 98% 96%,#000 0 42%,transparent 78%);
+  -webkit-mask-composite:source-over;
+  mask-image:
+    radial-gradient(ellipse 17% 18% at 2% 3%,#000 0 46%,transparent 78%),
+    radial-gradient(ellipse 18% 19% at 98% 96%,#000 0 42%,transparent 78%);
+  mask-composite:add;
+  opacity:.62;
+}
+@media(max-width:600px){
+  body::before{opacity:.74;}
+  body::after{opacity:.5;}
+}
+@media(prefers-reduced-motion:reduce){
+  body::before,body::after{animation:none!important;transition:none!important;}
+}
+</style>
 </head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
