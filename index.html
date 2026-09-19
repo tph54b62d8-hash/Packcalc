@@ -1626,60 +1626,102 @@ body.etStartMode .footer{display:none!important}
 </style>
 
 <style id="packalkylatorV1952Layout">
-/* V1.9.55 — Packalkylator startsida. Mobilmått anpassade efter referensbilden. */
-#calculatorChoice{padding:0 0 8px;}
-#calculatorChoice .calculatorHero{display:flex;align-items:center;gap:14px;margin:0 4px 16px;padding:0;}
-#calculatorChoice .calculatorHeroIcon{width:58px;height:58px;flex:0 0 58px;border-radius:18px;background:linear-gradient(145deg,#eaf3ff,#dceaff);display:flex;align-items:center;justify-content:center;color:#1459d9;box-shadow:inset 0 1px 0 rgba(255,255,255,.9);}
-#calculatorChoice .calculatorHeroIcon svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-#calculatorChoice .calculatorHero h2{margin:0 0 3px;font-size:30px;line-height:1.04;letter-spacing:-.8px;color:#10245a;font-weight:900;}
-#calculatorChoice .calculatorHero p{margin:0;color:#68758d;font-size:15px;line-height:1.2;}
-#calculatorChoice .calcCategoryGrid{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"hero hero" "time labels" "pall pall";gap:9px;margin:0;}
-#calculatorChoice .calcCategoryCard{position:relative;overflow:hidden;isolation:isolate;width:100%;min-width:0;height:auto;margin:0;padding:0;border:1px solid rgba(218,227,240,.9);border-radius:22px;text-align:left;color:#10245a;box-shadow:0 8px 24px rgba(30,60,100,.07),inset 0 1px 0 rgba(255,255,255,.75);cursor:pointer;display:block;transition:transform .18s ease,box-shadow .18s ease;}
-#calculatorChoice .calcCategoryCard:active{transform:scale(.992);box-shadow:0 5px 15px rgba(30,60,100,.07);}
-#calculatorChoice .calcCategoryCard::before{content:"";position:absolute;z-index:0;width:260px;height:260px;border-radius:50%;right:-105px;top:-105px;background:rgba(255,255,255,.28);filter:blur(1px);pointer-events:none;}
-#calculatorChoice .calcCategoryCard::after{content:"";position:absolute;z-index:0;right:-28px;bottom:-86px;width:245px;height:150px;border-radius:50%;background:rgba(255,255,255,.18);transform:rotate(-18deg);pointer-events:none;}
-#calculatorChoice .calcHeroCard{grid-area:hero;height:124px;background:linear-gradient(135deg,#f5faff 0%,#dcecff 52%,#59aaf7 100%);}
-#calculatorChoice .calcTimeCard{grid-area:time;height:132px;background:linear-gradient(135deg,#f8fbff 0%,#e5e9ff 100%);}
-#calculatorChoice .calcLabelsCard{grid-area:labels;height:132px;background:linear-gradient(135deg,#f5fffb 0%,#d8f7ee 100%);}
-#calculatorChoice .calcPallCard{grid-area:pall;height:94px;background:linear-gradient(135deg,#fffaf1 0%,#f7e4c6 100%);}
-#calculatorChoice .calcCategoryIcon{position:absolute;z-index:5;margin:0;display:grid;place-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.8);}
-#calculatorChoice .calcCategoryIcon svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-#calculatorChoice .calcHeroCard .calcCategoryIcon{left:14px;top:23px;width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.48);color:#1459d9;}
-#calculatorChoice .calcTimeCard .calcCategoryIcon{left:15px;top:0;width:31px;height:31px;border-radius:10px;background:rgba(232,238,255,.72);color:#1459d9;}
-#calculatorChoice .calcLabelsCard .calcCategoryIcon{left:15px;top:0;width:31px;height:31px;border-radius:10px;background:rgba(213,249,237,.78);color:#129c75;}
-#calculatorChoice .calcPallCard .calcCategoryIcon{left:15px;top:14px;width:30px;height:30px;border-radius:10px;background:rgba(255,239,210,.82);color:#ed8b09;}
-#calculatorChoice .calcCardText{position:absolute;z-index:4;margin:0;padding:0;}
-#calculatorChoice .calcCardText strong{display:block;color:#10245a;font-weight:900;}
-#calculatorChoice .calcCardText span{display:block;color:#64728b;white-space:normal;overflow-wrap:normal;}
-#calculatorChoice .calcHeroCard .calcCardText{left:72px;top:33px;width:124px;max-width:124px;}
-#calculatorChoice .calcHeroCard .calcCardText strong{font-size:15px;line-height:1.03;letter-spacing:-.35px;margin:0 0 3px;}
-#calculatorChoice .calcHeroCard .calcCardText span{font-size:9px;line-height:1.28;max-width:120px;}
-#calculatorChoice .calcTimeCard .calcCardText,#calculatorChoice .calcLabelsCard .calcCardText{left:17px;top:54px;width:92px;max-width:92px;}
-#calculatorChoice .calcTimeCard .calcCardText strong,#calculatorChoice .calcLabelsCard .calcCardText strong{font-size:13.5px;line-height:1.04;letter-spacing:-.25px;margin:0 0 3px;}
-#calculatorChoice .calcTimeCard .calcCardText span,#calculatorChoice .calcLabelsCard .calcCardText span{font-size:8.5px;line-height:1.28;max-width:88px;}
-#calculatorChoice .calcPallCard .calcCardText{left:73px;top:22px;width:132px;max-width:132px;}
-#calculatorChoice .calcPallCard .calcCardText strong{font-size:14px;line-height:1.04;letter-spacing:-.25px;margin:0 0 3px;}
-#calculatorChoice .calcPallCard .calcCardText span{font-size:8.5px;line-height:1.28;max-width:128px;}
-#calculatorChoice .calcChevron{position:absolute;z-index:7;display:flex;align-items:center;justify-content:center;margin:0;border-radius:50%;line-height:1;font-weight:300;background:rgba(255,255,255,.84);box-shadow:0 6px 18px rgba(32,72,130,.10),inset 0 1px 0 rgba(255,255,255,.9);}
-#calculatorChoice .calcHeroCard .calcChevron{right:14px;top:50px;width:34px;height:34px;transform:none;font-size:25px;color:#1769e8;}
-#calculatorChoice .calcTimeCard .calcChevron{right:15px;top:50px;width:33px;height:33px;transform:none;font-size:24px;color:#1769e8;}
-#calculatorChoice .calcLabelsCard .calcChevron{right:15px;top:50px;width:33px;height:33px;transform:none;font-size:24px;color:#159a73;}
-#calculatorChoice .calcPallCard .calcChevron{right:14px;top:21px;width:34px;height:34px;transform:none;font-size:25px;color:#ec8b0a;}
-#calculatorChoice .calcIllustration{position:absolute;z-index:2;display:block;pointer-events:none;}
-#calculatorChoice .calcIllustration svg{display:block;width:100%;height:100%;overflow:visible;}
-#calculatorChoice .heroBoxesIllustration{right:38px;bottom:0;width:130px;height:87px;color:#2c78dc;}
-#calculatorChoice .clockIllustration{right:17px;bottom:2px;width:74px;height:78px;color:#4679dc;opacity:.95;}
-#calculatorChoice .labelsIllustration{right:23px;bottom:2px;width:75px;height:78px;color:#16a982;opacity:.96;}
-#calculatorChoice .palletIllustration{right:48px;bottom:0;width:135px;height:73px;color:#c88738;}
-#calculatorChoice .techLabel,#calculatorChoice .cardIndex,#calculatorChoice .cardMicroLabel{display:none!important;visibility:hidden!important;}
-@media(min-width:701px){
- #calculatorChoice .calculatorHero{margin-bottom:18px;} #calculatorChoice .calculatorHeroIcon{width:74px;height:74px;flex-basis:74px;border-radius:22px;} #calculatorChoice .calculatorHeroIcon svg{width:40px;height:40px;} #calculatorChoice .calculatorHero h2{font-size:36px;} #calculatorChoice .calculatorHero p{font-size:20px;}
- #calculatorChoice .calcHeroCard{height:305px;} #calculatorChoice .calcHeroCard .calcCategoryIcon{left:36px;top:55px;width:74px;height:74px;border-radius:22px;} #calculatorChoice .calcHeroCard .calcCardText{left:184px;top:78px;width:350px;max-width:350px;} #calculatorChoice .calcHeroCard .calcCardText strong{font-size:36px;} #calculatorChoice .calcHeroCard .calcCardText span{font-size:22px;line-height:1.35;max-width:330px;} #calculatorChoice .heroBoxesIllustration{right:120px;bottom:0;width:390px;height:235px;} #calculatorChoice .calcHeroCard .calcChevron{right:34px;width:64px;height:64px;font-size:50px;}
- #calculatorChoice .calcTimeCard,#calculatorChoice .calcLabelsCard{height:326px;} #calculatorChoice .calcTimeCard .calcCategoryIcon,#calculatorChoice .calcLabelsCard .calcCategoryIcon{left:38px;top:28px;width:74px;height:74px;border-radius:22px;} #calculatorChoice .calcTimeCard .calcCardText,#calculatorChoice .calcLabelsCard .calcCardText{left:42px;top:137px;width:190px;max-width:190px;} #calculatorChoice .calcTimeCard .calcCardText strong,#calculatorChoice .calcLabelsCard .calcCardText strong{font-size:32px;} #calculatorChoice .calcTimeCard .calcCardText span,#calculatorChoice .calcLabelsCard .calcCardText span{font-size:21px;line-height:1.32;max-width:210px;} #calculatorChoice .clockIllustration{right:30px;bottom:8px;width:190px;height:190px;} #calculatorChoice .labelsIllustration{right:16px;bottom:0;width:215px;height:190px;} #calculatorChoice .calcTimeCard .calcChevron,#calculatorChoice .calcLabelsCard .calcChevron{right:28px;top:50%;width:64px;height:64px;font-size:50px;}
- #calculatorChoice .calcPallCard{height:228px;} #calculatorChoice .calcPallCard .calcCategoryIcon{left:36px;top:34px;width:74px;height:74px;border-radius:22px;} #calculatorChoice .calcPallCard .calcCardText{left:184px;top:50px;width:340px;max-width:340px;} #calculatorChoice .calcPallCard .calcCardText strong{font-size:34px;} #calculatorChoice .calcPallCard .calcCardText span{font-size:21px;line-height:1.32;max-width:330px;} #calculatorChoice .palletIllustration{right:150px;bottom:-2px;width:310px;height:180px;} #calculatorChoice .calcPallCard .calcChevron{right:34px;width:64px;height:64px;font-size:50px;}
+/* V1.9.52 — Packalkylator start: text under icon, illustration isolated to lower-right. */
+#calculatorChoice .calcCategoryCard{position:relative!important;overflow:hidden!important;box-sizing:border-box!important;}
+#calculatorChoice .calcCardText{position:absolute!important;z-index:4!important;margin:0!important;padding:0!important;box-sizing:border-box!important;left:18px!important;}
+#calculatorChoice .calcCardText strong,#calculatorChoice .calcCardText span{display:block!important;}
+#calculatorChoice .calcCardText strong{color:#12295c!important;}
+#calculatorChoice .calcCardText span{color:#5f6f87!important;}
+
+/* Huvudräknare */
+#calculatorChoice .calcCategoryHeroCard{height:218px!important;min-height:218px!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCategoryIcon{left:18px!important;top:18px!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCardText{left:28px!important;top:136px!important;width:44%!important;max-width:155px!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCardText strong{font-size:27px!important;line-height:1.02!important;letter-spacing:-.8px!important;margin:0 0 7px!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCardText span{font-size:14px!important;line-height:1.28!important;}
+#calculatorChoice .heroBoxesIllustration{right:4px!important;bottom:4px!important;width:205px!important;height:130px!important;z-index:2!important;}
+#calculatorChoice .calcCategoryHeroCard .calcChevron{right:14px!important;top:50%!important;transform:translateY(-50%)!important;width:54px!important;height:54px!important;z-index:7!important;}
+
+/* Tid + Etiketter: text under ikonen, illustration separat nere till höger. */
+#calculatorChoice .calcCategoryCard:nth-child(2),#calculatorChoice .calcCategoryCard:nth-child(3){height:174px!important;min-height:174px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCategoryIcon,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCategoryIcon{left:18px!important;top:18px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText{left:18px!important;top:79px!important;width:48%!important;max-width:145px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText strong,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText strong{font-size:22px!important;line-height:1.04!important;letter-spacing:-.55px!important;margin:0 0 6px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText span,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText span{font-size:13px!important;line-height:1.28!important;max-width:138px!important;}
+#calculatorChoice .clockIllustration{right:7px!important;bottom:5px!important;width:88px!important;height:88px!important;z-index:2!important;}
+#calculatorChoice .labelsIllustration{right:3px!important;bottom:2px!important;width:108px!important;height:97px!important;z-index:2!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcChevron,#calculatorChoice .calcCategoryCard:nth-child(3) .calcChevron{right:11px!important;top:50%!important;transform:translateY(-50%)!important;width:48px!important;height:48px!important;z-index:7!important;}
+
+/* Pall: text under ikonen, illustration separat nere till höger. */
+#calculatorChoice .calcCategoryCard:nth-child(4){height:170px!important;min-height:170px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCategoryIcon{left:18px!important;top:18px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText{left:28px!important;top:83px!important;width:42%!important;max-width:170px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText strong{font-size:22px!important;line-height:1.04!important;letter-spacing:-.55px!important;margin:0 0 7px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText span{font-size:13px!important;line-height:1.3!important;max-width:160px!important;}
+#calculatorChoice .palletIllustration{right:4px!important;bottom:1px!important;width:204px!important;height:119px!important;z-index:2!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcChevron{right:14px!important;top:50%!important;transform:translateY(-50%)!important;width:54px!important;height:54px!important;z-index:7!important;}
+
+@media(max-width:380px){
+ #calculatorChoice .calcCategoryHeroCard{height:205px!important;min-height:205px!important;}
+ #calculatorChoice .calcCategoryHeroCard .calcCardText{left:24px!important;top:119px!important;width:46%!important;max-width:145px!important;}
+ #calculatorChoice .calcCategoryHeroCard .calcCardText strong{font-size:25px!important;}
+ #calculatorChoice .calcCategoryHeroCard .calcCardText span{font-size:13px!important;}
+ #calculatorChoice .heroBoxesIllustration{right:2px!important;bottom:4px!important;width:188px!important;height:118px!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(2),#calculatorChoice .calcCategoryCard:nth-child(3){height:164px!important;min-height:164px!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText{left:18px!important;top:76px!important;width:46%!important;max-width:130px!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText span,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText span{max-width:128px!important;}
+ #calculatorChoice .clockIllustration{width:84px!important;height:84px!important;right:4px!important;bottom:4px!important;}
+ #calculatorChoice .labelsIllustration{width:104px!important;height:93px!important;right:1px!important;bottom:1px!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(4){height:158px!important;min-height:158px!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText{left:28px!important;top:78px!important;width:44%!important;max-width:145px!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText span{font-size:12.5px!important;max-width:140px!important;}
+ #calculatorChoice .palletIllustration{width:190px!important;height:110px!important;right:1px!important;}
 }
-@media(max-width:380px){#calculatorChoice .calcHeroCard{height:112px;} #calculatorChoice .calcHeroCard .calcCardText{left:68px;top:29px;width:116px;max-width:116px;} #calculatorChoice .calcHeroCard .calcCardText strong{font-size:13px;} #calculatorChoice .calcHeroCard .calcCardText span{font-size:8px;} #calculatorChoice .heroBoxesIllustration{right:35px;width:116px;height:78px;} #calculatorChoice .calcTimeCard,#calculatorChoice .calcLabelsCard{height:120px;} #calculatorChoice .calcTimeCard .calcCardText,#calculatorChoice .calcLabelsCard .calcCardText{left:16px;top:51px;width:84px;max-width:84px;} #calculatorChoice .clockIllustration{width:65px;height:69px;right:17px;} #calculatorChoice .labelsIllustration{width:66px;height:69px;right:23px;} #calculatorChoice .calcPallCard{height:85px;} #calculatorChoice .calcPallCard .calcCardText{left:68px;top:20px;width:122px;max-width:122px;} #calculatorChoice .palletIllustration{width:123px;height:67px;right:45px;}}
-#packalkylator:not(.hidden) ~ .footer{display:none!important;}
+</style>
+
+<style id="packalkylatorV1960SafeOverride">
+/* v1.9.60 — Safe Packalkylator-only override. All v1.9.52 CSS remains intact. */
+#calculatorChoice .calcCategoryCard{box-sizing:border-box!important;overflow:hidden!important;position:relative!important;}
+#calculatorChoice .calcCategoryHeroCard{height:228px!important;min-height:228px!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCategoryIcon{left:18px!important;top:18px!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCardText{left:28px!important;top:140px!important;width:46%!important;max-width:165px!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCardText strong{font-size:28px!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCardText span{font-size:14.5px!important;}
+#calculatorChoice .heroBoxesIllustration{right:4px!important;bottom:4px!important;width:212px!important;height:134px!important;}
+#calculatorChoice .calcCategoryHeroCard .calcChevron{right:14px!important;width:56px!important;height:56px!important;}
+
+#calculatorChoice .calcCategoryCard:nth-child(2),#calculatorChoice .calcCategoryCard:nth-child(3){height:182px!important;min-height:182px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCategoryIcon,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCategoryIcon{left:18px!important;top:0!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText{left:18px!important;top:82px!important;width:50%!important;max-width:150px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText strong,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText strong{font-size:23px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText span,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText span{font-size:13.5px!important;}
+#calculatorChoice .clockIllustration{right:7px!important;bottom:5px!important;width:92px!important;height:92px!important;}
+#calculatorChoice .labelsIllustration{right:3px!important;bottom:2px!important;width:112px!important;height:100px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcChevron,#calculatorChoice .calcCategoryCard:nth-child(3) .calcChevron{right:11px!important;width:50px!important;height:50px!important;}
+
+#calculatorChoice .calcCategoryCard:nth-child(4){height:178px!important;min-height:178px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCategoryIcon{left:18px!important;top:18px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText{left:28px!important;top:86px!important;width:44%!important;max-width:175px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText strong{font-size:23px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText span{font-size:13.5px!important;}
+#calculatorChoice .palletIllustration{right:4px!important;bottom:1px!important;width:210px!important;height:122px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcChevron{right:14px!important;width:56px!important;height:56px!important;}
+
+@media(max-width:380px){
+ #calculatorChoice .calcCategoryHeroCard{height:214px!important;min-height:214px!important;}
+ #calculatorChoice .calcCategoryHeroCard .calcCardText{left:24px!important;top:124px!important;width:47%!important;max-width:150px!important;}
+ #calculatorChoice .calcCategoryHeroCard .calcCardText strong{font-size:26px!important;}
+ #calculatorChoice .calcCategoryHeroCard .calcCardText span{font-size:13.5px!important;}
+ #calculatorChoice .heroBoxesIllustration{right:2px!important;bottom:4px!important;width:194px!important;height:122px!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(2),#calculatorChoice .calcCategoryCard:nth-child(3){height:172px!important;min-height:172px!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText{left:18px!important;top:78px!important;width:47%!important;max-width:135px!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText span,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText span{max-width:132px!important;}
+ #calculatorChoice .clockIllustration{width:86px!important;height:86px!important;right:4px!important;bottom:4px!important;}
+ #calculatorChoice .labelsIllustration{width:106px!important;height:95px!important;right:1px!important;bottom:1px!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(4){height:166px!important;min-height:166px!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText{left:28px!important;top:80px!important;width:45%!important;max-width:150px!important;}
+ #calculatorChoice .palletIllustration{width:194px!important;height:112px!important;right:1px!important;}
+}
 </style>
 </head>
 <body>
@@ -1786,47 +1828,41 @@ body.etStartMode .footer{display:none!important}
 <div class="card batchIdCard"><h2>Batch ID</h2><div class="batchIdInputWrap"><input id="fpkNumber" placeholder="" autocomplete="off"><button id="fpkClear" class="batchIdClear" type="button" onclick="clearBatchId()" aria-label="Rensa Batch ID">×</button></div><div class="batchButtons"><button id="startBatchBtn" class="blue" onclick="startFpk()"><span class="batchPlayIcon">▶</span><span>Starta batch</span></button><button id="finishBatchBtn" class="red" onclick="finishFpk()"><span class="batchStopIcon">■</span><span>Avsluta batch</span></button></div></div>
 <div class="card kolliInputCard"><div class="productionSectionHeader"><div class="kolliSectionTitle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg><h2>Kolli → kapsel / well</h2></div><span class="collapseArrow">⌃</span></div><div class="productionInputGrid"><div><label>Produkt</label><select id="produkt"><option>Vialer</option><option>Sprutor</option><option>Annan produkt</option></select></div><div><label>Kollinummer</label><input id="kollinummer" placeholder="1-3"></div><div><label>Antal i kollit</label><input id="antal" type="number" inputmode="numeric" pattern="[0-9]*" placeholder="0" oninput="raknaKolli()"></div><div><label>Antal per</label><input id="per" type="number" inputmode="numeric" pattern="[0-9]*" placeholder="0" oninput="raknaKolli()"></div></div><div class="productionActionGrid"><button class="scanButton" onclick="skannaKolli()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 9a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 12 9Z" /><path fill-rule="evenodd" d="M9.344 3.071a49.52 49.52 0 0 1 5.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 0 1-3 3h-15a3 3 0 0 1-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 0 0 1.11-.71l.822-1.315a2.942 2.942 0 0 1 2.332-1.39ZM6.75 12.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Zm12-1.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" /></svg><span>Skanna kolli</span></button><button class="blue" onclick="laggTillKolli()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg><span>Lägg till kolli</span></button></div></div>
 <div class="card balanceCard"><div class="balanceTitle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" /></svg><h2>Aktuellt saldo</h2></div><div class="balanceGrid"><div class="balanceBox"><svg class="balanceBoxIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z" /><path d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z" /><path d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25c.39-.21.49-.71.22-1.08l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z" /></svg><div class="balanceBoxContent"><div class="balanceLabel">Totalt</div><span class="balanceNumber" id="totalt">0</span></div></div><div class="balanceBox balanceKass"><svg class="balanceBoxIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg><div class="balanceBoxContent"><div class="balanceLabel">Total kass</div><span class="balanceNumber" id="totaltKass">0</span></div></div><div class="balanceBox"><svg class="balanceBoxIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.378 1.602a.75.75 0 0 0-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03ZM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 0 0 .372-.648V7.93ZM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 0 0 .372.648l8.628 5.033Z" /></svg><div class="balanceBoxContent"><div class="balanceLabel">Fulla kapslar / wells</div><span class="balanceNumber" id="totaltFulla">0</span></div></div><div class="balanceBox"><svg class="balanceBoxIcon" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M2.25 13.5a8.25 8.25 0 0 1 8.25-8.25.75.75 0 0 1 .75.75v6.75H18a.75.75 0 0 1 .75.75 8.25 8.25 0 0 1-16.5 0Z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M12.75 3a.75.75 0 0 1 .75-.75 8.25 8.25 0 0 1 8.25 8.25.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V3Z" clip-rule="evenodd" /></svg><div class="balanceBoxContent"><div class="balanceLabel">Sista kapsel / well</div><span class="balanceNumber" id="sistaTotal">0</span></div></div></div></div>
-<div class="card"><div class="activeKolliHeader"><div id="activeKolliTitle" class="activeKolliTitle"><span class="activeKolliDot" aria-hidden="true"></span><span>Aktivt kolli</span></div><div class="activeKolliHeaderActions"><button id="activeDiffFlag" class="diffFlag" onclick="visaDiffPanel()">⚑ Flagga diff</button><button id="activeEkButton" class="ekFlag" type="button" onclick="visaEkProv()" aria-label="Registrera EK-prov">EK</button></div></div><div id="activeKolliData" class="activeKolliData"><div><div class="activeDataLabel">Produkt</div><span class="activeDataValue" id="activeProdukt"<div id="calculatorChoice">
+<div class="card"><div class="activeKolliHeader"><div id="activeKolliTitle" class="activeKolliTitle"><span class="activeKolliDot" aria-hidden="true"></span><span>Aktivt kolli</span></div><div class="activeKolliHeaderActions"><button id="activeDiffFlag" class="diffFlag" onclick="visaDiffPanel()">⚑ Flagga diff</button><button id="activeEkButton" class="ekFlag" type="button" onclick="visaEkProv()" aria-label="Registrera EK-prov">EK</button></div></div><div id="activeKolliData" class="activeKolliData"><div><div class="activeDataLabel">Produkt</div><span class="activeDataValue" id="activeProdukt">-</span></div><div><div class="activeDataLabel">Antal i kollit</div><span class="activeDataValue" id="activeAntal">0</span></div><div><div class="activeDataLabel">Kass</div><span class="activeDataValue" id="activeKass">0</span></div></div><div class="activeActionGrid"><button class="red" onclick="visaKassation()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg><span>Kassation / justering</span></button><button class="gray" onclick="angraSenaste()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h9a7 7 0 0 1 7 7v1"/></svg><span>Ångra senaste</span></button></div></div>
+<div class="card"><div class="latestEvent"><div class="latestEventIcon">◷</div><div><div class="latestEventTitle">Senaste händelse</div><div id="latestEventText" class="latestEventText">Ingen händelse ännu.</div></div><div id="latestEventChange" class="latestEventChange">-</div></div></div>
+<div class="productionBottomLinks"><button class="productionLink" onclick="openProductionView('registered')">Registrerade kollin <span style="float:right">›</span></button><button class="productionLink" onclick="openProductionView('registrations')">Registreringar <span style="float:right">›</span></button></div>
+</div><div class="productionRight"></div></div>
+</section>
+
+<div id="diffModal" class="productionModal hidden"><div class="card productionModalCard"><span class="closeX" onclick="stangDiffPanel()">×</span><h3>Flagga differens</h3><div id="diffOption1" class="diffOption" onclick="valjDiff('En för mycket i sista','')"><span>För mycket</span><span class="positive">›</span></div><div id="diffOption2" class="diffOption" onclick="valjDiff('En för lite i sista','')"><span>För lite</span><span class="negative">›</span></div><div id="diffOption3" class="diffOption" onclick="valjDiff('Fel antal i kolli','')"><span>Kollit stämde inte i antal</span><span>›</span></div><div id="diffOption4" class="diffOption" onclick="valjDiff('Skadad vara','')"><span>Skadad vara</span><span>›</span></div><div id="diffOption5" class="diffOption" onclick="valjDiff('Annat','')"><span>Annat</span><span>›</span></div><div id="diffFields" class="hidden"></div><button class="blue" onclick="sparaValdDiff()">Spara</button></div></div>
+
+<div id="kassModal" class="productionModal hidden"><div class="card productionModalCard"><span class="closeX" onclick="stangKassPanel()">×</span><h3>Snabb kassation</h3><label>Antal att ta bort</label><input id="minus" type="number" value="1"><label>Anledning</label><select id="anledning"><option>Skadad vara</option><option>Felräkning</option><option>Annat</option></select><label>Kommentar</label><textarea id="kassKommentar" placeholder="Skriv en kommentar..." style="min-height:80px"></textarea><button class="red quickButton" onclick="taBort()">Ta bort från aktivt kolli</button></div></div>
+<div id="ekModal" class="productionModal hidden ekModal" aria-hidden="true"><div class="card productionModalCard" role="dialog" aria-modal="true" aria-labelledby="ekModalTitle"><span class="closeX" onclick="stangEkPanel()">×</span><div class="ekModalTitleRow"><div class="ekModalIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5z"></path><path d="M8 8h8M8 12h5M8 16h8"></path></svg></div><div><h3 id="ekModalTitle" class="ekModalCardTitle">Ta EK-prov?</h3><p class="ekModalSub">Kontrollera mängden innan provet registreras.</p></div></div><div id="ekModalFacts" class="ekModalFacts"></div><p id="ekModalStatement" class="ekModalStatement"></p><div class="ekModalButtons"><button class="gray" type="button" onclick="stangEkPanel()">Avbryt</button><button id="ekApproveBtn" class="blue" type="button" onclick="godkannEkProv()">Godkänn</button></div></div></div>
+
+<section id="packalkylator" class="hidden">
+<div id="calculatorChoice">
 <div class="calculatorHero">
-<div class="calculatorHeroIcon"><svg aria-hidden="true" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"></path></svg></div>
-<div><h2>Packalkylator</h2><p>Välj vad du vill göra.</p></div>
+  <div class="calculatorHeroIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg></div>
+  <div><h2>Packalkylator</h2><p>Välj vad du vill göra.</p></div>
 </div>
 <div class="calcCategoryGrid">
-<button class="calcCategoryCard calcCategoryHeroCard calcHeroCard" onclick="openCalculator('huvud')">
-<div class="calcCategoryIcon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 10.5 12 4l9 6.5V20H3z"></path><path d="M7 20v-5h10v5M9 12h6"></path></svg></div>
-<div class="calcCardText"><strong>Huvudräknare</strong><span>Kapslar, enheter, well och kolli.</span></div>
-<div aria-hidden="true" class="calcChevron">›</div>
-<div aria-hidden="true" class="calcIllustration heroBoxesIllustration">
-<svg viewbox="0 0 300 180">
-<path d="M48 139h195l25 13H73z" fill="currentColor" opacity=".16"></path>
-<path d="M67 132h184l20 11H87z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="3"></path>
-<path d="M76 143v11m168-11v11M92 148v8m135-8v8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
-<g transform="translate(150 38)"><path d="m0 13 42-17 42 17-42 19z" fill="#f8fbff" stroke="currentColor" stroke-width="2"></path><path d="M0 13v42l42 21V32z" fill="#dbeafe" stroke="currentColor" stroke-width="2"></path><path d="M84 13v42L42 76V32z" fill="#b8d6fb" stroke="currentColor" stroke-width="2"></path><path d="M39 34h6v18h-6z" fill="#fff" opacity=".65"></path></g>
-<g transform="translate(79 79)"><path d="m0 12 39-16 39 16-39 18z" fill="#f8fbff" stroke="currentColor" stroke-width="2"></path><path d="M0 12v36l39 20V30z" fill="#e4efff" stroke="currentColor" stroke-width="2"></path><path d="M78 12v36L39 68V30z" fill="#c6dcf7" stroke="currentColor" stroke-width="2"></path><path d="M35 31h8v16h-8z" fill="#fff" opacity=".6"></path></g>
-<g transform="translate(172 87)"><path d="m0 12 35-14 35 14-35 17z" fill="#f8fbff" stroke="currentColor" stroke-width="2"></path><path d="M0 12v33l35 18V29z" fill="#e4efff" stroke="currentColor" stroke-width="2"></path><path d="M70 12v33L35 63V29z" fill="#bfd8f8" stroke="currentColor" stroke-width="2"></path></g>
-</svg>
-</div>
-</button>
-<button class="calcCategoryCard calcTimeCard" onclick="openCalculator('tid')">
-<div class="calcCategoryIcon"><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7v5l3 2"></path></svg></div>
-<div class="calcCardText"><strong>Tid</strong><span>Lägg ihop tid och hitta mitten.</span></div>
-<div aria-hidden="true" class="calcChevron">›</div>
-<div aria-hidden="true" class="calcIllustration clockIllustration"><svg viewbox="0 0 140 140"><circle cx="70" cy="75" fill="rgba(255,255,255,.45)" r="45" stroke="currentColor" stroke-width="3"></circle><circle cx="70" cy="75" fill="none" opacity=".5" r="39" stroke="currentColor" stroke-width="1.4"></circle><path d="M70 75 70 45M70 75l20 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4"></path><circle cx="70" cy="75" fill="currentColor" r="4"></circle><path d="M70 24v8M70 118v8M19 75h8M113 75h8" opacity=".65" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path><path d="M48 29 53 36M92 29 87 36" opacity=".55" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg></div>
-</button>
-<button class="calcCategoryCard calcLabelsCard" onclick="openCalculator('etiketter')">
-<div class="calcCategoryIcon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="m14 4 6 6-8.5 8.5a2.1 2.1 0 0 1-3 0l-3-3a2.1 2.1 0 0 1 0-3z"></path><circle cx="15.5" cy="8.5" r="1"></circle></svg></div>
-<div class="calcCardText"><strong>Etiketter</strong><span>Etiketter och tilläggsetiketter.</span></div>
-<div aria-hidden="true" class="calcChevron">›</div>
-<div aria-hidden="true" class="calcIllustration labelsIllustration"><svg viewbox="0 0 170 145"><ellipse cx="74" cy="33" fill="#dff8ef" rx="45" ry="18" stroke="currentColor" stroke-width="2"></ellipse><path d="M29 33v22c0 10 20 18 45 18s45-8 45-18V33" fill="#bdeee0" stroke="currentColor" stroke-width="2"></path><ellipse cx="74" cy="55" fill="#c9f3e5" rx="45" ry="18" stroke="currentColor" stroke-width="2"></ellipse><path d="M115 55c4 8 10 15 18 21l29 23c6 5 6 13 1 18-5 5-13 5-18 0l-30-29c-7-7-12-14-14-22" fill="#f7fffc" stroke="currentColor" stroke-width="2"></path><path d="m123 71 29 25-13 13-29-28z" fill="#d5f4e9" stroke="currentColor" stroke-width="1.5"></path><path d="M133 86h10M140 93h10M146 100h9" opacity=".65" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg></div>
-</button>
-<button class="calcCategoryCard calcPallCard" onclick="openCalculator('pallcalc')">
-<div class="calcCategoryIcon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 17h16M5 17v3M19 17v3M6 14h12l-1-7H7z"></path><path d="M8 7V4h8v3M9 14v3M15 14v3"></path></svg></div>
-<div class="calcCardText"><strong>Pall</strong><span>Pallberäkning och well per pall.</span></div>
-<div aria-hidden="true" class="calcChevron">›</div>
-<div aria-hidden="true" class="calcIllustration palletIllustration"><svg viewbox="0 0 280 160"><path d="M32 119h202l22 12H55z" fill="#d9a967" opacity=".6"></path><path d="M42 105h194v18H42z" fill="#c88d45" stroke="currentColor" stroke-width="2"></path><path d="M54 123v17m170-17v17M80 123v17m118-17v17" stroke="currentColor" stroke-linecap="round" stroke-width="4"></path><g transform="translate(70 59)"><path d="m0 12 38-16 38 16-38 17z" fill="#fffaf1" stroke="currentColor" stroke-width="2"></path><path d="M0 12v35l38 19V29z" fill="#efd1a8" stroke="currentColor" stroke-width="2"></path><path d="M76 12v35L38 66V29z" fill="#ddb47b" stroke="currentColor" stroke-width="2"></path></g><g transform="translate(136 55)"><path d="m0 11 36-15 36 15-36 16z" fill="#fffaf1" stroke="currentColor" stroke-width="2"></path><path d="M0 11v34l36 18V27z" fill="#efd1a8" stroke="currentColor" stroke-width="2"></path><path d="M72 11v34L36 63V27z" fill="#ddb47b" stroke="currentColor" stroke-width="2"></path></g><g transform="translate(103 28)"><path d="m0 10 33-14 33 14-33 15z" fill="#fffaf1" stroke="currentColor" stroke-width="2"></path><path d="M0 10v29l33 17V25z" fill="#f1d6ae" stroke="currentColor" stroke-width="2"></path><path d="M66 10v29L33 56V25z" fill="#dfba83" stroke="currentColor" stroke-width="2"></path></g></svg></div>
-</button>
-</div>
-</div>12" r="8.5"/><path d="M12 7v5l3 2"/></svg></div>
+  <button class="calcCategoryCard calcCategoryHeroCard" onclick="openCalculator('huvud')">
+    <div class="calcCategoryIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5V20H3z"/><path d="M7 20v-5h10v5M9 12h6"/></svg></div>
+    <div class="calcCardText"><strong>Huvudräknare</strong><span>Kapslar, enheter, well och kolli.</span></div>
+    <div class="calcChevron" aria-hidden="true">›</div>
+    <div class="calcIllustration heroBoxesIllustration" aria-hidden="true">
+      <svg viewBox="0 0 300 180">
+        <path d="M48 139h195l25 13H73z" fill="currentColor" opacity=".16"/>
+        <path d="M67 132h184l20 11H87z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M76 143v11m168-11v11M92 148v8m135-8v8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <g transform="translate(150 38)"><path d="m0 13 42-17 42 17-42 19z" fill="#f8fbff" stroke="currentColor" stroke-width="2"/><path d="M0 13v42l42 21V32z" fill="#dbeafe" stroke="currentColor" stroke-width="2"/><path d="M84 13v42L42 76V32z" fill="#b8d6fb" stroke="currentColor" stroke-width="2"/><path d="M39 34h6v18h-6z" fill="#fff" opacity=".65"/></g>
+        <g transform="translate(79 79)"><path d="m0 12 39-16 39 16-39 18z" fill="#f8fbff" stroke="currentColor" stroke-width="2"/><path d="M0 12v36l39 20V30z" fill="#e4efff" stroke="currentColor" stroke-width="2"/><path d="M78 12v36L39 68V30z" fill="#c6dcf7" stroke="currentColor" stroke-width="2"/><path d="M35 31h8v16h-8z" fill="#fff" opacity=".6"/></g>
+        <g transform="translate(172 87)"><path d="m0 12 35-14 35 14-35 17z" fill="#f8fbff" stroke="currentColor" stroke-width="2"/><path d="M0 12v33l35 18V29z" fill="#e4efff" stroke="currentColor" stroke-width="2"/><path d="M70 12v33L35 63V29z" fill="#bfd8f8" stroke="currentColor" stroke-width="2"/></g>
+      </svg>
+    </div>
+  </button>
+  <button class="calcCategoryCard" onclick="openCalculator('tid')">
+    <div class="calcCategoryIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg></div>
     <div class="calcCardText"><strong>Tid</strong><span>Lägg ihop tid och hitta mitten.</span></div>
 <div class="calcChevron" aria-hidden="true">›</div>
     <div class="calcIllustration clockIllustration" aria-hidden="true"><svg viewBox="0 0 140 140"><circle cx="70" cy="75" r="45" fill="rgba(255,255,255,.45)" stroke="currentColor" stroke-width="3"/><circle cx="70" cy="75" r="39" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".5"/><path d="M70 75 70 45M70 75l20 12" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="70" cy="75" r="4" fill="currentColor"/><path d="M70 24v8M70 118v8M19 75h8M113 75h8" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".65"/><path d="M48 29 53 36M92 29 87 36" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg></div>
@@ -2199,24 +2235,6 @@ function etScanKolli(){
 function etInitStartInputs(){
  ["etRunQty","etStartLabel"].forEach(id=>{let el=document.getElementById(id);if(!el)return;el.addEventListener("focus",()=>{if(el.value==="0"){el.select();el.classList.add("etStartZero")}});el.addEventListener("input",()=>{el.classList.toggle("etStartZero",el.value==="0"||el.value==="")});});
 }
-function etFinishPrompt(){
- if(!etState.started||etState.finished)return;
- let total=Number(etState.totalRun)||0;
- let msg="Avsluta etikettering?"+(total>0?"\n\nKört hittills: "+etFmt(total)+" st.":"");
- if(!window.confirm(msg))return;
- etState.finished=true;
- localStorage.removeItem(ET_STATE_KEY);
- localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
- let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),et=document.getElementById("etiketteringView"),sub=document.getElementById("productionSubView");
- if(chooser)chooser.classList.remove("hidden");
- if(main)main.classList.add("hidden");
- if(sub)sub.classList.add("hidden");
- if(et)et.classList.add("hidden");
- document.body.classList.remove("etStartMode");
- window.scrollTo(0,0);
- etToast("Etikettering avslutad");
-}
-
 function etStart(){
  let q=Number(String(document.getElementById("etRunQty").value||"").replace(/\s/g,""))||0;
  let raw=(document.getElementById("etStartLabel").value||"").trim(), n=Number(raw.replace(/\s/g,""));
@@ -4410,5 +4428,21 @@ if(savedPage&&pages.includes(savedPage))showPage(savedPage);
 
 </script>
 
+
+<script id="packvexEtFinishPromptFix">
+function etFinishPrompt(){
+  if(typeof etState==='undefined' || !etState.started || etState.finished) return;
+  const total=Number(etState.totalRun)||0;
+  const msg='Avsluta etikettering?'+(total>0?'\n\nKört hittills: '+(typeof etFmt==='function'?etFmt(total):total)+' st.':'');
+  if(!window.confirm(msg)) return;
+  etState.finished=true;
+  if(typeof ET_STATE_KEY!=='undefined') localStorage.removeItem(ET_STATE_KEY);
+  if(typeof PRODUCTION_VIEW_KEY!=='undefined') localStorage.setItem(PRODUCTION_VIEW_KEY,'chooser');
+  ['productionChooser','productionMainLayout','productionSubView','etiketteringView'].forEach(id=>{const el=document.getElementById(id); if(el) el.classList.toggle('hidden', id!=='productionChooser');});
+  document.body.classList.remove('etStartMode');
+  window.scrollTo(0,0);
+  if(typeof etToast==='function') etToast('Etikettering avslutad');
+}
+</script>
 </body>
 </html>
