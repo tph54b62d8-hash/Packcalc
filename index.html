@@ -1836,6 +1836,104 @@ body.etStartMode .footer{display:none!important}
  #calculatorChoice .calcCategoryCard:nth-child(4){aspect-ratio:3.80/1!important;}
 }
 </style>
+
+<style id="packalkylatorV1967CorrectSelectors">
+/* v1.9.67 — Packalkylator: korrigerade selectors mot den faktiska .calcCategoryGrid-strukturen. */
+#calculatorChoice .calcCategoryGrid{gap:12px!important;}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard{box-sizing:border-box!important;position:relative!important;overflow:hidden!important;}
+
+/* HUVUDRÄKNARE — referensens proportioner */
+#calculatorChoice .calcCategoryGrid > .calcCategoryHeroCard{
+  height:auto!important;min-height:0!important;aspect-ratio:2.79/1!important;padding:0!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryHeroCard .calcCategoryIcon{
+  position:absolute!important;left:5.3%!important;top:9%!important;width:12.9%!important;height:auto!important;aspect-ratio:1/1!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryHeroCard .calcCardText{
+  position:absolute!important;left:6.1%!important;top:48%!important;bottom:auto!important;right:auto!important;
+  width:43%!important;max-width:none!important;height:auto!important;transform:none!important;margin:0!important;padding:0!important;z-index:5!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryHeroCard .calcCardText strong{
+  font-size:clamp(20px,4vw,28px)!important;line-height:1.04!important;letter-spacing:-.5px!important;margin:0 0 6px!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryHeroCard .calcCardText span{
+  font-size:clamp(12px,2.4vw,17px)!important;line-height:1.27!important;max-width:none!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryHeroCard .heroBoxesIllustration{
+  position:absolute!important;right:10%!important;left:auto!important;bottom:2%!important;top:auto!important;
+  width:29%!important;height:auto!important;max-height:none!important;z-index:2!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryHeroCard .calcChevron{
+  right:3.4%!important;top:34%!important;transform:none!important;width:11%!important;height:auto!important;
+  aspect-ratio:1/1!important;z-index:7!important;
+}
+
+/* TID + ETIKETTER — texten nere till vänster, ikonen högst upp */
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(2),
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(3){
+  height:auto!important;min-height:0!important;aspect-ratio:1.27/1!important;padding:0!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(2) .calcCategoryIcon,
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(3) .calcCategoryIcon{
+  position:absolute!important;left:10.7%!important;top:9%!important;width:25.2%!important;height:auto!important;
+  aspect-ratio:1/1!important;flex:none!important;border-radius:22%!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(2) .calcCategoryIcon svg,
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(3) .calcCategoryIcon svg{width:54%!important;height:54%!important;}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(2) .calcCardText,
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(3) .calcCardText{
+  position:absolute!important;left:12%!important;top:46%!important;bottom:auto!important;right:auto!important;
+  width:62%!important;max-width:none!important;height:auto!important;transform:none!important;margin:0!important;padding:0!important;z-index:5!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(2) .calcCardText strong,
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(3) .calcCardText strong{
+  font-size:clamp(19px,4vw,28px)!important;line-height:1.04!important;letter-spacing:-.5px!important;margin:0 0 6px!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(2) .calcCardText span,
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(3) .calcCardText span{
+  font-size:clamp(12px,2.35vw,16px)!important;line-height:1.28!important;max-width:none!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(2) .calcChevron,
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(3) .calcChevron{
+  right:7.5%!important;top:44%!important;transform:none!important;width:21.5%!important;height:auto!important;
+  aspect-ratio:1/1!important;font-size:clamp(30px,7vw,50px)!important;z-index:7!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(2) .clockIllustration,
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(3) .labelsIllustration{display:none!important;}
+
+/* PALL */
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(4){
+  height:auto!important;min-height:0!important;aspect-ratio:3.80/1!important;padding:0!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(4) .calcCategoryIcon{
+  position:absolute!important;left:5%!important;top:17%!important;width:12.6%!important;height:auto!important;
+  aspect-ratio:1/1!important;flex:none!important;border-radius:22%!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(4) .calcCardText{
+  position:absolute!important;left:22.5%!important;top:23%!important;bottom:auto!important;right:auto!important;
+  width:40%!important;max-width:none!important;height:auto!important;transform:none!important;margin:0!important;padding:0!important;z-index:5!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(4) .calcCardText strong{
+  font-size:clamp(19px,4vw,28px)!important;line-height:1.04!important;margin:0 0 6px!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(4) .calcCardText span{
+  font-size:clamp(12px,2.35vw,16px)!important;line-height:1.28!important;max-width:none!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(4) .palletIllustration{
+  right:10%!important;bottom:1%!important;width:27%!important;height:auto!important;max-height:none!important;
+}
+#calculatorChoice .calcCategoryGrid > .calcCategoryCard:nth-child(4) .calcChevron{
+  right:3.4%!important;top:27%!important;transform:none!important;width:11%!important;height:auto!important;
+  aspect-ratio:1/1!important;font-size:clamp(32px,7.6vw,54px)!important;z-index:7!important;
+}
+
+/* Referensen har ingen extra PACKVEX-footer direkt under korten. */
+#packalkylator:not(.hidden) ~ .footer{display:none!important;}
+
+@media(max-width:430px){
+  #calculatorChoice .calcCategoryGrid{gap:12px!important;}
+}
+</style>
 </head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
