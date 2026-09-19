@@ -1724,68 +1724,42 @@ body.etStartMode .footer{display:none!important}
 }
 </style>
 
-<style id="packalkylatorV1962TopIllustrations">
-/* v1.9.62 — Endast Tid/Etiketter: dekorativa SVG-illustrationer flyttas från nederkant till toppen av respektive kort. */
-#calculatorChoice .clockIllustration{
-  top:4px!important;
-  bottom:auto!important;
-  right:52px!important;
-  width:30%!important;
-  height:auto!important;
-  max-height:55%!important;
-  z-index:2!important;
-}
-#calculatorChoice .labelsIllustration{
-  top:2px!important;
-  bottom:auto!important;
-  right:48px!important;
-  width:35%!important;
-  height:auto!important;
-  max-height:62%!important;
-  z-index:2!important;
-}
-@media(max-width:380px){
-  #calculatorChoice .clockIllustration{top:3px!important;right:48px!important;width:29%!important;}
-  #calculatorChoice .labelsIllustration{top:1px!important;right:44px!important;width:34%!important;}
-}
-</style>
-
-<style id="packalkylatorV1963ExactReference">
-/* v1.9.63 — Packalkylator startsida enligt senaste referensbilden. Endast denna startsida påverkas. */
+<style id="packalkylatorV1964ExactReference">
+/* v1.9.64 — Packalkylator-startsidan. Endast denna vy påverkas. Proportioner/placeringar är byggda mot referensbilden i mobil viewport. */
 #calculatorChoice .calcCategoryCard{box-sizing:border-box!important;position:relative!important;overflow:hidden!important;}
-#calculatorChoice .calcCategoryHeroCard{height:246px!important;min-height:246px!important;aspect-ratio:auto!important;padding:0!important;}
-#calculatorChoice .calcCategoryHeroCard .calcCategoryIcon{left:32px!important;top:30px!important;width:84px!important;height:84px!important;border-radius:22px!important;}
-#calculatorChoice .calcCategoryHeroCard .calcCategoryIcon svg{width:43px!important;height:43px!important;}
-#calculatorChoice .calcCategoryHeroCard .calcCardText{position:absolute!important;left:39px!important;top:120px!important;width:250px!important;max-width:250px!important;padding:0!important;}
-#calculatorChoice .calcCategoryHeroCard .calcCardText strong{font-size:28px!important;line-height:1.05!important;letter-spacing:-.7px!important;margin:0 0 7px!important;}
-#calculatorChoice .calcCategoryHeroCard .calcCardText span{font-size:17px!important;line-height:1.25!important;max-width:250px!important;}
-#calculatorChoice .calcCategoryHeroCard .heroBoxesIllustration{right:72px!important;bottom:3px!important;width:200px!important;height:150px!important;max-height:none!important;}
-#calculatorChoice .calcCategoryHeroCard .calcChevron{right:22px!important;top:88px!important;transform:none!important;width:72px!important;height:72px!important;font-size:54px!important;}
 
-#calculatorChoice .calcCategoryCard:nth-child(2),#calculatorChoice .calcCategoryCard:nth-child(3){height:254px!important;min-height:254px!important;aspect-ratio:auto!important;padding:0!important;}
-#calculatorChoice .calcCategoryCard:nth-child(2) .calcCategoryIcon,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCategoryIcon{position:absolute!important;left:32px!important;top:25px!important;width:80px!important;height:80px!important;flex:none!important;border-radius:21px!important;}
-#calculatorChoice .calcCategoryCard:nth-child(2) .calcCategoryIcon svg,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCategoryIcon svg{width:43px!important;height:43px!important;}
-#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText{position:absolute!important;left:38px!important;top:113px!important;width:205px!important;max-width:205px!important;padding:0!important;}
-#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText strong,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText strong{font-size:28px!important;line-height:1.05!important;letter-spacing:-.7px!important;margin:0 0 8px!important;}
-#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText span,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText span{font-size:16px!important;line-height:1.28!important;max-width:205px!important;}
-#calculatorChoice .calcCategoryCard:nth-child(2) .calcChevron,#calculatorChoice .calcCategoryCard:nth-child(3) .calcChevron{right:20px!important;top:111px!important;transform:none!important;width:68px!important;height:68px!important;font-size:50px!important;}
-/* De dekorativa stora SVG-illustrationerna ska inte synas i referenslayouten. De små Tid/Etiketter-ikonerna ovan är de synliga SVG-ikonerna. */
+/* Huvudräknare */
+#calculatorChoice .calcCategoryHeroCard{height:auto!important;min-height:0!important;aspect-ratio:2.54/1!important;padding:0!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCategoryIcon{position:absolute!important;left:5.3%!important;top:12%!important;width:12.9%!important;height:auto!important;aspect-ratio:1/1!important;border-radius:22%!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCategoryIcon svg{width:52%!important;height:52%!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCardText{position:absolute!important;left:6.1%!important;top:48%!important;width:43%!important;max-width:none!important;padding:0!important;margin:0!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCardText strong{font-size:clamp(20px,4.0vw,28px)!important;line-height:1.04!important;letter-spacing:-.5px!important;margin:0 0 6px!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCardText span{font-size:clamp(12px,2.4vw,17px)!important;line-height:1.27!important;max-width:none!important;}
+#calculatorChoice .calcCategoryHeroCard .heroBoxesIllustration{right:11%!important;bottom:3%!important;width:29%!important;height:auto!important;max-height:none!important;z-index:2!important;}
+#calculatorChoice .calcCategoryHeroCard .calcChevron{right:3.4%!important;top:34%!important;transform:none!important;width:11%!important;height:auto!important;aspect-ratio:1/1!important;font-size:clamp(32px,7.6vw,54px)!important;z-index:7!important;}
+
+/* Tid + Etiketter */
+#calculatorChoice .calcCategoryCard:nth-child(2),#calculatorChoice .calcCategoryCard:nth-child(3){height:auto!important;min-height:0!important;aspect-ratio:1.26/1!important;padding:0!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCategoryIcon,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCategoryIcon{position:absolute!important;left:10.7%!important;top:9%!important;width:25.2%!important;height:auto!important;aspect-ratio:1/1!important;flex:none!important;border-radius:22%!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCategoryIcon svg,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCategoryIcon svg{width:54%!important;height:54%!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText{position:absolute!important;left:12%!important;top:46%!important;width:62%!important;max-width:none!important;padding:0!important;margin:0!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText strong,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText strong{font-size:clamp(19px,4vw,28px)!important;line-height:1.04!important;letter-spacing:-.5px!important;margin:0 0 6px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText span,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText span{font-size:clamp(12px,2.35vw,16px)!important;line-height:1.28!important;max-width:none!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcChevron,#calculatorChoice .calcCategoryCard:nth-child(3) .calcChevron{right:7.5%!important;top:44%!important;transform:none!important;width:21.5%!important;height:auto!important;aspect-ratio:1/1!important;font-size:clamp(30px,7vw,50px)!important;z-index:7!important;}
+/* Referensbildens stora dekorillustrationer för Tid/Etiketter visas inte. */
 #calculatorChoice .clockIllustration,#calculatorChoice .labelsIllustration{display:none!important;}
 
-#calculatorChoice .calcCategoryCard:nth-child(4){height:174px!important;min-height:174px!important;aspect-ratio:auto!important;padding:0!important;}
-#calculatorChoice .calcCategoryCard:nth-child(4) .calcCategoryIcon{position:absolute!important;left:32px!important;top:32px!important;width:82px!important;height:82px!important;flex:none!important;border-radius:21px!important;}
-#calculatorChoice .calcCategoryCard:nth-child(4) .calcCategoryIcon svg{width:43px!important;height:43px!important;}
-#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText{position:absolute!important;left:148px!important;top:37px!important;width:260px!important;max-width:260px!important;padding:0!important;}
-#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText strong{font-size:28px!important;line-height:1.05!important;letter-spacing:-.7px!important;margin:0 0 7px!important;}
-#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText span{font-size:16px!important;line-height:1.28!important;max-width:260px!important;}
-#calculatorChoice .calcCategoryCard:nth-child(4) .palletIllustration{right:60px!important;bottom:0!important;width:185px!important;height:115px!important;max-height:none!important;}
-#calculatorChoice .calcCategoryCard:nth-child(4) .calcChevron{right:20px!important;top:40px!important;transform:none!important;width:68px!important;height:68px!important;font-size:50px!important;}
+/* Pall */
+#calculatorChoice .calcCategoryCard:nth-child(4){height:auto!important;min-height:0!important;aspect-ratio:3.49/1!important;padding:0!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCategoryIcon{position:absolute!important;left:5%!important;top:17%!important;width:12.6%!important;height:auto!important;aspect-ratio:1/1!important;flex:none!important;border-radius:22%!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCategoryIcon svg{width:54%!important;height:54%!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText{position:absolute!important;left:22.5%!important;top:23%!important;width:40%!important;max-width:none!important;padding:0!important;margin:0!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText strong{font-size:clamp(19px,4vw,28px)!important;line-height:1.04!important;letter-spacing:-.5px!important;margin:0 0 6px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText span{font-size:clamp(12px,2.35vw,16px)!important;line-height:1.28!important;max-width:none!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .palletIllustration{right:11%!important;bottom:1%!important;width:26%!important;height:auto!important;max-height:none!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcChevron{right:3.4%!important;top:27%!important;transform:none!important;width:11%!important;height:auto!important;aspect-ratio:1/1!important;font-size:clamp(32px,7.6vw,54px)!important;z-index:7!important;}
 
-@media(max-width:700px){
-  #calculatorChoice .calcCategoryHeroCard{height:246px!important;min-height:246px!important;}
-  #calculatorChoice .calcCategoryCard:nth-child(2),#calculatorChoice .calcCategoryCard:nth-child(3){height:254px!important;min-height:254px!important;}
-  #calculatorChoice .calcCategoryCard:nth-child(4){height:174px!important;min-height:174px!important;}
-}
+#calculatorChoice .techLabel,#calculatorChoice .cardIndex,#calculatorChoice .cardMicroLabel{display:none!important;visibility:hidden!important;}
 </style>
 </head>
 <body>
