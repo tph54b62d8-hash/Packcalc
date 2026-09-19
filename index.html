@@ -1800,6 +1800,42 @@ body.etStartMode .footer{display:none!important}
   #calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText{left:10%!important;top:52%!important;width:69%!important;}
 }
 </style>
+
+<style id="packalkylatorV1966FinalFix">
+/* v1.9.66 — exakt slutjustering av Packalkylator-startsidan. Endast denna vy. */
+#packalkylator:not(.hidden) ~ .footer{display:none!important;}
+#calculatorChoice .calcCategoryCard{box-sizing:border-box!important;position:relative!important;overflow:hidden!important;}
+
+/* Huvudräknare */
+#calculatorChoice .calcCategoryHeroCard{height:auto!important;min-height:0!important;aspect-ratio:2.65/1!important;padding:0!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCategoryIcon{position:absolute!important;left:5.3%!important;top:12%!important;width:12.9%!important;height:auto!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCardText{position:absolute!important;left:6.1%!important;top:47%!important;bottom:auto!important;right:auto!important;width:43%!important;max-width:none!important;transform:none!important;margin:0!important;padding:0!important;z-index:5!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCardText strong{font-size:clamp(20px,4vw,28px)!important;line-height:1.04!important;margin:0 0 6px!important;}
+#calculatorChoice .calcCategoryHeroCard .calcCardText span{font-size:clamp(12px,2.4vw,17px)!important;line-height:1.27!important;}
+#calculatorChoice .calcCategoryHeroCard .heroBoxesIllustration{position:absolute!important;right:7%!important;left:auto!important;bottom:2%!important;top:auto!important;width:31%!important;height:auto!important;max-height:none!important;z-index:2!important;}
+#calculatorChoice .calcCategoryHeroCard .calcChevron{right:3.4%!important;top:34%!important;transform:none!important;width:11%!important;height:auto!important;aspect-ratio:1/1!important;z-index:7!important;}
+
+/* Tid + Etiketter */
+#calculatorChoice .calcCategoryCard:nth-child(2),#calculatorChoice .calcCategoryCard:nth-child(3){height:auto!important;min-height:0!important;aspect-ratio:1.27/1!important;padding:0!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText{position:absolute!important;left:12%!important;top:46%!important;bottom:auto!important;right:auto!important;width:62%!important;max-width:none!important;transform:none!important;margin:0!important;padding:0!important;z-index:5!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText strong,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText strong{font-size:clamp(19px,4vw,28px)!important;line-height:1.04!important;margin:0 0 6px!important;}
+#calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText span,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText span{font-size:clamp(12px,2.35vw,16px)!important;line-height:1.28!important;}
+#calculatorChoice .clockIllustration,#calculatorChoice .labelsIllustration{display:none!important;}
+
+/* Pall */
+#calculatorChoice .calcCategoryCard:nth-child(4){height:auto!important;min-height:0!important;aspect-ratio:3.80/1!important;padding:0!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .calcCardText{position:absolute!important;left:22.5%!important;top:23%!important;bottom:auto!important;right:auto!important;width:40%!important;max-width:none!important;transform:none!important;margin:0!important;padding:0!important;z-index:5!important;}
+#calculatorChoice .calcCategoryCard:nth-child(4) .palletIllustration{right:10%!important;bottom:1%!important;width:27%!important;height:auto!important;max-height:none!important;}
+
+@media(max-width:380px){
+ #calculatorChoice .calcCategoryHeroCard{aspect-ratio:2.65/1!important;}
+ #calculatorChoice .calcCategoryHeroCard .calcCardText{left:6%!important;top:46%!important;width:44%!important;}
+ #calculatorChoice .calcCategoryHeroCard .heroBoxesIllustration{right:5%!important;width:32%!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(2),#calculatorChoice .calcCategoryCard:nth-child(3){aspect-ratio:1.27/1!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(2) .calcCardText,#calculatorChoice .calcCategoryCard:nth-child(3) .calcCardText{left:11%!important;top:46%!important;width:64%!important;}
+ #calculatorChoice .calcCategoryCard:nth-child(4){aspect-ratio:3.80/1!important;}
+}
+</style>
 </head>
 <body>
 <header><div class="logo">PV</div><h1>PACKVEX</h1><div class="tagline">VERIFICATION. EFFICIENCY. EXECUTION.</div></header>
