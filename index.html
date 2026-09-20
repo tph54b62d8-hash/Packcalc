@@ -4823,5 +4823,25 @@ function etFinishPrompt(){
  #calcHuvudraknare .mainCalcNodeIcon.chartIcon svg{width:33px;height:33px;}
 }
 </style>
+
+<style id="packvexV1974SyringeFix">
+/* v1.9.74 — endast Enheter ↔ Kapslar-ikonen: samma blå färg och visuella linjetyngd som övriga huvudräknarikoner. */
+#calcHuvudraknare .mainCalcNodeIcon.syringeIcon svg{
+  width:22px!important;
+  height:48px!important;
+  fill:none!important;
+  stroke:#0061fe!important;
+  stroke-width:20.1764!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+  opacity:1!important;
+}
+@media(max-width:430px){
+  #calcHuvudraknare .mainCalcNodeIcon.syringeIcon svg{
+    width:22px!important;
+    height:48px!important;
+  }
+}
+</style>
 </body>
 </html>
