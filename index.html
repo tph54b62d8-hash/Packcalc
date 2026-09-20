@@ -3132,6 +3132,10 @@ let el=document.getElementById("batchFinishConfirmOverlay");
 if(el)el.remove();
 }
 
+function countActiveDiffEvents(events){
+return (events||[]).filter(x=>x.type==="DIFF"&&!x.undone&&Number(x.change)!==0).length;
+}
+
 function showBatchFinishConfirm(){
 if(!data.fpk){alert("Det finns ingen aktiv batch.");return;}
 let productionId=data.activeProductionId,
@@ -3141,7 +3145,7 @@ total=kollin.reduce((s,k)=>s+Number(k.used||0),0),
 kassation=kollin.reduce((s,k)=>s+Number(k.kassation||0),0),
 ekUnits=events.filter(x=>x.type==="EK"&&!x.undone).reduce((s,x)=>s+Math.abs(Number(x.ekUnits||x.change)||0),0),
 ekCount=events.filter(x=>x.type==="EK"&&!x.undone).reduce((s,x)=>s+Number(x.ekCount||1),0),
-diffCount=events.filter(x=>x.type==="DIFF"&&!x.undone&&Number(x.change)!==0).length,
+diffCount=countActiveDiffEvents(events),
 products=[...new Set(kollin.map(k=>k.produkt).filter(Boolean))];
 let esc=v=>String(v??"").replace(/</g,"&lt;").replace(/>/g,"&gt;"),
 productText=products.length?products.join(", "):"—";
@@ -3170,7 +3174,7 @@ total=kollin.reduce((s,k)=>s+Number(k.used||0),0),
 kassation=kollin.reduce((s,k)=>s+Number(k.kassation||0),0),
 ekUnits=events.filter(x=>x.type==="EK"&&!x.undone).reduce((s,x)=>s+Math.abs(Number(x.ekUnits||x.change)||0),0),
 ekCount=events.filter(x=>x.type==="EK"&&!x.undone).reduce((s,x)=>s+Number(x.ekCount||1),0),
-diffCount=events.filter(x=>x.type==="DIFF"&&!x.undone&&Number(x.change)!==0).length,
+diffCount=countActiveDiffEvents(events),
 products=[...new Set(kollin.map(k=>k.produkt).filter(Boolean))];
 data.produktioner.push({productionId,batchId:data.fpk,start:data.activeProductionStart||null,end,products,kollin,total,kolliCount:totalFysiskaKollin(kollin),registrationCount:kollin.length,kassation,ekCount,ekUnits,diffCount});
 addHistory("SLUT","-","","","Avslutade produktion","","","Batch avslutad");
@@ -3374,6 +3378,35 @@ if(!nummer){showKolliInputNotice("Kontrollera kollinummer – skriv kollinumret.
 if(!parsed.valid){showKolliInputNotice("Kontrollera kollinummer – kollinumret kunde inte tolkas.","invalid");return;}
 if(antal<=0){alert("Antalet måste vara större än 0.");return;}
 if(per<=0){alert("Antal per kapsel/well måste vara större än 0.");return;}
+
+/* Blockera kollinummer som redan finns i den aktiva batchen.
+   Även nummer inne i ett intervall räknas som redan registrerade. */
+let befintliga=new Set();
+(data.kollin||[]).forEach(existing=>{
+ let parsedExisting=tolkaKollinummer(existing.nummer);
+ if(parsedExisting.valid){
+  let rawExisting=String(existing.nummer||"").trim();
+  for(let part of rawExisting.split(",")){
+   let x=part.trim(),a=x.split("-"),from=Number(a[0]),to=a.length===2?Number(a[1]):from;
+   if(Number.isSafeInteger(from)&&Number.isSafeInteger(to)&&to>=from){
+    for(let n=from;n<=to;n++)befintliga.add(String(n));
+   }
+  }
+ }
+});
+let redanRegistrerade=parsed.valid?[...new Set(String(nummer).split(",").flatMap(part=>{
+ let x=part.trim(),a=x.split("-"),from=Number(a[0]),to=a.length===2?Number(a[1]):from;
+ let arr=[];
+ for(let n=from;n<=to;n++)if(befintliga.has(String(n)))arr.push(n);
+ return arr;
+}))]:[];
+if(redanRegistrerade.length){
+ let visade=redanRegistrerade.slice(0,8).join(", ");
+ if(redanRegistrerade.length>8)visade+=" …";
+ /* Varningen ska informera men inte blockera registreringen. */
+ showKolliInputNotice("Kollinummer "+visade+" är redan registrerat.","warning");
+}
+
 let kolli={nummer,produkt,original:antal,used:antal,per,physicalCount:parsed.count,diff:false,kassation:0,ekCount:0,ekUnits:0,datum:new Date().toLocaleString("sv-SE")};
 data.kollin.push(kolli);
 addHistory("KOLLI",nummer,produkt,"+"+antal,"La till kolli",totalKolli(),totalKolli()%per,"");
