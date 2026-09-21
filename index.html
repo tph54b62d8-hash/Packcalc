@@ -2173,6 +2173,125 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
  header.packvexHeaderV1988 .packvexHeaderOperator{width:104px!important;min-width:104px!important;}
 }
 </style>
+<style id="packvexTillaggTestStyleV1991">
+/* v1.9.91 — endast Tilläggsetiketter-testfunktionen i Produktion. */
+.tillaggEntryBtn{grid-column:1 / -1;width:100%;min-height:66px;margin:0!important;padding:12px 14px!important;border:1px solid #dfe7f2!important;border-radius:16px!important;background:rgba(255,255,255,.92)!important;box-shadow:0 4px 14px rgba(30,48,82,.045)!important;display:grid!important;grid-template-columns:34px minmax(0,1fr) 20px;align-items:center;gap:10px;text-align:left;color:#172033!important;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease!important;}
+.tillaggEntryBtn:active{transform:scale(.992);box-shadow:0 2px 9px rgba(30,48,82,.05)!important;}
+.tillaggEntryIcon{width:34px;height:34px;border-radius:10px;background:#eef5ff;color:#1459d9;display:grid;place-items:center;}
+.tillaggEntryIcon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.tillaggEntryBtn strong{display:block;font-size:14px;line-height:1.1;}
+.tillaggEntryBtn small{display:block;margin-top:3px;color:#7a8596;font-size:10px;line-height:1.2;}
+.tillaggEntryArrow{font-size:26px;color:#1459d9;text-align:right;}
+.tillaggPage{width:calc(100% - 20px);max-width:1100px;margin:0 auto 24px;padding-bottom:20px;}
+.tillaggPage *{box-sizing:border-box;}
+.tillaggTopbar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;margin:2px 0 12px;}
+.tillaggBack{border:0;background:transparent;color:#1459d9;font-weight:700;padding:7px 0;font-size:13px;white-space:nowrap;}
+.tillaggTopTitle{min-width:0;}
+.tillaggEyebrow,.tillaggLabel{font-size:9px;letter-spacing:1.15px;font-weight:800;color:#788497;}
+.tillaggTopTitle h2{margin:3px 0 2px;color:#172033;font-size:24px;line-height:1.05;letter-spacing:-.35px;}
+.tillaggTopTitle p{margin:0;color:#7a8596;font-size:11px;}
+.tillaggTopStatus{font-size:10px;font-weight:800;color:#687386;background:#f2f5f9;border:1px solid #e1e7ef;padding:7px 9px;border-radius:999px;white-space:nowrap;}
+.tillaggCard{background:rgba(255,255,255,.94);border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 5px 18px rgba(30,48,82,.045);padding:14px;margin-bottom:11px;}
+.tillaggSectionHead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;}
+.tillaggSectionHead.compact{margin-bottom:10px;}
+.tillaggSectionHead h3{margin:3px 0 0;font-size:17px;line-height:1.1;color:#172033;}
+.tillaggTextBtn{border:0;background:transparent;color:#1459d9;font-size:11px;font-weight:800;padding:3px 0;white-space:nowrap;}
+.tillaggModeGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.tillaggModeChoice{min-height:84px;border:1px solid #e0e7f0;border-radius:13px;background:#fbfcfe;display:grid;grid-template-columns:38px minmax(0,1fr);align-items:center;gap:10px;text-align:left;padding:11px;transition:border-color .25s ease,background-color .25s ease,transform .25s ease;}
+.tillaggModeChoice:active{transform:scale(.992);}
+.tillaggModeChoice.selected{border-color:#1459d9;background:#f4f8ff;box-shadow:0 0 0 2px rgba(20,89,217,.08);}
+.tillaggModeChoice strong{display:block;font-size:13px;color:#172033;}
+.tillaggModeChoice small{display:block;margin-top:3px;color:#7a8596;font-size:10px;line-height:1.3;}
+.tillaggChoiceIcon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:#e8f7ef;color:#16834d;}
+.tillaggChoiceIcon.blue{background:#eef5ff;color:#1459d9;}
+.tillaggChoiceIcon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.tillaggFields,.tillaggRollForm{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.tillaggFields label:first-child{grid-column:1 / -1;}
+.tillaggCard label{display:grid;gap:5px;font-size:10px;font-weight:800;color:#687386;}
+.tillaggCard input{width:100%;height:42px;border:1px solid #dbe3ed;border-radius:11px;background:#fff;color:#172033;padding:0 11px;font-size:14px;outline:none;}
+.tillaggCard input:focus{border-color:#1459d9;box-shadow:0 0 0 3px rgba(20,89,217,.08);}
+.tillaggSubSetup{margin-top:13px;padding-top:13px;border-top:1px solid #edf0f4;}
+.tillaggInlineHead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:9px;}
+.tillaggInlineHead strong{font-size:13px;color:#172033;}
+.tillaggInlineHead span{font-size:9px;color:#7a8596;text-align:right;}
+.tillaggRollForm{grid-template-columns:1fr 1fr 1fr;}
+.tillaggAddRoll{height:38px;margin-top:9px!important;display:inline-flex!important;align-items:center;justify-content:center;gap:6px;padding:0 12px!important;font-size:11px!important;}
+.tillaggAddRoll svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;}
+.tillaggStartBtn{width:100%;margin-top:13px!important;height:44px!important;font-size:13px!important;}
+.tillaggRollList{display:grid;gap:7px;margin-top:10px;}
+.tillaggRollRow{border:1px solid #e5eaf1;border-radius:11px;padding:9px 10px;display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:8px;align-items:center;background:#fff;}
+.tillaggRollDot{width:8px;height:8px;border-radius:50%;background:#cbd3df;}
+.tillaggRollDot.active{background:#16834d;box-shadow:0 0 0 4px #e3f6ea;}
+.tillaggRollDot.done{background:#9aa5b5;}
+.tillaggRollInfo strong{display:block;font-size:12px;color:#172033;}
+.tillaggRollInfo span{display:block;margin-top:2px;font-size:9px;color:#7a8596;}
+.tillaggRollActions{display:flex;gap:5px;align-items:center;}
+.tillaggRollActions button{border:1px solid #dce4ee;background:#fff;border-radius:8px;color:#1459d9;font-size:9px;font-weight:800;padding:6px 7px;}
+.tillaggRollActions .danger{color:#b21f32;border-color:#f0d9dd;}
+.tillaggActive{animation:tillaggIn .28s ease both;}
+@keyframes tillaggIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.tillaggOverviewHead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.tillaggOverviewHead h3{margin:3px 0 0;font-size:17px;color:#172033;}
+.tillaggStatusPill{font-size:9px;font-weight:800;padding:6px 8px;border-radius:999px;background:#f1f4f8;color:#687386;white-space:nowrap;}
+.tillaggStatusPill.ok{background:#e5f6eb;color:#16834d;}
+.tillaggStatusPill.warn{background:#fff3df;color:#986100;}
+.tillaggMeta{display:flex;gap:14px;flex-wrap:wrap;margin:8px 0 12px;color:#7a8596;font-size:9px;}
+.tillaggMeta strong{color:#172033;font-size:10px;margin-left:3px;}
+.tillaggPrimaryGrid{display:grid;grid-template-columns:1fr 1.2fr;gap:9px;}
+.tillaggMetric{min-height:94px;border-radius:13px;background:#f7f9fc;padding:12px;display:flex;flex-direction:column;justify-content:center;}
+.tillaggMetric span{font-size:9px;color:#687386;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.tillaggMetric strong{font-size:31px;line-height:1;margin-top:6px;color:#172033;letter-spacing:-1px;}
+.tillaggMetric small{font-size:9px;color:#7a8596;margin-top:3px;}
+.tillaggNextMetric{background:#eef5ff;border:1px solid #dbe9ff;}
+.tillaggNextMetric strong{font-size:39px;color:#1459d9;}
+.tillaggSecondaryGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
+.tillaggSecondaryGrid>div{padding:9px 10px;border-top:1px solid #edf0f4;}
+.tillaggSecondaryGrid span{display:block;color:#7a8596;font-size:9px;}
+.tillaggSecondaryGrid strong{display:block;color:#172033;font-size:12px;margin-top:3px;}
+.tillaggProductionEntry{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;}
+.tillaggProductionEntry input{height:44px;font-size:18px;font-weight:800;}
+.tillaggProductionEntry button{height:44px!important;margin:0!important;padding:0 14px!important;font-size:11px!important;}
+.tillaggHint{margin-top:7px;color:#8a94a4;font-size:9px;line-height:1.35;}
+.tillaggRollStatus{font-size:9px;font-weight:800;color:#16834d;background:#e5f6eb;padding:5px 7px;border-radius:999px;}
+.tillaggRollMainGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.tillaggRollMainGrid>div{background:#f7f9fc;border-radius:10px;padding:9px 10px;}
+.tillaggRollMainGrid span{display:block;color:#7a8596;font-size:9px;}
+.tillaggRollMainGrid strong{display:block;color:#172033;font-size:15px;margin-top:3px;}
+.tillaggRollSwitch{margin-top:10px;border:1px solid #f0d9b4;background:#fff8ed;border-radius:11px;padding:10px;display:grid;gap:8px;}
+.tillaggRollSwitch p{margin:0;font-size:10px;color:#765b2d;line-height:1.35;}
+.tillaggRollSwitchButtons{display:flex;flex-wrap:wrap;gap:6px;}
+.tillaggRollSwitchButtons button{border:1px solid #e5d3b2;background:#fff;border-radius:8px;padding:7px 8px;color:#765b2d;font-size:9px;font-weight:800;}
+.tillaggControlExpected{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:12px;background:#eef5ff;border:1px solid #dbe9ff;margin-bottom:9px;}
+.tillaggControlExpected span{font-size:9px;color:#687386;font-weight:700;}
+.tillaggControlExpected strong{font-size:25px;color:#1459d9;}
+.tillaggActualLabel{max-width:220px;}
+.tillaggControlBtn{width:100%;height:42px!important;margin-top:9px!important;font-size:12px!important;}
+.tillaggResult{margin-top:10px;border-radius:11px;padding:11px 12px;border:1px solid #dce4ee;background:#f7f9fc;}
+.tillaggResult.ok{border-color:#cdebd8;background:#effaf3;color:#16834d;}
+.tillaggResult.warn{border-color:#f0d8b0;background:#fff8ec;color:#8a5a00;}
+.tillaggResult strong{display:block;font-size:12px;}
+.tillaggResult span{display:block;margin-top:4px;font-size:10px;line-height:1.4;color:#687386;}
+.tillaggPossible{margin-top:7px;padding-top:7px;border-top:1px solid rgba(120,130,145,.16);font-size:9px;color:#687386;}
+.tillaggEvents{display:grid;gap:7px;}
+.tillaggEvent{border-left:2px solid #dfe6ef;padding:8px 9px;background:#fafbfd;border-radius:0 9px 9px 0;}
+.tillaggEvent.ok{border-left-color:#16834d;}.tillaggEvent.warn{border-left-color:#d98a00;}.tillaggEvent.undo{border-left-color:#1459d9;}
+.tillaggEventTop{display:flex;justify-content:space-between;gap:8px;font-size:10px;font-weight:800;color:#172033;}
+.tillaggEventMeta{margin-top:3px;color:#7a8596;font-size:9px;line-height:1.4;}
+.tillaggEmpty{font-size:10px;color:#8a94a4;padding:8px 0;}
+.tillaggFinishRow{display:flex;justify-content:flex-end;margin-top:3px;}
+.tillaggFinishBtn{margin:0!important;height:42px!important;padding:0 15px!important;font-size:11px!important;}
+.tillaggHidden{display:none!important;}
+@media(max-width:430px){
+ .tillaggPage{width:calc(100% - 14px);}
+ .tillaggTopbar{grid-template-columns:auto minmax(0,1fr);gap:8px;}.tillaggTopStatus{grid-column:2;justify-self:start;margin-top:-5px;}.tillaggTopTitle h2{font-size:22px;}
+ .tillaggModeGrid{gap:7px;}.tillaggModeChoice{min-height:78px;padding:9px;grid-template-columns:34px minmax(0,1fr);gap:8px;}.tillaggChoiceIcon{width:34px;height:34px;}.tillaggModeChoice strong{font-size:12px;}.tillaggModeChoice small{font-size:9px;}
+ .tillaggCard{padding:12px;border-radius:14px;margin-bottom:9px;}
+ .tillaggPrimaryGrid{grid-template-columns:.9fr 1.1fr;}.tillaggMetric{min-height:88px;padding:10px;}.tillaggMetric strong{font-size:28px;}.tillaggNextMetric strong{font-size:35px;}
+ .tillaggRollForm{grid-template-columns:1fr 1fr;}.tillaggRollForm label:first-child{grid-column:1 / -1;}
+ .tillaggRollActions button{padding:6px 6px;}
+}
+@media(prefers-reduced-motion:reduce){.tillaggActive,.tillaggEntryBtn,.tillaggModeChoice{animation:none!important;transition:none!important;}}
+</style>
 </head>
 <body>
 <header class="packvexHeaderV1988">
@@ -2225,6 +2344,11 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 <div class="etChooserHead"><div class="etChooserIcon"><svg viewbox="0 0 24 24"><path d="M4 5h16v14H4z"></path><path d="M7 9h10M7 13h7M7 17h4"></path></svg></div><div><h2>Produktion</h2><p>Välj arbetsfunktion.</p></div></div>
 <button class="etModeBtn" onclick="chooseProductionMode('kolli')"><span class="etModeIcon"><svg viewbox="0 0 24 24"><path d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M3.375 7.5h17.25"></path><path d="M8 5h8"></path></svg></span><span class="etModeText"><strong>Kolli → kapsel / well</strong><span>Ordinarie kolli- och produktionshantering.</span></span><span class="etModeArrow">›</span></button>
 <button class="etModeBtn" onclick="chooseProductionMode('etikettering')"><span class="etModeIcon green"><svg viewbox="0 0 24 24"><path d="M4 5h16v14H4z"></path><path d="M7 9h10M7 13h7M7 17h4"></path></svg></span><span class="etModeText"><strong>Etikettering</strong><span>Automatisk kontroll av nästa etikett.</span></span><span class="etModeArrow">›</span></button>
+<button class="tillaggEntryBtn" type="button" onclick="openTillaggTest()">
+  <span class="tillaggEntryIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6.5h16v11H4z"></path><path d="M7 9.5h10M7 13h6"></path><path d="M17.5 4v4M15.5 6h4"></path></svg></span>
+  <span><strong>Tilläggsetiketter</strong><small>Produktionsfunktion · test</small></span>
+  <span class="tillaggEntryArrow" aria-hidden="true">›</span>
+</button>
 </div></div>
 <div class="hidden etPage" id="etiketteringView">
 <div class="etTop"><div><button class="etBack" onclick="backToProductionChooser()">‹ Produktion</button><div class="etTopTitle"><div><h2 class="etTitle">Etikettering</h2><div class="etSubtitle">Slipp den handskrivna lappen. PACKVEX håller reda på nästa etikett.</div></div></div></div><div class="etRunCounter" id="etRunCounter">Kört 0 st</div></div>
@@ -2284,6 +2408,121 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 <button class="etFinish" onclick="etFinishPrompt()">Avsluta etikettering</button>
 </div>
 </div>
+
+<div class="hidden tillaggPage" id="tillaggTestView">
+  <div class="tillaggTopbar">
+    <button class="tillaggBack" type="button" onclick="closeTillaggTest()">‹ Produktion</button>
+    <div class="tillaggTopTitle">
+      <div class="tillaggEyebrow">PRODUKTIONSFUNKTION · TEST</div>
+      <h2>Tilläggsetiketter</h2>
+      <p>PACKVEX håller reda på etikettförbrukningen.</p>
+    </div>
+    <div class="tillaggTopStatus" id="tillaggTopStatus">Ej startad</div>
+  </div>
+
+  <div class="tillaggCard tillaggModeCard" id="tillaggModeCard">
+    <div class="tillaggSectionHead">
+      <div>
+        <span class="tillaggLabel">ARBETSSÄTT</span>
+        <h3>Välj typ av tilläggsetiketter</h3>
+      </div>
+    </div>
+    <div class="tillaggModeGrid">
+      <button type="button" class="tillaggModeChoice" data-mode="printed" onclick="tillaggChooseMode('printed')">
+        <span class="tillaggChoiceIcon"><svg viewBox="0 0 24 24"><path d="M6 5h12v14H6z"></path><path d="M9 8h6M9 12h6M9 16h3"></path></svg></span>
+        <span><strong>Färdigprintade</strong><small>Etiketter finns redan på rulle.</small></span>
+      </button>
+      <button type="button" class="tillaggModeChoice" data-mode="unprinted" onclick="tillaggChooseMode('unprinted')">
+        <span class="tillaggChoiceIcon blue"><svg viewBox="0 0 24 24"><path d="M4 7h16v10H4z"></path><path d="M7 10h10M7 14h6"></path><path d="M16 4v4"></path></svg></span>
+        <span><strong>Oprintade</strong><small>Etiketter printas under körningen.</small></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="tillaggCard tillaggSetupCard tillaggHidden" id="tillaggSetupCard">
+    <div class="tillaggSectionHead">
+      <div>
+        <span class="tillaggLabel" id="tillaggSetupEyebrow">START</span>
+        <h3 id="tillaggSetupTitle">Produktionsuppgifter</h3>
+      </div>
+      <button class="tillaggTextBtn" type="button" onclick="tillaggResetMode()">Byt arbetssätt</button>
+    </div>
+    <div class="tillaggFields">
+      <label>Batch ID<input id="tillaggBatch" type="text" autocomplete="off" placeholder="Batch ID"></label>
+      <label>Produkt<input id="tillaggProduct" type="text" autocomplete="off" placeholder="Produkt"></label>
+    </div>
+    <div id="tillaggPrintedSetup" class="tillaggSubSetup tillaggHidden">
+      <div class="tillaggInlineHead"><strong>Rullar</strong><span>Registrera varje fysisk rulle med sitt eget intervall.</span></div>
+      <div class="tillaggRollForm">
+        <label>Rull-ID<input id="tillaggRollId" type="text" autocomplete="off" placeholder="Rulle A"></label>
+        <label>Första etikett<input id="tillaggRollStart" type="number" inputmode="numeric" min="0" value="0"></label>
+        <label>Sista etikett<input id="tillaggRollEnd" type="number" inputmode="numeric" min="0" value="0"></label>
+      </div>
+      <button type="button" class="blue tillaggAddRoll" onclick="tillaggAddRoll()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>Lägg till rulle</button>
+      <div class="tillaggRollList" id="tillaggSetupRollList"></div>
+    </div>
+    <div id="tillaggUnprintedSetup" class="tillaggSubSetup tillaggHidden">
+      <label>Startetikett<input id="tillaggStartLabel" type="number" inputmode="numeric" min="0" value="0"></label>
+    </div>
+    <button type="button" class="blue tillaggStartBtn" onclick="tillaggStartProduction()">Starta produktion</button>
+  </div>
+
+  <div class="tillaggActive tillaggHidden" id="tillaggActiveView">
+    <div class="tillaggCard tillaggOverviewCard">
+      <div class="tillaggOverviewHead">
+        <div><span class="tillaggLabel">TILLÄGGSETIKETTER</span><h3 id="tillaggActiveTitle">Produktion</h3></div>
+        <div class="tillaggStatusPill neutral" id="tillaggStatusPill">Ej kontrollerad</div>
+      </div>
+      <div class="tillaggMeta"><span>Produkt <strong id="tillaggMetaProduct">—</strong></span><span>Batch ID <strong id="tillaggMetaBatch">—</strong></span></div>
+      <div class="tillaggPrimaryGrid">
+        <div class="tillaggMetric"><span>Totalt kört</span><strong id="tillaggTotal">0</strong><small>st</small></div>
+        <div class="tillaggMetric tillaggNextMetric"><span>Nästa etikett</span><strong id="tillaggNext">—</strong></div>
+      </div>
+      <div class="tillaggSecondaryGrid">
+        <div><span>Kört sedan senaste kontroll</span><strong id="tillaggSince">0 st</strong></div>
+        <div><span>Senast kontrollerat</span><strong id="tillaggLastControl">0 st</strong></div>
+      </div>
+    </div>
+
+    <div class="tillaggCard tillaggProductionInputCard">
+      <div class="tillaggSectionHead compact"><div><span class="tillaggLabel">PRODUKTION</span><h3>Uppdatera totalt kört</h3></div></div>
+      <div class="tillaggProductionEntry"><input id="tillaggTotalInput" type="number" inputmode="numeric" min="0" value="0" aria-label="Totalt kört"><button type="button" class="blue" onclick="tillaggUpdateTotal()">Uppdatera</button></div>
+      <div class="tillaggHint">Ange den faktiska totalproduktionen. PACKVEX räknar själv mängden sedan senaste kontroll.</div>
+    </div>
+
+    <div class="tillaggCard tillaggRollActiveCard tillaggHidden" id="tillaggRollActiveCard">
+      <div class="tillaggSectionHead compact"><div><span class="tillaggLabel">AKTIV RULLE</span><h3 id="tillaggActiveRollName">—</h3></div><span class="tillaggRollStatus" id="tillaggActiveRollStatus">AKTIV</span></div>
+      <div class="tillaggRollMainGrid">
+        <div><span>Rullintervall</span><strong id="tillaggActiveRollRange">—</strong></div>
+        <div><span>Förbrukat</span><strong id="tillaggActiveRollUsed">0</strong></div>
+        <div><span>Kvar</span><strong id="tillaggActiveRollLeft">0</strong></div>
+        <div><span>Nästa etikett</span><strong id="tillaggActiveRollNext">—</strong></div>
+      </div>
+      <div id="tillaggRollSwitchArea"></div>
+    </div>
+
+    <div class="tillaggCard tillaggControlCard">
+      <div class="tillaggSectionHead compact"><div><span class="tillaggLabel">KONTROLL</span><h3>Kontrollera etikett</h3></div></div>
+      <div class="tillaggControlExpected"><span>Förväntad nästa etikett</span><strong id="tillaggExpected">—</strong></div>
+      <label class="tillaggActualLabel">Faktisk etikett<input id="tillaggActual" type="number" inputmode="numeric" min="0" value="0"></label>
+      <button type="button" class="blue tillaggControlBtn" onclick="tillaggCheckLabel()">Kontrollera etikett</button>
+      <div id="tillaggControlResult"></div>
+    </div>
+
+    <div class="tillaggCard tillaggRollsCard tillaggHidden" id="tillaggRollsCard">
+      <div class="tillaggSectionHead compact"><div><span class="tillaggLabel">RULLAR</span><h3>Rullstatus</h3></div><button type="button" class="tillaggTextBtn" onclick="tillaggOpenAddRoll()">+ Lägg till</button></div>
+      <div class="tillaggRollList" id="tillaggActiveRollList"></div>
+    </div>
+
+    <div class="tillaggCard tillaggEventsCard">
+      <div class="tillaggSectionHead compact"><div><span class="tillaggLabel">REGISTRERINGAR</span><h3>Senaste händelser</h3></div><button type="button" class="tillaggTextBtn" onclick="tillaggUndo()">Ångra senaste</button></div>
+      <div id="tillaggEvents" class="tillaggEvents"><div class="tillaggEmpty">Inga händelser ännu.</div></div>
+    </div>
+
+    <div class="tillaggFinishRow"><button type="button" class="red tillaggFinishBtn" onclick="tillaggFinishPrompt()">Avsluta produktion</button></div>
+  </div>
+</div>
+
 <div class="productionLayout" id="productionMainLayout">
 <div class="kolliProductionBackWrap"><button class="gray kolliProductionBack" onclick="backFromKolliProduction()">← Tillbaka</button></div>
 <div class="productionLeft">
@@ -4956,5 +5195,156 @@ function etFinishPrompt(){
   }
 }
 </style>
+<script id="packvexTillaggTestV1991">
+/* v1.9.91 — Tilläggsetiketter testproduktion. Isolerad från global historik/data. */
+(function(){
+  const KEY='packvex_tillagg_test_v1991';
+  let state=tillaggLoad()||tillaggBlank();
+  let pendingProduction=0;
+
+  function tillaggBlank(){return {mode:null,started:false,finished:false,batchId:'',product:'',total:0,lastControl:0,lastExpected:null,lastActual:null,lastDiff:0,status:'neutral',startLabel:0,rolls:[],activeRollId:null,nextRollId:null,events:[]};}
+  function tillaggLoad(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return x&&typeof x==='object'?x:null;}catch(e){return null;}}
+  function tillaggSave(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+  function fmt(n){return Number(n||0).toLocaleString('sv-SE');}
+  function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  function now(){return new Date().toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'});}
+  function $(id){return document.getElementById(id);}
+  function show(id,on){const e=$(id);if(e)e.classList.toggle('tillaggHidden',!on);}
+  function activeRoll(){return state.rolls.find(r=>r.id===state.activeRollId)||null;}
+  function availableRolls(){return state.rolls.filter(r=>r.status==='unused');}
+  function nextExpected(){
+    if(state.mode==='unprinted') return Number(state.startLabel||0)+Number(state.total||0);
+    const r=activeRoll();
+    if(!r)return null;
+    if(r.consumed<r.count)return r.start+r.consumed;
+    return null;
+  }
+  function addEvent(type,detail,kind){
+    state.events.unshift({time:now(),type,detail,kind:kind||'neutral'});
+  }
+  function snapshot(){return JSON.stringify({mode:state.mode,started:state.started,finished:state.finished,batchId:state.batchId,product:state.product,total:state.total,lastControl:state.lastControl,lastExpected:state.lastExpected,lastActual:state.lastActual,lastDiff:state.lastDiff,status:state.status,startLabel:state.startLabel,rolls:state.rolls,activeRollId:state.activeRollId,nextRollId:state.nextRollId});}
+  function recordAction(type,detail,kind,prev){addEvent(type,detail,kind);state.events[0].snapshot=prev;tillaggSave();render();}
+
+  window.openTillaggTest=function(){
+    const chooser=$('productionChooser'),main=$('productionMainLayout'),sub=$('productionSubView'),et=$('etiketteringView'),page=$('tillaggTestView'),pack=$('pack');
+    if(!page||!chooser)return;
+    chooser.classList.add('hidden');if(main)main.classList.add('hidden');if(sub)sub.classList.add('hidden');if(et)et.classList.add('hidden');page.classList.remove('hidden');
+    localStorage.setItem('packvex_tillagg_view','test');
+    render();window.scrollTo(0,0);
+  };
+  window.closeTillaggTest=function(){
+    const page=$('tillaggTestView'),chooser=$('productionChooser');if(page)page.classList.add('hidden');if(chooser)chooser.classList.remove('hidden');localStorage.setItem('packvex_tillagg_view','chooser');window.scrollTo(0,0);
+  };
+  window.tillaggChooseMode=function(mode){
+    if(state.started&&!state.finished)return;
+    state.mode=mode;
+    document.querySelectorAll('.tillaggModeChoice').forEach(b=>b.classList.toggle('selected',b.dataset.mode===mode));
+    show('tillaggSetupCard',true);show('tillaggPrintedSetup',mode==='printed');show('tillaggUnprintedSetup',mode==='unprinted');
+    $('tillaggSetupEyebrow').textContent=mode==='printed'?'FÄRDIGPRINTADE':'OPRINTADE';
+    $('tillaggSetupTitle').textContent=mode==='printed'?'Registrera rullar och starta':'Ange startnummer och starta';
+    renderSetupRolls();
+  };
+  window.tillaggResetMode=function(){if(state.started&&!state.finished)return;state=tillaggBlank();pendingProduction=0;tillaggSave();show('tillaggSetupCard',false);show('tillaggPrintedSetup',false);show('tillaggUnprintedSetup',false);document.querySelectorAll('.tillaggModeChoice').forEach(b=>b.classList.remove('selected'));render();};
+  window.tillaggAddRoll=function(){
+    const id=($('tillaggRollId')?.value||'').trim()||('Rulle '+(state.rolls.length+1));
+    const start=Number($('tillaggRollStart')?.value);const end=Number($('tillaggRollEnd')?.value);
+    if(!Number.isInteger(start)||!Number.isInteger(end)||start<0||end<start){alert('Kontrollera första och sista etikett.');return;}
+    if(state.rolls.some(r=>r.id.toLowerCase()===id.toLowerCase())){alert('Rull-ID finns redan.');return;}
+    state.rolls.push({id,start,end,count:end-start+1,consumed:0,status:'unused'});tillaggSave();renderSetupRolls();
+    if($('tillaggRollId'))$('tillaggRollId').value='';if($('tillaggRollStart'))$('tillaggRollStart').value='0';if($('tillaggRollEnd'))$('tillaggRollEnd').value='0';
+  };
+  window.tillaggRemoveSetupRoll=function(id){if(state.started)return;state.rolls=state.rolls.filter(r=>r.id!==id);tillaggSave();renderSetupRolls();};
+  function renderSetupRolls(){const w=$('tillaggSetupRollList');if(!w)return;w.innerHTML=state.rolls.map(r=>`<div class="tillaggRollRow"><span class="tillaggRollDot"></span><div class="tillaggRollInfo"><strong>${esc(r.id)}</strong><span>${fmt(r.start)}–${fmt(r.end)} · ${fmt(r.count)} etiketter</span></div><div class="tillaggRollActions"><button type="button" class="danger" onclick="tillaggRemoveSetupRoll('${esc(r.id).replace(/'/g,"\\'")}')">Ta bort</button></div></div>`).join('')||'<div class="tillaggEmpty">Inga rullar registrerade ännu.</div>';}
+  window.tillaggStartProduction=function(){
+    if(!state.mode){alert('Välj arbetssätt först.');return;}
+    const batch=($('tillaggBatch')?.value||'').trim();const product=($('tillaggProduct')?.value||'').trim();
+    if(!batch){alert('Ange Batch ID.');return;}
+    if(!product){alert('Ange produkt.');return;}
+    if(state.mode==='printed'&&state.rolls.length===0){alert('Lägg till minst en rulle.');return;}
+    if(state.mode==='unprinted'){
+      const start=Number($('tillaggStartLabel')?.value);if(!Number.isInteger(start)||start<0){alert('Ange ett giltigt startnummer.');return;}state.startLabel=start;
+    }
+    state.batchId=batch;state.product=product;state.started=true;state.finished=false;state.total=0;state.lastControl=0;state.lastExpected=state.mode==='unprinted'?state.startLabel:(state.rolls[0]?.start??null);state.lastActual=null;state.lastDiff=0;state.status='neutral';state.events=[];state.rolls=state.rolls.map((r,i)=>({...r,consumed:0,status:i===0?'active':'unused'}));state.activeRollId=state.mode==='printed'?state.rolls[0].id:null;state.nextRollId=null;
+    addEvent('START',state.mode==='printed'?'Startad med registrerade rullar':'Startad från etikett '+fmt(state.startLabel));tillaggSave();localStorage.setItem('packvex_tillagg_view','test');render();
+  };
+  function chooseNextRollIfNeeded(){
+    const cur=activeRoll();if(cur&&cur.consumed<cur.count)return cur;
+    if(cur){cur.status='done';}
+    let candidate=state.rolls.find(r=>r.id===state.nextRollId&&r.status==='unused');
+    if(!candidate){const unused=availableRolls();if(unused.length===1)candidate=unused[0];}
+    if(candidate){candidate.status='active';state.activeRollId=candidate.id;state.nextRollId=null;return candidate;}
+    state.activeRollId=null;return null;
+  }
+  function consumePrinted(delta){
+    let remaining=delta;pendingProduction=0;
+    while(remaining>0){
+      let r=chooseNextRollIfNeeded();if(!r){pendingProduction=remaining;return false;}
+      const capacity=r.count-r.consumed;const take=Math.min(capacity,remaining);r.consumed+=take;remaining-=take;if(r.consumed>=r.count)r.status='done';
+    }
+    return true;
+  }
+  window.tillaggUpdateTotal=function(){
+    if(!state.started||state.finished)return;
+    const total=Number($('tillaggTotalInput')?.value);if(!Number.isInteger(total)||total<state.total){alert('Totalt kört kan bara öka.');return;}
+    if(total===state.total)return;
+    const prev=snapshot();const delta=total-state.total;state.total=total;
+    if(state.mode==='printed')consumePrinted(delta);
+    const detail=pendingProduction?`Totalt ${fmt(total)} st · ${fmt(delta-pendingProduction)} etiketter förbrukade · ${fmt(pendingProduction)} väntar på vald rulle`:`Totalt ${fmt(total)} st · ${fmt(delta)} nya`;recordAction('PRODUKTION',detail,pendingProduction?'warn':'neutral',prev);
+  };
+  window.tillaggSelectNextRoll=function(id){
+    if(!state.started||state.mode!=='printed')return;const r=state.rolls.find(x=>x.id===id&&x.status==='unused');if(!r)return;const prev=snapshot();state.nextRollId=id;addEvent('RULLBYTE',`Nästa valda rulle: ${r.id} · ${fmt(r.start)}–${fmt(r.end)}`);state.events[0].snapshot=prev;tillaggSave();render();
+    if(pendingProduction){const delta=pendingProduction;pendingProduction=0;const p=snapshot();consumePrinted(delta);addEvent('PRODUKTION',`Resterande ${fmt(delta)} etiketter förbrukade på ${r.id}`, 'neutral');state.events[0].snapshot=p;tillaggSave();render();}
+  };
+  window.tillaggOpenAddRoll=function(){
+    show('tillaggSetupCard',true);show('tillaggPrintedSetup',true);$('tillaggRollId')?.focus();window.scrollTo({top:document.getElementById('tillaggSetupCard')?.offsetTop||0,behavior:'smooth'});
+  };
+  window.tillaggCheckLabel=function(){
+    if(!state.started||state.finished)return;const expected=nextExpected();const actual=Number($('tillaggActual')?.value);if(expected===null){alert('Ingen säker nästa etikett kan fastställas ännu. Välj eller aktivera nästa rulle.');return;}if(!Number.isInteger(actual)||actual<0){alert('Ange en giltig faktisk etikett.');return;}
+    const prev=snapshot();const diff=actual-expected;state.lastControl=state.total;state.lastExpected=expected;state.lastActual=actual;state.lastDiff=diff;state.status=diff===0?'ok':'warn';
+    if(diff===0)addEvent('KONTROLL',`Totalt ${fmt(state.total)} · Förväntad ${fmt(expected)} · Faktisk ${fmt(actual)} · Stämde`,'ok');
+    else addEvent('DIFF',`Förväntad ${fmt(expected)} · Faktisk ${fmt(actual)} · ${diff>0?'+':''}${fmt(diff)}`,'warn');
+    state.events[0].snapshot=prev;tillaggSave();render();
+  };
+  window.tillaggUndo=function(){
+    if(!state.events.length){return;}const ev=state.events[0];if(!ev.snapshot){return;}let snap;try{snap=JSON.parse(ev.snapshot);}catch(e){return;}const prev=snapshot();Object.assign(state,snap);state.events.unshift({time:now(),type:'UNDO',detail:`Ångrade: ${ev.type} · ${ev.detail}`,kind:'undo',snapshot:prev});tillaggSave();render();
+  };
+  window.tillaggFinishPrompt=function(){
+    if(!state.started||state.finished)return;
+    if(state.status==='warn'){if(!confirm('Det finns en aktiv etikettavvikelse. Vill du ändå avsluta produktionen?'))return;}
+    const total=state.total;const checks=state.events.filter(e=>e.type==='KONTROLL'||e.type==='DIFF').length;const diffs=state.events.filter(e=>e.type==='DIFF').length;const used=state.rolls.filter(r=>r.status==='active'||r.status==='done').length;
+    const msg=`Avsluta produktion?\n\nTotalt producerat: ${fmt(total)} st\nAntal kontroller: ${fmt(checks)}\nEtikettavvikelser: ${fmt(diffs)}\nRullar använda: ${fmt(used)}\nNästa etikett: ${nextExpected()===null?'—':fmt(nextExpected())}`;
+    if(!confirm(msg))return;const prev=snapshot();state.finished=true;state.started=false;addEvent('AVSLUT',`Produktion avslutad · ${fmt(total)} st`,'neutral');state.events[0].snapshot=prev;tillaggSave();render();
+  };
+  function render(){
+    const page=$('tillaggTestView');if(!page)return;
+    const hasActive=state.started&&!state.finished;show('tillaggModeCard',!hasActive);show('tillaggSetupCard',!hasActive&&!!state.mode);show('tillaggActiveView',hasActive||state.finished);
+    const title=$('tillaggActiveTitle');if(title)title.textContent=state.finished?'Produktion avslutad':'Produktion';
+    $('tillaggMetaProduct')&&( $('tillaggMetaProduct').textContent=state.product||'—');$('tillaggMetaBatch')&&( $('tillaggMetaBatch').textContent=state.batchId||'—');
+    $('tillaggTotal')&&( $('tillaggTotal').textContent=fmt(state.total));$('tillaggSince')&&( $('tillaggSince').textContent=fmt(Math.max(0,state.total-state.lastControl))+' st');$('tillaggLastControl')&&( $('tillaggLastControl').textContent=fmt(state.lastControl)+' st');
+    const next=nextExpected();$('tillaggNext')&&($('tillaggNext').textContent=next===null?'—':fmt(next));$('tillaggExpected')&&($('tillaggExpected').textContent=next===null?'—':fmt(next));
+    const pill=$('tillaggStatusPill');if(pill){pill.className='tillaggStatusPill '+(state.status==='ok'?'ok':state.status==='warn'?'warn':'neutral');pill.textContent=state.status==='ok'?'Kontrollerad':state.status==='warn'?'Avvikelse':'Ej kontrollerad';}
+    const top=$('tillaggTopStatus');if(top)top.textContent=state.finished?'Avslutad':hasActive?'Aktiv produktion':'Ej startad';
+    const input=$('tillaggTotalInput');if(input&&document.activeElement!==input)input.value=state.total;
+    const actual=$('tillaggActual');if(actual&&state.lastActual!==null&&document.activeElement!==actual)actual.value=state.lastActual;
+    show('tillaggRollActiveCard',hasActive&&state.mode==='printed');show('tillaggRollsCard',hasActive&&state.mode==='printed');
+    renderActiveRoll();renderRolls();renderEvents();renderControlResult();
+    if(!hasActive&&state.finished){$('tillaggFinishRow')?.classList.add('tillaggHidden');}
+    else $('tillaggFinishRow')?.classList.remove('tillaggHidden');
+  }
+  function renderActiveRoll(){const r=activeRoll();if(!r)return;const range=$( 'tillaggActiveRollRange');if(range)range.textContent=fmt(r.start)+'–'+fmt(r.end);$('tillaggActiveRollName')&&( $('tillaggActiveRollName').textContent=r.id);$('tillaggActiveRollUsed')&&( $('tillaggActiveRollUsed').textContent=fmt(r.consumed)+' st');$('tillaggActiveRollLeft')&&( $('tillaggActiveRollLeft').textContent=fmt(r.count-r.consumed));$('tillaggActiveRollNext')&&( $('tillaggActiveRollNext').textContent=r.consumed<r.count?fmt(r.start+r.consumed):'—');
+    const area=$('tillaggRollSwitchArea');if(!area)return;const unused=availableRolls();if(r.consumed>=r.count&&unused.length){area.innerHTML=`<div class="tillaggRollSwitch"><p>Aktuell rulle är slut. Välj vilken fysisk rulle som ska användas härnäst. PACKVEX ändrar inte nästa nummer till föregående rulles slutnummer.</p><div class="tillaggRollSwitchButtons">${unused.map(x=>`<button type="button" onclick="tillaggSelectNextRoll('${esc(x.id).replace(/'/g,"\\'")}')">${esc(x.id)} · ${fmt(x.start)}–${fmt(x.end)}</button>`).join('')}</div></div>`;}else area.innerHTML='';}
+  function renderRolls(){const w=$('tillaggActiveRollList');if(!w)return;w.innerHTML=state.rolls.map(r=>{const status=r.status==='active'?'AKTIV':r.status==='done'?'SLUT':'EJ ANVÄND';const dot=r.status==='active'?'active':r.status==='done'?'done':'';const actions=r.status==='unused'&&state.started?`<button type="button" onclick="tillaggSelectNextRoll('${esc(r.id).replace(/'/g,"\\'")}')">Sätt som nästa</button>`:'';return `<div class="tillaggRollRow"><span class="tillaggRollDot ${dot}"></span><div class="tillaggRollInfo"><strong>${esc(r.id)}</strong><span>${fmt(r.start)}–${fmt(r.end)} · ${fmt(r.count)} totalt · ${fmt(r.consumed)} förbrukat · ${fmt(r.count-r.consumed)} kvar · ${status}</span></div><div class="tillaggRollActions">${actions}</div></div>`;}).join('');}
+  function renderControlResult(){const w=$('tillaggControlResult');if(!w)return;if(state.lastExpected===null){w.innerHTML='';return;}if(state.lastDiff===0){w.innerHTML='<div class="tillaggResult ok"><strong>✓ ETIKETTEN STÄMMER</strong><span>Faktisk etikett '+fmt(state.lastActual)+' matchar förväntad etikett '+fmt(state.lastExpected)+'.</span></div>';}else{const d=state.lastDiff;w.innerHTML=`<div class="tillaggResult warn"><strong>${d>0?'+':''}${fmt(d)} etikett${Math.abs(d)===1?'':'er'}</strong><span>${d>0?fmt(Math.abs(d))+' etikett'+(Math.abs(d)===1?'':'er')+' mer förbrukad'+(Math.abs(d)===1?'':'e')+' än förväntat.':fmt(Math.abs(d))+' etikett'+(Math.abs(d)===1?'':'er')+' mindre förbrukad'+(Math.abs(d)===1?'':'e')+' än förväntat.'}</span><div class="tillaggPossible">Möjliga förklaringar: ${d>0?'dubbelprint · borttappad etikett · annan förbrukning':'1 enhet kan sakna etikett.'}</div></div>`;}}
+  function renderEvents(){const w=$('tillaggEvents');if(!w)return;w.innerHTML=state.events.length?state.events.slice(0,12).map(e=>`<div class="tillaggEvent ${e.kind||''}"><div class="tillaggEventTop"><span>${esc(e.type)}</span><span>${esc(e.time)}</span></div><div class="tillaggEventMeta">${esc(e.detail)}</div></div>`).join(''):'<div class="tillaggEmpty">Inga händelser ännu.</div>';}
+
+  // Restore the isolated test view after the original PACKVEX page-state boot has run.
+  setTimeout(function(){
+    if(localStorage.getItem('packvex_tillagg_view')==='test' && document.getElementById('pack') && !document.getElementById('pack').classList.contains('hidden'))openTillaggTest();
+    if(state.mode&&!state.started&&!state.finished){tillaggChooseMode(state.mode);}
+    render();
+  },0);
+  window.addEventListener('beforeunload',tillaggSave);
+})();
+</script>
 </body>
 </html>
