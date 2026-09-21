@@ -2319,6 +2319,30 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
   #productionChooser .etChooserCard > .tillaggEntryBtn{transition:none !important;}
 }
 </style>
+<style id="packvexTillaggOutsidePlacementV1993">
+/* v1.9.93 — Tilläggsetiketter ligger utanför 2-kolumnskorten, som egen rad under dem. */
+#productionChooser > .tillaggEntryOutside{
+  display:grid !important;
+  grid-column:auto !important;
+  position:relative !important;
+  width:calc(100% - 20px) !important;
+  min-height:64px !important;
+  height:auto !important;
+  margin:12px auto 0 !important;
+  padding:11px 14px !important;
+  box-sizing:border-box !important;
+  z-index:10 !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  background:rgba(255,255,255,.96) !important;
+  color:#172033 !important;
+  border:1px solid #dfe7f2 !important;
+  border-radius:16px !important;
+  box-shadow:0 4px 14px rgba(30,48,82,.045) !important;
+}
+#productionChooser > .tillaggEntryOutside .tillaggEntryArrow{color:#1459d9 !important;}
+@media(prefers-reduced-motion:reduce){#productionChooser > .tillaggEntryOutside{transition:none !important;}}
+</style>
 </head>
 <body>
 <header class="packvexHeaderV1988">
@@ -2371,12 +2395,12 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 <div class="etChooserHead"><div class="etChooserIcon"><svg viewbox="0 0 24 24"><path d="M4 5h16v14H4z"></path><path d="M7 9h10M7 13h7M7 17h4"></path></svg></div><div><h2>Produktion</h2><p>Välj arbetsfunktion.</p></div></div>
 <button class="etModeBtn" onclick="chooseProductionMode('kolli')"><span class="etModeIcon"><svg viewbox="0 0 24 24"><path d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M3.375 7.5h17.25"></path><path d="M8 5h8"></path></svg></span><span class="etModeText"><strong>Kolli → kapsel / well</strong><span>Ordinarie kolli- och produktionshantering.</span></span><span class="etModeArrow">›</span></button>
 <button class="etModeBtn" onclick="chooseProductionMode('etikettering')"><span class="etModeIcon green"><svg viewbox="0 0 24 24"><path d="M4 5h16v14H4z"></path><path d="M7 9h10M7 13h7M7 17h4"></path></svg></span><span class="etModeText"><strong>Etikettering</strong><span>Automatisk kontroll av nästa etikett.</span></span><span class="etModeArrow">›</span></button>
-<button class="tillaggEntryBtn" type="button" onclick="openTillaggTest()">
+</div></div>
+<button class="tillaggEntryBtn tillaggEntryOutside" type="button" onclick="openTillaggTest()">
   <span class="tillaggEntryIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6.5h16v11H4z"></path><path d="M7 9.5h10M7 13h6"></path><path d="M17.5 4v4M15.5 6h4"></path></svg></span>
   <span><strong>Tilläggsetiketter</strong><small>Produktionsfunktion · test</small></span>
   <span class="tillaggEntryArrow" aria-hidden="true">›</span>
 </button>
-</div></div>
 <div class="hidden etPage" id="etiketteringView">
 <div class="etTop"><div><button class="etBack" onclick="backToProductionChooser()">‹ Produktion</button><div class="etTopTitle"><div><h2 class="etTitle">Etikettering</h2><div class="etSubtitle">Slipp den handskrivna lappen. PACKVEX håller reda på nästa etikett.</div></div></div></div><div class="etRunCounter" id="etRunCounter">Kört 0 st</div></div>
 <div class="etCard etStartPremiumCard" id="etStartCard">
@@ -5222,10 +5246,10 @@ function etFinishPrompt(){
   }
 }
 </style>
-<script id="packvexTillaggTestV1991">
-/* v1.9.91 — Tilläggsetiketter testproduktion. Isolerad från global historik/data. */
+<script id="packvexTillaggTestV1993">
+/* v1.9.93 — Tilläggsetiketter testproduktion. Isolerad från global historik/data. */
 (function(){
-  const KEY='packvex_tillagg_test_v1991';
+  const KEY='packvex_tillagg_test_v1993';
   let state=tillaggLoad()||tillaggBlank();
   let pendingProduction=0;
 
