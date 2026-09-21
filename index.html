@@ -2513,7 +2513,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
       <div class="tillaggRollList" id="tillaggSetupRollList"></div>
     </div>
     <div id="tillaggUnprintedSetup" class="tillaggSubSetup tillaggHidden">
-      <label>Startetikett<input id="tillaggStartLabel" type="number" inputmode="numeric" min="0" value="0"></label>
+      <label>Startetikett<input id="tillaggStartLabel" type="number" inputmode="numeric" min="1" value="1"></label>
     </div>
     <button type="button" class="blue tillaggStartBtn" onclick="tillaggStartProduction()">Starta produktion</button>
   </div>
@@ -2890,6 +2890,8 @@ function showPage(page,fromNav=false){
 localStorage.setItem(PAGE_STATE_KEY,page);
 
 pages.forEach(p=>document.getElementById(p).classList.add("hidden"));
+const tillaggTestPage=document.getElementById("tillaggTestView");
+if(tillaggTestPage) tillaggTestPage.classList.add("hidden");
 document.getElementById(page).classList.remove("hidden");
 document.querySelectorAll("nav button").forEach(btn=>btn.classList.remove("active"));
 if(page==="home")document.getElementById("navHome").classList.add("active");
@@ -2900,6 +2902,7 @@ if(page==="historik")document.getElementById("navHistorik").classList.add("activ
 if(["more","print","pall","qr","oversikt","installningar","data","dataOlder","omAppen"].includes(page))document.getElementById("navMore").classList.add("active");
 renderAll();
 window.scrollTo(0,0);
+requestAnimationFrame(()=>window.scrollTo(0,0));
 }
 
 
@@ -2908,11 +2911,15 @@ let etState={started:false,runQty:108,nextLabel:null,scrapLabel:0,scrapUnit:0,la
 function openProductionChooser(){
  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),et=document.getElementById("etiketteringView");
  if(!chooser||!main)return;
+ const tillaggTest=document.getElementById("tillaggTestView");
+ if(tillaggTest)tillaggTest.classList.add("hidden");
  chooser.classList.remove("hidden"); main.classList.add("hidden"); if(sub)sub.classList.add("hidden"); if(et)et.classList.add("hidden"); document.body.classList.remove("etStartMode"); localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser"); window.scrollTo(0,0);
 }
 function chooseProductionMode(mode){
  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),et=document.getElementById("etiketteringView"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
  if(!chooser||!main||!et)return;
+ const tillaggTest=document.getElementById("tillaggTestView");
+ if(tillaggTest)tillaggTest.classList.add("hidden");
  chooser.classList.add("hidden"); if(sub)sub.classList.add("hidden");
  if(mode==="kolli"){
   localStorage.setItem(PRODUCTION_VIEW_KEY,"kolli");
@@ -2925,6 +2932,8 @@ function chooseProductionMode(mode){
 function backFromKolliProduction(){
  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),pack=document.getElementById("pack");
  if(!chooser||!main||!pack)return;
+ const tillaggTest=document.getElementById("tillaggTestView");
+ if(tillaggTest)tillaggTest.classList.add("hidden");
  localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
  chooser.classList.remove("hidden");
  main.classList.add("hidden");
@@ -2948,6 +2957,8 @@ function restoreEtState(){
  }catch(e){localStorage.removeItem(ET_STATE_KEY);return false;}
 }
 function restoreProductionView(){
+ const tillaggTest=document.getElementById("tillaggTestView");
+ if(tillaggTest)tillaggTest.classList.add("hidden");
  let saved=localStorage.getItem(PRODUCTION_VIEW_KEY)||"chooser";
  if(saved==="etikettering-active" && restoreEtState()){
   let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),et=document.getElementById("etiketteringView"),sub=document.getElementById("productionSubView");
@@ -3082,6 +3093,8 @@ function etRender(){
 function openProductionView(view){
 let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
 if(!main||!sub||!pack)return;
+const tillaggTest=document.getElementById("tillaggTestView");
+if(tillaggTest)tillaggTest.classList.add("hidden");
 localStorage.setItem(PRODUCTION_VIEW_KEY,view);
 main.classList.add("hidden");
 sub.classList.add("hidden");
@@ -3110,6 +3123,8 @@ if(view==="registered"||view==="registrations"){
 function closeProductionView(){
 let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
 if(!main||!sub||!pack)return;
+const tillaggTest=document.getElementById("tillaggTestView");
+if(tillaggTest)tillaggTest.classList.add("hidden");
 localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
 let wasSub=!sub.classList.contains("hidden");
 if(!wasSub){
@@ -5257,9 +5272,9 @@ function etFinishPrompt(){
 .tillaggKassCard .orange{background:#f28b00!important;color:#fff!important}.tillaggKassStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.tillaggKassStats span{display:flex;justify-content:space-between;gap:8px;padding:9px 10px;border-radius:10px;background:#fff7e9;color:#7a5a18;font-size:11px}.tillaggKassStats strong{color:#172033;font-size:13px}@media(prefers-reduced-motion:reduce){.tillaggKassCard *{transition:none!important}}
 </style>
 <script id="packvexTillaggTestV1994">
-/* v1.9.95 — Tilläggsetiketter testproduktion. Isolerad från global historik/data. */
+/* v1.9.97 — Tilläggsetiketter testproduktion. Isolerad från global historik/data. */
 (function(){
-  const KEY='packvex_tillagg_test_v1995';
+  const KEY='packvex_tillagg_test_v1997';
   let state=tillaggLoad()||tillaggBlank();
   let pendingProduction=0;
 
@@ -5325,7 +5340,7 @@ function etFinishPrompt(){
     if(!product){alert('Ange produkt.');return;}
     if(state.mode==='printed'&&state.rolls.length===0){alert('Lägg till minst en rulle.');return;}
     if(state.mode==='unprinted'){
-      const start=Number($('tillaggStartLabel')?.value);if(!Number.isInteger(start)||start<0){alert('Ange ett giltigt startnummer.');return;}state.startLabel=start;
+      const start=Number($('tillaggStartLabel')?.value);if(!Number.isInteger(start)||start<1){alert('Startetiketten måste börja på 1 eller högre. 0 är ingen etikett.');return;}state.startLabel=start;
     }
     state.batchId=batch;state.product=product;state.started=true;state.finished=false;state.total=0;state.scrap=0;state.lastControl=0;state.lastExpected=state.mode==='unprinted'?state.startLabel:(state.rolls[0]?.start??null);state.lastActual=null;state.lastDiff=0;state.status='neutral';state.events=[];state.rolls=state.rolls.map((r,i)=>({...r,consumed:0,status:i===0?'active':'unused'}));state.activeRollId=state.mode==='printed'?state.rolls[0].id:null;state.nextRollId=null;
     addEvent('START',state.mode==='printed'?'Startad med registrerade rullar':'Startad från etikett '+fmt(state.startLabel));tillaggSave();localStorage.setItem('packvex_tillagg_view','test');render();
@@ -5380,7 +5395,7 @@ function etFinishPrompt(){
     show('tillaggSetupCard',true);show('tillaggPrintedSetup',true);$('tillaggRollId')?.focus();window.scrollTo({top:document.getElementById('tillaggSetupCard')?.offsetTop||0,behavior:'smooth'});
   };
   window.tillaggCheckLabel=function(){
-    if(!state.started||state.finished)return;const expected=nextExpected();const actual=Number($('tillaggActual')?.value);if(expected===null){alert('Ingen säker nästa etikett kan fastställas ännu. Välj eller aktivera nästa rulle.');return;}if(!Number.isInteger(actual)||actual<0){alert('Ange en giltig faktisk etikett.');return;}
+    if(!state.started||state.finished)return;const expected=nextExpected();const actual=Number($('tillaggActual')?.value);if(expected===null){alert('Ingen säker nästa etikett kan fastställas ännu. Välj eller aktivera nästa rulle.');return;}if(!Number.isInteger(actual)||actual<1){alert('Ange en giltig faktisk etikett från 1 eller högre. 0 är ingen etikett.');return;}
     const prev=snapshot();const diff=actual-expected;state.lastControl=Number(state.total||0);state.lastExpected=expected;state.lastActual=actual;state.lastDiff=diff;state.status=diff===0?'ok':'warn';
     if(diff===0)addEvent('KONTROLL',`Totalt ${fmt(state.total)} · Förväntad ${fmt(expected)} · Faktisk ${fmt(actual)} · Stämde`,'ok');
     else addEvent('DIFF',`Förväntad ${fmt(expected)} · Faktisk ${fmt(actual)} · ${diff>0?'+':''}${fmt(diff)}`,'warn');
