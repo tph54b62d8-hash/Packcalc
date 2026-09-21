@@ -2321,7 +2321,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 </style>
 <style id="packvexTillaggOutsidePlacementV1993">
 /* v1.9.93 — Tilläggsetiketter ligger utanför 2-kolumnskorten, som egen rad under dem. */
-#productionChooser > .tillaggEntryOutside{
+#productionChooser + .tillaggEntryOutside{
   display:grid !important;
   grid-column:auto !important;
   position:relative !important;
@@ -2340,8 +2340,8 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
   border-radius:16px !important;
   box-shadow:0 4px 14px rgba(30,48,82,.045) !important;
 }
-#productionChooser > .tillaggEntryOutside .tillaggEntryArrow{color:#1459d9 !important;}
-@media(prefers-reduced-motion:reduce){#productionChooser > .tillaggEntryOutside{transition:none !important;}}
+#productionChooser + .tillaggEntryOutside .tillaggEntryArrow{color:#1459d9 !important;}
+@media(prefers-reduced-motion:reduce){#productionChooser + .tillaggEntryOutside{transition:none !important;}}
 </style>
 </head>
 <body>
@@ -2909,7 +2909,7 @@ requestAnimationFrame(()=>window.scrollTo(0,0));
 /* ETIKETTERING – helt separat från ordinarie Kolli-produktion */
 let etState={started:false,runQty:108,nextLabel:null,scrapLabel:0,scrapUnit:0,labelsAdded:0,labelsConsumed:0,approved:false,actual:null,totalRun:0,history:[],finished:false,rolls:[],activeRoll:0};
 function setTillaggEntryVisible(visible){
- const btn=document.querySelector('#productionChooser > .tillaggEntryOutside');
+ const btn=document.querySelector('#productionChooser + .tillaggEntryOutside');
  if(!btn)return;
  btn.classList.toggle('tillaggEntryVisible',!!visible);
  btn.setAttribute('aria-hidden',visible?'false':'true');
@@ -5281,15 +5281,15 @@ function etFinishPrompt(){
 }
 </style>
 <style id="packvexTillaggVisibilityV11000">
-/* v1.10.00 — Tilläggsetiketter-kortet får endast visas när Produktionsvalet är synligt. */
-#productionChooser > .tillaggEntryOutside{display:none !important;}
-#productionChooser > .tillaggEntryOutside.tillaggEntryVisible{display:grid !important;}
+/* v1.10.01 — Tilläggsetiketter-kortet får endast visas när Produktionsvalet är synligt. */
+#productionChooser + .tillaggEntryOutside{display:none !important;}
+#productionChooser + .tillaggEntryOutside.tillaggEntryVisible{display:grid !important;}
 </style>
 <style id="packvexTillaggKassV1994">
 .tillaggKassCard .orange{background:#f28b00!important;color:#fff!important}.tillaggKassStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.tillaggKassStats span{display:flex;justify-content:space-between;gap:8px;padding:9px 10px;border-radius:10px;background:#fff7e9;color:#7a5a18;font-size:11px}.tillaggKassStats strong{color:#172033;font-size:13px}@media(prefers-reduced-motion:reduce){.tillaggKassCard *{transition:none!important}}
 </style>
 <script id="packvexTillaggTestV1994">
-/* v1.10.00 — Tilläggsetiketter-kortet visas endast i Produktionsvalet.
+/* v1.10.01 — Tilläggsetiketter-kortet visas endast i Produktionsvalet.
    Säker visningsstyrning så kortet inte följer med till Kolli, Etikettering eller Packalkylator. */
 /* v1.9.97 — Tilläggsetiketter testproduktion. Isolerad från global historik/data. */
 (function(){
