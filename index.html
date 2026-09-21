@@ -2541,6 +2541,13 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
       <div class="tillaggHint">Ange den faktiska totalproduktionen. PACKVEX räknar själv mängden sedan senaste kontroll.</div>
     </div>
 
+    <div class="tillaggCard tillaggKassCard">
+      <div class="tillaggSectionHead compact"><div><span class="tillaggLabel">KASSATION</span><h3>Räkna bort kassation</h3></div></div>
+      <div class="tillaggProductionEntry"><input id="tillaggScrapInput" type="number" inputmode="numeric" min="0" value="0" aria-label="Kassation totalt"><button type="button" class="orange" onclick="tillaggUpdateScrap()">Uppdatera</button></div>
+      <div class="tillaggKassStats"><span>Kassation <strong id="tillaggScrapValue">0</strong> st</span><span>Kört <strong id="tillaggNetTotal">0</strong> st</span></div>
+      <div class="tillaggHint">Kassation påverkar endast etikettförbrukningen i båda arbetssätten. Kört påverkas inte.</div>
+    </div>
+
     <div class="tillaggCard tillaggRollActiveCard tillaggHidden" id="tillaggRollActiveCard">
       <div class="tillaggSectionHead compact"><div><span class="tillaggLabel">AKTIV RULLE</span><h3 id="tillaggActiveRollName">—</h3></div><span class="tillaggRollStatus" id="tillaggActiveRollStatus">AKTIV</span></div>
       <div class="tillaggRollMainGrid">
@@ -5246,14 +5253,17 @@ function etFinishPrompt(){
   }
 }
 </style>
-<script id="packvexTillaggTestV1993">
-/* v1.9.93 — Tilläggsetiketter testproduktion. Isolerad från global historik/data. */
+<style id="packvexTillaggKassV1994">
+.tillaggKassCard .orange{background:#f28b00!important;color:#fff!important}.tillaggKassStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.tillaggKassStats span{display:flex;justify-content:space-between;gap:8px;padding:9px 10px;border-radius:10px;background:#fff7e9;color:#7a5a18;font-size:11px}.tillaggKassStats strong{color:#172033;font-size:13px}@media(prefers-reduced-motion:reduce){.tillaggKassCard *{transition:none!important}}
+</style>
+<script id="packvexTillaggTestV1994">
+/* v1.9.95 — Tilläggsetiketter testproduktion. Isolerad från global historik/data. */
 (function(){
-  const KEY='packvex_tillagg_test_v1993';
+  const KEY='packvex_tillagg_test_v1995';
   let state=tillaggLoad()||tillaggBlank();
   let pendingProduction=0;
 
-  function tillaggBlank(){return {mode:null,started:false,finished:false,batchId:'',product:'',total:0,lastControl:0,lastExpected:null,lastActual:null,lastDiff:0,status:'neutral',startLabel:0,rolls:[],activeRollId:null,nextRollId:null,events:[]};}
+  function tillaggBlank(){return {mode:null,started:false,finished:false,batchId:'',product:'',total:0,scrap:0,lastControl:0,lastExpected:null,lastActual:null,lastDiff:0,status:'neutral',startLabel:0,rolls:[],activeRollId:null,nextRollId:null,events:[]};}
   function tillaggLoad(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return x&&typeof x==='object'?x:null;}catch(e){return null;}}
   function tillaggSave(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
   function fmt(n){return Number(n||0).toLocaleString('sv-SE');}
@@ -5263,8 +5273,10 @@ function etFinishPrompt(){
   function show(id,on){const e=$(id);if(e)e.classList.toggle('tillaggHidden',!on);}
   function activeRoll(){return state.rolls.find(r=>r.id===state.activeRollId)||null;}
   function availableRolls(){return state.rolls.filter(r=>r.status==='unused');}
+  function netTotal(){return Number(state.total||0);}
+  function netSinceLastControl(){return Math.max(0,Number(state.total||0)-Number(state.lastControl||0));}
   function nextExpected(){
-    if(state.mode==='unprinted') return Number(state.startLabel||0)+Number(state.total||0);
+    if(state.mode==='unprinted') return Number(state.startLabel||0)+Number(state.total||0)+Number(state.scrap||0);
     const r=activeRoll();
     if(!r)return null;
     if(r.consumed<r.count)return r.start+r.consumed;
@@ -5273,7 +5285,7 @@ function etFinishPrompt(){
   function addEvent(type,detail,kind){
     state.events.unshift({time:now(),type,detail,kind:kind||'neutral'});
   }
-  function snapshot(){return JSON.stringify({mode:state.mode,started:state.started,finished:state.finished,batchId:state.batchId,product:state.product,total:state.total,lastControl:state.lastControl,lastExpected:state.lastExpected,lastActual:state.lastActual,lastDiff:state.lastDiff,status:state.status,startLabel:state.startLabel,rolls:state.rolls,activeRollId:state.activeRollId,nextRollId:state.nextRollId});}
+  function snapshot(){return JSON.stringify({mode:state.mode,started:state.started,finished:state.finished,batchId:state.batchId,product:state.product,total:state.total,scrap:state.scrap,lastControl:state.lastControl,lastExpected:state.lastExpected,lastActual:state.lastActual,lastDiff:state.lastDiff,status:state.status,startLabel:state.startLabel,rolls:state.rolls,activeRollId:state.activeRollId,nextRollId:state.nextRollId});}
   function recordAction(type,detail,kind,prev){addEvent(type,detail,kind);state.events[0].snapshot=prev;tillaggSave();render();}
 
   window.openTillaggTest=function(){
@@ -5315,7 +5327,7 @@ function etFinishPrompt(){
     if(state.mode==='unprinted'){
       const start=Number($('tillaggStartLabel')?.value);if(!Number.isInteger(start)||start<0){alert('Ange ett giltigt startnummer.');return;}state.startLabel=start;
     }
-    state.batchId=batch;state.product=product;state.started=true;state.finished=false;state.total=0;state.lastControl=0;state.lastExpected=state.mode==='unprinted'?state.startLabel:(state.rolls[0]?.start??null);state.lastActual=null;state.lastDiff=0;state.status='neutral';state.events=[];state.rolls=state.rolls.map((r,i)=>({...r,consumed:0,status:i===0?'active':'unused'}));state.activeRollId=state.mode==='printed'?state.rolls[0].id:null;state.nextRollId=null;
+    state.batchId=batch;state.product=product;state.started=true;state.finished=false;state.total=0;state.scrap=0;state.lastControl=0;state.lastExpected=state.mode==='unprinted'?state.startLabel:(state.rolls[0]?.start??null);state.lastActual=null;state.lastDiff=0;state.status='neutral';state.events=[];state.rolls=state.rolls.map((r,i)=>({...r,consumed:0,status:i===0?'active':'unused'}));state.activeRollId=state.mode==='printed'?state.rolls[0].id:null;state.nextRollId=null;
     addEvent('START',state.mode==='printed'?'Startad med registrerade rullar':'Startad från etikett '+fmt(state.startLabel));tillaggSave();localStorage.setItem('packvex_tillagg_view','test');render();
   };
   function chooseNextRollIfNeeded(){
@@ -5334,13 +5346,31 @@ function etFinishPrompt(){
     }
     return true;
   }
+  function rollbackPrinted(count){
+    let remaining=count;
+    for(let i=state.rolls.length-1;i>=0&&remaining>0;i--){
+      const r=state.rolls[i];if(r.consumed<=0)continue;const take=Math.min(r.consumed,remaining);r.consumed-=take;remaining-=take;r.status=r.consumed>0?'active':'unused';
+    }
+    const active=state.rolls.find(r=>r.status==='active');state.activeRollId=active?active.id:null;
+    if(!active){const first=state.rolls.find(r=>r.status==='unused');if(first)state.activeRollId=first.id;}
+  }
   window.tillaggUpdateTotal=function(){
     if(!state.started||state.finished)return;
     const total=Number($('tillaggTotalInput')?.value);if(!Number.isInteger(total)||total<state.total){alert('Totalt kört kan bara öka.');return;}
     if(total===state.total)return;
-    const prev=snapshot();const delta=total-state.total;state.total=total;
-    if(state.mode==='printed')consumePrinted(delta);
-    const detail=pendingProduction?`Totalt ${fmt(total)} st · ${fmt(delta-pendingProduction)} etiketter förbrukade · ${fmt(pendingProduction)} väntar på vald rulle`:`Totalt ${fmt(total)} st · ${fmt(delta)} nya`;recordAction('PRODUKTION',detail,pendingProduction?'warn':'neutral',prev);
+    const prev=snapshot();const oldTotal=Number(state.total||0);state.total=total;const delta=Number(state.total||0)-oldTotal;
+    if(state.mode==='printed'&&delta>0)consumePrinted(delta);
+    if(state.mode==='printed'&&delta<0)rollbackPrinted(-delta);
+    const detail=`Totalt producerat ${fmt(total)} st · Kassation ${fmt(state.scrap)} st · Etikettförbrukning totalt ${fmt(Number(state.total||0)+Number(state.scrap||0))} st`;recordAction('PRODUKTION',detail,pendingProduction?'warn':'neutral',prev);
+  };
+  window.tillaggUpdateScrap=function(){
+    if(!state.started||state.finished)return;
+    const scrap=Number($('tillaggScrapInput')?.value);if(!Number.isInteger(scrap)||scrap<0||scrap>state.total){alert('Kassation måste vara mellan 0 och totalt kört.');return;}
+    if(scrap===state.scrap)return;
+    const prev=snapshot();const oldScrap=Number(state.scrap||0);state.scrap=scrap;const delta=Number(state.scrap||0)-oldScrap;
+    if(state.mode==='printed'&&delta>0)consumePrinted(delta);
+    if(state.mode==='printed'&&delta<0)rollbackPrinted(-delta);
+    addEvent('KASSATION',`Kassation ${fmt(state.scrap)} st · Påverkar etikettförbrukningen med ${delta>=0?'+':''}${fmt(delta)} st`,'warn');state.events[0].snapshot=prev;tillaggSave();render();
   };
   window.tillaggSelectNextRoll=function(id){
     if(!state.started||state.mode!=='printed')return;const r=state.rolls.find(x=>x.id===id&&x.status==='unused');if(!r)return;const prev=snapshot();state.nextRollId=id;addEvent('RULLBYTE',`Nästa valda rulle: ${r.id} · ${fmt(r.start)}–${fmt(r.end)}`);state.events[0].snapshot=prev;tillaggSave();render();
@@ -5351,7 +5381,7 @@ function etFinishPrompt(){
   };
   window.tillaggCheckLabel=function(){
     if(!state.started||state.finished)return;const expected=nextExpected();const actual=Number($('tillaggActual')?.value);if(expected===null){alert('Ingen säker nästa etikett kan fastställas ännu. Välj eller aktivera nästa rulle.');return;}if(!Number.isInteger(actual)||actual<0){alert('Ange en giltig faktisk etikett.');return;}
-    const prev=snapshot();const diff=actual-expected;state.lastControl=state.total;state.lastExpected=expected;state.lastActual=actual;state.lastDiff=diff;state.status=diff===0?'ok':'warn';
+    const prev=snapshot();const diff=actual-expected;state.lastControl=Number(state.total||0);state.lastExpected=expected;state.lastActual=actual;state.lastDiff=diff;state.status=diff===0?'ok':'warn';
     if(diff===0)addEvent('KONTROLL',`Totalt ${fmt(state.total)} · Förväntad ${fmt(expected)} · Faktisk ${fmt(actual)} · Stämde`,'ok');
     else addEvent('DIFF',`Förväntad ${fmt(expected)} · Faktisk ${fmt(actual)} · ${diff>0?'+':''}${fmt(diff)}`,'warn');
     state.events[0].snapshot=prev;tillaggSave();render();
@@ -5362,7 +5392,7 @@ function etFinishPrompt(){
   window.tillaggFinishPrompt=function(){
     if(!state.started||state.finished)return;
     if(state.status==='warn'){if(!confirm('Det finns en aktiv etikettavvikelse. Vill du ändå avsluta produktionen?'))return;}
-    const total=state.total;const checks=state.events.filter(e=>e.type==='KONTROLL'||e.type==='DIFF').length;const diffs=state.events.filter(e=>e.type==='DIFF').length;const used=state.rolls.filter(r=>r.status==='active'||r.status==='done').length;
+    const total=Number(state.total||0);const checks=state.events.filter(e=>e.type==='KONTROLL'||e.type==='DIFF').length;const diffs=state.events.filter(e=>e.type==='DIFF').length;const used=state.rolls.filter(r=>r.status==='active'||r.status==='done').length;
     const msg=`Avsluta produktion?\n\nTotalt producerat: ${fmt(total)} st\nAntal kontroller: ${fmt(checks)}\nEtikettavvikelser: ${fmt(diffs)}\nRullar använda: ${fmt(used)}\nNästa etikett: ${nextExpected()===null?'—':fmt(nextExpected())}`;
     if(!confirm(msg))return;const prev=snapshot();state.finished=true;state.started=false;addEvent('AVSLUT',`Produktion avslutad · ${fmt(total)} st`,'neutral');state.events[0].snapshot=prev;tillaggSave();render();
   };
@@ -5371,11 +5401,11 @@ function etFinishPrompt(){
     const hasActive=state.started&&!state.finished;show('tillaggModeCard',!hasActive);show('tillaggSetupCard',!hasActive&&!!state.mode);show('tillaggActiveView',hasActive||state.finished);
     const title=$('tillaggActiveTitle');if(title)title.textContent=state.finished?'Produktion avslutad':'Produktion';
     $('tillaggMetaProduct')&&( $('tillaggMetaProduct').textContent=state.product||'—');$('tillaggMetaBatch')&&( $('tillaggMetaBatch').textContent=state.batchId||'—');
-    $('tillaggTotal')&&( $('tillaggTotal').textContent=fmt(state.total));$('tillaggSince')&&( $('tillaggSince').textContent=fmt(Math.max(0,state.total-state.lastControl))+' st');$('tillaggLastControl')&&( $('tillaggLastControl').textContent=fmt(state.lastControl)+' st');
+    $('tillaggTotal')&&( $('tillaggTotal').textContent=fmt(Number(state.total||0)));$('tillaggSince')&&( $('tillaggSince').textContent=fmt(netSinceLastControl())+' st');$('tillaggLastControl')&&( $('tillaggLastControl').textContent=fmt(state.lastControl)+' st');
     const next=nextExpected();$('tillaggNext')&&($('tillaggNext').textContent=next===null?'—':fmt(next));$('tillaggExpected')&&($('tillaggExpected').textContent=next===null?'—':fmt(next));
     const pill=$('tillaggStatusPill');if(pill){pill.className='tillaggStatusPill '+(state.status==='ok'?'ok':state.status==='warn'?'warn':'neutral');pill.textContent=state.status==='ok'?'Kontrollerad':state.status==='warn'?'Avvikelse':'Ej kontrollerad';}
     const top=$('tillaggTopStatus');if(top)top.textContent=state.finished?'Avslutad':hasActive?'Aktiv produktion':'Ej startad';
-    const input=$('tillaggTotalInput');if(input&&document.activeElement!==input)input.value=state.total;
+    const input=$('tillaggTotalInput');if(input&&document.activeElement!==input)input.value=state.total;const scrapInput=$('tillaggScrapInput');if(scrapInput&&document.activeElement!==scrapInput)scrapInput.value=state.scrap;const netOut=$('tillaggNetTotal');if(netOut)netOut.textContent=fmt(Number(state.total||0));const scrapOut=$('tillaggScrapValue');if(scrapOut)scrapOut.textContent=fmt(state.scrap);
     const actual=$('tillaggActual');if(actual&&state.lastActual!==null&&document.activeElement!==actual)actual.value=state.lastActual;
     show('tillaggRollActiveCard',hasActive&&state.mode==='printed');show('tillaggRollsCard',hasActive&&state.mode==='printed');
     renderActiveRoll();renderRolls();renderEvents();renderControlResult();
