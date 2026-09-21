@@ -2292,6 +2292,33 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 }
 @media(prefers-reduced-motion:reduce){.tillaggActive,.tillaggEntryBtn,.tillaggModeChoice{animation:none!important;transition:none!important;}}
 </style>
+
+<style id="packvexTillaggPlacementFixV1992">
+/* v1.9.92 — endast placering/synlighet för Tilläggsetiketter i Produktionsval. */
+#productionChooser .etChooserCard > .tillaggEntryBtn{
+  grid-column:1 / -1 !important;
+  grid-row:auto !important;
+  display:grid !important;
+  position:relative !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  width:100% !important;
+  min-height:66px !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:12px 14px !important;
+  box-sizing:border-box !important;
+  z-index:5 !important;
+}
+@media(max-width:430px){
+  #productionChooser .etChooserCard > .tillaggEntryBtn{
+    min-height:62px !important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #productionChooser .etChooserCard > .tillaggEntryBtn{transition:none !important;}
+}
+</style>
 </head>
 <body>
 <header class="packvexHeaderV1988">
@@ -5194,12 +5221,6 @@ function etFinishPrompt(){
     height:48px!important;
   }
 }
-<style id="packvexTillaggPlacementV1992">
-/* v1.9.92 — endast placering av Tilläggsetiketter i Produktionsval. */
-#productionChooser .etChooserCard > .tillaggEntryBtn{grid-column:1 / -1!important;display:grid!important;width:100%!important;min-height:66px!important;height:auto!important;margin:0!important;padding:12px 14px!important;}
-#productionChooser .etChooserCard > .tillaggEntryBtn{align-self:start!important;}
-@media(max-width:430px){#productionChooser .etChooserCard > .tillaggEntryBtn{min-height:64px!important;padding:11px 13px!important;border-radius:16px!important;}}
-</style>
 </style>
 <script id="packvexTillaggTestV1991">
 /* v1.9.91 — Tilläggsetiketter testproduktion. Isolerad från global historik/data. */
