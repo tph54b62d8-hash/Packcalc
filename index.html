@@ -2911,7 +2911,7 @@ let etState={started:false,runQty:108,nextLabel:null,scrapLabel:0,scrapUnit:0,la
 function setTillaggEntryVisible(visible){
  const btn=document.querySelector('#productionChooser > .tillaggEntryOutside');
  if(!btn)return;
- btn.style.setProperty('display',visible?'grid':'none','important');
+ btn.classList.toggle('tillaggEntryVisible',!!visible);
  btn.setAttribute('aria-hidden',visible?'false':'true');
  if(!visible)btn.setAttribute('tabindex','-1'); else btn.removeAttribute('tabindex');
 }
@@ -5280,11 +5280,16 @@ function etFinishPrompt(){
   }
 }
 </style>
+<style id="packvexTillaggVisibilityV11000">
+/* v1.10.00 — Tilläggsetiketter-kortet får endast visas när Produktionsvalet är synligt. */
+#productionChooser > .tillaggEntryOutside{display:none !important;}
+#productionChooser > .tillaggEntryOutside.tillaggEntryVisible{display:grid !important;}
+</style>
 <style id="packvexTillaggKassV1994">
 .tillaggKassCard .orange{background:#f28b00!important;color:#fff!important}.tillaggKassStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.tillaggKassStats span{display:flex;justify-content:space-between;gap:8px;padding:9px 10px;border-radius:10px;background:#fff7e9;color:#7a5a18;font-size:11px}.tillaggKassStats strong{color:#172033;font-size:13px}@media(prefers-reduced-motion:reduce){.tillaggKassCard *{transition:none!important}}
 </style>
 <script id="packvexTillaggTestV1994">
-/* v1.9.99 — Tilläggsetiketter-kortet visas endast i Produktionsvalet.
+/* v1.10.00 — Tilläggsetiketter-kortet visas endast i Produktionsvalet.
    Säker visningsstyrning så kortet inte följer med till Kolli, Etikettering eller Packalkylator. */
 /* v1.9.97 — Tilläggsetiketter testproduktion. Isolerad från global historik/data. */
 (function(){
@@ -5449,7 +5454,7 @@ function etFinishPrompt(){
 
   // Restore the isolated test view after the original PACKVEX page-state boot has run.
   setTimeout(function(){
-    if(localStorage.getItem('packvex_tillagg_view')==='test' && document.getElementById('pack') && !document.getElementById('pack').classList.contains('hidden'))openTillaggTest();
+    if(false && localStorage.getItem('packvex_tillagg_view')==='test' && document.getElementById('pack') && !document.getElementById('pack').classList.contains('hidden'))openTillaggTest();
     if(state.mode&&!state.started&&!state.finished){tillaggChooseMode(state.mode);}
     render();
   },0);
