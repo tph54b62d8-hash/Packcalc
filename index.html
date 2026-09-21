@@ -2908,19 +2908,27 @@ requestAnimationFrame(()=>window.scrollTo(0,0));
 
 /* ETIKETTERING – helt separat från ordinarie Kolli-produktion */
 let etState={started:false,runQty:108,nextLabel:null,scrapLabel:0,scrapUnit:0,labelsAdded:0,labelsConsumed:0,approved:false,actual:null,totalRun:0,history:[],finished:false,rolls:[],activeRoll:0};
+function setTillaggEntryVisible(visible){
+ const btn=document.querySelector('#productionChooser > .tillaggEntryOutside');
+ if(!btn)return;
+ btn.style.setProperty('display',visible?'grid':'none','important');
+ btn.setAttribute('aria-hidden',visible?'false':'true');
+ if(!visible)btn.setAttribute('tabindex','-1'); else btn.removeAttribute('tabindex');
+}
+
 function openProductionChooser(){
  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),et=document.getElementById("etiketteringView");
  if(!chooser||!main)return;
  const tillaggTest=document.getElementById("tillaggTestView");
  if(tillaggTest)tillaggTest.classList.add("hidden");
- chooser.classList.remove("hidden"); main.classList.add("hidden"); if(sub)sub.classList.add("hidden"); if(et)et.classList.add("hidden"); document.body.classList.remove("etStartMode"); localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser"); window.scrollTo(0,0);
+ chooser.classList.remove("hidden"); setTillaggEntryVisible(true); main.classList.add("hidden"); if(sub)sub.classList.add("hidden"); if(et)et.classList.add("hidden"); document.body.classList.remove("etStartMode"); localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser"); window.scrollTo(0,0);
 }
 function chooseProductionMode(mode){
  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),et=document.getElementById("etiketteringView"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
  if(!chooser||!main||!et)return;
  const tillaggTest=document.getElementById("tillaggTestView");
  if(tillaggTest)tillaggTest.classList.add("hidden");
- chooser.classList.add("hidden"); if(sub)sub.classList.add("hidden");
+ chooser.classList.add("hidden"); setTillaggEntryVisible(false); if(sub)sub.classList.add("hidden");
  if(mode==="kolli"){
   localStorage.setItem(PRODUCTION_VIEW_KEY,"kolli");
   main.classList.remove("hidden");et.classList.add("hidden");document.body.classList.remove("etStartMode");
@@ -2936,6 +2944,7 @@ function backFromKolliProduction(){
  if(tillaggTest)tillaggTest.classList.add("hidden");
  localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
  chooser.classList.remove("hidden");
+ setTillaggEntryVisible(true);
  main.classList.add("hidden");
  pack.classList.remove("chooserNavTransition","navChooserForward");
  pack.classList.add("chooserNavTransition","navChooserBack");
@@ -2957,6 +2966,7 @@ function restoreEtState(){
  }catch(e){localStorage.removeItem(ET_STATE_KEY);return false;}
 }
 function restoreProductionView(){
+ setTillaggEntryVisible(false);
  const tillaggTest=document.getElementById("tillaggTestView");
  if(tillaggTest)tillaggTest.classList.add("hidden");
  let saved=localStorage.getItem(PRODUCTION_VIEW_KEY)||"chooser";
@@ -3093,6 +3103,7 @@ function etRender(){
 function openProductionView(view){
 let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
 if(!main||!sub||!pack)return;
+setTillaggEntryVisible(false);
 const tillaggTest=document.getElementById("tillaggTestView");
 if(tillaggTest)tillaggTest.classList.add("hidden");
 localStorage.setItem(PRODUCTION_VIEW_KEY,view);
@@ -3123,6 +3134,7 @@ if(view==="registered"||view==="registrations"){
 function closeProductionView(){
 let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
 if(!main||!sub||!pack)return;
+setTillaggEntryVisible(true);
 const tillaggTest=document.getElementById("tillaggTestView");
 if(tillaggTest)tillaggTest.classList.add("hidden");
 localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
@@ -5272,6 +5284,8 @@ function etFinishPrompt(){
 .tillaggKassCard .orange{background:#f28b00!important;color:#fff!important}.tillaggKassStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.tillaggKassStats span{display:flex;justify-content:space-between;gap:8px;padding:9px 10px;border-radius:10px;background:#fff7e9;color:#7a5a18;font-size:11px}.tillaggKassStats strong{color:#172033;font-size:13px}@media(prefers-reduced-motion:reduce){.tillaggKassCard *{transition:none!important}}
 </style>
 <script id="packvexTillaggTestV1994">
+/* v1.9.99 — Tilläggsetiketter-kortet visas endast i Produktionsvalet.
+   Säker visningsstyrning så kortet inte följer med till Kolli, Etikettering eller Packalkylator. */
 /* v1.9.97 — Tilläggsetiketter testproduktion. Isolerad från global historik/data. */
 (function(){
   const KEY='packvex_tillagg_test_v1997';
@@ -5306,12 +5320,12 @@ function etFinishPrompt(){
   window.openTillaggTest=function(){
     const chooser=$('productionChooser'),main=$('productionMainLayout'),sub=$('productionSubView'),et=$('etiketteringView'),page=$('tillaggTestView'),pack=$('pack');
     if(!page||!chooser)return;
-    chooser.classList.add('hidden');if(main)main.classList.add('hidden');if(sub)sub.classList.add('hidden');if(et)et.classList.add('hidden');page.classList.remove('hidden');
+    chooser.classList.add('hidden');setTillaggEntryVisible(false);if(main)main.classList.add('hidden');if(sub)sub.classList.add('hidden');if(et)et.classList.add('hidden');page.classList.remove('hidden');
     localStorage.setItem('packvex_tillagg_view','test');
     render();window.scrollTo(0,0);
   };
   window.closeTillaggTest=function(){
-    const page=$('tillaggTestView'),chooser=$('productionChooser');if(page)page.classList.add('hidden');if(chooser)chooser.classList.remove('hidden');localStorage.setItem('packvex_tillagg_view','chooser');window.scrollTo(0,0);
+    const page=$('tillaggTestView'),chooser=$('productionChooser');if(page)page.classList.add('hidden');if(chooser){chooser.classList.remove('hidden');setTillaggEntryVisible(true);}localStorage.setItem('packvex_tillagg_view','chooser');window.scrollTo(0,0);
   };
   window.tillaggChooseMode=function(mode){
     if(state.started&&!state.finished)return;
