@@ -2416,7 +2416,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 @media(prefers-reduced-motion:reduce){#productionChooser + .tillaggEntryOutside{transition:none!important;}}
 </style>
 <style id="packvexProductionStartV11006">
-/* v1.10.11 — Produktionsstartsida + inline startanimation. */
+/* v1.10.12 — Produktionsstartsida + inline startanimation. */
 #productionChooser{position:relative;overflow:hidden;padding:2px 0 18px;}
 #productionChooser::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-145px;top:-80px;background:radial-gradient(circle,rgba(20,89,217,.10),rgba(20,89,217,0) 70%);pointer-events:none;}
 #productionChooser::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;left:-150px;bottom:-105px;background:radial-gradient(circle,rgba(22,131,77,.08),rgba(22,131,77,0) 72%);pointer-events:none;}
@@ -2454,7 +2454,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 }
 </style>
 <style id="packvexProductionViewGuardV11010">
-/* v1.10.11 — hård separation mellan Produktionsstartsida och produktionsflöden. */
+/* v1.10.12 — hård separation mellan Produktionsstartsida och produktionsflöden. */
 #pack #productionChooser.hidden,#pack #productionMainLayout.hidden,#pack #productionSubView.hidden,#pack #etiketteringView.hidden,#pack #tillaggTestView.hidden{display:none!important;}
 </style>
 </head>
@@ -2589,7 +2589,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 <div class="productionBottomLinks"><button class="productionLink" onclick="openProductionView('registered')">Registrerade kollin <span style="float:right">›</span></button><button class="productionLink" onclick="openProductionView('registrations')">Registreringar <span style="float:right">›</span></button></div>
 </div><div class="productionRight"></div></div>
 </section>
-<!-- PACKVEX v1.10.11: Tilläggsetiketter is a top-level production view, fully separated from ordinary production DOM. -->
+<!-- PACKVEX v1.10.12: Tilläggsetiketter is a top-level production view, fully separated from ordinary production DOM. -->
 <div class="hidden tillaggPage" id="tillaggTestView">
   <div class="tillaggTopbar">
     <button class="tillaggBack" type="button" onclick="closeTillaggTest()">‹ Produktion</button>
@@ -5509,12 +5509,15 @@ function etFinishPrompt(){
   window.openTillaggTest=function(){
     const chooser=$('productionChooser'),main=$('productionMainLayout'),sub=$('productionSubView'),et=$('etiketteringView'),page=$('tillaggTestView'),pack=$('pack');
     if(!page||!chooser)return;
-    resetProductionViews();page.classList.remove('hidden');page.style.setProperty('display','block','important');
+    resetProductionViews();
+    const packPage=document.getElementById('pack');
+    if(packPage){packPage.classList.add('hidden');packPage.style.setProperty('display','none','important');}
+    page.classList.remove('hidden');page.style.setProperty('display','block','important');
     localStorage.setItem('packvex_tillagg_view','test');
     render();window.scrollTo(0,0);
   };
   window.closeTillaggTest=function(){
-    const page=$('tillaggTestView'),chooser=$('productionChooser');resetProductionViews();if(chooser){chooser.classList.remove('hidden');chooser.style.setProperty('display','block','important');setTillaggEntryVisible(true);}localStorage.setItem('packvex_tillagg_view','chooser');window.scrollTo(0,0);
+    const page=$('tillaggTestView'),chooser=$('productionChooser');resetProductionViews();const packPage=document.getElementById('pack');if(packPage){packPage.classList.remove('hidden');packPage.style.removeProperty('display');}if(chooser){chooser.classList.remove('hidden');chooser.style.setProperty('display','block','important');setTillaggEntryVisible(true);}localStorage.setItem('packvex_tillagg_view','chooser');window.scrollTo(0,0);
   };
   window.tillaggChooseMode=function(mode){
     if(state.started&&!state.finished)return;
