@@ -2601,6 +2601,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
     <div class="tillaggTopStatus" id="tillaggTopStatus">Ej startad</div>
   </div>
 
+  <div class="tillaggStageView tillaggStartStageView" id="tillaggStartStageView">
   <div class="tillaggCard tillaggModeCard" id="tillaggModeCard">
     <div class="tillaggSectionHead">
       <div>
@@ -2648,6 +2649,9 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
     <button type="button" class="blue tillaggStartBtn" onclick="tillaggStartProduction()">Starta produktion</button>
   </div>
 
+  </div>
+
+  <div class="tillaggStageView tillaggProductionStageView tillaggHidden" id="tillaggProductionStageView">
   <div class="tillaggActive tillaggHidden" id="tillaggActiveView">
     <div class="tillaggCard tillaggOverviewCard">
       <div class="tillaggOverviewHead">
@@ -2708,6 +2712,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
     </div>
 
     <div class="tillaggFinishRow"><button type="button" class="red tillaggFinishBtn" onclick="tillaggFinishPrompt()">Avsluta produktion</button></div>
+  </div>
   </div>
 </div>
 <div class="productionModal hidden" id="diffModal"><div class="card productionModalCard"><span class="closeX" onclick="stangDiffPanel()">×</span><h3>Flagga differens</h3><div class="diffOption" id="diffOption1" onclick="valjDiff('En för mycket i sista','')"><span>För mycket</span><span class="positive">›</span></div><div class="diffOption" id="diffOption2" onclick="valjDiff('En för lite i sista','')"><span>För lite</span><span class="negative">›</span></div><div class="diffOption" id="diffOption3" onclick="valjDiff('Fel antal i kolli','')"><span>Kollit stämde inte i antal</span><span>›</span></div><div class="diffOption" id="diffOption4" onclick="valjDiff('Skadad vara','')"><span>Skadad vara</span><span>›</span></div><div class="diffOption" id="diffOption5" onclick="valjDiff('Annat','')"><span>Annat</span><span>›</span></div><div class="hidden" id="diffFields"></div><button class="blue" onclick="sparaValdDiff()">Spara</button></div></div>
@@ -5481,13 +5486,13 @@ function etFinishPrompt(){
 .tillaggKassCard .orange{background:#f28b00!important;color:#fff!important}.tillaggKassStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.tillaggKassStats span{display:flex;justify-content:space-between;gap:8px;padding:9px 10px;border-radius:10px;background:#fff7e9;color:#7a5a18;font-size:11px}.tillaggKassStats strong{color:#172033;font-size:13px}@media(prefers-reduced-motion:reduce){.tillaggKassCard *{transition:none!important}}
 </style>
 <style id="packvexTillaggStageGuardV11013Fix">
-/* v1.10.13 FIX — Tilläggsetiketter: startsida och aktiv produktion är ömsesidigt exklusiva. */
-#tillaggTestView.tillaggStageStart #tillaggActiveView{display:none!important;}
-#tillaggTestView.tillaggStageStart #tillaggModeCard{display:block;}
-#tillaggTestView.tillaggStageStart #tillaggSetupCard.tillaggHidden{display:none!important;}
-#tillaggTestView.tillaggStageProduction #tillaggModeCard,
-#tillaggTestView.tillaggStageProduction #tillaggSetupCard{display:none!important;}
-#tillaggTestView.tillaggStageProduction #tillaggActiveView{display:block!important;}
+/* v1.10.13 FIX 2 — START och PRODUKTION är separata vycontainrar. */
+#tillaggTestView #tillaggStartStageView.tillaggHidden,
+#tillaggTestView #tillaggProductionStageView.tillaggHidden{display:none!important;}
+#tillaggTestView.tillaggStageStart #tillaggStartStageView{display:block!important;}
+#tillaggTestView.tillaggStageStart #tillaggProductionStageView{display:none!important;}
+#tillaggTestView.tillaggStageProduction #tillaggStartStageView{display:none!important;}
+#tillaggTestView.tillaggStageProduction #tillaggProductionStageView{display:block!important;}
 </style>
 <script id="packvexTillaggTestV1994">
 /* v1.10.02 — Tilläggsetiketter-kortet visas endast i Produktionsvalet.
@@ -5524,9 +5529,23 @@ function etFinishPrompt(){
   function recordAction(type,detail,kind,prev){addEvent(type,detail,kind);state.events[0].snapshot=prev;tillaggSave();render();}
   function setTillaggStage(stage){
     const page=$('tillaggTestView');
-    if(!page)return;
-    page.classList.toggle('tillaggStageStart',stage==='start');
-    page.classList.toggle('tillaggStageProduction',stage==='production');
+    const start=$('tillaggStartStageView');
+    const production=$('tillaggProductionStageView');
+    if(!page||!start||!production)return;
+    const isProduction=stage==='production';
+    page.classList.toggle('tillaggStageStart',!isProduction);
+    page.classList.toggle('tillaggStageProduction',isProduction);
+    start.classList.toggle('tillaggHidden',isProduction);
+    production.classList.toggle('tillaggHidden',!isProduction);
+    if(isProduction){
+      show('tillaggModeCard',false);
+      show('tillaggSetupCard',false);
+      show('tillaggActiveView',true);
+    }else{
+      show('tillaggActiveView',false);
+      show('tillaggModeCard',true);
+      show('tillaggSetupCard',!!state.mode);
+    }
   }
 
   window.openTillaggTest=function(){
@@ -5534,7 +5553,7 @@ function etFinishPrompt(){
     if(!page||!chooser)return;
     resetProductionViews();
     const packPage=document.getElementById('pack');
-    if(packPage){packPage.classList.add('hidden');packPage.style.setProperty('display','none','important');}
+    if(packPage){packPage.classList.remove('hidden');packPage.style.removeProperty('display');}
     page.classList.remove('hidden');page.style.setProperty('display','block','important');
     setTillaggStage(state.started&&!state.finished?'production':'start');
     localStorage.setItem('packvex_tillagg_view','test');
@@ -5647,13 +5666,29 @@ function etFinishPrompt(){
     if(state.status==='warn'){if(!confirm('Det finns en aktiv etikettavvikelse. Vill du ändå avsluta produktionen?'))return;}
     const total=Number(state.total||0);const checks=state.events.filter(e=>e.type==='KONTROLL'||e.type==='DIFF').length;const diffs=state.events.filter(e=>e.type==='DIFF').length;const used=state.rolls.filter(r=>r.status==='active'||r.status==='done').length;
     const msg=`Avsluta produktion?\n\nTotalt producerat: ${fmt(total)} st\nAntal kontroller: ${fmt(checks)}\nEtikettavvikelser: ${fmt(diffs)}\nRullar använda: ${fmt(used)}\nNästa etikett: ${nextExpected()===null?'—':fmt(nextExpected())}`;
-    if(!confirm(msg))return;const prev=snapshot();state.finished=true;state.started=false;addEvent('AVSLUT',`Produktion avslutad · ${fmt(total)} st`,'neutral');state.events[0].snapshot=prev;tillaggSave();render();
+    if(!confirm(msg))return;
+    const finishedState=JSON.parse(snapshot());
+    finishedState.finished=true;
+    finishedState.started=false;
+    finishedState.finishedAt=now();
+    localStorage.setItem('packvex_tillagg_last_finished',JSON.stringify(finishedState));
+    state=tillaggBlank();
+    pendingProduction=0;
+    tillaggSave();
+    localStorage.setItem('packvex_tillagg_view','test');
+    setTillaggStage('start');
+    render();
+    window.scrollTo(0,0);
   };
   function render(){
     const page=$('tillaggTestView');if(!page)return;
     const hasActive=state.started&&!state.finished;
-    setTillaggStage(hasActive||state.finished?'production':'start');
-    show('tillaggModeCard',!hasActive);show('tillaggSetupCard',!hasActive&&!!state.mode);show('tillaggActiveView',hasActive||state.finished);
+    // Tilläggsetiketter har två separata lägen: START eller AKTIV PRODUKTION.
+    // En avslutad produktion ska alltid tillbaka till startsidan så att en ny kan startas.
+    setTillaggStage(hasActive?'production':'start');
+    show('tillaggModeCard',!hasActive);
+    show('tillaggSetupCard',!hasActive&&!!state.mode);
+    show('tillaggActiveView',hasActive);
     const title=$('tillaggActiveTitle');if(title)title.textContent=state.finished?'Produktion avslutad':'Produktion';
 $('tillaggMetaBatch')&&( $('tillaggMetaBatch').textContent=state.batchId||'—');
     $('tillaggTotal')&&( $('tillaggTotal').textContent=fmt(Number(state.total||0)));$('tillaggSince')&&( $('tillaggSince').textContent=fmt(netSinceLastControl())+' st');$('tillaggLastControl')&&( $('tillaggLastControl').textContent=fmt(state.lastControl)+' st');
