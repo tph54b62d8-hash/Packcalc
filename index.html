@@ -3081,6 +3081,9 @@ function restoreProductionView(){
  if(saved==="etikettering"){chooseProductionMode("etikettering");return;}
  if(saved==="kolli"){chooseProductionMode("kolli");return;}
  if(saved==="registered"||saved==="registrations"){openProductionView(saved);return;}
+ if(saved==="test"){
+  if(typeof openTillaggTest==="function" && document.getElementById("tillaggTestView")){openTillaggTest();return;}
+ }
  openProductionChooser();
 }
 function backToProductionChooser(){openProductionChooser();}
@@ -4838,7 +4841,7 @@ function etFinishPrompt(){
     render();window.scrollTo(0,0);
   };
   window.closeTillaggTest=function(){
-    const page=$('tillaggTestView'),chooser=$('productionChooser');resetProductionViews();if(chooser){chooser.classList.remove('hidden');setTillaggEntryVisible(true);}localStorage.setItem('packvex_tillagg_view','chooser');window.scrollTo(0,0);
+    const page=$('tillaggTestView'),chooser=$('productionChooser');resetProductionViews();if(chooser){chooser.classList.remove('hidden');setTillaggEntryVisible(true);}localStorage.setItem('packvex_tillagg_view','chooser');localStorage.setItem(PRODUCTION_VIEW_KEY,'chooser');window.scrollTo(0,0);
   };
   window.tillaggChooseMode=function(mode){
     if(state.started&&!state.finished)return;
