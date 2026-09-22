@@ -5480,6 +5480,15 @@ function etFinishPrompt(){
 <style id="packvexTillaggKassV1994">
 .tillaggKassCard .orange{background:#f28b00!important;color:#fff!important}.tillaggKassStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.tillaggKassStats span{display:flex;justify-content:space-between;gap:8px;padding:9px 10px;border-radius:10px;background:#fff7e9;color:#7a5a18;font-size:11px}.tillaggKassStats strong{color:#172033;font-size:13px}@media(prefers-reduced-motion:reduce){.tillaggKassCard *{transition:none!important}}
 </style>
+<style id="packvexTillaggStageGuardV11013Fix">
+/* v1.10.13 FIX — Tilläggsetiketter: startsida och aktiv produktion är ömsesidigt exklusiva. */
+#tillaggTestView.tillaggStageStart #tillaggActiveView{display:none!important;}
+#tillaggTestView.tillaggStageStart #tillaggModeCard{display:block;}
+#tillaggTestView.tillaggStageStart #tillaggSetupCard.tillaggHidden{display:none!important;}
+#tillaggTestView.tillaggStageProduction #tillaggModeCard,
+#tillaggTestView.tillaggStageProduction #tillaggSetupCard{display:none!important;}
+#tillaggTestView.tillaggStageProduction #tillaggActiveView{display:block!important;}
+</style>
 <script id="packvexTillaggTestV1994">
 /* v1.10.02 — Tilläggsetiketter-kortet visas endast i Produktionsvalet.
    Säker visningsstyrning så kortet inte följer med till Kolli, Etikettering eller Packalkylator. */
@@ -5513,6 +5522,12 @@ function etFinishPrompt(){
   }
   function snapshot(){return JSON.stringify({mode:state.mode,started:state.started,finished:state.finished,batchId:state.batchId,product:state.product,total:state.total,scrap:state.scrap,lastControl:state.lastControl,lastExpected:state.lastExpected,lastActual:state.lastActual,lastDiff:state.lastDiff,status:state.status,startLabel:state.startLabel,rolls:state.rolls,activeRollId:state.activeRollId,nextRollId:state.nextRollId});}
   function recordAction(type,detail,kind,prev){addEvent(type,detail,kind);state.events[0].snapshot=prev;tillaggSave();render();}
+  function setTillaggStage(stage){
+    const page=$('tillaggTestView');
+    if(!page)return;
+    page.classList.toggle('tillaggStageStart',stage==='start');
+    page.classList.toggle('tillaggStageProduction',stage==='production');
+  }
 
   window.openTillaggTest=function(){
     const chooser=$('productionChooser'),main=$('productionMainLayout'),sub=$('productionSubView'),et=$('etiketteringView'),page=$('tillaggTestView'),pack=$('pack');
@@ -5521,6 +5536,7 @@ function etFinishPrompt(){
     const packPage=document.getElementById('pack');
     if(packPage){packPage.classList.add('hidden');packPage.style.setProperty('display','none','important');}
     page.classList.remove('hidden');page.style.setProperty('display','block','important');
+    setTillaggStage(state.started&&!state.finished?'production':'start');
     localStorage.setItem('packvex_tillagg_view','test');
     render();window.scrollTo(0,0);
   };
@@ -5563,7 +5579,9 @@ function etFinishPrompt(){
     // men ska inte förbruka någon av de rullar som registreras här.
     state.rolls=state.rolls.map((r,i)=>({...r,consumed:0,status:i===0?'active':'unused'}));state.activeRollId=state.mode==='printed'?state.rolls[0].id:null;state.nextRollId=null;
     addEvent('START',state.mode==='printed'?`Startad mitt i produktion · Redan kört ${fmt(carry)} st · Registrerade rullar ej förbrukade`:`Startad mitt i produktion · Redan kört ${fmt(carry)} st · Startetikett ${fmt(state.startLabel)}`);
-    tillaggSave();localStorage.setItem('packvex_tillagg_view','test');render();
+    tillaggSave();localStorage.setItem('packvex_tillagg_view','test');
+    setTillaggStage('production');
+    render();window.scrollTo(0,0);
   };
   function chooseNextRollIfNeeded(){
     const cur=activeRoll();if(cur&&cur.consumed<cur.count)return cur;
@@ -5633,7 +5651,9 @@ function etFinishPrompt(){
   };
   function render(){
     const page=$('tillaggTestView');if(!page)return;
-    const hasActive=state.started&&!state.finished;show('tillaggModeCard',!hasActive);show('tillaggSetupCard',!hasActive&&!!state.mode);show('tillaggActiveView',hasActive||state.finished);
+    const hasActive=state.started&&!state.finished;
+    setTillaggStage(hasActive||state.finished?'production':'start');
+    show('tillaggModeCard',!hasActive);show('tillaggSetupCard',!hasActive&&!!state.mode);show('tillaggActiveView',hasActive||state.finished);
     const title=$('tillaggActiveTitle');if(title)title.textContent=state.finished?'Produktion avslutad':'Produktion';
 $('tillaggMetaBatch')&&( $('tillaggMetaBatch').textContent=state.batchId||'—');
     $('tillaggTotal')&&( $('tillaggTotal').textContent=fmt(Number(state.total||0)));$('tillaggSince')&&( $('tillaggSince').textContent=fmt(netSinceLastControl())+' st');$('tillaggLastControl')&&( $('tillaggLastControl').textContent=fmt(state.lastControl)+' st');
