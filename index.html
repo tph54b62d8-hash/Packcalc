@@ -5549,15 +5549,32 @@ function etFinishPrompt(){
   }
 
   window.openTillaggTest=function(){
-    const chooser=$('productionChooser'),main=$('productionMainLayout'),sub=$('productionSubView'),et=$('etiketteringView'),page=$('tillaggTestView'),pack=$('pack');
+    const chooser=$('productionChooser'),page=$('tillaggTestView');
     if(!page||!chooser)return;
+
+    /*
+      Tilläggsetiketter has exactly two states:
+      - START: no active production exists
+      - PRODUKTION: an unfinished production exists
+      A finished state is historical data only and must never reopen as the
+      production screen. Starting Tilläggsetiketter after a finished run
+      therefore creates a clean start state while preserving last-finished data.
+    */
+    if(state.finished || !state.started){
+      state=tillaggBlank();
+      pendingProduction=0;
+      tillaggSave();
+    }
+
     resetProductionViews();
     const packPage=document.getElementById('pack');
     if(packPage){packPage.classList.remove('hidden');packPage.style.removeProperty('display');}
-    page.classList.remove('hidden');page.style.setProperty('display','block','important');
-    setTillaggStage(state.started&&!state.finished?'production':'start');
+    page.classList.remove('hidden');
+    page.style.setProperty('display','block','important');
+    setTillaggStage(state.started?'production':'start');
     localStorage.setItem('packvex_tillagg_view','test');
-    render();window.scrollTo(0,0);
+    render();
+    window.scrollTo(0,0);
   };
   window.closeTillaggTest=function(){
     const page=$('tillaggTestView'),chooser=$('productionChooser');resetProductionViews();const packPage=document.getElementById('pack');if(packPage){packPage.classList.remove('hidden');packPage.style.removeProperty('display');}if(chooser){chooser.classList.remove('hidden');chooser.style.setProperty('display','block','important');setTillaggEntryVisible(true);}localStorage.setItem('packvex_tillagg_view','chooser');window.scrollTo(0,0);
@@ -5682,9 +5699,9 @@ function etFinishPrompt(){
   };
   function render(){
     const page=$('tillaggTestView');if(!page)return;
-    const hasActive=state.started&&!state.finished;
-    // Tilläggsetiketter har två separata lägen: START eller AKTIV PRODUKTION.
-    // En avslutad produktion ska alltid tillbaka till startsidan så att en ny kan startas.
+    const hasActive=state.started===true && state.finished!==true;
+    // A finished/invalid state is never rendered as production. It is cleared
+    // when the Tilläggsetiketter view is opened, so START is always clean.
     setTillaggStage(hasActive?'production':'start');
     show('tillaggModeCard',!hasActive);
     show('tillaggSetupCard',!hasActive&&!!state.mode);
