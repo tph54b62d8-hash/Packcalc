@@ -2988,10 +2988,20 @@ function setTillaggEntryVisible(visible){
  if(!visible)btn.setAttribute('tabindex','-1'); else btn.removeAttribute('tabindex');
 }
 
+function setProductionOnly(id){
+ const ids=["productionChooser","productionMainLayout","productionSubView","etiketteringView","tillaggTestView"];
+ ids.forEach(key=>{
+  const el=document.getElementById(key);
+  if(!el)return;
+  const on=key===id;
+  el.classList.toggle("hidden",!on);
+  el.style.display=on?(key==="productionSubView"?"block":key==="productionMainLayout"?"block":key==="etiketteringView"?"block":key==="tillaggTestView"?"block":"block"):"none";
+ });
+}
 function resetProductionViews(){
  const ids=["productionChooser","productionMainLayout","productionSubView","etiketteringView","tillaggTestView"];
- ids.forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add("hidden");});
- document.querySelectorAll("#productionSubView > div").forEach(el=>el.classList.add("hidden"));
+ ids.forEach(id=>{const el=document.getElementById(id);if(el){el.classList.add("hidden");el.style.display="none";}});
+ document.querySelectorAll("#productionSubView > div").forEach(el=>{el.classList.add("hidden");el.style.display="none";});
  setTillaggEntryVisible(false);
  document.body.classList.remove("etStartMode");
 }
@@ -3001,6 +3011,7 @@ function openProductionChooser(){
  if(!chooser||!main)return;
  resetProductionViews();
  chooser.classList.remove("hidden");
+ chooser.style.display="block";
  setTillaggEntryVisible(true);
  localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
  window.scrollTo(0,0);
@@ -3012,11 +3023,13 @@ function chooseProductionMode(mode){
  if(mode==="kolli"){
   localStorage.setItem(PRODUCTION_VIEW_KEY,"kolli");
   main.classList.remove("hidden");
+  main.style.display="block";
   if(pack){pack.classList.remove("chooserNavTransition","navChooserBack");pack.classList.add("chooserNavTransition","navChooserForward");setTimeout(()=>pack.classList.remove("chooserNavTransition","navChooserForward"),520);}
   window.scrollTo(0,0);return;
  }
  localStorage.setItem(PRODUCTION_VIEW_KEY,"etikettering");
  et.classList.remove("hidden");
+ et.style.display="block";
  document.body.classList.add("etStartMode");
  etRender();
  window.scrollTo(0,0);
@@ -3026,6 +3039,7 @@ function backFromKolliProduction(){
  if(!chooser||!main||!pack)return;
  resetProductionViews();
  chooser.classList.remove("hidden");
+ chooser.style.display="block";
  setTillaggEntryVisible(true);
  localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
  pack.classList.remove("chooserNavTransition","navChooserForward");
@@ -3054,6 +3068,7 @@ function restoreProductionView(){
   let et=document.getElementById("etiketteringView");
   if(et){
    et.classList.remove("hidden");
+   et.style.display="block";
    document.body.classList.remove("etStartMode");
    document.getElementById("etStartCard")?.classList.add("etHidden");
    document.getElementById("etWorkView")?.classList.remove("etHidden");
@@ -3196,6 +3211,7 @@ function openProductionView(view){
  if(view==="registered"){document.getElementById("registeredView").classList.remove("hidden");renderKolliView();}
  if(view==="registrations"){document.getElementById("registrationsView").classList.remove("hidden");renderPackHistoryView();}
  sub.classList.remove("hidden");
+ sub.style.display="block";
  pack.classList.remove("navBack");
  pack.classList.add("productionNavTransition","navForward");
  requestAnimationFrame(function(){
@@ -3215,6 +3231,7 @@ function closeProductionView(){
  resetProductionViews();
  localStorage.setItem(PRODUCTION_VIEW_KEY,"kolli");
  main.classList.remove("hidden");
+ main.style.display="block";
  if(!wasSub){window.scrollTo(0,0);return;}
  let mainHeight=main.offsetHeight;
  pack.classList.remove("navForward");
@@ -4960,3 +4977,32 @@ $('tillaggMetaBatch')&&( $('tillaggMetaBatch').textContent=state.batchId||'—')
 </script>
 </body>
 </html>
+<style id="packvexProductionIsolationV11008">
+/* v1.10.08 — Produktionsstart och aktiv produktionsvy är strikt separerade. */
+#pack #productionChooser[style*="display: none"],
+#pack #productionMainLayout[style*="display: none"],
+#pack #productionSubView[style*="display: none"],
+#pack #etiketteringView[style*="display: none"],
+#pack #tillaggTestView[style*="display: none"]{display:none!important;}
+#pack #productionChooser.hidden,
+#pack #productionMainLayout.hidden,
+#pack #productionSubView.hidden,
+#pack #etiketteringView.hidden,
+#pack #tillaggTestView.hidden{display:none!important;}
+</style>
+<script id="packvexPersistentPageV11008">
+/* v1.10.08 — återställ alltid senast öppna sida efter refresh. */
+(function(){
+  function restoreLastPage(){
+    try{
+      const key="packvex_current_page";
+      const saved=localStorage.getItem(key);
+      if(saved && typeof pages!=='undefined' && pages.includes(saved) && typeof showPage==='function'){
+        showPage(saved,false);
+      }
+    }catch(e){}
+  }
+  window.addEventListener('pageshow',function(){setTimeout(restoreLastPage,0);});
+  setTimeout(restoreLastPage,0);
+})();
+</script>
