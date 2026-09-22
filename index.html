@@ -2415,6 +2415,44 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 }
 @media(prefers-reduced-motion:reduce){#productionChooser + .tillaggEntryOutside{transition:none!important;}}
 </style>
+<style id="packvexProductionStartV11006">
+/* v1.10.06 — Produktionsstartsida + inline startanimation. */
+#productionChooser{position:relative;overflow:hidden;padding:2px 0 18px;}
+#productionChooser::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-145px;top:-80px;background:radial-gradient(circle,rgba(20,89,217,.10),rgba(20,89,217,0) 70%);pointer-events:none;}
+#productionChooser::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;left:-150px;bottom:-105px;background:radial-gradient(circle,rgba(22,131,77,.08),rgba(22,131,77,0) 72%);pointer-events:none;}
+#productionChooser .etChooserCard{position:relative;z-index:1;}
+#productionChooser .etModeBtn{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease!important;}
+#productionChooser .etModeBtn:hover{transform:translateY(-2px)!important;filter:saturate(1.03);}
+#productionChooser .etModeBtn:active{transform:scale(.985)!important;}
+#productionMainLayout{position:relative;}
+.productionStartAnimation{position:relative;z-index:20;grid-column:1 / -1;margin:0 10px 12px;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#eef5ff 0%,#f8fbff 52%,#eefaf4 100%);border:1px solid #dce7f5;box-shadow:0 12px 28px rgba(30,48,82,.10);padding:16px 17px;display:grid;grid-template-columns:54px minmax(0,1fr);align-items:center;gap:13px;animation:productionStartReveal .5s cubic-bezier(.22,.8,.25,1) both;}
+.productionStartAnimation::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;right:-58px;top:-78px;background:rgba(255,255,255,.72);animation:productionStartOrb 2.2s ease-out both;}
+.productionStartAnimation .startAnimIcon{width:54px;height:54px;border-radius:17px;background:#fff;display:flex;align-items:center;justify-content:center;color:#1459d9;box-shadow:0 7px 17px rgba(20,89,217,.13);position:relative;}
+.productionStartAnimation .startAnimIcon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.productionStartAnimation .startAnimIcon::after{content:"";position:absolute;inset:-5px;border:2px solid rgba(20,89,217,.18);border-radius:20px;animation:productionStartPulse 1.1s ease-out 2;}
+.productionStartAnimation .startAnimText{position:relative;z-index:2;}
+.productionStartAnimation .startAnimKicker{font-size:9px;font-weight:850;letter-spacing:1.5px;color:#6880a3;text-transform:uppercase;}
+.productionStartAnimation .startAnimTitle{margin:3px 0 1px;font-size:19px;line-height:1.1;font-weight:900;color:#172033;}
+.productionStartAnimation .startAnimSub{font-size:11px;color:#687386;line-height:1.35;}
+.productionStartAnimation .startAnimCheck{color:#16834d;font-weight:850;}
+@keyframes productionStartReveal{from{opacity:0;transform:translateY(-12px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes productionStartPulse{0%{transform:scale(.88);opacity:.8}75%{transform:scale(1.18);opacity:0}100%{transform:scale(1.18);opacity:0}}
+@keyframes productionStartOrb{0%{transform:translateX(45px) scale(.7);opacity:0}35%{opacity:1}100%{transform:translateX(-12px) scale(1.05);opacity:.65}}
+.productionStartAnimation.startAnimExit{animation:productionStartExit .45s ease both;}
+@keyframes productionStartExit{to{opacity:0;transform:translateY(-10px);max-height:0;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;border-width:0;}}
+.kolliProductionBackWrap.productionLocked{display:none!important;}
+@media(max-width:430px){
+ .productionStartAnimation{margin:0 6px 10px;padding:14px 14px;border-radius:18px;grid-template-columns:48px minmax(0,1fr);gap:11px;}
+ .productionStartAnimation .startAnimIcon{width:48px;height:48px;border-radius:15px;}
+ .productionStartAnimation .startAnimIcon svg{width:27px;height:27px;}
+ .productionStartAnimation .startAnimTitle{font-size:17px;}
+ .productionStartAnimation .startAnimSub{font-size:10.5px;}
+}
+@media(prefers-reduced-motion:reduce){
+ #productionChooser .etModeBtn{transition:none!important;}
+ .productionStartAnimation,.productionStartAnimation.startAnimExit,.productionStartAnimation::before,.productionStartAnimation .startAnimIcon::after{animation:none!important;}
+}
+</style>
 </head>
 <body>
 <header class="packvexHeaderV1988">
@@ -2654,6 +2692,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 </div>
 
 <div class="productionLayout" id="productionMainLayout">
+<div class="productionStartAnimation hidden" id="productionStartAnimation" aria-live="polite"></div>
 <div class="kolliProductionBackWrap"><button class="gray kolliProductionBack" onclick="backFromKolliProduction()">← Tillbaka</button></div>
 <div class="productionLeft">
 <div class="card productionHeaderCard"><div class="productionTop"><div class="productionHeaderMain"><div class="productionHeaderIcon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 20V9h5v11M16 20V4h5v16M8 20v-5h8v5M3 9h5"></path></svg></div><div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div></div><div class="activeBatch" id="productionActiveBatch"></div></div></div>
@@ -2967,7 +3006,7 @@ if(tillaggTestPage) tillaggTestPage.classList.add("hidden");
 document.getElementById(page).classList.remove("hidden");
 document.querySelectorAll("nav button").forEach(btn=>btn.classList.remove("active"));
 if(page==="home")document.getElementById("navHome").classList.add("active");
-if(page==="pack"){document.getElementById("navPack").classList.add("active");if(fromNav)openProductionChooser();else restoreProductionView();}
+if(page==="pack"){document.getElementById("navPack").classList.add("active");if(fromNav)openProductionEntry();else restoreProductionView();}
 if(page==="packalkylator"){document.getElementById("navCalc").classList.add("active");restoreCalculatorState();}
 if(page==="dagbok")document.getElementById("navDagbok").classList.add("active");
 if(page==="historik")document.getElementById("navHistorik").classList.add("active");
@@ -2988,7 +3027,24 @@ function setTillaggEntryVisible(visible){
  if(!visible)btn.setAttribute('tabindex','-1'); else btn.removeAttribute('tabindex');
 }
 
+function openProductionEntry(){
+ if(typeof data!=="undefined" && data.fpk){
+  chooseProductionMode("kolli");
+  syncProductionLock();
+  return;
+ }
+ if(typeof etState!=="undefined" && etState.started && !etState.finished){
+  chooseProductionMode("etikettering");
+  return;
+ }
+ openProductionChooser();
+}
+function syncProductionLock(){
+ const back=document.querySelector(".kolliProductionBackWrap");
+ if(back)back.classList.toggle("productionLocked",!!(typeof data!=="undefined"&&data.fpk));
+}
 function openProductionChooser(){
+ if(typeof data!=="undefined" && data.fpk){openProductionEntry();return;}
  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),et=document.getElementById("etiketteringView");
  if(!chooser||!main)return;
  const tillaggTest=document.getElementById("tillaggTestView");
@@ -3010,6 +3066,7 @@ function chooseProductionMode(mode){
  localStorage.setItem(PRODUCTION_VIEW_KEY,"etikettering");main.classList.add("hidden");et.classList.remove("hidden");document.body.classList.add("etStartMode");etRender();window.scrollTo(0,0);
 }
 function backFromKolliProduction(){
+ if(typeof data!=="undefined" && data.fpk){syncProductionLock();return;}
  let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),pack=document.getElementById("pack");
  if(!chooser||!main||!pack)return;
  const tillaggTest=document.getElementById("tillaggTestView");
@@ -3042,6 +3099,7 @@ function restoreProductionView(){
  const tillaggTest=document.getElementById("tillaggTestView");
  if(tillaggTest)tillaggTest.classList.add("hidden");
  let saved=localStorage.getItem(PRODUCTION_VIEW_KEY)||"chooser";
+ if(typeof data!=="undefined" && data.fpk){chooseProductionMode("kolli");syncProductionLock();return;}
  if(saved==="etikettering-active" && restoreEtState()){
   let chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),et=document.getElementById("etiketteringView"),sub=document.getElementById("productionSubView");
   chooser.classList.add("hidden");main.classList.add("hidden");if(sub)sub.classList.add("hidden");et.classList.remove("hidden");document.body.classList.remove("etStartMode");document.getElementById("etStartCard").classList.add("etHidden");document.getElementById("etWorkView").classList.remove("etHidden");etRender();window.scrollTo(0,0);return;
@@ -3577,6 +3635,20 @@ el.innerHTML='<div class="batchFeedbackCard"><div class="batchFeedbackIcon pulse
 document.body.appendChild(el);
 }
 
+function startProductionAnimation(batchId){
+ const main=document.getElementById("productionMainLayout");
+ if(!main)return;
+ const box=document.getElementById("productionStartAnimation");
+ if(!box)return;
+ box.classList.remove("hidden","startAnimExit");
+ box.innerHTML='<div class="startAnimIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5 9.2 17.7 20 6.8"></path><circle cx="12" cy="12" r="9"></circle></svg></div><div class="startAnimText"><div class="startAnimKicker">PRODUKTION STARTAS</div><div class="startAnimTitle">Batch '+String(batchId).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))+' är aktiv</div><div class="startAnimSub"><span class="startAnimCheck">✓</span> Produktion är redo. Du stannar här tills batchen avslutas.</div></div>';
+ clearTimeout(window.__productionStartAnimTimer);
+ window.__productionStartAnimTimer=setTimeout(()=>{
+   box.classList.add("startAnimExit");
+   setTimeout(()=>{box.classList.add("hidden");box.classList.remove("startAnimExit");box.innerHTML="";},460);
+ },2400);
+}
+
 function startFpk(){
 let v=document.getElementById("fpkNumber").value.trim();
 if(!v){alert("Skriv in ett Batch ID.");return;}
@@ -3589,7 +3661,10 @@ saveData();
 renderFpk();
 addHistory("START","-","","","Startade produktion","","","Batch "+v);
 renderAll();
-showBatchStartFeedback(v);
+chooseProductionMode("kolli");
+syncProductionLock();
+startProductionAnimation(v);
+window.scrollTo(0,0);
 }
 
 function closeBatchFinishConfirm(){
@@ -3644,7 +3719,7 @@ products=[...new Set(kollin.map(k=>k.produkt).filter(Boolean))];
 data.produktioner.push({productionId,batchId:data.fpk,start:data.activeProductionStart||null,end,products,kollin,total,kolliCount:totalFysiskaKollin(kollin),registrationCount:kollin.length,kassation,ekCount,ekUnits,diffCount});
 addHistory("SLUT","-","","","Avslutade produktion","","","Batch avslutad");
 let finishInfo={batchId:data.fpk,products,start:data.activeProductionStart?new Date(data.activeProductionStart).toLocaleString("sv-SE"):"—",end:new Date(end).toLocaleString("sv-SE"),total,kolliCount:totalFysiskaKollin(kollin),registrationCount:kollin.length,kassation,ekCount,ekUnits,diffCount};
-data.fpk="";data.activeProductionId="";data.activeProductionStart="";data.kollin=[];clearKolliInputState();saveData();renderAll();showBatchFinishFeedback(finishInfo);
+data.fpk="";data.activeProductionId="";data.activeProductionStart="";data.kollin=[];clearKolliInputState();saveData();renderAll();syncProductionLock();openProductionChooser();showBatchFinishFeedback(finishInfo);
 }
 
 function skannaKolli(){alert("QR-skanning kopplas på här. Kamerafunktionen kan läggas till senare.");}
@@ -4282,6 +4357,7 @@ fpkInput.disabled=!!data.fpk;
 if(clearBtn)clearBtn.disabled=!!data.fpk;
 if(startBtn){startBtn.disabled=!!data.fpk;startBtn.classList.toggle("batchLocked",!!data.fpk);}
 if(finishBtn)finishBtn.disabled=!data.fpk;
+syncProductionLock();
 }
 
 function openActiveProduction(card){
