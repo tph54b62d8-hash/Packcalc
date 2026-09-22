@@ -2343,6 +2343,78 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 #productionChooser + .tillaggEntryOutside .tillaggEntryArrow{color:#1459d9 !important;}
 @media(prefers-reduced-motion:reduce){#productionChooser + .tillaggEntryOutside{transition:none !important;}}
 </style>
+
+<style id="packvexTillaggEntryCardV11003">
+/* v1.10.03 — större Tilläggsetiketter-kort i samma visuella nivå som Produktionskorten. */
+#productionChooser + .tillaggEntryOutside{
+  position:relative!important;
+  overflow:hidden!important;
+  min-height:108px!important;
+  height:108px!important;
+  width:calc(100% - 20px)!important;
+  margin:14px auto 0!important;
+  padding:16px 18px!important;
+  display:grid!important;
+  grid-template-columns:50px minmax(0,1fr) 46px!important;
+  align-items:center!important;
+  gap:14px!important;
+  border:1px solid rgba(222,157,35,.48)!important;
+  border-radius:22px!important;
+  background:linear-gradient(135deg,#fff8e8 0%,#ffe7ae 52%,#ffd26f 100%)!important;
+  color:#5f3b00!important;
+  box-shadow:0 10px 24px rgba(187,126,18,.13),0 2px 7px rgba(187,126,18,.07)!important;
+  isolation:isolate!important;
+  transition:transform .18s ease,box-shadow .18s ease!important;
+}
+#productionChooser + .tillaggEntryOutside::before{
+  content:"";position:absolute;width:180px;height:180px;border-radius:50%;
+  right:-74px;top:-58px;background:rgba(255,255,255,.27);z-index:-1;
+}
+#productionChooser + .tillaggEntryOutside::after{
+  content:"";position:absolute;width:120px;height:120px;border-radius:34px;
+  right:74px;bottom:-84px;background:rgba(255,255,255,.18);
+  transform:rotate(24deg);z-index:-1;
+}
+#productionChooser + .tillaggEntryOutside:active{
+  transform:scale(.992)!important;
+  box-shadow:0 6px 16px rgba(187,126,18,.12)!important;
+}
+#productionChooser + .tillaggEntryOutside .tillaggEntryIcon{
+  width:50px!important;height:50px!important;border-radius:15px!important;
+  background:rgba(255,255,255,.48)!important;
+  color:#c87900!important;
+  border:1px solid rgba(222,157,35,.28)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65),0 4px 10px rgba(187,126,18,.08)!important;
+}
+#productionChooser + .tillaggEntryOutside .tillaggEntryIcon svg{
+  width:27px!important;height:27px!important;
+  stroke-width:1.7!important;
+}
+#productionChooser + .tillaggEntryOutside .tillaggEntryBtn{}
+#productionChooser + .tillaggEntryOutside strong{
+  font-size:19px!important;line-height:1.1!important;font-weight:850!important;
+  color:#4d3204!important;letter-spacing:-.2px!important;
+}
+#productionChooser + .tillaggEntryOutside small{
+  margin-top:5px!important;font-size:12px!important;line-height:1.25!important;
+  color:#80652d!important;font-weight:650!important;
+}
+#productionChooser + .tillaggEntryOutside .tillaggEntryArrow{
+  width:46px!important;height:46px!important;border-radius:50%!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  background:rgba(255,255,255,.78)!important;color:#c87900!important;
+  font-size:32px!important;line-height:1!important;text-align:center!important;
+  box-shadow:0 5px 13px rgba(187,126,18,.12)!important;
+}
+@media(max-width:430px){
+  #productionChooser + .tillaggEntryOutside{min-height:104px!important;height:104px!important;grid-template-columns:48px minmax(0,1fr) 44px!important;gap:12px!important;padding:15px 16px!important;border-radius:21px!important;}
+  #productionChooser + .tillaggEntryOutside .tillaggEntryIcon{width:48px!important;height:48px!important;}
+  #productionChooser + .tillaggEntryOutside strong{font-size:18px!important;}
+  #productionChooser + .tillaggEntryOutside small{font-size:11px!important;}
+  #productionChooser + .tillaggEntryOutside .tillaggEntryArrow{width:44px!important;height:44px!important;}
+}
+@media(prefers-reduced-motion:reduce){#productionChooser + .tillaggEntryOutside{transition:none!important;}}
+</style>
 </head>
 <body>
 <header class="packvexHeaderV1988">
@@ -2397,7 +2469,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 <button class="etModeBtn" onclick="chooseProductionMode('etikettering')"><span class="etModeIcon green"><svg viewbox="0 0 24 24"><path d="M4 5h16v14H4z"></path><path d="M7 9h10M7 13h7M7 17h4"></path></svg></span><span class="etModeText"><strong>Etikettering</strong><span>Automatisk kontroll av nästa etikett.</span></span><span class="etModeArrow">›</span></button>
 </div></div>
 <button class="tillaggEntryBtn tillaggEntryOutside" type="button" onclick="openTillaggTest()">
-  <span class="tillaggEntryIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6.5h16v11H4z"></path><path d="M7 9.5h10M7 13h6"></path><path d="M17.5 4v4M15.5 6h4"></path></svg></span>
+  <span class="tillaggEntryIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 7.5h14v11H5z"></path><path d="M8 4.5h8a2 2 0 0 1 2 2v1H6v-1a2 2 0 0 1 2-2Z"></path><path d="M8.5 11h7M8.5 14.5h5"></path></svg></span>
   <span><strong>Tilläggsetiketter</strong><small>Produktionsfunktion · test</small></span>
   <span class="tillaggEntryArrow" aria-hidden="true">›</span>
 </button>
