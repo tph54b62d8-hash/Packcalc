@@ -2583,6 +2583,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 
 
 <div class="productionLayout" id="productionMainLayout">
+<div class="productionStartAnimation hidden" id="productionStartAnimation" aria-live="polite"></div>
 <div class="kolliProductionBackWrap"><button class="gray kolliProductionBack" onclick="backFromKolliProduction()">← Tillbaka</button></div>
 <div class="productionLeft">
 <div class="card productionHeaderCard"><div class="productionTop"><div class="productionHeaderMain"><div class="productionHeaderIcon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 20V9h5v11M16 20V4h5v16M8 20v-5h8v5M3 9h5"></path></svg></div><div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div></div><div class="activeBatch" id="productionActiveBatch"></div></div></div>
@@ -2657,7 +2658,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
   </div>
 
   <div class="tillaggStageView tillaggProductionStageView tillaggHidden" id="tillaggProductionStageView">
-  <div class="productionStartAnimation hidden" id="productionStartAnimation" aria-live="polite"></div>
+  <div class="productionStartAnimation hidden" id="tillaggStartAnimation" aria-live="polite"></div>
   <div class="tillaggActive tillaggHidden" id="tillaggActiveView">
     <div class="tillaggCard tillaggOverviewCard">
       <div class="tillaggOverviewHead">
@@ -3209,7 +3210,7 @@ function etStart(){
    card.classList.add("etHidden");
    document.body.classList.remove("etStartMode");
    etRender();
-   startProductionAnimation(batch);
+   startProductionAnimation(batch,"tillaggStartAnimation");
    etToast("✓ Körning startad · "+etFmt(q)+" st · Nästa etikett "+etFmt(n));
  },4000);
 }
@@ -3721,10 +3722,8 @@ el.innerHTML='<div class="batchFeedbackCard"><div class="batchFeedbackIcon pulse
 document.body.appendChild(el);
 }
 
-function startProductionAnimation(batchId){
- const main=document.getElementById("productionMainLayout");
- if(!main)return;
- const box=document.getElementById("productionStartAnimation");
+function startProductionAnimation(batchId,targetId="productionStartAnimation"){
+ const box=document.getElementById(targetId);
  if(!box)return;
  box.classList.remove("hidden","startAnimExit");
  box.innerHTML='<div class="startAnimIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5 9.2 17.7 20 6.8"></path><circle cx="12" cy="12" r="9"></circle></svg></div><div class="startAnimText"><div class="startAnimKicker">PRODUKTION STARTAS</div><div class="startAnimTitle">Batch '+String(batchId).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))+' är aktiv</div><div class="startAnimSub"><span class="startAnimCheck">✓</span> Produktion är redo. Du stannar här tills batchen avslutas.</div></div>';
@@ -3749,6 +3748,7 @@ addHistory("START","-","","","Startade produktion","","","Batch "+v);
 renderAll();
 chooseProductionMode("kolli");
 syncProductionLock();
+startProductionAnimation(v,"productionStartAnimation");
 window.scrollTo(0,0);
 }
 
