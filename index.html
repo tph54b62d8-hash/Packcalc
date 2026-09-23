@@ -2456,12 +2456,11 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 <style id="packvexProductionViewGuardV11010">
 /* v1.10.13 — hård separation mellan Produktionsstartsida och produktionsflöden. */
 #pack #productionChooser.hidden,#pack #productionMainLayout.hidden,#pack #productionSubView.hidden,#pack #etiketteringView.hidden,#pack #tillaggTestView.hidden{display:none!important;}
-/* FIX 6: hidden production views must also override any stale inline display. */
-#pack #productionChooser.hidden,#pack #productionMainLayout.hidden,#pack #productionSubView.hidden,#pack #etiketteringView.hidden,#pack #registeredView.hidden,#pack #registrationsView.hidden{display:none!important;}
 </style>
-<style id="packvexProductionIsolationV11013Fix6">
-/* v1.10.13 FIX 6 — Produktionsvyer får aldrig ligga ovanpå varandra. */
-#pack #productionMainLayout.hidden,#pack #productionChooser.hidden,#pack #productionSubView.hidden,#pack #etiketteringView.hidden,#pack #registeredView.hidden,#pack #registrationsView.hidden{display:none!important;}
+<style id="packvexTillaggStartPopupV11013Fix">
+#tillaggStartPopup{position:fixed!important;left:50%;top:calc(env(safe-area-inset-top) + 18px);width:min(92vw,430px);margin:0!important;z-index:2200;box-sizing:border-box;}
+#tillaggStartPopup.hidden{display:none!important;}
+@media(max-width:430px){#tillaggStartPopup{width:calc(100vw - 24px);}}
 </style>
 </head>
 <body>
@@ -2607,7 +2606,8 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
     <div class="tillaggTopStatus" id="tillaggTopStatus">Ej startad</div>
   </div>
 
-  <div class="tillaggStageView tillaggStartStageView" id="tillaggStartStageView">
+  <div class="productionStartAnimation hidden" id="tillaggStartPopup" aria-live="polite"></div>
+<div class="tillaggStageView tillaggStartStageView" id="tillaggStartStageView">
   <div class="tillaggCard tillaggModeCard" id="tillaggModeCard">
     <div class="tillaggSectionHead">
       <div>
@@ -2658,7 +2658,6 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
   </div>
 
   <div class="tillaggStageView tillaggProductionStageView tillaggHidden" id="tillaggProductionStageView">
-  <div class="productionStartAnimation hidden" id="tillaggStartAnimation" aria-live="polite"></div>
   <div class="tillaggActive tillaggHidden" id="tillaggActiveView">
     <div class="tillaggCard tillaggOverviewCard">
       <div class="tillaggOverviewHead">
@@ -3107,6 +3106,7 @@ function chooseProductionMode(mode){
   main.classList.remove("hidden");
   main.style.setProperty("display","block","important");
   document.body.classList.remove("etStartMode");
+  if(pack){pack.classList.remove("chooserNavTransition","navChooserBack");pack.classList.add("chooserNavTransition","navChooserForward");setTimeout(()=>pack.classList.remove("chooserNavTransition","navChooserForward"),520);}
  }else{
   et.classList.remove("hidden");
   et.style.setProperty("display","block","important");
@@ -3210,7 +3210,6 @@ function etStart(){
    card.classList.add("etHidden");
    document.body.classList.remove("etStartMode");
    etRender();
-   startProductionAnimation(batch,"tillaggStartAnimation");
    etToast("✓ Körning startad · "+etFmt(q)+" st · Nästa etikett "+etFmt(n));
  },4000);
 }
@@ -3294,33 +3293,14 @@ const tillaggTest=document.getElementById("tillaggTestView");
 if(tillaggTest)tillaggTest.classList.add("hidden");
 localStorage.setItem(PRODUCTION_VIEW_KEY,view);
 main.classList.add("hidden");
-main.style.setProperty("display","none","important");
-const chooser=document.getElementById("productionChooser");
-const etikettering=document.getElementById("etiketteringView");
-if(chooser){chooser.classList.add("hidden");chooser.style.setProperty("display","none","important");}
-if(etikettering){etikettering.classList.add("hidden");etikettering.style.setProperty("display","none","important");}
 sub.classList.add("hidden");
-sub.style.setProperty("display","none","important");
 sub.classList.remove("navSubEnter","navSubLeave");
-const registered=document.getElementById("registeredView");
-const registrations=document.getElementById("registrationsView");
-registered.classList.add("hidden");
-registrations.classList.add("hidden");
-registered.style.setProperty("display","none","important");
-registrations.style.setProperty("display","none","important");
-if(view==="registered"){
-  registered.classList.remove("hidden");
-  registered.style.setProperty("display","block","important");
-  renderKolliView();
-}
-if(view==="registrations"){
-  registrations.classList.remove("hidden");
-  registrations.style.setProperty("display","block","important");
-  renderPackHistoryView();
-}
+document.getElementById("registeredView").classList.add("hidden");
+document.getElementById("registrationsView").classList.add("hidden");
+if(view==="registered"){document.getElementById("registeredView").classList.remove("hidden");renderKolliView();}
+if(view==="registrations"){document.getElementById("registrationsView").classList.remove("hidden");renderPackHistoryView();}
 if(view==="registered"||view==="registrations"){
  sub.classList.remove("hidden");
- sub.style.setProperty("display","block","important");
  pack.classList.remove("navBack");
  pack.classList.add("productionNavTransition","navForward");
  requestAnimationFrame(function(){
@@ -3339,16 +3319,13 @@ if(view==="registered"||view==="registrations"){
 function closeProductionView(){
 let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
 if(!main||!sub||!pack)return;
-setTillaggEntryVisible(false);
+setTillaggEntryVisible(true);
 const tillaggTest=document.getElementById("tillaggTestView");
 if(tillaggTest)tillaggTest.classList.add("hidden");
 localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
 let wasSub=!sub.classList.contains("hidden");
 if(!wasSub){
  main.classList.remove("hidden");
- main.style.setProperty("display","block","important");
- sub.classList.add("hidden");
- sub.style.setProperty("display","none","important");
  return;
 }
 
@@ -3371,17 +3348,8 @@ requestAnimationFrame(function(){
  });
  setTimeout(function(){
   sub.classList.add("hidden");
-  sub.style.setProperty("display","none","important");
-  const chooser=document.getElementById("productionChooser");
-  const etikettering=document.getElementById("etiketteringView");
-  if(chooser){chooser.classList.add("hidden");chooser.style.setProperty("display","none","important");}
-  if(etikettering){etikettering.classList.add("hidden");etikettering.style.setProperty("display","none","important");}
-  main.classList.remove("hidden");
-  main.style.setProperty("display","block","important");
-  const registered=document.getElementById("registeredView");
-  const registrations=document.getElementById("registrationsView");
-  if(registered){registered.classList.add("hidden");registered.style.setProperty("display","none","important");}
-  if(registrations){registrations.classList.add("hidden");registrations.style.setProperty("display","none","important");}
+  document.getElementById("registeredView").classList.add("hidden");
+  document.getElementById("registrationsView").classList.add("hidden");
   sub.classList.remove("navSubLeave");
   main.style.visibility="";
   pack.classList.remove("productionNavTransition","navBack");
@@ -3722,16 +3690,17 @@ el.innerHTML='<div class="batchFeedbackCard"><div class="batchFeedbackIcon pulse
 document.body.appendChild(el);
 }
 
-function startProductionAnimation(batchId,targetId="productionStartAnimation"){
- const box=document.getElementById(targetId);
+function startProductionAnimation(batchId,targetId){
+ const isTillagg=targetId==="tillaggStartPopup";
+ const main=document.getElementById("productionMainLayout");
+ if(!isTillagg && !main)return;
+ const box=document.getElementById(targetId||"productionStartAnimation");
  if(!box)return;
  box.classList.remove("hidden","startAnimExit");
  box.innerHTML='<div class="startAnimIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5 9.2 17.7 20 6.8"></path><circle cx="12" cy="12" r="9"></circle></svg></div><div class="startAnimText"><div class="startAnimKicker">PRODUKTION STARTAS</div><div class="startAnimTitle">Batch '+String(batchId).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))+' är aktiv</div><div class="startAnimSub"><span class="startAnimCheck">✓</span> Produktion är redo. Du stannar här tills batchen avslutas.</div></div>';
- clearTimeout(window.__productionStartAnimTimer);
- window.__productionStartAnimTimer=setTimeout(()=>{
-   box.classList.add("startAnimExit");
-   setTimeout(()=>{box.classList.add("hidden");box.classList.remove("startAnimExit");box.innerHTML="";},460);
- },2400);
+ const timerKey=isTillagg?"__tillaggStartAnimTimer":"__productionStartAnimTimer";
+ clearTimeout(window[timerKey]);
+ window[timerKey]=setTimeout(()=>{box.classList.add("startAnimExit");setTimeout(()=>{box.classList.add("hidden");box.classList.remove("startAnimExit");box.innerHTML="";},460);},2400);
 }
 
 function startFpk(){
@@ -3748,7 +3717,7 @@ addHistory("START","-","","","Startade produktion","","","Batch "+v);
 renderAll();
 chooseProductionMode("kolli");
 syncProductionLock();
-startProductionAnimation(v,"productionStartAnimation");
+showBatchStartFeedback(v);
 window.scrollTo(0,0);
 }
 
@@ -5473,8 +5442,7 @@ function etFinishPrompt(){
   etState.finished=true;
   if(typeof ET_STATE_KEY!=='undefined') localStorage.removeItem(ET_STATE_KEY);
   if(typeof PRODUCTION_VIEW_KEY!=='undefined') localStorage.setItem(PRODUCTION_VIEW_KEY,'chooser');
-  ['productionChooser','productionMainLayout','productionSubView','etiketteringView'].forEach(id=>{const el=document.getElementById(id); if(!el)return; const show=id==='productionChooser'; el.classList.toggle('hidden',!show); el.style.setProperty('display',show?'block':'none','important');});
-  setTillaggEntryVisible(true);
+  ['productionChooser','productionMainLayout','productionSubView','etiketteringView'].forEach(id=>{const el=document.getElementById(id); if(el) el.classList.toggle('hidden', id!=='productionChooser');});
   document.body.classList.remove('etStartMode');
   window.scrollTo(0,0);
   if(typeof etToast==='function') etToast('Etikettering avslutad');
@@ -5521,19 +5489,6 @@ function etFinishPrompt(){
 </style>
 <style id="packvexTillaggKassV1994">
 .tillaggKassCard .orange{background:#f28b00!important;color:#fff!important}.tillaggKassStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.tillaggKassStats span{display:flex;justify-content:space-between;gap:8px;padding:9px 10px;border-radius:10px;background:#fff7e9;color:#7a5a18;font-size:11px}.tillaggKassStats strong{color:#172033;font-size:13px}@media(prefers-reduced-motion:reduce){.tillaggKassCard *{transition:none!important}}
-</style>
-<style id="packvexTillaggStartAnimationV11013Fix">
-/* v1.10.13 FIX 5 — Startanimationen hör till Tilläggsetiketter, inte Kolli. */
-#productionChooser + .tillaggEntryOutside.tillaggEntryVisible{
-  animation:tillaggEntryStartIn .42s cubic-bezier(.22,.61,.36,1) both;
-}
-@keyframes tillaggEntryStartIn{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:translateY(0)}
-}
-@media(prefers-reduced-motion:reduce){
-  #productionChooser + .tillaggEntryOutside.tillaggEntryVisible{animation:none!important}
-}
 </style>
 <style id="packvexTillaggStageGuardV11013Fix">
 /* v1.10.13 FIX 2 — START och PRODUKTION är separata vycontainrar. */
@@ -5666,6 +5621,7 @@ function etFinishPrompt(){
     state.rolls=state.rolls.map((r,i)=>({...r,consumed:0,status:i===0?'active':'unused'}));state.activeRollId=state.mode==='printed'?state.rolls[0].id:null;state.nextRollId=null;
     addEvent('START',state.mode==='printed'?`Startad mitt i produktion · Redan kört ${fmt(carry)} st · Registrerade rullar ej förbrukade`:`Startad mitt i produktion · Redan kört ${fmt(carry)} st · Startetikett ${fmt(state.startLabel)}`);
     tillaggSave();localStorage.setItem('packvex_tillagg_view','test');
+    showBatchStartFeedback(state.batchId);
     setTillaggStage('production');
     render();window.scrollTo(0,0);
   };
