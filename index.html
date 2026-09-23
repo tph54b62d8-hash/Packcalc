@@ -2479,8 +2479,8 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 #pack.productionNavTransition.navBack #productionMainLayout{position:relative!important;left:auto!important;top:auto!important;width:100%!important;z-index:auto!important;}
 #pack.productionNavTransition.navBack #productionSubView{animation:packvexSmoothPageOut .16s ease-out both!important;}
 #productionSubView.navSubLeave{animation:packvexSmoothPageOut .16s ease-out both!important;}
-@keyframes packvexSmoothPageIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
-@keyframes packvexSmoothPageOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-3px)}}
+@keyframes packvexSmoothPageIn{from{opacity:0;transform:translate3d(0,5px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes packvexSmoothPageOut{from{opacity:1;transform:translate3d(0,0,0)}to{opacity:0;transform:translate3d(0,-2px,0)}}
 @media(prefers-reduced-motion:reduce){
  #pack.chooserNavTransition #productionChooser,
  #pack.chooserNavTransition #productionMainLayout,
@@ -2613,6 +2613,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 
 
 <div class="productionLayout" id="productionMainLayout">
+<div class="kolliProductionBackWrap"><button class="gray kolliProductionBack" onclick="backFromKolliProduction()">← Tillbaka</button></div>
 <div class="productionStartAnimation hidden" id="productionStartAnimation" aria-live="polite"></div>
 
 <div class="productionLeft">
@@ -3745,7 +3746,10 @@ saveData();
 renderFpk();
 addHistory("START","-","","","Startade produktion","","","Batch "+v);
 renderAll();
-chooseProductionMode("kolli");
+/* Vi är redan i Kolli-vyn när batchen startas. Byt inte vy igen och hoppa inte till toppen. */
+if(document.getElementById("productionMainLayout")?.classList.contains("hidden")){
+  chooseProductionMode("kolli");
+}
 syncProductionLock();
 showBatchStartFeedback(v);
 }
