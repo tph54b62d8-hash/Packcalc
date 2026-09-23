@@ -3295,12 +3295,15 @@ localStorage.setItem(PRODUCTION_VIEW_KEY,view);
 main.classList.add("hidden");
 sub.classList.add("hidden");
 sub.classList.remove("navSubEnter","navSubLeave");
-document.getElementById("registeredView").classList.add("hidden");
-document.getElementById("registrationsView").classList.add("hidden");
-if(view==="registered"){document.getElementById("registeredView").classList.remove("hidden");renderKolliView();}
-if(view==="registrations"){document.getElementById("registrationsView").classList.remove("hidden");renderPackHistoryView();}
+const registeredView=document.getElementById("registeredView");
+const registrationsView=document.getElementById("registrationsView");
+if(registeredView){registeredView.classList.add("hidden");registeredView.style.setProperty("display","none","important");}
+if(registrationsView){registrationsView.classList.add("hidden");registrationsView.style.setProperty("display","none","important");}
+if(view==="registered"&&registeredView){registeredView.classList.remove("hidden");registeredView.style.setProperty("display","block","important");renderKolliView();}
+if(view==="registrations"&&registrationsView){registrationsView.classList.remove("hidden");registrationsView.style.setProperty("display","block","important");renderPackHistoryView();}
 if(view==="registered"||view==="registrations"){
  sub.classList.remove("hidden");
+ sub.style.setProperty("display","block","important");
  pack.classList.remove("navBack");
  pack.classList.add("productionNavTransition","navForward");
  requestAnimationFrame(function(){
