@@ -3100,7 +3100,6 @@ function chooseProductionMode(mode){
   main.classList.remove("hidden");
   main.style.setProperty("display","block","important");
   document.body.classList.remove("etStartMode");
-  if(pack){pack.classList.remove("chooserNavTransition","navChooserBack");pack.classList.add("chooserNavTransition","navChooserForward");setTimeout(()=>pack.classList.remove("chooserNavTransition","navChooserForward"),520);}
  }else{
   et.classList.remove("hidden");
   et.style.setProperty("display","block","important");
@@ -3289,12 +3288,25 @@ localStorage.setItem(PRODUCTION_VIEW_KEY,view);
 main.classList.add("hidden");
 sub.classList.add("hidden");
 sub.classList.remove("navSubEnter","navSubLeave");
-document.getElementById("registeredView").classList.add("hidden");
-document.getElementById("registrationsView").classList.add("hidden");
-if(view==="registered"){document.getElementById("registeredView").classList.remove("hidden");renderKolliView();}
-if(view==="registrations"){document.getElementById("registrationsView").classList.remove("hidden");renderPackHistoryView();}
+const registered=document.getElementById("registeredView");
+const registrations=document.getElementById("registrationsView");
+registered.classList.add("hidden");
+registrations.classList.add("hidden");
+registered.style.setProperty("display","none","important");
+registrations.style.setProperty("display","none","important");
+if(view==="registered"){
+  registered.classList.remove("hidden");
+  registered.style.setProperty("display","block","important");
+  renderKolliView();
+}
+if(view==="registrations"){
+  registrations.classList.remove("hidden");
+  registrations.style.setProperty("display","block","important");
+  renderPackHistoryView();
+}
 if(view==="registered"||view==="registrations"){
  sub.classList.remove("hidden");
+ sub.style.setProperty("display","block","important");
  pack.classList.remove("navBack");
  pack.classList.add("productionNavTransition","navForward");
  requestAnimationFrame(function(){
@@ -3320,6 +3332,7 @@ localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
 let wasSub=!sub.classList.contains("hidden");
 if(!wasSub){
  main.classList.remove("hidden");
+ main.style.setProperty("display","block","important");
  return;
 }
 
@@ -3342,8 +3355,11 @@ requestAnimationFrame(function(){
  });
  setTimeout(function(){
   sub.classList.add("hidden");
-  document.getElementById("registeredView").classList.add("hidden");
-  document.getElementById("registrationsView").classList.add("hidden");
+  sub.style.setProperty("display","none","important");
+  const registered=document.getElementById("registeredView");
+  const registrations=document.getElementById("registrationsView");
+  if(registered){registered.classList.add("hidden");registered.style.setProperty("display","none","important");}
+  if(registrations){registrations.classList.add("hidden");registrations.style.setProperty("display","none","important");}
   sub.classList.remove("navSubLeave");
   main.style.visibility="";
   pack.classList.remove("productionNavTransition","navBack");
@@ -5484,6 +5500,19 @@ function etFinishPrompt(){
 </style>
 <style id="packvexTillaggKassV1994">
 .tillaggKassCard .orange{background:#f28b00!important;color:#fff!important}.tillaggKassStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.tillaggKassStats span{display:flex;justify-content:space-between;gap:8px;padding:9px 10px;border-radius:10px;background:#fff7e9;color:#7a5a18;font-size:11px}.tillaggKassStats strong{color:#172033;font-size:13px}@media(prefers-reduced-motion:reduce){.tillaggKassCard *{transition:none!important}}
+</style>
+<style id="packvexTillaggStartAnimationV11013Fix">
+/* v1.10.13 FIX 5 — Startanimationen hör till Tilläggsetiketter, inte Kolli. */
+#productionChooser + .tillaggEntryOutside.tillaggEntryVisible{
+  animation:tillaggEntryStartIn .42s cubic-bezier(.22,.61,.36,1) both;
+}
+@keyframes tillaggEntryStartIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(prefers-reduced-motion:reduce){
+  #productionChooser + .tillaggEntryOutside.tillaggEntryVisible{animation:none!important}
+}
 </style>
 <style id="packvexTillaggStageGuardV11013Fix">
 /* v1.10.13 FIX 2 — START och PRODUKTION är separata vycontainrar. */
