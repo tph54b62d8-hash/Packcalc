@@ -2493,6 +2493,25 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 <style id="packvexProductionContextFixV11015">
 /* v1.10.15 — bottom Production navigation preserves Tilläggsetiketter context; Kolli keeps its original layout without an added back link. */
 </style>
+
+<style id="packvexNavigationPolishV11017">
+/* v1.10.17 — small back link + true tab-like horizontal navigation without vertical jump. */
+.kolliProductionBackWrap{position:absolute!important;top:-28px!important;left:0!important;z-index:20!important;margin:0!important;display:block!important;pointer-events:auto!important;}
+.kolliProductionBack{font-size:12px!important;line-height:1.2!important;padding:3px 5px!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important;color:#7d8797!important;font-weight:650!important;opacity:.78!important;border-radius:6px!important;}
+.kolliProductionBack:hover,.kolliProductionBack:active{background:transparent!important;color:#526176!important;opacity:1!important;}
+#pack.productionNavTransition{overflow:visible!important;position:relative!important;transition:none!important;}
+#pack.productionNavTransition #productionMainLayout,#pack.productionNavTransition #productionSubView{will-change:transform,opacity;}
+#pack.productionNavTransition.navForward #productionSubView{animation:packvexTabForward .28s cubic-bezier(.22,.72,.25,1) both!important;}
+#productionSubView.navSubEnter{animation:packvexTabForward .28s cubic-bezier(.22,.72,.25,1) both!important;}
+#pack.productionNavTransition.navBack #productionMainLayout{animation:packvexTabBack .28s cubic-bezier(.22,.72,.25,1) both!important;}
+#productionSubView.navSubLeave{animation:packvexTabBackOut .22s cubic-bezier(.4,0,.2,1) both!important;}
+@keyframes packvexTabForward{from{opacity:.72;transform:translate3d(42px,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes packvexTabBack{from{opacity:.72;transform:translate3d(-42px,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes packvexTabBackOut{from{opacity:1;transform:translate3d(0,0,0)}to{opacity:.72;transform:translate3d(42px,0,0)}}
+@media(prefers-reduced-motion:reduce){
+ #pack.productionNavTransition #productionSubView,#productionSubView.navSubEnter,#pack.productionNavTransition.navBack #productionMainLayout,#productionSubView.navSubLeave{animation:none!important;}
+}
+</style>
 </head>
 <body>
 <header class="packvexHeaderV1988">
@@ -3330,8 +3349,11 @@ function openProductionView(view){
  const tillaggTest=document.getElementById("tillaggTestView");
  if(tillaggTest){tillaggTest.classList.add("hidden");tillaggTest.style.setProperty("display","none","important");}
  localStorage.setItem(PRODUCTION_VIEW_KEY,view);
- /* Byt sida utan att animera höjden på hela #pack. Det var höjdinterpoleringen
-    som gjorde att innehållet hoppade på mobil. */
+
+ /* Behåll dokumenthöjden under själva flikbytet. Ingen scrollTo och ingen
+    höjd-animation av #pack — därför kan sidan inte hoppa upp/ned. */
+ const packHeight=Math.max(main.offsetHeight||0,sub.offsetHeight||0);
+ if(packHeight)pack.style.minHeight=packHeight+"px";
  main.classList.add("hidden","productionViewHidden");
  main.style.setProperty("display","none","important");
  sub.classList.add("hidden","productionViewHidden");
@@ -3352,14 +3374,13 @@ function openProductionView(view){
    renderPackHistoryView();
  }
  if(view==="registered"||view==="registrations"){
-   /* Flytta scrollpositionen innan undersidan visas, så användaren inte ser
-      den gamla produktionssidan hoppa upp/ned under bytet. */
-   window.scrollTo(0,0);
    sub.classList.remove("hidden","productionViewHidden");
    sub.style.setProperty("display","block","important");
    void sub.offsetWidth;
    sub.classList.add("navSubEnter");
-   setTimeout(()=>sub.classList.remove("navSubEnter"),240);
+   setTimeout(()=>{sub.classList.remove("navSubEnter");pack.classList.remove("productionNavTransition","navForward");},280);
+   pack.classList.remove("navBack");
+   pack.classList.add("productionNavTransition","navForward");
  }
 }
 
@@ -3370,22 +3391,28 @@ function closeProductionView(){
  const tillaggTest=document.getElementById("tillaggTestView");
  if(tillaggTest){tillaggTest.classList.add("hidden");tillaggTest.style.setProperty("display","none","important");}
  localStorage.setItem(PRODUCTION_VIEW_KEY,"kolli");
- sub.classList.add("hidden","productionViewHidden");
- sub.style.setProperty("display","none","important");
+
+ /* Behåll samma scrollläge och dokumenthöjd under tillbakaanimationen. */
+ const packHeight=Math.max(main.offsetHeight||0,sub.offsetHeight||0);
+ if(packHeight)pack.style.minHeight=packHeight+"px";
  const registeredView=document.getElementById("registeredView");
  const registrationsView=document.getElementById("registrationsView");
- if(registeredView){registeredView.classList.add("hidden");registeredView.style.setProperty("display","none","important");}
- if(registrationsView){registrationsView.classList.add("hidden");registrationsView.style.setProperty("display","none","important");}
  sub.classList.remove("navSubEnter","navSubLeave");
  main.classList.remove("hidden","productionViewHidden");
  main.style.setProperty("display","block","important");
- /* Återställ exakt där användaren var i Kolli-produktionen istället för att
-    kasta sidan till toppen när man går tillbaka. */
- const restoreY=Math.max(0,productionMainScrollY||0);
- window.scrollTo(0,restoreY);
  void main.offsetWidth;
  main.classList.add("navSubEnter");
- setTimeout(()=>main.classList.remove("navSubEnter"),240);
+ pack.classList.remove("navForward");
+ pack.classList.add("productionNavTransition","navBack");
+ if(registeredView){registeredView.classList.add("hidden");registeredView.style.setProperty("display","none","important");}
+ if(registrationsView){registrationsView.classList.add("hidden");registrationsView.style.setProperty("display","none","important");}
+ setTimeout(()=>{
+   sub.classList.add("hidden","productionViewHidden");
+   sub.style.setProperty("display","none","important");
+   main.classList.remove("navSubEnter");
+   pack.classList.remove("productionNavTransition","navBack");
+   pack.style.minHeight="";
+ },280);
 }
 
 function saveCalculatorState(view){
