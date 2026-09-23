@@ -171,8 +171,8 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .registrationCountPlus{color:#1eaa68;font-weight:800}
 .registrationCountMinus{color:#b21f32;font-weight:800}
 .registrationCountDiff{color:#8a5a00;font-weight:800}
-.kolliProductionBackWrap{position:absolute;top:-30px;left:0;z-index:5;margin:0}
-.kolliProductionBack{font-size:11px!important;padding:2px 3px!important;background:transparent!important;border:0!important;box-shadow:none!important;color:#8a94a6!important;font-weight:600!important;opacity:.72}
+.kolliProductionBackWrap{position:relative;top:auto;left:auto;z-index:5;margin:0 0 8px;grid-column:1 / -1;display:block}
+.kolliProductionBack{font-size:12px!important;padding:5px 3px!important;background:transparent!important;border:0!important;box-shadow:none!important;color:#687386!important;font-weight:700!important;opacity:.9}
 .kolliProductionBack:hover{opacity:1;background:transparent!important}
 #pack.chooserNavTransition{overflow:hidden;position:relative}
 #pack.chooserNavTransition #productionChooser,#pack.chooserNavTransition #productionMainLayout{will-change:transform}
@@ -2440,7 +2440,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 @keyframes productionStartOrb{0%{transform:translateX(45px) scale(.7);opacity:0}35%{opacity:1}100%{transform:translateX(-12px) scale(1.05);opacity:.65}}
 .productionStartAnimation.startAnimExit{animation:productionStartExit .45s ease both;}
 @keyframes productionStartExit{to{opacity:0;transform:translateY(-10px);max-height:0;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;border-width:0;}}
-.kolliProductionBackWrap.productionLocked{display:none!important;}
+.kolliProductionBackWrap.productionLocked{display:block!important;}
 @media(max-width:430px){
  .productionStartAnimation{margin:0 6px 10px;padding:14px 14px;border-radius:18px;grid-template-columns:48px minmax(0,1fr);gap:11px;}
  .productionStartAnimation .startAnimIcon{width:48px;height:48px;border-radius:15px;}
@@ -2456,6 +2456,10 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 <style id="packvexProductionViewGuardV11010">
 /* v1.10.13 — hård separation mellan Produktionsstartsida och produktionsflöden. */
 #pack #productionChooser.hidden,#pack #productionMainLayout.hidden,#pack #productionSubView.hidden,#pack #etiketteringView.hidden,#pack #tillaggTestView.hidden{display:none!important;}
+/* FIX 13: undersidor och huvudproduktion får aldrig ligga synliga samtidigt. */
+#productionMainLayout.productionViewHidden{display:none!important;}
+#productionSubView.productionViewHidden{display:none!important;}
+#registeredView.hidden,#registrationsView.hidden{display:none!important;}
 </style>
 <style id="packvexTillaggStartPopupV11013Fix">
 #tillaggStartPopup{position:fixed!important;left:50%;top:calc(env(safe-area-inset-top) + 18px);width:min(92vw,430px);margin:0!important;z-index:2200;box-sizing:border-box;}
@@ -3116,7 +3120,6 @@ function chooseProductionMode(mode){
  window.scrollTo(0,0);
 }
 function backFromKolliProduction(){
- if(typeof data!=="undefined" && data.fpk){syncProductionLock();return;}
  const chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),pack=document.getElementById("pack");
  if(!chooser||!main||!pack)return;
  resetProductionViews();
@@ -3286,80 +3289,81 @@ function etRender(){
 }
 
 function openProductionView(view){
-let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
-if(!main||!sub||!pack)return;
-setTillaggEntryVisible(false);
-const tillaggTest=document.getElementById("tillaggTestView");
-if(tillaggTest)tillaggTest.classList.add("hidden");
-localStorage.setItem(PRODUCTION_VIEW_KEY,view);
-main.classList.add("hidden");
-sub.classList.add("hidden");
-sub.classList.remove("navSubEnter","navSubLeave");
-const registeredView=document.getElementById("registeredView");
-const registrationsView=document.getElementById("registrationsView");
-if(registeredView){registeredView.classList.add("hidden");registeredView.style.setProperty("display","none","important");}
-if(registrationsView){registrationsView.classList.add("hidden");registrationsView.style.setProperty("display","none","important");}
-if(view==="registered"&&registeredView){registeredView.classList.remove("hidden");registeredView.style.setProperty("display","block","important");renderKolliView();}
-if(view==="registrations"&&registrationsView){registrationsView.classList.remove("hidden");registrationsView.style.setProperty("display","block","important");renderPackHistoryView();}
-if(view==="registered"||view==="registrations"){
- sub.classList.remove("hidden");
- sub.style.setProperty("display","block","important");
- pack.classList.remove("navBack");
- pack.classList.add("productionNavTransition","navForward");
- requestAnimationFrame(function(){
-  sub.classList.add("navSubEnter");
-  window.scrollTo(0,0);
-  setTimeout(function(){
-   sub.classList.remove("navSubEnter");
-   pack.classList.remove("productionNavTransition","navForward");
-  },320);
- });
-}else{
- window.scrollTo(0,0);
-}
+ const main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
+ if(!main||!sub||!pack)return;
+ setTillaggEntryVisible(false);
+ const tillaggTest=document.getElementById("tillaggTestView");
+ if(tillaggTest){tillaggTest.classList.add("hidden");tillaggTest.style.setProperty("display","none","important");}
+ localStorage.setItem(PRODUCTION_VIEW_KEY,view);
+ /* Göm hela Kolli-produktionen först. Undersidan ska vara ensam på skärmen. */
+ main.classList.add("hidden","productionViewHidden");
+ main.style.setProperty("display","none","important");
+ sub.classList.add("hidden","productionViewHidden");
+ sub.style.setProperty("display","none","important");
+ sub.classList.remove("navSubEnter","navSubLeave");
+ const registeredView=document.getElementById("registeredView");
+ const registrationsView=document.getElementById("registrationsView");
+ if(registeredView){registeredView.classList.add("hidden");registeredView.style.setProperty("display","none","important");}
+ if(registrationsView){registrationsView.classList.add("hidden");registrationsView.style.setProperty("display","none","important");}
+ if(view==="registered"&&registeredView){
+   registeredView.classList.remove("hidden");
+   registeredView.style.setProperty("display","block","important");
+   renderKolliView();
+ }
+ if(view==="registrations"&&registrationsView){
+   registrationsView.classList.remove("hidden");
+   registrationsView.style.setProperty("display","block","important");
+   renderPackHistoryView();
+ }
+ if(view==="registered"||view==="registrations"){
+   sub.classList.remove("hidden","productionViewHidden");
+   sub.style.setProperty("display","block","important");
+   pack.classList.remove("navBack");
+   pack.classList.add("productionNavTransition","navForward");
+   requestAnimationFrame(function(){
+     sub.classList.add("navSubEnter");
+     window.scrollTo(0,0);
+     setTimeout(function(){
+       sub.classList.remove("navSubEnter");
+       pack.classList.remove("productionNavTransition","navForward");
+     },320);
+   });
+ }else{
+   window.scrollTo(0,0);
+ }
 }
 
 function closeProductionView(){
-let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
-if(!main||!sub||!pack)return;
-setTillaggEntryVisible(true);
-const tillaggTest=document.getElementById("tillaggTestView");
-if(tillaggTest)tillaggTest.classList.add("hidden");
-localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
-let wasSub=!sub.classList.contains("hidden");
-if(!wasSub){
- main.classList.remove("hidden");
- return;
-}
-
-/* Håll layoutens höjd stabil under tillbakaglidningen så att innehållet
-   under Produktion inte hoppar när sub-vyn byts tillbaka. */
-let subHeight=sub.offsetHeight;
-main.classList.remove("hidden");
-let mainHeight=main.offsetHeight;
-main.style.visibility="hidden";
-sub.classList.remove("navSubEnter","navSubLeave");
-pack.style.height=subHeight+"px";
-pack.classList.remove("navForward");
-pack.classList.add("productionNavTransition","navBack");
-requestAnimationFrame(function(){
- main.style.visibility="visible";
- sub.classList.add("navSubLeave");
+ const main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
+ if(!main||!sub||!pack)return;
+ /* Vi går tillbaka till Kolli-produktionen, inte till Produktionsvalet.
+    Tilläggsetiketter-knappen ska därför inte visas här. */
+ setTillaggEntryVisible(false);
+ const tillaggTest=document.getElementById("tillaggTestView");
+ if(tillaggTest){tillaggTest.classList.add("hidden");tillaggTest.style.setProperty("display","none","important");}
+ localStorage.setItem(PRODUCTION_VIEW_KEY,"kolli");
+ /* Stäng undersidan först. Huvudproduktionen får visas först när undersidan är helt dold. */
+ sub.classList.add("hidden","productionViewHidden");
+ sub.style.setProperty("display","none","important");
+ document.getElementById("registeredView")?.classList.add("hidden");
+ document.getElementById("registeredView")?.style.setProperty("display","none","important");
+ document.getElementById("registrationsView")?.classList.add("hidden");
+ document.getElementById("registrationsView")?.style.setProperty("display","none","important");
+ sub.classList.remove("navSubEnter","navSubLeave");
+ main.classList.remove("hidden","productionViewHidden");
+ main.style.setProperty("display","block","important");
+ pack.classList.remove("navForward");
+ pack.classList.add("productionNavTransition","navBack");
  window.scrollTo(0,0);
  requestAnimationFrame(function(){
-  pack.style.height=mainHeight+"px";
+   main.classList.add("navSubEnter");
+   setTimeout(function(){
+     main.classList.remove("navSubEnter");
+     pack.classList.remove("productionNavTransition","navBack");
+   },320);
  });
- setTimeout(function(){
-  sub.classList.add("hidden");
-  document.getElementById("registeredView").classList.add("hidden");
-  document.getElementById("registrationsView").classList.add("hidden");
-  sub.classList.remove("navSubLeave");
-  main.style.visibility="";
-  pack.classList.remove("productionNavTransition","navBack");
-  pack.style.height="";
- },320);
-});
 }
+
 function saveCalculatorState(view){
  let ids=["sprutorAntal","sprutorPer","kapslarAntal","kapslarPer","pallCalcAntal","pallCalcPer","etikettMottagna","etikettTillOrder","etikettTillRapportering","etikettKassation","etikettAterlamnade","etikettForsta","etikettSista","etikettStart","etikettProducerade","etikettVerklig","midFrom","midTo","midFromPicker","midToPicker","unitCapsReverseCount","unitCapsReversePer","capsWellReverseCount","capsWellReversePer","unitWellUnits","unitWellPerCapsule","unitWellPerWell","unitWellReverseWells","unitWellReversePerWell","unitWellReversePerCapsule","kvarTotalInput","kvarKörtInput"];
  let values={};
