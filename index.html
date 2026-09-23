@@ -2456,6 +2456,12 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 <style id="packvexProductionViewGuardV11010">
 /* v1.10.13 — hård separation mellan Produktionsstartsida och produktionsflöden. */
 #pack #productionChooser.hidden,#pack #productionMainLayout.hidden,#pack #productionSubView.hidden,#pack #etiketteringView.hidden,#pack #tillaggTestView.hidden{display:none!important;}
+/* FIX 6: hidden production views must also override any stale inline display. */
+#pack #productionChooser.hidden,#pack #productionMainLayout.hidden,#pack #productionSubView.hidden,#pack #etiketteringView.hidden,#pack #registeredView.hidden,#pack #registrationsView.hidden{display:none!important;}
+</style>
+<style id="packvexProductionIsolationV11013Fix6">
+/* v1.10.13 FIX 6 — Produktionsvyer får aldrig ligga ovanpå varandra. */
+#pack #productionMainLayout.hidden,#pack #productionChooser.hidden,#pack #productionSubView.hidden,#pack #etiketteringView.hidden,#pack #registeredView.hidden,#pack #registrationsView.hidden{display:none!important;}
 </style>
 </head>
 <body>
@@ -2577,7 +2583,6 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 
 
 <div class="productionLayout" id="productionMainLayout">
-<div class="productionStartAnimation hidden" id="productionStartAnimation" aria-live="polite"></div>
 <div class="kolliProductionBackWrap"><button class="gray kolliProductionBack" onclick="backFromKolliProduction()">← Tillbaka</button></div>
 <div class="productionLeft">
 <div class="card productionHeaderCard"><div class="productionTop"><div class="productionHeaderMain"><div class="productionHeaderIcon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 20V9h5v11M16 20V4h5v16M8 20v-5h8v5M3 9h5"></path></svg></div><div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div></div><div class="activeBatch" id="productionActiveBatch"></div></div></div>
@@ -2652,6 +2657,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
   </div>
 
   <div class="tillaggStageView tillaggProductionStageView tillaggHidden" id="tillaggProductionStageView">
+  <div class="productionStartAnimation hidden" id="productionStartAnimation" aria-live="polite"></div>
   <div class="tillaggActive tillaggHidden" id="tillaggActiveView">
     <div class="tillaggCard tillaggOverviewCard">
       <div class="tillaggOverviewHead">
@@ -3203,6 +3209,7 @@ function etStart(){
    card.classList.add("etHidden");
    document.body.classList.remove("etStartMode");
    etRender();
+   startProductionAnimation(batch);
    etToast("✓ Körning startad · "+etFmt(q)+" st · Nästa etikett "+etFmt(n));
  },4000);
 }
@@ -3286,7 +3293,13 @@ const tillaggTest=document.getElementById("tillaggTestView");
 if(tillaggTest)tillaggTest.classList.add("hidden");
 localStorage.setItem(PRODUCTION_VIEW_KEY,view);
 main.classList.add("hidden");
+main.style.setProperty("display","none","important");
+const chooser=document.getElementById("productionChooser");
+const etikettering=document.getElementById("etiketteringView");
+if(chooser){chooser.classList.add("hidden");chooser.style.setProperty("display","none","important");}
+if(etikettering){etikettering.classList.add("hidden");etikettering.style.setProperty("display","none","important");}
 sub.classList.add("hidden");
+sub.style.setProperty("display","none","important");
 sub.classList.remove("navSubEnter","navSubLeave");
 const registered=document.getElementById("registeredView");
 const registrations=document.getElementById("registrationsView");
@@ -3325,7 +3338,7 @@ if(view==="registered"||view==="registrations"){
 function closeProductionView(){
 let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
 if(!main||!sub||!pack)return;
-setTillaggEntryVisible(true);
+setTillaggEntryVisible(false);
 const tillaggTest=document.getElementById("tillaggTestView");
 if(tillaggTest)tillaggTest.classList.add("hidden");
 localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
@@ -3333,6 +3346,8 @@ let wasSub=!sub.classList.contains("hidden");
 if(!wasSub){
  main.classList.remove("hidden");
  main.style.setProperty("display","block","important");
+ sub.classList.add("hidden");
+ sub.style.setProperty("display","none","important");
  return;
 }
 
@@ -3356,6 +3371,12 @@ requestAnimationFrame(function(){
  setTimeout(function(){
   sub.classList.add("hidden");
   sub.style.setProperty("display","none","important");
+  const chooser=document.getElementById("productionChooser");
+  const etikettering=document.getElementById("etiketteringView");
+  if(chooser){chooser.classList.add("hidden");chooser.style.setProperty("display","none","important");}
+  if(etikettering){etikettering.classList.add("hidden");etikettering.style.setProperty("display","none","important");}
+  main.classList.remove("hidden");
+  main.style.setProperty("display","block","important");
   const registered=document.getElementById("registeredView");
   const registrations=document.getElementById("registrationsView");
   if(registered){registered.classList.add("hidden");registered.style.setProperty("display","none","important");}
@@ -3728,7 +3749,6 @@ addHistory("START","-","","","Startade produktion","","","Batch "+v);
 renderAll();
 chooseProductionMode("kolli");
 syncProductionLock();
-startProductionAnimation(v);
 window.scrollTo(0,0);
 }
 
@@ -5453,7 +5473,8 @@ function etFinishPrompt(){
   etState.finished=true;
   if(typeof ET_STATE_KEY!=='undefined') localStorage.removeItem(ET_STATE_KEY);
   if(typeof PRODUCTION_VIEW_KEY!=='undefined') localStorage.setItem(PRODUCTION_VIEW_KEY,'chooser');
-  ['productionChooser','productionMainLayout','productionSubView','etiketteringView'].forEach(id=>{const el=document.getElementById(id); if(el) el.classList.toggle('hidden', id!=='productionChooser');});
+  ['productionChooser','productionMainLayout','productionSubView','etiketteringView'].forEach(id=>{const el=document.getElementById(id); if(!el)return; const show=id==='productionChooser'; el.classList.toggle('hidden',!show); el.style.setProperty('display',show?'block':'none','important');});
+  setTillaggEntryVisible(true);
   document.body.classList.remove('etStartMode');
   window.scrollTo(0,0);
   if(typeof etToast==='function') etToast('Etikettering avslutad');
