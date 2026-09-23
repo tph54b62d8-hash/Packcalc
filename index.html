@@ -2512,6 +2512,18 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
  #pack.productionNavTransition #productionSubView,#productionSubView.navSubEnter,#pack.productionNavTransition.navBack #productionMainLayout,#productionSubView.navSubLeave{animation:none!important;}
 }
 </style>
+
+<style id="packvexNoInputZoomV11013">
+/* FIX 19 — iPhone: håll formulärfält stabila vid fokus utan att låsa sidans responsiva zoom.
+   Safari zoomar automatiskt på fält med textstorlek under 16px. Alla formulärfält
+   får därför minst 16px på mobil; större befintliga fält behåller sin storlek. */
+@media(max-width:430px){
+  input,select,textarea{font-size:16px!important;}
+  .calcMainInput{font-size:19px!important;}
+  .tillaggProductionEntry input{font-size:18px!important;}
+  .batchIdInputWrap input{font-size:16px!important;}
+}
+</style>
 </head>
 <body>
 <header class="packvexHeaderV1988">
