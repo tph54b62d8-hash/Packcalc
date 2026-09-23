@@ -3345,6 +3345,10 @@ function openProductionView(view){
  const main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
  if(!main||!sub||!pack)return;
  productionMainScrollY=Math.max(0,window.scrollY||document.documentElement.scrollTop||0);
+ /* Undersidan ska alltid börja vid toppen av Produktionssektionen, inte vid
+    den scrollposition där användaren råkade trycka på länken. */
+ const productionTop=Math.max(0,window.scrollY+(pack.getBoundingClientRect().top||0));
+ if(Math.abs(window.scrollY-productionTop)>2) window.scrollTo(0,productionTop);
  setTillaggEntryVisible(false);
  const tillaggTest=document.getElementById("tillaggTestView");
  if(tillaggTest){tillaggTest.classList.add("hidden");tillaggTest.style.setProperty("display","none","important");}
@@ -3412,6 +3416,9 @@ function closeProductionView(){
    main.classList.remove("navSubEnter");
    pack.classList.remove("productionNavTransition","navBack");
    pack.style.minHeight="";
+   if(Number.isFinite(productionMainScrollY)){
+     window.scrollTo(0,Math.max(0,productionMainScrollY));
+   }
  },280);
 }
 
