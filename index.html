@@ -3150,7 +3150,8 @@ function openProductionEntry(){
 }
 function syncProductionLock(){
  const back=document.querySelector(".kolliProductionBackWrap");
- if(back)back.classList.toggle("productionLocked",!!(typeof data!=="undefined"&&data.fpk));
+ /* Tillbaka-knappen ska alltid vara synlig i Kolli-vyn, även efter att en batch har startats. */
+ if(back)back.classList.remove("productionLocked");
 }
 function openProductionChooser(){
  if(typeof data!=="undefined" && data.fpk){openProductionEntry();return;}
@@ -3184,7 +3185,6 @@ function chooseProductionMode(mode){
  window.scrollTo(0,0);
 }
 function backFromKolliProduction(){
- if(typeof data!=="undefined" && data.fpk){syncProductionLock();return;}
  const chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),pack=document.getElementById("pack");
  if(!chooser||!main||!pack)return;
  resetProductionViews();
