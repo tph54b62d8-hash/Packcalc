@@ -3724,18 +3724,17 @@ el.innerHTML='<div class="batchFeedbackCard"><div class="batchFeedbackIcon pulse
 document.body.appendChild(el);
 }
 
-function startProductionAnimation(batchId){
+function startProductionAnimation(batchId,targetId){
+ const isTillagg=targetId==="tillaggStartPopup";
  const main=document.getElementById("productionMainLayout");
- if(!main)return;
- const box=document.getElementById("productionStartAnimation");
+ if(!isTillagg && !main)return;
+ const box=document.getElementById(targetId||"productionStartAnimation");
  if(!box)return;
  box.classList.remove("hidden","startAnimExit");
  box.innerHTML='<div class="startAnimIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5 9.2 17.7 20 6.8"></path><circle cx="12" cy="12" r="9"></circle></svg></div><div class="startAnimText"><div class="startAnimKicker">PRODUKTION STARTAS</div><div class="startAnimTitle">Batch '+String(batchId).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))+' är aktiv</div><div class="startAnimSub"><span class="startAnimCheck">✓</span> Produktion är redo. Du stannar här tills batchen avslutas.</div></div>';
- clearTimeout(window.__productionStartAnimTimer);
- window.__productionStartAnimTimer=setTimeout(()=>{
-   box.classList.add("startAnimExit");
-   setTimeout(()=>{box.classList.add("hidden");box.classList.remove("startAnimExit");box.innerHTML="";},460);
- },2400);
+ const timerKey=isTillagg?"__tillaggStartAnimTimer":"__productionStartAnimTimer";
+ clearTimeout(window[timerKey]);
+ window[timerKey]=setTimeout(()=>{box.classList.add("startAnimExit");setTimeout(()=>{box.classList.add("hidden");box.classList.remove("startAnimExit");box.innerHTML="";},460);},2400);
 }
 
 function startFpk(){
@@ -3750,10 +3749,12 @@ saveData();
 renderFpk();
 addHistory("START","-","","","Startade produktion","","","Batch "+v);
 renderAll();
-chooseProductionMode("kolli");
+/* Vi är redan i Kolli-vyn när batchen startas. Byt inte vy igen och hoppa inte till toppen. */
+if(document.getElementById("productionMainLayout")?.classList.contains("hidden")){
+  chooseProductionMode("kolli");
+}
 syncProductionLock();
-startProductionAnimation(v);
-window.scrollTo(0,0);
+showBatchStartFeedback(v);
 }
 
 function closeBatchFinishConfirm(){
