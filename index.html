@@ -3394,47 +3394,65 @@ if(view==="registered"||view==="registrations"){
 }
 
 function closeProductionView(){
-let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
-if(!main||!sub||!pack)return;
-setTillaggEntryVisible(true);
+let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),chooser=document.getElementById("productionChooser"),pack=document.getElementById("pack");
+if(!main||!sub||!chooser||!pack)return;
+
+/* Tillbaka från Registrerade kollin / Registreringar ska ALLTID gå tillbaka
+   till den vanliga Kolli-vyn. Den får aldrig gå till Produktionsväljaren eller
+   visa Tilläggsetiketter. */
+setTillaggEntryVisible(false);
 const tillaggTest=document.getElementById("tillaggTestView");
-if(tillaggTest)tillaggTest.classList.add("hidden");
-safeProductionStorageSet(PRODUCTION_VIEW_KEY,"chooser");
-let wasSub=!sub.classList.contains("hidden");
+if(tillaggTest){
+  tillaggTest.classList.add("hidden");
+  tillaggTest.style.setProperty("display","none","important");
+}
+safeProductionStorageSet(PRODUCTION_VIEW_KEY,"kolli");
+safeProductionStorageSet("packvex_tillagg_view","chooser");
+
+const wasSub=!sub.classList.contains("hidden");
 if(!wasSub){
- main.classList.remove("hidden");
- return;
+  chooser.classList.add("hidden");
+  chooser.style.setProperty("display","none","important");
+  main.classList.remove("hidden");
+  main.style.setProperty("display","block","important");
+  syncProductionLock();
+  window.scrollTo(0,0);
+  return;
 }
 
-/* Håll layoutens höjd stabil under tillbakaglidningen så att innehållet
-   under Produktion inte hoppar när sub-vyn byts tillbaka. */
-let subHeight=sub.offsetHeight;
+/* Visa ordinarie Kolli-vy bakom sub-vyn och behåll den gamla mjuka
+   tillbakaanimationen utan att öppna Produktionsväljaren. */
+chooser.classList.add("hidden");
+chooser.style.setProperty("display","none","important");
 main.classList.remove("hidden");
-let mainHeight=main.offsetHeight;
+main.style.setProperty("display","block","important");
 main.style.visibility="hidden";
+
+let subHeight=Math.max(sub.offsetHeight,1);
+let mainHeight=Math.max(main.offsetHeight,1);
 sub.classList.remove("navSubEnter","navSubLeave");
 pack.style.height=subHeight+"px";
 pack.classList.remove("navForward");
 pack.classList.add("productionNavTransition","navBack");
+
 requestAnimationFrame(function(){
- main.style.visibility="visible";
- sub.classList.add("navSubLeave");
- window.scrollTo(0,0);
- requestAnimationFrame(function(){
-  pack.style.height=mainHeight+"px";
- });
- setTimeout(function(){
-  sub.classList.add("hidden");
-  sub.style.setProperty("display","none","important");
-  document.getElementById("registeredView").classList.add("hidden");
-  document.getElementById("registeredView").style.setProperty("display","none","important");
-  document.getElementById("registrationsView").classList.add("hidden");
-  document.getElementById("registrationsView").style.setProperty("display","none","important");
-  sub.classList.remove("navSubLeave");
-  main.style.visibility="";
-  pack.classList.remove("productionNavTransition","navBack");
-  pack.style.height="";
- },320);
+  main.style.visibility="visible";
+  sub.classList.add("navSubLeave");
+  window.scrollTo(0,0);
+  requestAnimationFrame(function(){pack.style.height=mainHeight+"px";});
+  setTimeout(function(){
+    sub.classList.add("hidden");
+    sub.style.setProperty("display","none","important");
+    const registered=document.getElementById("registeredView");
+    const registrations=document.getElementById("registrationsView");
+    if(registered){registered.classList.add("hidden");registered.style.setProperty("display","none","important");}
+    if(registrations){registrations.classList.add("hidden");registrations.style.setProperty("display","none","important");}
+    sub.classList.remove("navSubLeave");
+    main.style.visibility="";
+    pack.classList.remove("productionNavTransition","navBack");
+    pack.style.height="";
+    syncProductionLock();
+  },320);
 });
 }
 function saveCalculatorState(view){
