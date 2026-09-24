@@ -171,6 +171,9 @@ nav#mainNav button.active .navIcon{stroke-width:2.4}
 .registrationCountPlus{color:#1eaa68;font-weight:800}
 .registrationCountMinus{color:#b21f32;font-weight:800}
 .registrationCountDiff{color:#8a5a00;font-weight:800}
+.kolliProductionBackWrap{position:absolute;top:-30px;left:0;z-index:5;margin:0}
+.kolliProductionBack{font-size:11px!important;padding:2px 3px!important;background:transparent!important;border:0!important;box-shadow:none!important;color:#8a94a6!important;font-weight:600!important;opacity:.72}
+.kolliProductionBack:hover{opacity:1;background:transparent!important}
 #pack.chooserNavTransition{overflow:hidden;position:relative}
 #pack.chooserNavTransition #productionChooser,#pack.chooserNavTransition #productionMainLayout{will-change:transform}
 #pack.chooserNavTransition.navChooserForward #productionMainLayout{animation:productionChooserInRight .5s cubic-bezier(.22,.61,.36,1) both}
@@ -2437,7 +2440,7 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 @keyframes productionStartOrb{0%{transform:translateX(45px) scale(.7);opacity:0}35%{opacity:1}100%{transform:translateX(-12px) scale(1.05);opacity:.65}}
 .productionStartAnimation.startAnimExit{animation:productionStartExit .45s ease both;}
 @keyframes productionStartExit{to{opacity:0;transform:translateY(-10px);max-height:0;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;border-width:0;}}
-.kolliProductionBackWrap.productionLocked{display:block!important;}
+.kolliProductionBackWrap.productionLocked{display:none!important;}
 @media(max-width:430px){
  .productionStartAnimation{margin:0 6px 10px;padding:14px 14px;border-radius:18px;grid-template-columns:48px minmax(0,1fr);gap:11px;}
  .productionStartAnimation .startAnimIcon{width:48px;height:48px;border-radius:15px;}
@@ -2453,76 +2456,6 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 <style id="packvexProductionViewGuardV11010">
 /* v1.10.13 — hård separation mellan Produktionsstartsida och produktionsflöden. */
 #pack #productionChooser.hidden,#pack #productionMainLayout.hidden,#pack #productionSubView.hidden,#pack #etiketteringView.hidden,#pack #tillaggTestView.hidden{display:none!important;}
-/* FIX 13: undersidor och huvudproduktion får aldrig ligga synliga samtidigt. */
-#productionMainLayout.productionViewHidden{display:none!important;}
-#productionSubView.productionViewHidden{display:none!important;}
-#registeredView.hidden,#registrationsView.hidden{display:none!important;}
-</style>
-<style id="packvexTillaggStartPopupV11013Fix">
-#tillaggStartPopup{position:fixed!important;left:50%;top:calc(env(safe-area-inset-top) + 18px);width:min(92vw,430px);margin:0!important;z-index:2200;box-sizing:border-box;}
-#tillaggStartPopup.hidden{display:none!important;}
-@media(max-width:430px){#tillaggStartPopup{width:calc(100vw - 24px);}}
-</style>
-<style id="packvexSmoothNavigationV11014">
-/* v1.10.14 — smooth, restrained production navigation. No large slides or height interpolation. */
-#pack.chooserNavTransition,
-#pack.productionNavTransition{overflow:visible!important;position:relative!important;transition:none!important;height:auto!important;}
-#pack.chooserNavTransition #productionChooser,
-#pack.chooserNavTransition #productionMainLayout,
-#pack.productionNavTransition #productionMainLayout,
-#pack.productionNavTransition #productionSubView{will-change:opacity,transform;}
-#pack.chooserNavTransition.navChooserForward #productionMainLayout,
-#pack.chooserNavTransition.navChooserBack #productionChooser,
-#pack.productionNavTransition.navForward #productionSubView,
-#productionSubView.navSubEnter,
-#pack.productionNavTransition.navBack #productionMainLayout{animation:packvexSmoothPageIn .22s cubic-bezier(.22,.7,.3,1) both!important;}
-#pack.productionNavTransition.navBack #productionMainLayout{position:relative!important;left:auto!important;top:auto!important;width:100%!important;z-index:auto!important;}
-#pack.productionNavTransition.navBack #productionSubView{animation:packvexSmoothPageOut .16s ease-out both!important;}
-#productionSubView.navSubLeave{animation:packvexSmoothPageOut .16s ease-out both!important;}
-@keyframes packvexSmoothPageIn{from{opacity:0;transform:translate3d(0,5px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
-@keyframes packvexSmoothPageOut{from{opacity:1;transform:translate3d(0,0,0)}to{opacity:0;transform:translate3d(0,-2px,0)}}
-@media(prefers-reduced-motion:reduce){
- #pack.chooserNavTransition #productionChooser,
- #pack.chooserNavTransition #productionMainLayout,
- #pack.productionNavTransition #productionMainLayout,
- #pack.productionNavTransition #productionSubView,
- #productionSubView.navSubEnter,
- #productionSubView.navSubLeave{animation:none!important;}
-}
-</style>
-<style id="packvexProductionContextFixV11015">
-/* v1.10.15 — bottom Production navigation preserves Tilläggsetiketter context; Kolli keeps its original layout without an added back link. */
-</style>
-
-<style id="packvexNavigationPolishV11017">
-/* v1.10.17 — small back link + true tab-like horizontal navigation without vertical jump. */
-.kolliProductionBackWrap{position:absolute!important;top:-28px!important;left:0!important;z-index:20!important;margin:0!important;display:block!important;pointer-events:auto!important;}
-.kolliProductionBack{font-size:12px!important;line-height:1.2!important;padding:3px 5px!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important;color:#7d8797!important;font-weight:650!important;opacity:.78!important;border-radius:6px!important;}
-.kolliProductionBack:hover,.kolliProductionBack:active{background:transparent!important;color:#526176!important;opacity:1!important;}
-#pack.productionNavTransition{overflow:visible!important;position:relative!important;transition:none!important;}
-#pack.productionNavTransition #productionMainLayout,#pack.productionNavTransition #productionSubView{will-change:transform,opacity;}
-#pack.productionNavTransition.navForward #productionSubView{animation:packvexTabForward .28s cubic-bezier(.22,.72,.25,1) both!important;}
-#productionSubView.navSubEnter{animation:packvexTabForward .28s cubic-bezier(.22,.72,.25,1) both!important;}
-#pack.productionNavTransition.navBack #productionMainLayout{animation:packvexTabBack .28s cubic-bezier(.22,.72,.25,1) both!important;}
-#productionSubView.navSubLeave{animation:packvexTabBackOut .22s cubic-bezier(.4,0,.2,1) both!important;}
-@keyframes packvexTabForward{from{opacity:.72;transform:translate3d(42px,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}
-@keyframes packvexTabBack{from{opacity:.72;transform:translate3d(-42px,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}
-@keyframes packvexTabBackOut{from{opacity:1;transform:translate3d(0,0,0)}to{opacity:.72;transform:translate3d(42px,0,0)}}
-@media(prefers-reduced-motion:reduce){
- #pack.productionNavTransition #productionSubView,#productionSubView.navSubEnter,#pack.productionNavTransition.navBack #productionMainLayout,#productionSubView.navSubLeave{animation:none!important;}
-}
-</style>
-
-<style id="packvexNoInputZoomV11013">
-/* FIX 19 — iPhone: håll formulärfält stabila vid fokus utan att låsa sidans responsiva zoom.
-   Safari zoomar automatiskt på fält med textstorlek under 16px. Alla formulärfält
-   får därför minst 16px på mobil; större befintliga fält behåller sin storlek. */
-@media(max-width:430px){
-  input,select,textarea{font-size:16px!important;}
-  .calcMainInput{font-size:19px!important;}
-  .tillaggProductionEntry input{font-size:18px!important;}
-  .batchIdInputWrap input{font-size:16px!important;}
-}
 </style>
 </head>
 <body>
@@ -2644,9 +2577,8 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 
 
 <div class="productionLayout" id="productionMainLayout">
-<div class="kolliProductionBackWrap"><button class="gray kolliProductionBack" onclick="backFromKolliProduction()">← Tillbaka</button></div>
 <div class="productionStartAnimation hidden" id="productionStartAnimation" aria-live="polite"></div>
-
+<div class="kolliProductionBackWrap"><button class="gray kolliProductionBack" onclick="backFromKolliProduction()">← Tillbaka</button></div>
 <div class="productionLeft">
 <div class="card productionHeaderCard"><div class="productionTop"><div class="productionHeaderMain"><div class="productionHeaderIcon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 20V9h5v11M16 20V4h5v16M8 20v-5h8v5M3 9h5"></path></svg></div><div><h2 style="margin-bottom:0">Produktion</h2><div class="productionSubtitle">Batch och kollihantering i realtid.</div></div></div><div class="activeBatch" id="productionActiveBatch"></div></div></div>
 <div class="card batchIdCard"><h2>Batch ID</h2><div class="batchIdInputWrap"><input autocomplete="off" id="fpkNumber" placeholder=""/><button aria-label="Rensa Batch ID" class="batchIdClear" id="fpkClear" onclick="clearBatchId()" type="button">×</button></div><div class="batchButtons"><button class="blue" id="startBatchBtn" onclick="startFpk()"><span class="batchPlayIcon">▶</span><span>Starta batch</span></button><button class="red" id="finishBatchBtn" onclick="finishFpk()"><span class="batchStopIcon">■</span><span>Avsluta batch</span></button></div></div>
@@ -2669,8 +2601,6 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
     <div class="tillaggTopStatus" id="tillaggTopStatus">Ej startad</div>
   </div>
 
-  <div class="productionStartAnimation hidden" id="tillaggStartPopup" aria-live="polite"></div>
-<div class="tillaggStageView tillaggStartStageView" id="tillaggStartStageView">
   <div class="tillaggCard tillaggModeCard" id="tillaggModeCard">
     <div class="tillaggSectionHead">
       <div>
@@ -2718,9 +2648,6 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
     <button type="button" class="blue tillaggStartBtn" onclick="tillaggStartProduction()">Starta produktion</button>
   </div>
 
-  </div>
-
-  <div class="tillaggStageView tillaggProductionStageView tillaggHidden" id="tillaggProductionStageView">
   <div class="tillaggActive tillaggHidden" id="tillaggActiveView">
     <div class="tillaggCard tillaggOverviewCard">
       <div class="tillaggOverviewHead">
@@ -2781,7 +2708,6 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
     </div>
 
     <div class="tillaggFinishRow"><button type="button" class="red tillaggFinishBtn" onclick="tillaggFinishPrompt()">Avsluta produktion</button></div>
-  </div>
   </div>
 </div>
 <div class="productionModal hidden" id="diffModal"><div class="card productionModalCard"><span class="closeX" onclick="stangDiffPanel()">×</span><h3>Flagga differens</h3><div class="diffOption" id="diffOption1" onclick="valjDiff('En för mycket i sista','')"><span>För mycket</span><span class="positive">›</span></div><div class="diffOption" id="diffOption2" onclick="valjDiff('En för lite i sista','')"><span>För lite</span><span class="negative">›</span></div><div class="diffOption" id="diffOption3" onclick="valjDiff('Fel antal i kolli','')"><span>Kollit stämde inte i antal</span><span>›</span></div><div class="diffOption" id="diffOption4" onclick="valjDiff('Skadad vara','')"><span>Skadad vara</span><span>›</span></div><div class="diffOption" id="diffOption5" onclick="valjDiff('Annat','')"><span>Annat</span><span>›</span></div><div class="hidden" id="diffFields"></div><button class="blue" onclick="sparaValdDiff()">Spara</button></div></div>
@@ -3092,14 +3018,10 @@ if(page==="home")document.getElementById("navHome").classList.add("active");
 if(page==="pack"){
  document.getElementById("navPack").classList.add("active");
  if(fromNav){
-  // Bottom navigation must respect the production context instead of blindly forcing Kolli.
-  // If Tilläggsetiketter is the current/active production, stay there; otherwise use the normal production entry.
-  if(document.body.classList.contains("etStartMode") || (typeof etState!=="undefined" && etState.started && !etState.finished)){
-   chooseProductionMode("etikettering");
-  }else{
-   localStorage.setItem("packvex_tillagg_view","chooser");
-   openProductionEntry();
-  }
+  // Navigering till Produktion från bottenmenyn ska alltid öppna ordinarie Produktionsstartsida.
+  // Tilläggsetiketter är en separat vy och får inte återöppnas bara för att den sparade vyn är "test".
+  localStorage.setItem("packvex_tillagg_view","chooser");
+  openProductionChooser();
  }else restoreProductionView();
 }
 if(page==="packalkylator"){document.getElementById("navCalc").classList.add("active");restoreCalculatorState();}
@@ -3173,7 +3095,7 @@ function chooseProductionMode(mode){
   main.classList.remove("hidden");
   main.style.setProperty("display","block","important");
   document.body.classList.remove("etStartMode");
-  if(pack){pack.classList.remove("chooserNavTransition","navChooserBack");pack.classList.add("chooserNavTransition","navChooserForward");void main.offsetWidth;setTimeout(()=>pack.classList.remove("chooserNavTransition","navChooserForward"),240);}
+  if(pack){pack.classList.remove("chooserNavTransition","navChooserBack");pack.classList.add("chooserNavTransition","navChooserForward");setTimeout(()=>pack.classList.remove("chooserNavTransition","navChooserForward"),520);}
  }else{
   et.classList.remove("hidden");
   et.style.setProperty("display","block","important");
@@ -3183,6 +3105,7 @@ function chooseProductionMode(mode){
  window.scrollTo(0,0);
 }
 function backFromKolliProduction(){
+ if(typeof data!=="undefined" && data.fpk){syncProductionLock();return;}
  const chooser=document.getElementById("productionChooser"),main=document.getElementById("productionMainLayout"),pack=document.getElementById("pack");
  if(!chooser||!main||!pack)return;
  resetProductionViews();
@@ -3193,8 +3116,7 @@ function backFromKolliProduction(){
  pack.classList.remove("chooserNavTransition","navChooserForward");
  pack.classList.add("chooserNavTransition","navChooserBack");
  window.scrollTo(0,0);
- void chooser.offsetWidth;
- setTimeout(()=>pack.classList.remove("chooserNavTransition","navChooserBack"),240);
+ setTimeout(()=>pack.classList.remove("chooserNavTransition","navChooserBack"),520);
 }
 function saveEtState(){
  if(etState&&etState.started&&!etState.finished)localStorage.setItem(ET_STATE_KEY,JSON.stringify(etState));
@@ -3352,88 +3274,78 @@ function etRender(){
  let h=document.getElementById("etHistory");h.innerHTML=etState.history.length?etState.history.slice(0,5).map((r,i)=>'<div class="etRunItem"><div class="etRunItemTop"><span>Körning '+(etState.history.length-i)+'</span><span>'+etFmt(r.qty)+' godkända enheter</span></div><div class="etRunItemMeta">Start '+etFmt(r.start)+' · nästa '+etFmt(r.next)+' · förbrukat '+etFmt(r.consumed)+' etiketter</div></div>').join(""): '<div class="etMuted">Inga körningar ännu.</div>';
 }
 
-let productionMainScrollY=0;
 function openProductionView(view){
- const main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
- if(!main||!sub||!pack)return;
- productionMainScrollY=Math.max(0,window.scrollY||document.documentElement.scrollTop||0);
- /* Undersidan ska alltid börja vid toppen av Produktionssektionen, inte vid
-    den scrollposition där användaren råkade trycka på länken. */
- const productionTop=Math.max(0,window.scrollY+(pack.getBoundingClientRect().top||0));
- if(Math.abs(window.scrollY-productionTop)>2) window.scrollTo(0,productionTop);
- setTillaggEntryVisible(false);
- const tillaggTest=document.getElementById("tillaggTestView");
- if(tillaggTest){tillaggTest.classList.add("hidden");tillaggTest.style.setProperty("display","none","important");}
- localStorage.setItem(PRODUCTION_VIEW_KEY,view);
-
- /* Behåll dokumenthöjden under själva flikbytet. Ingen scrollTo och ingen
-    höjd-animation av #pack — därför kan sidan inte hoppa upp/ned. */
- const packHeight=Math.max(main.offsetHeight||0,sub.offsetHeight||0);
- if(packHeight)pack.style.minHeight=packHeight+"px";
- main.classList.add("hidden","productionViewHidden");
- main.style.setProperty("display","none","important");
- sub.classList.add("hidden","productionViewHidden");
- sub.style.setProperty("display","none","important");
- sub.classList.remove("navSubEnter","navSubLeave");
- const registeredView=document.getElementById("registeredView");
- const registrationsView=document.getElementById("registrationsView");
- if(registeredView){registeredView.classList.add("hidden");registeredView.style.setProperty("display","none","important");}
- if(registrationsView){registrationsView.classList.add("hidden");registrationsView.style.setProperty("display","none","important");}
- if(view==="registered"&&registeredView){
-   registeredView.classList.remove("hidden");
-   registeredView.style.setProperty("display","block","important");
-   renderKolliView();
- }
- if(view==="registrations"&&registrationsView){
-   registrationsView.classList.remove("hidden");
-   registrationsView.style.setProperty("display","block","important");
-   renderPackHistoryView();
- }
- if(view==="registered"||view==="registrations"){
-   sub.classList.remove("hidden","productionViewHidden");
-   sub.style.setProperty("display","block","important");
-   void sub.offsetWidth;
-   sub.classList.add("navSubEnter");
-   setTimeout(()=>{sub.classList.remove("navSubEnter");pack.classList.remove("productionNavTransition","navForward");},280);
-   pack.classList.remove("navBack");
-   pack.classList.add("productionNavTransition","navForward");
- }
+let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
+if(!main||!sub||!pack)return;
+setTillaggEntryVisible(false);
+const tillaggTest=document.getElementById("tillaggTestView");
+if(tillaggTest)tillaggTest.classList.add("hidden");
+localStorage.setItem(PRODUCTION_VIEW_KEY,view);
+main.classList.add("hidden");
+sub.classList.add("hidden");
+sub.classList.remove("navSubEnter","navSubLeave");
+document.getElementById("registeredView").classList.add("hidden");
+document.getElementById("registrationsView").classList.add("hidden");
+if(view==="registered"){document.getElementById("registeredView").classList.remove("hidden");renderKolliView();}
+if(view==="registrations"){document.getElementById("registrationsView").classList.remove("hidden");renderPackHistoryView();}
+if(view==="registered"||view==="registrations"){
+ sub.classList.remove("hidden");
+ pack.classList.remove("navBack");
+ pack.classList.add("productionNavTransition","navForward");
+ requestAnimationFrame(function(){
+  sub.classList.add("navSubEnter");
+  window.scrollTo(0,0);
+  setTimeout(function(){
+   sub.classList.remove("navSubEnter");
+   pack.classList.remove("productionNavTransition","navForward");
+  },320);
+ });
+}else{
+ window.scrollTo(0,0);
+}
 }
 
 function closeProductionView(){
- const main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
- if(!main||!sub||!pack)return;
- setTillaggEntryVisible(false);
- const tillaggTest=document.getElementById("tillaggTestView");
- if(tillaggTest){tillaggTest.classList.add("hidden");tillaggTest.style.setProperty("display","none","important");}
- localStorage.setItem(PRODUCTION_VIEW_KEY,"kolli");
-
- /* Behåll samma scrollläge och dokumenthöjd under tillbakaanimationen. */
- const packHeight=Math.max(main.offsetHeight||0,sub.offsetHeight||0);
- if(packHeight)pack.style.minHeight=packHeight+"px";
- const registeredView=document.getElementById("registeredView");
- const registrationsView=document.getElementById("registrationsView");
- sub.classList.remove("navSubEnter","navSubLeave");
- main.classList.remove("hidden","productionViewHidden");
- main.style.setProperty("display","block","important");
- void main.offsetWidth;
- main.classList.add("navSubEnter");
- pack.classList.remove("navForward");
- pack.classList.add("productionNavTransition","navBack");
- if(registeredView){registeredView.classList.add("hidden");registeredView.style.setProperty("display","none","important");}
- if(registrationsView){registrationsView.classList.add("hidden");registrationsView.style.setProperty("display","none","important");}
- setTimeout(()=>{
-   sub.classList.add("hidden","productionViewHidden");
-   sub.style.setProperty("display","none","important");
-   main.classList.remove("navSubEnter");
-   pack.classList.remove("productionNavTransition","navBack");
-   pack.style.minHeight="";
-   if(Number.isFinite(productionMainScrollY)){
-     window.scrollTo(0,Math.max(0,productionMainScrollY));
-   }
- },280);
+let main=document.getElementById("productionMainLayout"),sub=document.getElementById("productionSubView"),pack=document.getElementById("pack");
+if(!main||!sub||!pack)return;
+setTillaggEntryVisible(true);
+const tillaggTest=document.getElementById("tillaggTestView");
+if(tillaggTest)tillaggTest.classList.add("hidden");
+localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
+let wasSub=!sub.classList.contains("hidden");
+if(!wasSub){
+ main.classList.remove("hidden");
+ return;
 }
 
+/* Håll layoutens höjd stabil under tillbakaglidningen så att innehållet
+   under Produktion inte hoppar när sub-vyn byts tillbaka. */
+let subHeight=sub.offsetHeight;
+main.classList.remove("hidden");
+let mainHeight=main.offsetHeight;
+main.style.visibility="hidden";
+sub.classList.remove("navSubEnter","navSubLeave");
+pack.style.height=subHeight+"px";
+pack.classList.remove("navForward");
+pack.classList.add("productionNavTransition","navBack");
+requestAnimationFrame(function(){
+ main.style.visibility="visible";
+ sub.classList.add("navSubLeave");
+ window.scrollTo(0,0);
+ requestAnimationFrame(function(){
+  pack.style.height=mainHeight+"px";
+ });
+ setTimeout(function(){
+  sub.classList.add("hidden");
+  document.getElementById("registeredView").classList.add("hidden");
+  document.getElementById("registrationsView").classList.add("hidden");
+  sub.classList.remove("navSubLeave");
+  main.style.visibility="";
+  pack.classList.remove("productionNavTransition","navBack");
+  pack.style.height="";
+ },320);
+});
+}
 function saveCalculatorState(view){
  let ids=["sprutorAntal","sprutorPer","kapslarAntal","kapslarPer","pallCalcAntal","pallCalcPer","etikettMottagna","etikettTillOrder","etikettTillRapportering","etikettKassation","etikettAterlamnade","etikettForsta","etikettSista","etikettStart","etikettProducerade","etikettVerklig","midFrom","midTo","midFromPicker","midToPicker","unitCapsReverseCount","unitCapsReversePer","capsWellReverseCount","capsWellReversePer","unitWellUnits","unitWellPerCapsule","unitWellPerWell","unitWellReverseWells","unitWellReversePerWell","unitWellReversePerCapsule","kvarTotalInput","kvarKörtInput"];
  let values={};
@@ -3767,17 +3679,18 @@ el.innerHTML='<div class="batchFeedbackCard"><div class="batchFeedbackIcon pulse
 document.body.appendChild(el);
 }
 
-function startProductionAnimation(batchId,targetId){
- const isTillagg=targetId==="tillaggStartPopup";
+function startProductionAnimation(batchId){
  const main=document.getElementById("productionMainLayout");
- if(!isTillagg && !main)return;
- const box=document.getElementById(targetId||"productionStartAnimation");
+ if(!main)return;
+ const box=document.getElementById("productionStartAnimation");
  if(!box)return;
  box.classList.remove("hidden","startAnimExit");
  box.innerHTML='<div class="startAnimIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5 9.2 17.7 20 6.8"></path><circle cx="12" cy="12" r="9"></circle></svg></div><div class="startAnimText"><div class="startAnimKicker">PRODUKTION STARTAS</div><div class="startAnimTitle">Batch '+String(batchId).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))+' är aktiv</div><div class="startAnimSub"><span class="startAnimCheck">✓</span> Produktion är redo. Du stannar här tills batchen avslutas.</div></div>';
- const timerKey=isTillagg?"__tillaggStartAnimTimer":"__productionStartAnimTimer";
- clearTimeout(window[timerKey]);
- window[timerKey]=setTimeout(()=>{box.classList.add("startAnimExit");setTimeout(()=>{box.classList.add("hidden");box.classList.remove("startAnimExit");box.innerHTML="";},460);},2400);
+ clearTimeout(window.__productionStartAnimTimer);
+ window.__productionStartAnimTimer=setTimeout(()=>{
+   box.classList.add("startAnimExit");
+   setTimeout(()=>{box.classList.add("hidden");box.classList.remove("startAnimExit");box.innerHTML="";},460);
+ },2400);
 }
 
 function startFpk(){
@@ -3792,12 +3705,10 @@ saveData();
 renderFpk();
 addHistory("START","-","","","Startade produktion","","","Batch "+v);
 renderAll();
-/* Vi är redan i Kolli-vyn när batchen startas. Byt inte vy igen och hoppa inte till toppen. */
-if(document.getElementById("productionMainLayout")?.classList.contains("hidden")){
-  chooseProductionMode("kolli");
-}
+chooseProductionMode("kolli");
 syncProductionLock();
-showBatchStartFeedback(v);
+startProductionAnimation(v);
+window.scrollTo(0,0);
 }
 
 function closeBatchFinishConfirm(){
@@ -5570,13 +5481,13 @@ function etFinishPrompt(){
 .tillaggKassCard .orange{background:#f28b00!important;color:#fff!important}.tillaggKassStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.tillaggKassStats span{display:flex;justify-content:space-between;gap:8px;padding:9px 10px;border-radius:10px;background:#fff7e9;color:#7a5a18;font-size:11px}.tillaggKassStats strong{color:#172033;font-size:13px}@media(prefers-reduced-motion:reduce){.tillaggKassCard *{transition:none!important}}
 </style>
 <style id="packvexTillaggStageGuardV11013Fix">
-/* v1.10.13 FIX 2 — START och PRODUKTION är separata vycontainrar. */
-#tillaggTestView #tillaggStartStageView.tillaggHidden,
-#tillaggTestView #tillaggProductionStageView.tillaggHidden{display:none!important;}
-#tillaggTestView.tillaggStageStart #tillaggStartStageView{display:block!important;}
-#tillaggTestView.tillaggStageStart #tillaggProductionStageView{display:none!important;}
-#tillaggTestView.tillaggStageProduction #tillaggStartStageView{display:none!important;}
-#tillaggTestView.tillaggStageProduction #tillaggProductionStageView{display:block!important;}
+/* v1.10.13 FIX — Tilläggsetiketter: startsida och aktiv produktion är ömsesidigt exklusiva. */
+#tillaggTestView.tillaggStageStart #tillaggActiveView{display:none!important;}
+#tillaggTestView.tillaggStageStart #tillaggModeCard{display:block;}
+#tillaggTestView.tillaggStageStart #tillaggSetupCard.tillaggHidden{display:none!important;}
+#tillaggTestView.tillaggStageProduction #tillaggModeCard,
+#tillaggTestView.tillaggStageProduction #tillaggSetupCard{display:none!important;}
+#tillaggTestView.tillaggStageProduction #tillaggActiveView{display:block!important;}
 </style>
 <script id="packvexTillaggTestV1994">
 /* v1.10.02 — Tilläggsetiketter-kortet visas endast i Produktionsvalet.
@@ -5600,7 +5511,7 @@ function etFinishPrompt(){
   function netTotal(){return Number(state.total||0);}
   function netSinceLastControl(){return Math.max(0,Number(state.total||0)-Number(state.lastControl||0));}
   function nextExpected(){
-    if(state.mode==='unprinted') return Number(state.startLabel||0)+Number(state.total||0)+Number(state.scrap||0);
+    if(state.mode==='unprinted') return Math.max(0,Number(state.startLabel||0)-Number(state.total||0)-Number(state.scrap||0));
     const r=activeRoll();
     if(!r)return null;
     if(r.consumed<r.count)return r.start+r.consumed;
@@ -5613,52 +5524,21 @@ function etFinishPrompt(){
   function recordAction(type,detail,kind,prev){addEvent(type,detail,kind);state.events[0].snapshot=prev;tillaggSave();render();}
   function setTillaggStage(stage){
     const page=$('tillaggTestView');
-    const start=$('tillaggStartStageView');
-    const production=$('tillaggProductionStageView');
-    if(!page||!start||!production)return;
-    const isProduction=stage==='production';
-    page.classList.toggle('tillaggStageStart',!isProduction);
-    page.classList.toggle('tillaggStageProduction',isProduction);
-    start.classList.toggle('tillaggHidden',isProduction);
-    production.classList.toggle('tillaggHidden',!isProduction);
-    if(isProduction){
-      show('tillaggModeCard',false);
-      show('tillaggSetupCard',false);
-      show('tillaggActiveView',true);
-    }else{
-      show('tillaggActiveView',false);
-      show('tillaggModeCard',true);
-      show('tillaggSetupCard',!!state.mode);
-    }
+    if(!page)return;
+    page.classList.toggle('tillaggStageStart',stage==='start');
+    page.classList.toggle('tillaggStageProduction',stage==='production');
   }
 
   window.openTillaggTest=function(){
-    const chooser=$('productionChooser'),page=$('tillaggTestView');
+    const chooser=$('productionChooser'),main=$('productionMainLayout'),sub=$('productionSubView'),et=$('etiketteringView'),page=$('tillaggTestView'),pack=$('pack');
     if(!page||!chooser)return;
-
-    /*
-      Tilläggsetiketter has exactly two states:
-      - START: no active production exists
-      - PRODUKTION: an unfinished production exists
-      A finished state is historical data only and must never reopen as the
-      production screen. Starting Tilläggsetiketter after a finished run
-      therefore creates a clean start state while preserving last-finished data.
-    */
-    if(state.finished || !state.started){
-      state=tillaggBlank();
-      pendingProduction=0;
-      tillaggSave();
-    }
-
     resetProductionViews();
     const packPage=document.getElementById('pack');
-    if(packPage){packPage.classList.remove('hidden');packPage.style.removeProperty('display');}
-    page.classList.remove('hidden');
-    page.style.setProperty('display','block','important');
-    setTillaggStage(state.started?'production':'start');
+    if(packPage){packPage.classList.add('hidden');packPage.style.setProperty('display','none','important');}
+    page.classList.remove('hidden');page.style.setProperty('display','block','important');
+    setTillaggStage(state.started&&!state.finished?'production':'start');
     localStorage.setItem('packvex_tillagg_view','test');
-    render();
-    window.scrollTo(0,0);
+    render();window.scrollTo(0,0);
   };
   window.closeTillaggTest=function(){
     const page=$('tillaggTestView'),chooser=$('productionChooser');resetProductionViews();const packPage=document.getElementById('pack');if(packPage){packPage.classList.remove('hidden');packPage.style.removeProperty('display');}if(chooser){chooser.classList.remove('hidden');chooser.style.setProperty('display','block','important');setTillaggEntryVisible(true);}localStorage.setItem('packvex_tillagg_view','chooser');window.scrollTo(0,0);
@@ -5700,9 +5580,8 @@ function etFinishPrompt(){
     state.rolls=state.rolls.map((r,i)=>({...r,consumed:0,status:i===0?'active':'unused'}));state.activeRollId=state.mode==='printed'?state.rolls[0].id:null;state.nextRollId=null;
     addEvent('START',state.mode==='printed'?`Startad mitt i produktion · Redan kört ${fmt(carry)} st · Registrerade rullar ej förbrukade`:`Startad mitt i produktion · Redan kört ${fmt(carry)} st · Startetikett ${fmt(state.startLabel)}`);
     tillaggSave();localStorage.setItem('packvex_tillagg_view','test');
-    showBatchStartFeedback(state.batchId);
     setTillaggStage('production');
-    render();
+    render();window.scrollTo(0,0);
   };
   function chooseNextRollIfNeeded(){
     const cur=activeRoll();if(cur&&cur.consumed<cur.count)return cur;
@@ -5768,29 +5647,13 @@ function etFinishPrompt(){
     if(state.status==='warn'){if(!confirm('Det finns en aktiv etikettavvikelse. Vill du ändå avsluta produktionen?'))return;}
     const total=Number(state.total||0);const checks=state.events.filter(e=>e.type==='KONTROLL'||e.type==='DIFF').length;const diffs=state.events.filter(e=>e.type==='DIFF').length;const used=state.rolls.filter(r=>r.status==='active'||r.status==='done').length;
     const msg=`Avsluta produktion?\n\nTotalt producerat: ${fmt(total)} st\nAntal kontroller: ${fmt(checks)}\nEtikettavvikelser: ${fmt(diffs)}\nRullar använda: ${fmt(used)}\nNästa etikett: ${nextExpected()===null?'—':fmt(nextExpected())}`;
-    if(!confirm(msg))return;
-    const finishedState=JSON.parse(snapshot());
-    finishedState.finished=true;
-    finishedState.started=false;
-    finishedState.finishedAt=now();
-    localStorage.setItem('packvex_tillagg_last_finished',JSON.stringify(finishedState));
-    state=tillaggBlank();
-    pendingProduction=0;
-    tillaggSave();
-    localStorage.setItem('packvex_tillagg_view','test');
-    setTillaggStage('start');
-    render();
-    window.scrollTo(0,0);
+    if(!confirm(msg))return;const prev=snapshot();state.finished=true;state.started=false;addEvent('AVSLUT',`Produktion avslutad · ${fmt(total)} st`,'neutral');state.events[0].snapshot=prev;tillaggSave();render();
   };
   function render(){
     const page=$('tillaggTestView');if(!page)return;
-    const hasActive=state.started===true && state.finished!==true;
-    // A finished/invalid state is never rendered as production. It is cleared
-    // when the Tilläggsetiketter view is opened, so START is always clean.
-    setTillaggStage(hasActive?'production':'start');
-    show('tillaggModeCard',!hasActive);
-    show('tillaggSetupCard',!hasActive&&!!state.mode);
-    show('tillaggActiveView',hasActive);
+    const hasActive=state.started&&!state.finished;
+    setTillaggStage(hasActive||state.finished?'production':'start');
+    show('tillaggModeCard',!hasActive);show('tillaggSetupCard',!hasActive&&!!state.mode);show('tillaggActiveView',hasActive||state.finished);
     const title=$('tillaggActiveTitle');if(title)title.textContent=state.finished?'Produktion avslutad':'Produktion';
 $('tillaggMetaBatch')&&( $('tillaggMetaBatch').textContent=state.batchId||'—');
     $('tillaggTotal')&&( $('tillaggTotal').textContent=fmt(Number(state.total||0)));$('tillaggSince')&&( $('tillaggSince').textContent=fmt(netSinceLastControl())+' st');$('tillaggLastControl')&&( $('tillaggLastControl').textContent=fmt(state.lastControl)+' st');
