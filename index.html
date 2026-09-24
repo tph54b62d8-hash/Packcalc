@@ -2457,6 +2457,16 @@ header.packvexHeaderV1988 .packvexHeaderOperator{width:94px!important;min-width:
 /* v1.10.13 — hård separation mellan Produktionsstartsida och produktionsflöden. */
 #pack #productionChooser.hidden,#pack #productionMainLayout.hidden,#pack #productionSubView.hidden,#pack #etiketteringView.hidden,#pack #tillaggTestView.hidden{display:none!important;}
 </style>
+<style id="packvexMobileInputZoomFixV24">
+/* v1.10.13 FIX 24 — behåll iOS Safari zoomskyddet. Alla redigerbara fält måste vara minst 16px på mobil. */
+@media (max-width: 600px){
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea{
+    font-size:16px!important;
+  }
+}
+</style>
 </head>
 <body>
 <header class="packvexHeaderV1988">
