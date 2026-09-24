@@ -5647,7 +5647,14 @@ function etFinishPrompt(){
     if(state.status==='warn'){if(!confirm('Det finns en aktiv etikettavvikelse. Vill du ändå avsluta produktionen?'))return;}
     const total=Number(state.total||0);const checks=state.events.filter(e=>e.type==='KONTROLL'||e.type==='DIFF').length;const diffs=state.events.filter(e=>e.type==='DIFF').length;const used=state.rolls.filter(r=>r.status==='active'||r.status==='done').length;
     const msg=`Avsluta produktion?\n\nTotalt producerat: ${fmt(total)} st\nAntal kontroller: ${fmt(checks)}\nEtikettavvikelser: ${fmt(diffs)}\nRullar använda: ${fmt(used)}\nNästa etikett: ${nextExpected()===null?'—':fmt(nextExpected())}`;
-    if(!confirm(msg))return;const prev=snapshot();state.finished=true;state.started=false;addEvent('AVSLUT',`Produktion avslutad · ${fmt(total)} st`,'neutral');state.events[0].snapshot=prev;tillaggSave();render();
+    if(!confirm(msg))return;const prev=snapshot();state.finished=true;state.started=false;addEvent('AVSLUT',`Produktion avslutad · ${fmt(total)} st`,'neutral');state.events[0].snapshot=prev;tillaggSave();
+    // Efter avslutad order ska Tilläggsetiketter alltid återgå till startsidan,
+    // så att nästa order kan startas utan att den avslutade produktionen ligger kvar.
+    state=tillaggBlank();pendingProduction=0;tillaggSave();
+    setTillaggStage('start');show('tillaggSetupCard',false);show('tillaggPrintedSetup',false);show('tillaggUnprintedSetup',false);
+    document.querySelectorAll('.tillaggModeChoice').forEach(b=>b.classList.remove('selected'));
+    if($('tillaggBatch'))$('tillaggBatch').value='';if($('tillaggCarryIn'))$('tillaggCarryIn').value='';
+    render();window.scrollTo(0,0);
   };
   function render(){
     const page=$('tillaggTestView');if(!page)return;
