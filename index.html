@@ -3363,14 +3363,21 @@ const tillaggTest=document.getElementById("tillaggTestView");
 if(tillaggTest)tillaggTest.classList.add("hidden");
 safeProductionStorageSet(PRODUCTION_VIEW_KEY,view);
 main.classList.add("hidden");
+main.style.setProperty("display","none","important");
 sub.classList.add("hidden");
+sub.style.setProperty("display","none","important");
 sub.classList.remove("navSubEnter","navSubLeave");
-document.getElementById("registeredView").classList.add("hidden");
-document.getElementById("registrationsView").classList.add("hidden");
-if(view==="registered"){document.getElementById("registeredView").classList.remove("hidden");renderKolliView();}
-if(view==="registrations"){document.getElementById("registrationsView").classList.remove("hidden");renderPackHistoryView();}
+const registered=document.getElementById("registeredView");
+const registrations=document.getElementById("registrationsView");
+registered.classList.add("hidden");
+registered.style.setProperty("display","none","important");
+registrations.classList.add("hidden");
+registrations.style.setProperty("display","none","important");
+if(view==="registered"){registered.classList.remove("hidden");registered.style.setProperty("display","block","important");renderKolliView();}
+if(view==="registrations"){registrations.classList.remove("hidden");registrations.style.setProperty("display","block","important");renderPackHistoryView();}
 if(view==="registered"||view==="registrations"){
  sub.classList.remove("hidden");
+ sub.style.setProperty("display","block","important");
  pack.classList.remove("navBack");
  pack.classList.add("productionNavTransition","navForward");
  requestAnimationFrame(function(){
@@ -3392,7 +3399,7 @@ if(!main||!sub||!pack)return;
 setTillaggEntryVisible(true);
 const tillaggTest=document.getElementById("tillaggTestView");
 if(tillaggTest)tillaggTest.classList.add("hidden");
-localStorage.setItem(PRODUCTION_VIEW_KEY,"chooser");
+safeProductionStorageSet(PRODUCTION_VIEW_KEY,"chooser");
 let wasSub=!sub.classList.contains("hidden");
 if(!wasSub){
  main.classList.remove("hidden");
@@ -3418,8 +3425,11 @@ requestAnimationFrame(function(){
  });
  setTimeout(function(){
   sub.classList.add("hidden");
+  sub.style.setProperty("display","none","important");
   document.getElementById("registeredView").classList.add("hidden");
+  document.getElementById("registeredView").style.setProperty("display","none","important");
   document.getElementById("registrationsView").classList.add("hidden");
+  document.getElementById("registrationsView").style.setProperty("display","none","important");
   sub.classList.remove("navSubLeave");
   main.style.visibility="";
   pack.classList.remove("productionNavTransition","navBack");
