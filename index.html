@@ -5655,10 +5655,29 @@ function etFinishPrompt(){
     document.querySelectorAll('.tillaggModeChoice').forEach(b=>b.classList.remove('selected'));
     if($('tillaggBatch'))$('tillaggBatch').value='';if($('tillaggCarryIn'))$('tillaggCarryIn').value='';
     // Avslutad order ska lämna Tilläggsetiketter-vyn helt och återgå till Produktionsvalet.
-    closeTillaggTest();
+    localStorage.setItem('packvex_tillagg_view','chooser');
+    resetProductionViews();
+    const packPage=document.getElementById('pack');
+    if(packPage){packPage.classList.remove('hidden');packPage.style.removeProperty('display');}
+    if(typeof openProductionChooser==='function') openProductionChooser();
+    else {
+      const chooser=$('productionChooser');
+      if(chooser){chooser.classList.remove('hidden');chooser.style.setProperty('display','block','important');setTillaggEntryVisible(true);}
+    }
+    window.scrollTo(0,0);
   };
   function render(){
     const page=$('tillaggTestView');if(!page)return;
+    // Säkerhetsventil: en avslutad Tilläggsetikett-order får aldrig renderas som en fastlåst sida.
+    if(state.finished){
+      state=tillaggBlank();pendingProduction=0;tillaggSave();
+      localStorage.setItem('packvex_tillagg_view','chooser');
+      resetProductionViews();
+      const packPage=document.getElementById('pack');
+      if(packPage){packPage.classList.remove('hidden');packPage.style.removeProperty('display');}
+      if(typeof openProductionChooser==='function') openProductionChooser();
+      return;
+    }
     const hasActive=state.started&&!state.finished;
     setTillaggStage(hasActive||state.finished?'production':'start');
     show('tillaggModeCard',!hasActive);show('tillaggSetupCard',!hasActive&&!!state.mode);show('tillaggActiveView',hasActive||state.finished);
