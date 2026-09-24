@@ -5654,7 +5654,8 @@ function etFinishPrompt(){
     setTillaggStage('start');show('tillaggSetupCard',false);show('tillaggPrintedSetup',false);show('tillaggUnprintedSetup',false);
     document.querySelectorAll('.tillaggModeChoice').forEach(b=>b.classList.remove('selected'));
     if($('tillaggBatch'))$('tillaggBatch').value='';if($('tillaggCarryIn'))$('tillaggCarryIn').value='';
-    render();window.scrollTo(0,0);
+    // Avslutad order ska lämna Tilläggsetiketter-vyn helt och återgå till Produktionsvalet.
+    closeTillaggTest();
   };
   function render(){
     const page=$('tillaggTestView');if(!page)return;
